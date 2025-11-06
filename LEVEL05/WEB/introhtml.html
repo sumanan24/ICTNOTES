@@ -1,0 +1,2061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML & CSS Complete Guide - 100 Slides</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow-x: hidden;
+        }
+
+        .slide-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .slide {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 900px;
+            height: 90vh;
+            max-height: 600px;
+            padding: 60px;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            display: flex;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide-number {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        h1 {
+            color: #764ba2;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin: 20px 0 15px 0;
+        }
+
+        p, li {
+            color: #333;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #e83e8c;
+            font-size: 0.95em;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #ffd89b 0%, #19547b 100%);
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            z-index: 1000;
+            padding: 10px 0;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            min-width: 120px;
+            text-align: center;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-buttons {
+                top: 0;
+                padding: 8px 10px;
+                gap: 8px;
+                position: fixed;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 14px;
+                min-width: 100px;
+                border-radius: 25px;
+            }
+
+            .slide {
+                padding: 40px 20px;
+                height: auto;
+                min-height: 80vh;
+                margin-top: 80px;
+            }
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .tag-box {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .example {
+            background: #e7f3ff;
+            border: 2px solid #2196F3;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .title-slide {
+            text-align: center;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.3em;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+            z-index: 1001;
+        }
+
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 15px 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 1002;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .main-header h1 {
+            margin: 0;
+            font-size: 1.8em;
+            color: white;
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        body {
+            padding-top: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <div class="slide-container">
+        <!-- Slide 1: Title -->
+        <div class="slide active title-slide">
+            <div class="slide-number">1/100</div>
+            <h1>Web Development 1</h1>
+            <h1 class="highlight">HTML & CSS</h1>
+            <p class="subtitle">Complete Guide to Web Content Development</p>
+            <p class="subtitle">100 Comprehensive Slides</p>
+        </div>
+
+        <!-- Slide 2: Course Overview -->
+        <div class="slide">
+            <div class="slide-number">2/100</div>
+            <h2>Course Overview</h2>
+            <ul>
+                <li>Introduction to HTML (Slides 3-15)</li>
+                <li>HTML Basic Tags (Slides 16-40)</li>
+                <li>HTML Advanced Tags (Slides 41-60)</li>
+                <li>Introduction to CSS (Slides 61-70)</li>
+                <li>CSS Basic Properties (Slides 71-85)</li>
+                <li>CSS Advanced Techniques (Slides 86-100)</li>
+            </ul>
+        </div>
+
+        <!-- Slide 3: What is HTML? -->
+        <div class="slide">
+            <div class="slide-number">3/100</div>
+            <h2>What is HTML?</h2>
+            <p><strong>HTML</strong> stands for <span class="highlight">HyperText Markup Language</span></p>
+            <ul>
+                <li>Standard markup language for creating web pages</li>
+                <li>Describes the structure of a web page</li>
+                <li>Consists of a series of elements</li>
+                <li>Elements tell the browser how to display content</li>
+                <li>Not a programming language - it's a markup language</li>
+            </ul>
+        </div>
+
+        <!-- Slide 4: History of HTML -->
+        <div class="slide">
+            <div class="slide-number">4/100</div>
+            <h2>History of HTML</h2>
+            <ul>
+                <li><strong>1991:</strong> HTML 1.0 - Tim Berners-Lee created</li>
+                <li><strong>1995:</strong> HTML 2.0 - First standard version</li>
+                <li><strong>1997:</strong> HTML 3.2 - W3C Recommendation</li>
+                <li><strong>1999:</strong> HTML 4.01 - Widely adopted</li>
+                <li><strong>2014:</strong> HTML5 - Current standard</li>
+                <li><strong>Living Standard:</strong> Continuously updated by WHATWG</li>
+            </ul>
+        </div>
+
+        <!-- Slide 5: HTML Document Structure -->
+        <div class="slide">
+            <div class="slide-number">5/100</div>
+            <h2>HTML Document Structure</h2>
+            <div class="code-block">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Page Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Content goes here --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</div>
+            <p>Every HTML document follows this basic structure.</p>
+        </div>
+
+        <!-- Slide 6: DOCTYPE Declaration -->
+        <div class="slide">
+            <div class="slide-number">6/100</div>
+            <h2>DOCTYPE Declaration</h2>
+            <div class="tag-box">
+                <code>&lt;!DOCTYPE html&gt;</code>
+            </div>
+            <ul>
+                <li>Must be the first line in an HTML document</li>
+                <li>Tells the browser which version of HTML the page is written in</li>
+                <li>HTML5 uses the simplified declaration shown above</li>
+                <li>Not case-sensitive but conventionally written in uppercase</li>
+                <li>Ensures the browser renders the page in standards mode</li>
+            </ul>
+        </div>
+
+        <!-- Slide 7: The HTML Element -->
+        <div class="slide">
+            <div class="slide-number">7/100</div>
+            <h2>The &lt;html&gt; Element</h2>
+            <div class="tag-box">
+                <code>&lt;html lang="en"&gt;&lt;/html&gt;</code>
+            </div>
+            <ul>
+                <li>Root element of an HTML page</li>
+                <li>Contains all other HTML elements</li>
+                <li><code>lang</code> attribute specifies the language of the document</li>
+                <li>Important for search engines and accessibility</li>
+                <li>Example: <code>lang="en"</code> for English, <code>lang="es"</code> for Spanish</li>
+            </ul>
+        </div>
+
+        <!-- Slide 8: The HEAD Element -->
+        <div class="slide">
+            <div class="slide-number">8/100</div>
+            <h2>The &lt;head&gt; Element</h2>
+            <div class="tag-box">
+                <code>&lt;head&gt;&lt;/head&gt;</code>
+            </div>
+            <ul>
+                <li>Contains metadata about the HTML document</li>
+                <li>Not displayed on the page</li>
+                <li>Includes: title, character set, styles, scripts, and other meta information</li>
+                <li>Placed between <code>&lt;html&gt;</code> and <code>&lt;body&gt;</code> tags</li>
+            </ul>
+        </div>
+
+        <!-- Slide 9: The BODY Element -->
+        <div class="slide">
+            <div class="slide-number">9/100</div>
+            <h2>The &lt;body&gt; Element</h2>
+            <div class="tag-box">
+                <code>&lt;body&gt;&lt;/body&gt;</code>
+            </div>
+            <ul>
+                <li>Contains all visible content of the web page</li>
+                <li>Everything users see and interact with</li>
+                <li>Includes: headings, paragraphs, images, links, tables, lists, etc.</li>
+                <li>Only one <code>&lt;body&gt;</code> element per document</li>
+            </ul>
+        </div>
+
+        <!-- Slide 10: HTML Elements Anatomy -->
+        <div class="slide">
+            <div class="slide-number">10/100</div>
+            <h2>HTML Elements Anatomy</h2>
+            <div class="example">
+                <code>&lt;tagname attribute="value"&gt;Content&lt;/tagname&gt;</code>
+            </div>
+            <ul>
+                <li><strong>Opening tag:</strong> <code>&lt;tagname&gt;</code></li>
+                <li><strong>Attributes:</strong> Provide additional information</li>
+                <li><strong>Content:</strong> Text or other elements</li>
+                <li><strong>Closing tag:</strong> <code>&lt;/tagname&gt;</code></li>
+                <li><strong>Self-closing tags:</strong> <code>&lt;img /&gt;</code>, <code>&lt;br /&gt;</code></li>
+            </ul>
+        </div>
+
+        <!-- Slide 11: HTML Attributes -->
+        <div class="slide">
+            <div class="slide-number">11/100</div>
+            <h2>HTML Attributes</h2>
+            <ul>
+                <li>Provide additional information about elements</li>
+                <li>Always specified in the opening tag</li>
+                <li>Usually come in name/value pairs: <code>name="value"</code></li>
+                <li>Attribute values should be enclosed in quotes</li>
+                <li>Common attributes: <code>id</code>, <code>class</code>, <code>style</code>, <code>href</code>, <code>src</code></li>
+            </ul>
+            <div class="example">
+                <code>&lt;a href="https://example.com" target="_blank"&gt;Link&lt;/a&gt;</code>
+            </div>
+        </div>
+
+        <!-- Slide 12: Nested Elements -->
+        <div class="slide">
+            <div class="slide-number">12/100</div>
+            <h2>Nested Elements</h2>
+            <p>HTML elements can contain other elements.</p>
+            <div class="code-block">&lt;div&gt;
+    &lt;h1&gt;Main Heading&lt;/h1&gt;
+    &lt;p&gt;This is a &lt;strong&gt;paragraph&lt;/strong&gt;.&lt;/p&gt;
+&lt;/div&gt;</div>
+            <ul>
+                <li>Properly nest elements - close in reverse order of opening</li>
+                <li>Incorrect: <code>&lt;p&gt;&lt;strong&gt;Text&lt;/p&gt;&lt;/strong&gt;</code></li>
+                <li>Correct: <code>&lt;p&gt;&lt;strong&gt;Text&lt;/strong&gt;&lt;/p&gt;</code></li>
+            </ul>
+        </div>
+
+        <!-- Slide 13: Comments in HTML -->
+        <div class="slide">
+            <div class="slide-number">13/100</div>
+            <h2>HTML Comments</h2>
+            <div class="tag-box">
+                <code>&lt;!-- This is a comment --&gt;</code>
+            </div>
+            <ul>
+                <li>Not displayed in the browser</li>
+                <li>Used to document your code</li>
+                <li>Help explain sections of your HTML</li>
+                <li>Can temporarily disable code without deleting it</li>
+                <li>Visible in page source, so don't include sensitive information</li>
+            </ul>
+        </div>
+
+        <!-- Slide 14: Semantic HTML -->
+        <div class="slide">
+            <div class="slide-number">14/100</div>
+            <h2>Semantic HTML</h2>
+            <p>Semantic elements clearly describe their meaning to both the browser and the developer.</p>
+            <ul>
+                <li><strong>Semantic:</strong> <code>&lt;article&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;header&gt;</code></li>
+                <li><strong>Non-semantic:</strong> <code>&lt;div&gt;</code>, <code>&lt;span&gt;</code></li>
+                <li>Improves accessibility</li>
+                <li>Better for SEO</li>
+                <li>Makes code more readable and maintainable</li>
+            </ul>
+        </div>
+
+        <!-- Slide 15: HTML5 Features -->
+        <div class="slide">
+            <div class="slide-number">15/100</div>
+            <h2>HTML5 Key Features</h2>
+            <ul>
+                <li>Semantic elements (<code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code>, <code>&lt;article&gt;</code>)</li>
+                <li>Audio and video support without plugins</li>
+                <li>Canvas for drawing graphics</li>
+                <li>New form input types (email, date, range, etc.)</li>
+                <li>Local storage and offline application support</li>
+                <li>Improved accessibility features</li>
+                <li>Geolocation API</li>
+            </ul>
+        </div>
+
+        <!-- Slide 16: HTML Basic Tags - Headings -->
+        <div class="slide">
+            <div class="slide-number">16/100</div>
+            <h2>Heading Tags (h1-h6)</h2>
+            <div class="code-block">&lt;h1&gt;Heading 1&lt;/h1&gt;
+&lt;h2&gt;Heading 2&lt;/h2&gt;
+&lt;h3&gt;Heading 3&lt;/h3&gt;
+&lt;h4&gt;Heading 4&lt;/h4&gt;
+&lt;h5&gt;Heading 5&lt;/h5&gt;
+&lt;h6&gt;Heading 6&lt;/h6&gt;</div>
+            <ul>
+                <li>Six levels of headings</li>
+                <li><code>&lt;h1&gt;</code> is the most important, <code>&lt;h6&gt;</code> the least</li>
+                <li>Use only one <code>&lt;h1&gt;</code> per page for SEO</li>
+                <li>Don't skip heading levels</li>
+            </ul>
+        </div>
+
+        <!-- Slide 17: Paragraph Tag -->
+        <div class="slide">
+            <div class="slide-number">17/100</div>
+            <h2>Paragraph Tag &lt;p&gt;</h2>
+            <div class="tag-box">
+                <code>&lt;p&gt;This is a paragraph of text.&lt;/p&gt;</code>
+            </div>
+            <ul>
+                <li>Defines a paragraph</li>
+                <li>Browsers automatically add space before and after</li>
+                <li>Block-level element</li>
+                <li>Cannot contain block-level elements inside</li>
+                <li>Extra white space inside is ignored by browsers</li>
+            </ul>
+        </div>
+
+        <!-- Slide 18: Line Break and Horizontal Rule -->
+        <div class="slide">
+            <div class="slide-number">18/100</div>
+            <h2>Line Break &lt;br&gt; & Horizontal Rule &lt;hr&gt;</h2>
+            <div class="code-block">&lt;p&gt;First line&lt;br&gt;Second line&lt;/p&gt;
+&lt;hr&gt;</div>
+            <ul>
+                <li><code>&lt;br&gt;</code>: Inserts a line break (self-closing)</li>
+                <li><code>&lt;hr&gt;</code>: Creates a horizontal line/thematic break</li>
+                <li>Both are self-closing tags</li>
+                <li>Use sparingly for better semantic HTML</li>
+            </ul>
+        </div>
+
+        <!-- Slide 19: Text Formatting - Bold and Strong -->
+        <div class="slide">
+            <div class="slide-number">19/100</div>
+            <h2>&lt;b&gt; vs &lt;strong&gt;</h2>
+            <div class="code-block">&lt;b&gt;Bold text&lt;/b&gt;
+&lt;strong&gt;Important text&lt;/strong&gt;</div>
+            <ul>
+                <li><code>&lt;b&gt;</code>: Visual styling only (bold)</li>
+                <li><code>&lt;strong&gt;</code>: Semantic importance (also renders bold)</li>
+                <li>Screen readers emphasize <code>&lt;strong&gt;</code> content</li>
+                <li>Use <code>&lt;strong&gt;</code> for important content</li>
+                <li>Use <code>&lt;b&gt;</code> for stylistic purposes only</li>
+            </ul>
+        </div>
+
+        <!-- Slide 20: Text Formatting - Italic and Emphasis -->
+        <div class="slide">
+            <div class="slide-number">20/100</div>
+            <h2>&lt;i&gt; vs &lt;em&gt;</h2>
+            <div class="code-block">&lt;i&gt;Italic text&lt;/i&gt;
+&lt;em&gt;Emphasized text&lt;/em&gt;</div>
+            <ul>
+                <li><code>&lt;i&gt;</code>: Visual styling only (italic)</li>
+                <li><code>&lt;em&gt;</code>: Semantic emphasis (also renders italic)</li>
+                <li>Screen readers change voice tone for <code>&lt;em&gt;</code></li>
+                <li>Use <code>&lt;em&gt;</code> for stressed emphasis</li>
+                <li>Use <code>&lt;i&gt;</code> for technical terms, foreign phrases</li>
+            </ul>
+        </div>
+
+        <!-- Slide 21: More Text Formatting Tags -->
+        <div class="slide">
+            <div class="slide-number">21/100</div>
+            <h2>Additional Text Formatting</h2>
+            <div class="code-block">&lt;small&gt;Small text&lt;/small&gt;
+&lt;mark&gt;Highlighted text&lt;/mark&gt;
+&lt;del&gt;Deleted text&lt;/del&gt;
+&lt;ins&gt;Inserted text&lt;/ins&gt;
+&lt;sub&gt;Subscript&lt;/sub&gt;
+&lt;sup&gt;Superscript&lt;/sup&gt;</div>
+            <ul>
+                <li>Each has specific semantic meaning</li>
+                <li>Use appropriately for better accessibility</li>
+            </ul>
+        </div>
+
+        <!-- Slide 22: Anchor Tag - Links -->
+        <div class="slide">
+            <div class="slide-number">22/100</div>
+            <h2>Anchor Tag &lt;a&gt;</h2>
+            <div class="code-block">&lt;a href="https://example.com"&gt;Link Text&lt;/a&gt;
+&lt;a href="page.html" target="_blank"&gt;New Tab&lt;/a&gt;
+&lt;a href="#section"&gt;Jump to Section&lt;/a&gt;
+&lt;a href="mailto:email@example.com"&gt;Email&lt;/a&gt;</div>
+            <ul>
+                <li><code>href</code>: Specifies the link destination</li>
+                <li><code>target="_blank"</code>: Opens in new tab</li>
+                <li>Can link to files, emails, phone numbers</li>
+            </ul>
+        </div>
+
+        <!-- Slide 23: Image Tag -->
+        <div class="slide">
+            <div class="slide-number">23/100</div>
+            <h2>Image Tag &lt;img&gt;</h2>
+            <div class="code-block">&lt;img src="image.jpg" alt="Description" width="300" height="200"&gt;</div>
+            <ul>
+                <li>Self-closing tag</li>
+                <li><code>src</code>: Path to the image file (required)</li>
+                <li><code>alt</code>: Alternative text for accessibility (required)</li>
+                <li><code>width</code> and <code>height</code>: Dimensions in pixels</li>
+                <li>Supports formats: JPG, PNG, GIF, SVG, WebP</li>
+            </ul>
+        </div>
+
+        <!-- Slide 24: Lists - Unordered -->
+        <div class="slide">
+            <div class="slide-number">24/100</div>
+            <h2>Unordered Lists &lt;ul&gt;</h2>
+            <div class="code-block">&lt;ul&gt;
+    &lt;li&gt;First item&lt;/li&gt;
+    &lt;li&gt;Second item&lt;/li&gt;
+    &lt;li&gt;Third item&lt;/li&gt;
+&lt;/ul&gt;</div>
+            <ul>
+                <li>Creates a bulleted list</li>
+                <li><code>&lt;li&gt;</code>: List item element</li>
+                <li>Default bullet style can be changed with CSS</li>
+                <li>Can be nested for sub-lists</li>
+            </ul>
+        </div>
+
+        <!-- Slide 25: Lists - Ordered -->
+        <div class="slide">
+            <div class="slide-number">25/100</div>
+            <h2>Ordered Lists &lt;ol&gt;</h2>
+            <div class="code-block">&lt;ol&gt;
+    &lt;li&gt;First item&lt;/li&gt;
+    &lt;li&gt;Second item&lt;/li&gt;
+    &lt;li&gt;Third item&lt;/li&gt;
+&lt;/ol&gt;</div>
+            <ul>
+                <li>Creates a numbered list</li>
+                <li>Numbers automatically increment</li>
+                <li><code>type</code> attribute: "1", "A", "a", "I", "i"</li>
+                <li><code>start</code> attribute: Begin at specific number</li>
+            </ul>
+        </div>
+
+        <!-- Slide 26: Description Lists -->
+        <div class="slide">
+            <div class="slide-number">26/100</div>
+            <h2>Description Lists &lt;dl&gt;</h2>
+            <div class="code-block">&lt;dl&gt;
+    &lt;dt&gt;HTML&lt;/dt&gt;
+    &lt;dd&gt;HyperText Markup Language&lt;/dd&gt;
+    &lt;dt&gt;CSS&lt;/dt&gt;
+    &lt;dd&gt;Cascading Style Sheets&lt;/dd&gt;
+&lt;/dl&gt;</div>
+            <ul>
+                <li><code>&lt;dt&gt;</code>: Description term</li>
+                <li><code>&lt;dd&gt;</code>: Description definition</li>
+                <li>Used for glossaries, metadata, key-value pairs</li>
+            </ul>
+        </div>
+
+        <!-- Slide 27: Div and Span -->
+        <div class="slide">
+            <div class="slide-number">27/100</div>
+            <h2>&lt;div&gt; and &lt;span&gt;</h2>
+            <div class="code-block">&lt;div&gt;Block-level container&lt;/div&gt;
+&lt;span&gt;Inline container&lt;/span&gt;</div>
+            <ul>
+                <li><code>&lt;div&gt;</code>: Block-level generic container</li>
+                <li><code>&lt;span&gt;</code>: Inline generic container</li>
+                <li>Both are non-semantic elements</li>
+                <li>Used for styling and layout purposes</li>
+                <li>Should use semantic alternatives when possible</li>
+            </ul>
+        </div>
+
+        <!-- Slide 28: Tables - Basic Structure -->
+        <div class="slide">
+            <div class="slide-number">28/100</div>
+            <h2>Table Basics</h2>
+            <div class="code-block">&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Header 1&lt;/th&gt;
+        &lt;th&gt;Header 2&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Data 1&lt;/td&gt;
+        &lt;td&gt;Data 2&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</div>
+            <ul>
+                <li><code>&lt;tr&gt;</code>: Table row</li>
+                <li><code>&lt;th&gt;</code>: Table header cell</li>
+                <li><code>&lt;td&gt;</code>: Table data cell</li>
+            </ul>
+        </div>
+
+        <!-- Slide 29: Tables - Advanced Structure -->
+        <div class="slide">
+            <div class="slide-number">29/100</div>
+            <h2>Table Structure Elements</h2>
+            <div class="code-block">&lt;table&gt;
+    &lt;caption&gt;Table Title&lt;/caption&gt;
+    &lt;thead&gt;...&lt;/thead&gt;
+    &lt;tbody&gt;...&lt;/tbody&gt;
+    &lt;tfoot&gt;...&lt;/tfoot&gt;
+&lt;/table&gt;</div>
+            <ul>
+                <li><code>&lt;caption&gt;</code>: Table title</li>
+                <li><code>&lt;thead&gt;</code>: Groups header content</li>
+                <li><code>&lt;tbody&gt;</code>: Groups body content</li>
+                <li><code>&lt;tfoot&gt;</code>: Groups footer content</li>
+            </ul>
+        </div>
+
+        <!-- Slide 30: Table Attributes -->
+        <div class="slide">
+            <div class="slide-number">30/100</div>
+            <h2>Table Cell Attributes</h2>
+            <div class="code-block">&lt;td colspan="2"&gt;Spans 2 columns&lt;/td&gt;
+&lt;td rowspan="3"&gt;Spans 3 rows&lt;/td&gt;</div>
+            <ul>
+                <li><code>colspan</code>: Merge cells horizontally</li>
+                <li><code>rowspan</code>: Merge cells vertically</li>
+                <li>Useful for complex table layouts</li>
+                <li>Important for data presentation</li>
+            </ul>
+        </div>
+
+        <!-- Slide 31: Form Basics -->
+        <div class="slide">
+            <div class="slide-number">31/100</div>
+            <h2>Form Element &lt;form&gt;</h2>
+            <div class="code-block">&lt;form action="/submit" method="POST"&gt;
+    &lt;!-- Form elements here --&gt;
+&lt;/form&gt;</div>
+            <ul>
+                <li>Container for interactive controls</li>
+                <li><code>action</code>: URL where form data is sent</li>
+                <li><code>method</code>: HTTP method (GET or POST)</li>
+                <li>GET: Data in URL (visible)</li>
+                <li>POST: Data in request body (hidden)</li>
+            </ul>
+        </div>
+
+        <!-- Slide 32: Input Tag -->
+        <div class="slide">
+            <div class="slide-number">32/100</div>
+            <h2>Input Element &lt;input&gt;</h2>
+            <div class="code-block">&lt;input type="text" name="username" placeholder="Enter name"&gt;
+&lt;input type="password" name="pwd"&gt;
+&lt;input type="email" name="email"&gt;
+&lt;input type="number" name="age"&gt;</div>
+            <ul>
+                <li>Self-closing tag</li>
+                <li><code>type</code>: Specifies input type</li>
+                <li><code>name</code>: Identifies the field when submitted</li>
+                <li><code>placeholder</code>: Hint text</li>
+            </ul>
+        </div>
+
+        <!-- Slide 33: Input Types -->
+        <div class="slide">
+            <div class="slide-number">33/100</div>
+            <h2>HTML5 Input Types</h2>
+            <ul>
+                <li><code>text</code>: Single-line text</li>
+                <li><code>password</code>: Hidden text</li>
+                <li><code>email</code>: Email validation</li>
+                <li><code>number</code>: Numeric input</li>
+                <li><code>date</code>: Date picker</li>
+                <li><code>checkbox</code>: Multiple selections</li>
+                <li><code>radio</code>: Single selection from group</li>
+                <li><code>file</code>: File upload</li>
+                <li><code>submit</code>: Submit button</li>
+            </ul>
+        </div>
+
+        <!-- Slide 34: Textarea and Select -->
+        <div class="slide">
+            <div class="slide-number">34/100</div>
+            <h2>&lt;textarea&gt; and &lt;select&gt;</h2>
+            <div class="code-block">&lt;textarea rows="4" cols="50"&gt;Text here&lt;/textarea&gt;
+
+&lt;select name="country"&gt;
+    &lt;option value="us"&gt;USA&lt;/option&gt;
+    &lt;option value="uk"&gt;UK&lt;/option&gt;
+&lt;/select&gt;</div>
+            <ul>
+                <li><code>&lt;textarea&gt;</code>: Multi-line text input</li>
+                <li><code>&lt;select&gt;</code>: Dropdown menu</li>
+                <li><code>&lt;option&gt;</code>: Choices in dropdown</li>
+            </ul>
+        </div>
+
+        <!-- Slide 35: Button Element -->
+        <div class="slide">
+            <div class="slide-number">35/100</div>
+            <h2>Button Element &lt;button&gt;</h2>
+            <div class="code-block">&lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;button type="reset"&gt;Reset&lt;/button&gt;
+&lt;button type="button"&gt;Click Me&lt;/button&gt;</div>
+            <ul>
+                <li><code>type="submit"</code>: Submits form</li>
+                <li><code>type="reset"</code>: Resets form fields</li>
+                <li><code>type="button"</code>: Generic button</li>
+                <li>Can contain HTML content unlike <code>&lt;input type="button"&gt;</code></li>
+            </ul>
+        </div>
+
+        <!-- Slide 36: Label Element -->
+        <div class="slide">
+            <div class="slide-number">36/100</div>
+            <h2>Label Element &lt;label&gt;</h2>
+            <div class="code-block">&lt;label for="username"&gt;Username:&lt;/label&gt;
+&lt;input type="text" id="username" name="username"&gt;</div>
+            <ul>
+                <li>Associates text with form control</li>
+                <li><code>for</code> attribute matches input's <code>id</code></li>
+                <li>Improves accessibility</li>
+                <li>Clicking label focuses the input</li>
+                <li>Essential for screen readers</li>
+            </ul>
+        </div>
+
+        <!-- Slide 37: Form Validation Attributes -->
+        <div class="slide">
+            <div class="slide-number">37/100</div>
+            <h2>HTML5 Form Validation</h2>
+            <div class="code-block">&lt;input type="text" required&gt;
+&lt;input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"&gt;
+&lt;input type="number" min="1" max="100"&gt;
+&lt;input type="text" maxlength="50"&gt;</div>
+            <ul>
+                <li><code>required</code>: Field must be filled</li>
+                <li><code>pattern</code>: Regular expression validation</li>
+                <li><code>min/max</code>: Range for numbers/dates</li>
+                <li><code>maxlength</code>: Character limit</li>
+            </ul>
+        </div>
+
+        <!-- Slide 38: Meta Tags -->
+        <div class="slide">
+            <div class="slide-number">38/100</div>
+            <h2>Meta Tags</h2>
+            <div class="code-block">&lt;meta charset="UTF-8"&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+&lt;meta name="description" content="Page description"&gt;
+&lt;meta name="keywords" content="HTML, CSS, Web"&gt;</div>
+            <ul>
+                <li>Provide metadata about the HTML document</li>
+                <li>Used by browsers, search engines, and other services</li>
+                <li><code>charset</code>: Character encoding</li>
+                <li><code>viewport</code>: Responsive design control</li>
+            </ul>
+        </div>
+
+        <!-- Slide 39: Link and Script Tags -->
+        <div class="slide">
+            <div class="slide-number">39/100</div>
+            <h2>&lt;link&gt; and &lt;script&gt; Tags</h2>
+            <div class="code-block">&lt;link rel="stylesheet" href="styles.css"&gt;
+&lt;link rel="icon" href="favicon.ico"&gt;
+
+&lt;script src="script.js"&gt;&lt;/script&gt;
+&lt;script&gt;console.log('Inline JS');&lt;/script&gt;</div>
+            <ul>
+                <li><code>&lt;link&gt;</code>: Links external resources (CSS, icons)</li>
+                <li><code>&lt;script&gt;</code>: Includes JavaScript</li>
+                <li>Both typically placed in <code>&lt;head&gt;</code></li>
+                <li>Scripts can also go before closing <code>&lt;/body&gt;</code></li>
+            </ul>
+        </div>
+
+        <!-- Slide 40: Block vs Inline Elements -->
+        <div class="slide">
+            <div class="slide-number">40/100</div>
+            <h2>Block vs Inline Elements</h2>
+            <h3>Block-level Elements:</h3>
+            <ul>
+                <li>Start on a new line</li>
+                <li>Take up full width available</li>
+                <li>Examples: <code>&lt;div&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;h1&gt;</code>, <code>&lt;ul&gt;</code></li>
+            </ul>
+            <h3>Inline Elements:</h3>
+            <ul>
+                <li>Don't start on a new line</li>
+                <li>Only take up necessary width</li>
+                <li>Examples: <code>&lt;span&gt;</code>, <code>&lt;a&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;img&gt;</code></li>
+            </ul>
+        </div>
+
+        <!-- Slide 41: HTML Advanced Tags - Semantic HTML5 -->
+        <div class="slide">
+            <div class="slide-number">41/100</div>
+            <h2>Semantic HTML5 Elements</h2>
+            <p>HTML5 introduced semantic elements that clearly describe their meaning:</p>
+            <ul>
+                <li><code>&lt;header&gt;</code>: Introductory content</li>
+                <li><code>&lt;nav&gt;</code>: Navigation links</li>
+                <li><code>&lt;main&gt;</code>: Main content</li>
+                <li><code>&lt;article&gt;</code>: Self-contained content</li>
+                <li><code>&lt;section&gt;</code>: Thematic grouping</li>
+                <li><code>&lt;aside&gt;</code>: Side content</li>
+                <li><code>&lt;footer&gt;</code>: Footer information</li>
+            </ul>
+        </div>
+
+        <!-- Slide 42: Header Element -->
+        <div class="slide">
+            <div class="slide-number">42/100</div>
+            <h2>&lt;header&gt; Element</h2>
+            <div class="code-block">&lt;header&gt;
+    &lt;h1&gt;Website Title&lt;/h1&gt;
+    &lt;nav&gt;...&lt;/nav&gt;
+&lt;/header&gt;</div>
+            <ul>
+                <li>Represents introductory content</li>
+                <li>Typically contains site logo, heading, navigation</li>
+                <li>Can be used multiple times in a document</li>
+                <li>Usually at the top of a page or section</li>
+                <li>Not to be confused with <code>&lt;head&gt;</code></li>
+            </ul>
+        </div>
+
+        <!-- Slide 43: Nav Element -->
+        <div class="slide">
+            <div class="slide-number">43/100</div>
+            <h2>&lt;nav&gt; Element</h2>
+            <div class="code-block">&lt;nav&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="/about"&gt;About&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="/contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;</div>
+            <ul>
+                <li>Contains navigation links</li>
+                <li>Major navigation sections only</li>
+                <li>Helps screen readers and search engines</li>
+            </ul>
+        </div>
+
+        <!-- Slide 44: Main Element -->
+        <div class="slide">
+            <div class="slide-number">44/100</div>
+            <h2>&lt;main&gt; Element</h2>
+            <div class="code-block">&lt;main&gt;
+    &lt;h1&gt;Page Title&lt;/h1&gt;
+    &lt;article&gt;...&lt;/article&gt;
+&lt;/main&gt;</div>
+            <ul>
+                <li>Dominant content of the page</li>
+                <li>Only one per page</li>
+                <li>Excludes repeated content (headers, footers, sidebars)</li>
+                <li>Directly inside <code>&lt;body&gt;</code> or as descendant</li>
+                <li>Important for accessibility and SEO</li>
+            </ul>
+        </div>
+
+        <!-- Slide 45: Article Element -->
+        <div class="slide">
+            <div class="slide-number">45/100</div>
+            <h2>&lt;article&gt; Element</h2>
+            <div class="code-block">&lt;article&gt;
+    &lt;h2&gt;Article Title&lt;/h2&gt;
+    &lt;p&gt;Article content...&lt;/p&gt;
+&lt;/article&gt;</div>
+            <ul>
+                <li>Self-contained, independent content</li>
+                <li>Should make sense on its own</li>
+                <li>Examples: blog post, news article, forum post</li>
+                <li>Can be nested</li>
+                <li>Can contain its own header and footer</li>
+            </ul>
+        </div>
+
+        <!-- Slide 46: Section Element -->
+        <div class="slide">
+            <div class="slide-number">46/100</div>
+            <h2>&lt;section&gt; Element</h2>
+            <div class="code-block">&lt;section&gt;
+    &lt;h2&gt;Chapter 1&lt;/h2&gt;
+    &lt;p&gt;Content...&lt;/p&gt;
+&lt;/section&gt;</div>
+            <ul>
+                <li>Thematic grouping of content</li>
+                <li>Typically has a heading</li>
+                <li>Used for chapters, tabs, numbered sections</li>
+                <li>More specific than <code>&lt;div&gt;</code></li>
+                <li>Less independent than <code>&lt;article&gt;</code></li>
+            </ul>
+        </div>
+
+        <!-- Slide 47: Aside Element -->
+        <div class="slide">
+            <div class="slide-number">47/100</div>
+            <h2>&lt;aside&gt; Element</h2>
+            <div class="code-block">&lt;aside&gt;
+    &lt;h3&gt;Related Links&lt;/h3&gt;
+    &lt;ul&gt;...&lt;/ul&gt;
+&lt;/aside&gt;</div>
+            <ul>
+                <li>Content indirectly related to main content</li>
+                <li>Examples: sidebars, pull quotes, ads, related links</li>
+                <li>Could be removed without affecting main content</li>
+                <li>Often positioned to the side visually</li>
+            </ul>
+        </div>
+
+        <!-- Slide 48: Footer Element -->
+        <div class="slide">
+            <div class="slide-number">48/100</div>
+            <h2>&lt;footer&gt; Element</h2>
+            <div class="code-block">&lt;footer&gt;
+    &lt;p&gt;&copy; 2025 Company Name&lt;/p&gt;
+    &lt;nav&gt;...&lt;/nav&gt;
+&lt;/footer&gt;</div>
+            <ul>
+                <li>Footer for its nearest section or page</li>
+                <li>Typically contains copyright, contact info, links</li>
+                <li>Can be used multiple times in a document</li>
+                <li>Usually at bottom of page or section</li>
+            </ul>
+        </div>
+
+        <!-- Slide 49: Figure and Figcaption -->
+        <div class="slide">
+            <div class="slide-number">49/100</div>
+            <h2>&lt;figure&gt; and &lt;figcaption&gt;</h2>
+            <div class="code-block">&lt;figure&gt;
+    &lt;img src="image.jpg" alt="Description"&gt;
+    &lt;figcaption&gt;Image caption&lt;/figcaption&gt;
+&lt;/figure&gt;</div>
+            <ul>
+                <li><code>&lt;figure&gt;</code>: Self-contained content</li>
+                <li><code>&lt;figcaption&gt;</code>: Caption for the figure</li>
+                <li>Used for images, diagrams, code snippets, quotes</li>
+                <li>Can be referenced from main flow</li>
+            </ul>
+        </div>
+
+        <!-- Slide 50: Time Element -->
+        <div class="slide">
+            <div class="slide-number">50/100</div>
+            <h2>&lt;time&gt; Element</h2>
+            <div class="code-block">&lt;time datetime="2025-10-12"&gt;October 12, 2025&lt;/time&gt;
+&lt;time datetime="14:30"&gt;2:30 PM&lt;/time&gt;</div>
+            <ul>
+                <li>Represents a specific time or date</li>
+                <li><code>datetime</code> attribute: Machine-readable format</li>
+                <li>Helps search engines and browsers</li>
+                <li>Can be used for publishing dates, event times</li>
+                <li>Content can be human-readable format</li>
+            </ul>
+        </div>
+
+        <!-- Slide 51: Audio Element -->
+        <div class="slide">
+            <div class="slide-number">51/100</div>
+            <h2>&lt;audio&gt; Element</h2>
+            <div class="code-block">&lt;audio controls&gt;
+    &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+    &lt;source src="audio.ogg" type="audio/ogg"&gt;
+    Your browser doesn't support audio.
+&lt;/audio&gt;</div>
+            <ul>
+                <li>Embeds audio content</li>
+                <li><code>controls</code>: Shows play/pause buttons</li>
+                <li>Multiple sources for browser compatibility</li>
+                <li>Other attributes: <code>autoplay</code>, <code>loop</code>, <code>muted</code></li>
+            </ul>
+        </div>
+
+        <!-- Slide 52: Video Element -->
+        <div class="slide">
+            <div class="slide-number">52/100</div>
+            <h2>&lt;video&gt; Element</h2>
+            <div class="code-block">&lt;video width="640" height="480" controls&gt;
+    &lt;source src="video.mp4" type="video/mp4"&gt;
+    &lt;source src="video.webm" type="video/webm"&gt;
+    Your browser doesn't support video.
+&lt;/video&gt;</div>
+            <ul>
+                <li>Embeds video content</li>
+                <li>Similar to audio element</li>
+                <li>Can include <code>poster</code> attribute for thumbnail</li>
+                <li>Supports multiple formats</li>
+            </ul>
+        </div>
+
+        <!-- Slide 53: Canvas Element -->
+        <div class="slide">
+            <div class="slide-number">53/100</div>
+            <h2>&lt;canvas&gt; Element</h2>
+            <div class="code-block">&lt;canvas id="myCanvas" width="500" height="400"&gt;
+    Fallback content
+&lt;/canvas&gt;</div>
+            <ul>
+                <li>Used to draw graphics via JavaScript</li>
+                <li>Bitmap-based drawing surface</li>
+                <li>Used for games, charts, animations</li>
+                <li>Requires JavaScript to render content</li>
+                <li>Width and height set via attributes, not CSS</li>
+            </ul>
+        </div>
+
+        <!-- Slide 54: SVG Element -->
+        <div class="slide">
+            <div class="slide-number">54/100</div>
+            <h2>&lt;svg&gt; Element</h2>
+            <div class="code-block">&lt;svg width="100" height="100"&gt;
+    &lt;circle cx="50" cy="50" r="40" fill="blue" /&gt;
+&lt;/svg&gt;</div>
+            <ul>
+                <li>Scalable Vector Graphics</li>
+                <li>XML-based vector image format</li>
+                <li>Scalable without quality loss</li>
+                <li>Can be styled with CSS</li>
+                <li>Animated with CSS or JavaScript</li>
+            </ul>
+        </div>
+
+        <!-- Slide 55: IFrame Element -->
+        <div class="slide">
+            <div class="slide-number">55/100</div>
+            <h2>&lt;iframe&gt; Element</h2>
+            <div class="code-block">&lt;iframe src="https://example.com" 
+        width="600" 
+        height="400" 
+        title="Embedded content"&gt;
+&lt;/iframe&gt;</div>
+            <ul>
+                <li>Embeds another HTML page</li>
+                <li>Creates an inline frame</li>
+                <li>Used for maps, videos, external content</li>
+                <li>Security considerations with external sources</li>
+                <li><code>title</code> attribute important for accessibility</li>
+            </ul>
+        </div>
+
+        <!-- Slide 56: Details and Summary -->
+        <div class="slide">
+            <div class="slide-number">56/100</div>
+            <h2>&lt;details&gt; and &lt;summary&gt;</h2>
+            <div class="code-block">&lt;details&gt;
+    &lt;summary&gt;Click to expand&lt;/summary&gt;
+    &lt;p&gt;Hidden content revealed!&lt;/p&gt;
+&lt;/details&gt;</div>
+            <ul>
+                <li>Creates collapsible content</li>
+                <li><code>&lt;summary&gt;</code>: Visible heading</li>
+                <li>No JavaScript required</li>
+                <li><code>open</code> attribute: Expanded by default</li>
+                <li>Great for FAQs and accordions</li>
+            </ul>
+        </div>
+
+        <!-- Slide 57: Progress and Meter -->
+        <div class="slide">
+            <div class="slide-number">57/100</div>
+            <h2>&lt;progress&gt; and &lt;meter&gt;</h2>
+            <div class="code-block">&lt;progress value="70" max="100"&gt;70%&lt;/progress&gt;
+
+&lt;meter value="0.7" min="0" max="1"&gt;70%&lt;/meter&gt;</div>
+            <ul>
+                <li><code>&lt;progress&gt;</code>: Task completion (0-100%)</li>
+                <li><code>&lt;meter&gt;</code>: Measurement within range</li>
+                <li>Both show visual indicators</li>
+                <li>Meter has optimal/suboptimal ranges</li>
+            </ul>
+        </div>
+
+        <!-- Slide 58: Data Attributes -->
+        <div class="slide">
+            <div class="slide-number">58/100</div>
+            <h2>Custom Data Attributes</h2>
+            <div class="code-block">&lt;div data-user-id="12345" data-role="admin"&gt;
+    User Info
+&lt;/div&gt;</div>
+            <ul>
+                <li>Store custom data on HTML elements</li>
+                <li>Prefix with <code>data-</code></li>
+                <li>Accessed via JavaScript: <code>element.dataset.userId</code></li>
+                <li>Can be styled with CSS attribute selectors</li>
+                <li>Valid on all HTML elements</li>
+            </ul>
+        </div>
+
+        <!-- Slide 59: Picture Element -->
+        <div class="slide">
+            <div class="slide-number">59/100</div>
+            <h2>&lt;picture&gt; Element</h2>
+            <div class="code-block">&lt;picture&gt;
+    &lt;source media="(min-width: 800px)" srcset="large.jpg"&gt;
+    &lt;source media="(min-width: 400px)" srcset="medium.jpg"&gt;
+    &lt;img src="small.jpg" alt="Responsive image"&gt;
+&lt;/picture&gt;</div>
+            <ul>
+                <li>Responsive images</li>
+                <li>Different images for different screen sizes</li>
+                <li><code>&lt;img&gt;</code> as fallback is required</li>
+                <li>Art direction use case</li>
+            </ul>
+        </div>
+
+        <!-- Slide 60: Dialog Element -->
+        <div class="slide">
+            <div class="slide-number">60/100</div>
+            <h2>&lt;dialog&gt; Element</h2>
+            <div class="code-block">&lt;dialog id="myDialog"&gt;
+    &lt;h2&gt;Dialog Title&lt;/h2&gt;
+    &lt;p&gt;Dialog content&lt;/p&gt;
+    &lt;button&gt;Close&lt;/button&gt;
+&lt;/dialog&gt;</div>
+            <ul>
+                <li>Native modal or non-modal dialog box</li>
+                <li>Open with JavaScript: <code>dialog.showModal()</code></li>
+                <li>Built-in backdrop and keyboard support</li>
+                <li>Better accessibility than custom modals</li>
+            </ul>
+        </div>
+
+        <!-- Slide 61: Introduction to CSS -->
+        <div class="slide">
+            <div class="slide-number">61/100</div>
+            <h2>What is CSS?</h2>
+            <p><strong>CSS</strong> stands for <span class="highlight">Cascading Style Sheets</span></p>
+            <ul>
+                <li>Describes how HTML elements are displayed</li>
+                <li>Controls layout, colors, fonts, spacing</li>
+                <li>Separates presentation from content</li>
+                <li>One CSS file can style multiple pages</li>
+                <li>External stylesheets save work and load faster</li>
+            </ul>
+        </div>
+
+        <!-- Slide 62: CSS Syntax -->
+        <div class="slide">
+            <div class="slide-number">62/100</div>
+            <h2>CSS Syntax</h2>
+            <div class="code-block">selector {
+    property: value;
+    property: value;
+}</div>
+            <div class="example">
+                <code>h1 {<br>
+                &nbsp;&nbsp;color: blue;<br>
+                &nbsp;&nbsp;font-size: 24px;<br>
+                }</code>
+            </div>
+            <ul>
+                <li><strong>Selector:</strong> Targets HTML element</li>
+                <li><strong>Property:</strong> Aspect to style</li>
+                <li><strong>Value:</strong> Setting for property</li>
+            </ul>
+        </div>
+
+        <!-- Slide 63: Three Ways to Insert CSS -->
+        <div class="slide">
+            <div class="slide-number">63/100</div>
+            <h2>Three Ways to Insert CSS</h2>
+            <h3>1. Inline CSS:</h3>
+            <div class="code-block">&lt;p style="color: red;"&gt;Text&lt;/p&gt;</div>
+            <h3>2. Internal CSS:</h3>
+            <div class="code-block">&lt;style&gt;p { color: red; }&lt;/style&gt;</div>
+            <h3>3. External CSS:</h3>
+            <div class="code-block">&lt;link rel="stylesheet" href="styles.css"&gt;</div>
+            <p>External is the best practice!</p>
+        </div>
+
+        <!-- Slide 64: CSS Selectors - Basic -->
+        <div class="slide">
+            <div class="slide-number">64/100</div>
+            <h2>Basic CSS Selectors</h2>
+            <div class="code-block">/* Element Selector */
+p { color: blue; }
+
+/* Class Selector */
+.highlight { background: yellow; }
+
+/* ID Selector */
+#header { font-size: 24px; }
+
+/* Universal Selector */
+* { margin: 0; }</div>
+        </div>
+
+        <!-- Slide 65: CSS Combinators -->
+        <div class="slide">
+            <div class="slide-number">65/100</div>
+            <h2>CSS Combinators</h2>
+            <div class="code-block">/* Descendant */
+div p { color: red; }
+
+/* Child */
+div > p { color: blue; }
+
+/* Adjacent Sibling */
+h1 + p { margin-top: 0; }
+
+/* General Sibling */
+h1 ~ p { color: gray; }</div>
+        </div>
+
+        <!-- Slide 66: Pseudo-classes -->
+        <div class="slide">
+            <div class="slide-number">66/100</div>
+            <h2>CSS Pseudo-classes</h2>
+            <div class="code-block">a:hover { color: red; }
+a:visited { color: purple; }
+a:active { color: green; }
+
+input:focus { border-color: blue; }
+li:first-child { font-weight: bold; }
+li:nth-child(odd) { background: #f0f0f0; }</div>
+            <ul>
+                <li>Define special state of an element</li>
+                <li>Style based on user interaction or position</li>
+            </ul>
+        </div>
+
+        <!-- Slide 67: Pseudo-elements -->
+        <div class="slide">
+            <div class="slide-number">67/100</div>
+            <h2>CSS Pseudo-elements</h2>
+            <div class="code-block">p::first-line { font-weight: bold; }
+p::first-letter { font-size: 2em; }
+
+h1::before { content: "→ "; }
+h1::after { content: " ←"; }
+
+::selection { background: yellow; }</div>
+            <ul>
+                <li>Style specific parts of an element</li>
+                <li>Add content before or after elements</li>
+            </ul>
+        </div>
+
+        <!-- Slide 68: CSS Specificity -->
+        <div class="slide">
+            <div class="slide-number">68/100</div>
+            <h2>CSS Specificity</h2>
+            <p>When multiple rules target the same element, specificity determines which applies:</p>
+            <ul>
+                <li><strong>Inline styles:</strong> 1000 points</li>
+                <li><strong>IDs:</strong> 100 points</li>
+                <li><strong>Classes, attributes, pseudo-classes:</strong> 10 points</li>
+                <li><strong>Elements, pseudo-elements:</strong> 1 point</li>
+            </ul>
+            <div class="example">
+                <code>#header .nav a</code> = 111 points
+            </div>
+        </div>
+
+        <!-- Slide 69: CSS Cascade and Inheritance -->
+        <div class="slide">
+            <div class="slide-number">69/100</div>
+            <h2>Cascade and Inheritance</h2>
+            <h3>Cascade:</h3>
+            <ul>
+                <li>Multiple styles can apply to same element</li>
+                <li>Last rule wins if equal specificity</li>
+                <li>!important overrides (use sparingly)</li>
+            </ul>
+            <h3>Inheritance:</h3>
+            <ul>
+                <li>Some properties inherit from parent elements</li>
+                <li>Color, font properties typically inherit</li>
+                <li>Layout properties typically don't</li>
+            </ul>
+        </div>
+
+        <!-- Slide 70: CSS Box Model -->
+        <div class="slide">
+            <div class="slide-number">70/100</div>
+            <h2>The CSS Box Model</h2>
+            <p>Every element is a rectangular box with:</p>
+            <ul>
+                <li><strong>Content:</strong> The actual content</li>
+                <li><strong>Padding:</strong> Space around content</li>
+                <li><strong>Border:</strong> Line around padding</li>
+                <li><strong>Margin:</strong> Space outside border</li>
+            </ul>
+            <div class="code-block">div {
+    width: 300px;
+    padding: 20px;
+    border: 5px solid black;
+    margin: 10px;
+}</div>
+        </div>
+
+        <!-- Slide 71: Color Properties -->
+        <div class="slide">
+            <div class="slide-number">71/100</div>
+            <h2>CSS Color Properties</h2>
+            <div class="code-block">/* Named colors */
+color: red;
+background-color: blue;
+
+/* Hexadecimal */
+color: #FF5733;
+
+/* RGB */
+color: rgb(255, 87, 51);
+
+/* RGBA (with transparency) */
+color: rgba(255, 87, 51, 0.5);
+
+/* HSL */
+color: hsl(9, 100%, 60%);</div>
+        </div>
+
+        <!-- Slide 72: Text Properties -->
+        <div class="slide">
+            <div class="slide-number">72/100</div>
+            <h2>CSS Text Properties</h2>
+            <div class="code-block">color: blue;
+text-align: center; /* left, right, justify */
+text-decoration: underline; /* none, overline, line-through */
+text-transform: uppercase; /* lowercase, capitalize */
+text-indent: 50px;
+letter-spacing: 2px;
+line-height: 1.6;
+word-spacing: 5px;</div>
+        </div>
+
+        <!-- Slide 73: Font Properties -->
+        <div class="slide">
+            <div class="slide-number">73/100</div>
+            <h2>CSS Font Properties</h2>
+            <div class="code-block">font-family: Arial, sans-serif;
+font-size: 16px; /* or em, rem, % */
+font-weight: bold; /* or 100-900 */
+font-style: italic; /* or normal, oblique */
+
+/* Shorthand */
+font: italic bold 16px/1.5 Arial, sans-serif;</div>
+            <ul>
+                <li>Always provide fallback fonts</li>
+                <li>Generic families: serif, sans-serif, monospace</li>
+            </ul>
+        </div>
+
+        <!-- Slide 74: Background Properties -->
+        <div class="slide">
+            <div class="slide-number">74/100</div>
+            <h2>CSS Background Properties</h2>
+            <div class="code-block">background-color: #f0f0f0;
+background-image: url('image.jpg');
+background-repeat: no-repeat; /* repeat, repeat-x, repeat-y */
+background-position: center top;
+background-size: cover; /* contain, 100% 50% */
+background-attachment: fixed; /* scroll */
+
+/* Shorthand */
+background: #f0f0f0 url('image.jpg') no-repeat center/cover;</div>
+        </div>
+
+        <!-- Slide 75: Border Properties -->
+        <div class="slide">
+            <div class="slide-number">75/100</div>
+            <h2>CSS Border Properties</h2>
+            <div class="code-block">border-width: 2px;
+border-style: solid; /* dashed, dotted, double, none */
+border-color: black;
+
+/* Shorthand */
+border: 2px solid black;
+
+/* Individual sides */
+border-top: 1px solid red;
+border-right: 2px dashed blue;
+
+/* Rounded corners */
+border-radius: 10px;</div>
+        </div>
+
+        <!-- Slide 76: Margin and Padding -->
+        <div class="slide">
+            <div class="slide-number">76/100</div>
+            <h2>Margin and Padding</h2>
+            <div class="code-block">/* All sides */
+margin: 20px;
+padding: 10px;
+
+/* Vertical | Horizontal */
+margin: 20px 10px;
+
+/* Top | Horizontal | Bottom */
+margin: 20px 10px 30px;
+
+/* Top | Right | Bottom | Left (clockwise) */
+margin: 20px 10px 30px 5px;
+
+/* Individual sides */
+margin-top: 20px;
+padding-left: 15px;</div>
+        </div>
+
+        <!-- Slide 77: Width and Height -->
+        <div class="slide">
+            <div class="slide-number">77/100</div>
+            <h2>Width and Height Properties</h2>
+            <div class="code-block">width: 300px;
+height: 200px;
+
+/* Percentage */
+width: 50%;
+
+/* Min and Max */
+min-width: 200px;
+max-width: 800px;
+min-height: 100px;
+max-height: 500px;
+
+/* Auto */
+width: auto;</div>
+        </div>
+
+        <!-- Slide 78: Display Property -->
+        <div class="slide">
+            <div class="slide-number">78/100</div>
+            <h2>CSS Display Property</h2>
+            <div class="code-block">display: block;
+display: inline;
+display: inline-block;
+display: none;
+display: flex;
+display: grid;</div>
+            <ul>
+                <li><code>block</code>: Takes full width, starts new line</li>
+                <li><code>inline</code>: Takes only necessary width, no line break</li>
+                <li><code>inline-block</code>: Like inline but accepts width/height</li>
+                <li><code>none</code>: Hides element completely</li>
+            </ul>
+        </div>
+
+        <!-- Slide 79: Position Property -->
+        <div class="slide">
+            <div class="slide-number">79/100</div>
+            <h2>CSS Position Property</h2>
+            <div class="code-block">position: static; /* default */
+position: relative; /* relative to normal position */
+position: absolute; /* relative to positioned parent */
+position: fixed; /* relative to viewport */
+position: sticky; /* switches between relative and fixed */
+
+/* Positioning properties */
+top: 10px;
+right: 20px;
+bottom: 15px;
+left: 5px;</div>
+        </div>
+
+        <!-- Slide 80: Float and Clear -->
+        <div class="slide">
+            <div class="slide-number">80/100</div>
+            <h2>Float and Clear</h2>
+            <div class="code-block">/* Float */
+float: left;
+float: right;
+float: none;
+
+/* Clear */
+clear: left;
+clear: right;
+clear: both;</div>
+            <ul>
+                <li>Float removes element from normal flow</li>
+                <li>Clear prevents floating on specified sides</li>
+                <li>Modern layouts prefer Flexbox/Grid over float</li>
+            </ul>
+        </div>
+
+        <!-- Slide 81: Z-Index -->
+        <div class="slide">
+            <div class="slide-number">81/100</div>
+            <h2>CSS Z-Index</h2>
+            <div class="code-block">z-index: 10;
+z-index: -1;
+z-index: 999;</div>
+            <ul>
+                <li>Controls stacking order of positioned elements</li>
+                <li>Only works on positioned elements (not static)</li>
+                <li>Higher values appear on top</li>
+                <li>Negative values place behind default layer</li>
+                <li>Creates stacking contexts</li>
+            </ul>
+        </div>
+
+        <!-- Slide 82: Overflow Property -->
+        <div class="slide">
+            <div class="slide-number">82/100</div>
+            <h2>CSS Overflow Property</h2>
+            <div class="code-block">overflow: visible; /* default, content not clipped */
+overflow: hidden; /* content clipped, no scrollbar */
+overflow: scroll; /* always shows scrollbar */
+overflow: auto; /* scrollbar only when needed */
+
+/* Individual axes */
+overflow-x: hidden;
+overflow-y: auto;</div>
+            <ul>
+                <li>Controls what happens to overflowing content</li>
+            </ul>
+        </div>
+
+        <!-- Slide 83: Opacity and Visibility -->
+        <div class="slide">
+            <div class="slide-number">83/100</div>
+            <h2>Opacity and Visibility</h2>
+            <div class="code-block">/* Opacity (0 to 1) */
+opacity: 0.5; /* 50% transparent */
+opacity: 0; /* fully transparent */
+opacity: 1; /* fully opaque */
+
+/* Visibility */
+visibility: visible;
+visibility: hidden; /* hides but takes up space */
+visibility: collapse; /* for table elements */</div>
+            <ul>
+                <li><code>display: none</code> removes from layout</li>
+                <li><code>visibility: hidden</code> hides but keeps space</li>
+            </ul>
+        </div>
+
+        <!-- Slide 84: Cursor Property -->
+        <div class="slide">
+            <div class="slide-number">84/100</div>
+            <h2>CSS Cursor Property</h2>
+            <div class="code-block">cursor: pointer; /* hand icon */
+cursor: default; /* arrow */
+cursor: text; /* I-beam */
+cursor: move;
+cursor: not-allowed;
+cursor: wait;
+cursor: help;
+cursor: crosshair;
+cursor: url('custom.cur'), auto;</div>
+            <ul>
+                <li>Changes mouse cursor appearance</li>
+                <li>Can use custom cursor images</li>
+            </ul>
+        </div>
+
+        <!-- Slide 85: List Style Properties -->
+        <div class="slide">
+            <div class="slide-number">85/100</div>
+            <h2>CSS List Style Properties</h2>
+            <div class="code-block">list-style-type: disc; /* circle, square, none */
+list-style-type: decimal; /* 1, 2, 3... */
+list-style-type: upper-roman; /* I, II, III... */
+
+list-style-position: inside; /* or outside */
+list-style-image: url('bullet.png');
+
+/* Shorthand */
+list-style: square inside;</div>
+        </div>
+
+        <!-- Slide 86: CSS Transitions -->
+        <div class="slide">
+            <div class="slide-number">86/100</div>
+            <h2>CSS Transitions</h2>
+            <div class="code-block">/* Transition single property */
+transition: color 0.3s ease;
+
+/* Transition multiple properties */
+transition: all 0.5s ease-in-out;
+
+/* Individual properties */
+transition-property: color, background;
+transition-duration: 0.3s;
+transition-timing-function: ease; /* linear, ease-in, ease-out */
+transition-delay: 0.1s;</div>
+            <p>Creates smooth animations between states.</p>
+        </div>
+
+        <!-- Slide 87: CSS Transforms -->
+        <div class="slide">
+            <div class="slide-number">87/100</div>
+            <h2>CSS Transforms</h2>
+            <div class="code-block">/* Rotate */
+transform: rotate(45deg);
+
+/* Scale */
+transform: scale(1.5); /* or scaleX(), scaleY() */
+
+/* Translate (move) */
+transform: translate(50px, 100px);
+
+/* Skew */
+transform: skew(10deg, 5deg);
+
+/* Multiple transforms */
+transform: rotate(45deg) scale(1.5) translate(50px, 0);</div>
+        </div>
+
+        <!-- Slide 88: CSS Animations -->
+        <div class="slide">
+            <div class="slide-number">88/100</div>
+            <h2>CSS Animations</h2>
+            <div class="code-block">@keyframes slide {
+    0% { left: 0; }
+    50% { left: 100px; }
+    100% { left: 200px; }
+}
+
+.element {
+    animation-name: slide;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-delay: 0.5s;
+    animation-iteration-count: infinite; /* or number */
+    animation-direction: alternate; /* normal, reverse */
+}</div>
+        </div>
+
+        <!-- Slide 89: CSS Flexbox - Container -->
+        <div class="slide">
+            <div class="slide-number">89/100</div>
+            <h2>Flexbox Container Properties</h2>
+            <div class="code-block">.container {
+    display: flex;
+    flex-direction: row; /* column, row-reverse, column-reverse */
+    justify-content: center; /* flex-start, flex-end, space-between */
+    align-items: center; /* stretch, flex-start, flex-end */
+    flex-wrap: wrap; /* nowrap, wrap-reverse */
+    gap: 20px;
+}</div>
+            <p>One-dimensional layout system.</p>
+        </div>
+
+        <!-- Slide 90: CSS Flexbox - Items -->
+        <div class="slide">
+            <div class="slide-number">90/100</div>
+            <h2>Flexbox Item Properties</h2>
+            <div class="code-block">.item {
+    flex-grow: 1; /* growth factor */
+    flex-shrink: 1; /* shrink factor */
+    flex-basis: 200px; /* initial size */
+    
+    /* Shorthand */
+    flex: 1 1 200px;
+    
+    align-self: flex-end; /* override container's align-items */
+    order: 2; /* change visual order */
+}</div>
+        </div>
+
+        <!-- Slide 91: CSS Grid - Container -->
+        <div class="slide">
+            <div class="slide-number">91/100</div>
+            <h2>CSS Grid Container Properties</h2>
+            <div class="code-block">.container {
+    display: grid;
+    grid-template-columns: 200px 1fr 2fr;
+    grid-template-rows: 100px auto 50px;
+    gap: 20px; /* or row-gap, column-gap */
+    
+    /* Alternative syntax */
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}</div>
+            <p>Two-dimensional layout system.</p>
+        </div>
+
+        <!-- Slide 92: CSS Grid - Items -->
+        <div class="slide">
+            <div class="slide-number">92/100</div>
+            <h2>CSS Grid Item Properties</h2>
+            <div class="code-block">.item {
+    grid-column: 1 / 3; /* start / end */
+    grid-row: 2 / 4;
+    
+    /* Alternative */
+    grid-column-start: 1;
+    grid-column-end: 3;
+    
+    /* Span syntax */
+    grid-column: span 2;
+    
+    /* Named areas */
+    grid-area: header;
+}</div>
+        </div>
+
+        <!-- Slide 93: Media Queries -->
+        <div class="slide">
+            <div class="slide-number">93/100</div>
+            <h2>CSS Media Queries</h2>
+            <div class="code-block">/* Mobile first */
+.container { width: 100%; }
+
+@media (min-width: 768px) {
+    .container { width: 750px; }
+}
+
+@media (min-width: 1024px) {
+    .container { width: 1000px; }
+}
+
+/* Print styles */
+@media print {
+    body { font-size: 12pt; }
+}</div>
+            <p>Responsive design for different devices.</p>
+        </div>
+
+        <!-- Slide 94: CSS Variables -->
+        <div class="slide">
+            <div class="slide-number">94/100</div>
+            <h2>CSS Custom Properties (Variables)</h2>
+            <div class="code-block">:root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --spacing: 20px;
+}
+
+.element {
+    background-color: var(--primary-color);
+    padding: var(--spacing);
+    color: var(--text-color, black); /* fallback */
+}</div>
+            <ul>
+                <li>Reusable values throughout stylesheet</li>
+                <li>Can be changed with JavaScript</li>
+            </ul>
+        </div>
+
+        <!-- Slide 95: CSS Filters -->
+        <div class="slide">
+            <div class="slide-number">95/100</div>
+            <h2>CSS Filter Effects</h2>
+            <div class="code-block">filter: blur(5px);
+filter: brightness(150%);
+filter: contrast(200%);
+filter: grayscale(100%);
+filter: hue-rotate(90deg);
+filter: saturate(200%);
+filter: sepia(100%);
+filter: invert(100%);
+
+/* Multiple filters */
+filter: blur(2px) brightness(120%) contrast(110%);</div>
+        </div>
+
+        <!-- Slide 96: Box Shadow and Text Shadow -->
+        <div class="slide">
+            <div class="slide-number">96/100</div>
+            <h2>Shadow Properties</h2>
+            <div class="code-block">/* Box Shadow */
+box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+box-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+
+/* Text Shadow */
+text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+text-shadow: 1px 1px 2px black, 0 0 25px blue;</div>
+            <p>Format: horizontal vertical blur spread color</p>
+        </div>
+
+        <!-- Slide 97: CSS Gradients -->
+        <div class="slide">
+            <div class="slide-number">97/100</div>
+            <h2>CSS Gradients</h2>
+            <div class="code-block">/* Linear Gradient */
+background: linear-gradient(to right, red, blue);
+background: linear-gradient(45deg, red, yellow, blue);
+background: linear-gradient(to bottom, red 0%, blue 100%);
+
+/* Radial Gradient */
+background: radial-gradient(circle, red, blue);
+background: radial-gradient(ellipse at center, red, blue);
+
+/* Repeating */
+background: repeating-linear-gradient(45deg, red, blue 20px);</div>
+        </div>
+
+        <!-- Slide 98: CSS Grid Areas -->
+        <div class="slide">
+            <div class="slide-number">98/100</div>
+            <h2>CSS Grid Template Areas</h2>
+            <div class="code-block">.container {
+    display: grid;
+    grid-template-areas:
+        "header header header"
+        "sidebar main main"
+        "footer footer footer";
+}
+
+.header { grid-area: header; }
+.sidebar { grid-area: sidebar; }
+.main { grid-area: main; }
+.footer { grid-area: footer; }</div>
+            <p>Named grid areas for intuitive layouts.</p>
+        </div>
+
+        <!-- Slide 99: CSS Best Practices -->
+        <div class="slide">
+            <div class="slide-number">99/100</div>
+            <h2>CSS Best Practices</h2>
+            <ul>
+                <li>Use external stylesheets for maintainability</li>
+                <li>Follow naming conventions (BEM, OOCSS)</li>
+                <li>Keep specificity low and consistent</li>
+                <li>Use classes over IDs for styling</li>
+                <li>Mobile-first responsive design</li>
+                <li>Minimize use of !important</li>
+                <li>Group related properties together</li>
+                <li>Use CSS variables for repeated values</li>
+                <li>Comment complex or unclear code</li>
+                <li>Validate your CSS code</li>
+            </ul>
+        </div>
+
+        <!-- Slide 100: Summary and Next Steps -->
+        <div class="slide">
+            <div class="slide-number">100/100</div>
+            <h2>Course Summary</h2>
+            <h3>What We Covered:</h3>
+            <ul>
+                <li>✓ HTML fundamentals and document structure</li>
+                <li>✓ Basic HTML tags for content creation</li>
+                <li>✓ Advanced HTML5 semantic elements</li>
+                <li>✓ CSS fundamentals and syntax</li>
+                <li>✓ Basic CSS properties for styling</li>
+                <li>✓ Advanced CSS techniques (Flexbox, Grid, Animations)</li>
+            </ul>
+            <h3>Next Steps:</h3>
+            <ul>
+                <li>Practice building complete web pages</li>
+                <li>Learn JavaScript for interactivity</li>
+                <li>Explore CSS frameworks (Bootstrap, Tailwind)</li>
+                <li>Study responsive design patterns</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="nav-buttons">
+        <button id="prevBtn">← Previous</button>
+        <button id="nextBtn">Next →</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            const totalSlides = slides.length;
+            let isAnimating = false;
+
+            // Initialize buttons
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const progressBar = document.getElementById('progressBar');
+
+            function updateButtons() {
+                prevBtn.disabled = currentSlide === 0;
+                nextBtn.disabled = currentSlide === totalSlides - 1;
+            }
+
+            function updateProgress() {
+                if (progressBar) {
+                    progressBar.style.width = ((currentSlide + 1) / totalSlides) * 100 + '%';
+                }
+            }
+
+            function showSlide(n) {
+                if (isAnimating) return;
+                
+                // Ensure n is within bounds
+                if (n < 0 || n >= totalSlides) return;
+                
+                isAnimating = true;
+                const currentSlideElement = document.querySelector('.slide.active');
+                const nextSlideElement = slides[n];
+                
+                // Fade out current slide
+                if (currentSlideElement) {
+                    currentSlideElement.classList.remove('active');
+                }
+                
+                // Fade in next slide
+                setTimeout(() => {
+                    nextSlideElement.classList.add('active');
+                    currentSlide = n;
+                    updateProgress();
+                    updateButtons();
+                    isAnimating = false;
+                }, 300);
+            }
+
+            // Initialize
+            if (slides.length > 0) {
+                slides[0].classList.add('active');
+                updateButtons();
+                updateProgress();
+            }
+
+            // Event Listeners
+            prevBtn.addEventListener('click', () => {
+                if (currentSlide > 0) {
+                    showSlide(currentSlide - 1);
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentSlide < totalSlides - 1) {
+                    showSlide(currentSlide + 1);
+                }
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft' && currentSlide > 0) {
+                    showSlide(currentSlide - 1);
+                } else if (e.key === 'ArrowRight' && currentSlide < totalSlides - 1) {
+                    showSlide(currentSlide + 1);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
