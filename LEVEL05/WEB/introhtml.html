@@ -2051,7 +2051,7 @@ User Request → PHP/Python/Node.js → Database<br>
             slideTitles.forEach((title, index) => {
                 const activeClass = index === currentSlide ? 'active' : '';
                 html += `
-                    <div class="slide-item ${activeClass}" onclick="goToSlide(${index}); closeSlideMenu();">
+                    <div class="slide-item ${activeClass}" onclick="goToSlide(${index})">
                         <strong>Slide ${index + 1}:</strong> ${title}
                     </div>
                 `;
