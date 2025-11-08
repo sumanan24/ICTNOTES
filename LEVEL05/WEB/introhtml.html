@@ -55,7 +55,19 @@
             .slide {
                 position: absolute;
                 height: calc(100vh - 120px);
-                padding-bottom: 100px; /* Extra space for content at the bottom */
+                padding: 20px 15px;
+            }
+            /* First slide specific styles for mobile */
+            .slide:first-child .slide-content h1 {
+                font-size: 1.8em !important;
+                margin-bottom: 10px !important;
+            }
+            .slide:first-child .slide-content p {
+                font-size: 1.1em !important;
+                margin-bottom: 20px !important;
+            }
+            .slide:first-child .highlight-box {
+                padding: 15px !important;
             }
         }
         
@@ -907,14 +919,16 @@
     <div class="presentation-container">
         <!-- Slide 1: Title Slide -->
         <div class="slide active">
-            <div class="slide-content" style="text-align: center; justify-content: center;">
-                <div class="icon-box">🌐</div>
-                <h1 style="color: #1e3c72; font-size: 3em; margin-bottom: 20px;">Understanding Web Pages, Web Applications & Content Types</h1>
-                <p style="font-size: 1.5em; color: #2a5298; margin-bottom: 30px;">Static vs Dynamic Content Explained</p>
-                <div class="highlight-box">
-                    <h3>ICT Department</h3>
-                    <p style="font-size: 1.2em;">Sri Lanka German Training Institute (SLGTI)</p>
-                    <p style="margin-top: 10px;">Web Development Fundamentals</p>
+            <div class="slide-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding: 20px; box-sizing: border-box; overflow: hidden;">
+                <div style="max-width: 800px; width: 100%; margin: 0 auto;">
+                    <div class="icon-box" style="margin: 0 auto 20px;">🌐</div>
+                    <h1 style="color: #1e3c72; font-size: 2.2em; margin-bottom: 15px; line-height: 1.3;">Understanding Web Pages, Web Applications & Content Types</h1>
+                    <p style="font-size: 1.3em; color: #2a5298; margin-bottom: 25px;">Static vs Dynamic Content Explained</p>
+                    <div class="highlight-box" style="margin: 0 auto; max-width: 500px;">
+                        <h3 style="font-size: 1.3em; margin-bottom: 10px;">ICT Department</h3>
+                        <p style="font-size: 1.1em; margin-bottom: 5px;">Sri Lanka German Training Institute (SLGTI)</p>
+                        <p style="font-size: 1em; margin: 0;">Web Development Fundamentals</p>
+                    </div>
                 </div>
             </div>
         </div>
