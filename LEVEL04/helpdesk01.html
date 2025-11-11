@@ -15,13 +15,13 @@
             font-family: 'Arial', sans-serif;
             overflow: hidden;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            height: 100vh;
+            height: 100dvh;
         }
 
         .presentation {
             position: relative;
             width: 100%;
-            height: 100vh;
+            height: 100dvh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -31,7 +31,7 @@
             position: absolute;
             width: 90%;
             max-width: 1000px;
-            height: 85vh;
+            height: 85dvh;
             background: white;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
@@ -249,7 +249,7 @@
 
         .controls {
             position: fixed;
-            bottom: 30px;
+            bottom: calc(16px + env(safe-area-inset-bottom));
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -384,9 +384,15 @@
         }
 
         @media (max-width: 768px) {
+            .presentation {
+                align-items: flex-start;
+                padding: 0 10px;
+            }
             .slide {
-                padding: 30px 20px;
-                height: 90vh;
+                padding: 24px 16px 100px 16px; /* extra bottom padding so content stays above controls */
+                width: 100%;
+                max-width: 100%;
+                height: calc(100dvh - 16px);
             }
 
             h1 {
@@ -419,6 +425,22 @@
                 font-size: 0.9em;
             }
 
+            .controls {
+                left: 0;
+                right: 0;
+                transform: none;
+                width: 100%;
+                padding: 0 16px;
+                justify-content: space-between;
+                gap: 12px;
+                bottom: calc(12px + env(safe-area-inset-bottom));
+            }
+
+            .controls button {
+                width: calc((100% - 12px) / 2);
+                min-height: 44px; /* tap target */
+            }
+
             .step-number {
                 width: 50px;
                 height: 50px;
@@ -436,6 +458,22 @@
             .comparison-table th,
             .comparison-table td {
                 padding: 10px;
+            }
+
+            .image-placeholder {
+                max-width: 100%;
+                height: 180px;
+            }
+
+            .slide-number {
+                top: 12px;
+                right: 12px;
+                padding: 6px 12px;
+                font-size: 0.9em;
+            }
+
+            .progress {
+                height: 3px;
             }
         }
 
@@ -456,6 +494,26 @@
             .step-number {
                 margin-right: 0;
                 margin-bottom: 10px;
+            }
+
+            .slide {
+                height: calc(100dvh - 12px);
+                padding: 20px 14px 96px 14px;
+            }
+
+            .controls button {
+                width: calc((100% - 12px) / 2);
+                padding: 10px 14px;
+                font-size: 0.85em;
+                min-height: 44px;
+            }
+
+            .image-placeholder {
+                height: 160px;
+            }
+
+            .slide-number {
+                font-size: 0.85em;
             }
         }
     </style>
@@ -1039,28 +1097,6 @@
         function changeSlide(direction) {
             currentSlide += direction;
             showSlide(currentSlide);
-        }
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight') changeSlide(1);
-            if (e.key === 'ArrowLeft') changeSlide(-1);
-        });
-
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        document.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-
-        document.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
-
-        function handleSwipe() {
-            if (touchEndX < touchStartX - 50) changeSlide(1);
-            if (touchEndX > touchStartX + 50) changeSlide(-1);
         }
 
         showSlide(currentSlide);
