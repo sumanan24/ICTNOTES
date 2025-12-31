@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solution Range Identification & Outlining - Comprehensive Guide</title>
+
+<!-- ICON LIBRARY -->
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+<style>
+/* ===== GLOBAL STYLE ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ===== SLIDE CONTAINER ===== */
+.slide-container {
+  min-height: 100vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== SLIDE ===== */
+.slide {
+  display: none;
+  max-width: 1200px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 50px;
+  margin: 20px auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.slide.active {
+  display: block;
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== TYPOGRAPHY ===== */
+h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(45deg, #fff, #e0e0e0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+h2 {
+  font-size: 36px;
+  margin-bottom: 25px;
+  color: #fff;
+  text-align: center;
+  border-bottom: 3px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 15px;
+}
+
+h3 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #f0f0f0;
+}
+
+h4 {
+  font-size: 22px;
+  margin: 15px 0;
+  color: #e0e0e0;
+}
+
+p {
+  font-size: 20px;
+  line-height: 1.8;
+  margin-bottom: 15px;
+  text-align: justify;
+}
+
+ul, ol {
+  margin: 20px 0;
+  padding-left: 40px;
+}
+
+li {
+  font-size: 18px;
+  line-height: 1.8;
+  margin-bottom: 12px;
+  list-style-position: outside;
+}
+
+/* ===== IMAGES ===== */
+.slide-image {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  border-radius: 15px;
+  margin: 25px auto;
+  display: block;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  border: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+.image-container {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.image-caption {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 10px;
+  font-style: italic;
+}
+
+/* ===== ICON ===== */
+.icon {
+  font-size: 100px;
+  text-align: center;
+  margin: 30px 0;
+  opacity: 0.7;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ===== CONTENT SECTIONS ===== */
+.content-section {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 25px;
+  border-radius: 15px;
+  margin: 20px 0;
+  border-left: 4px solid #20c997;
+}
+
+.example-box {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+  border-left: 4px solid #0d6efd;
+}
+
+.example-box h4 {
+  color: #20c997;
+  margin-bottom: 15px;
+}
+
+.key-point {
+  background: rgba(32, 201, 151, 0.2);
+  padding: 15px;
+  border-radius: 10px;
+  margin: 15px 0;
+  border-left: 4px solid #20c997;
+}
+
+.warning-box {
+  background: rgba(255, 193, 7, 0.2);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+  border-left: 4px solid #ffc107;
+}
+
+.warning-box h4 {
+  color: #ffc107;
+}
+
+/* ===== GRID LAYOUT ===== */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin: 25px 0;
+}
+
+.grid-item {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ===== NAVIGATION ===== */
+.navigation {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 15px;
+  z-index: 1000;
+}
+
+.nav-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.slide-counter {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 16px;
+  backdrop-filter: blur(10px);
+}
+
+/* ===== NOTES ===== */
+.notes {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 15px 25px;
+  border-radius: 10px;
+  margin-top: 30px;
+  font-size: 16px;
+  border-left: 4px solid #ffc107;
+  font-style: italic;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .slide {
+    padding: 30px 20px;
+  }
+  
+  h1 { font-size: 32px; }
+  h2 { font-size: 28px; }
+  h3 { font-size: 22px; }
+  p, li { font-size: 16px; }
+  
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+  
+  .navigation {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+/* ===== NUMBER BADGES ===== */
+.number-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #20c997, #0d6efd);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 40px;
+  font-weight: bold;
+  margin-right: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+</style>
+</head>
+
+<body>
+
+<div class="slide-counter">
+  <span id="current-slide">1</span> / <span id="total-slides">25</span>
+</div>
+
+<!-- SLIDE 1: Title -->
+<div class="slide active">
+  <div class="slide-container">
+    <i class="ri-file-list-3-line icon"></i>
+    <h1>Solution Range Identification & Outlining</h1>
+    <h3>Within Contractual Scope</h3>
+    <p style="text-align: center; font-size: 22px; margin-top: 30px;">
+      A Comprehensive Guide to Planning Solutions Within Contract Boundaries
+    </p>
+    <div class="image-container">
+      <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80" 
+           alt="Business Contract" 
+           class="slide-image"
+           onerror="this.style.display='none'">
+      <p class="image-caption">Understanding contractual boundaries is essential for successful project delivery</p>
+    </div>
+    <div class="notes">
+      <strong>Presenter Notes:</strong> Introduce the topic. Explain that solutions must always stay within contract boundaries. 
+      This session will teach you how to identify scope, outline solutions, and apply organizational standards.
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2: Session Overview -->
+<div class="slide">
+  <div class="slide-container">
+    <h2><i class="ri-presentation-line"></i> Session Overview</h2>
+    <div class="grid-2">
+      <div class="grid-item">
+        <h3><span class="number-badge">1</span>Contractual Scope</h3>
+        <p>Understanding boundaries and requirements</p>
+      </div>
+      <div class="grid-item">
+        <h3><span class="number-badge">2</span>Solution Range</h3>
+        <p>Identifying feasible solutions within scope</p>
+      </div>
+      <div class="grid-item">
+        <h3><span class="number-badge">3</span>Organizational Standards</h3>
+        <p>Applying company guidelines and templates</p>
+      </div>
+      <div class="grid-item">
+        <h3><span class="number-badge">4</span>Practical Application</h3>
+        <p>Real-world examples and case studies</p>
+      </div>
+    </div>
+    <div class="image-container">
+      <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80" 
+           alt="Planning" 
+           class="slide-image"
+           onerror="this.style.display='none'">
+    </div>
+    <div class="notes">
+      <strong>Presenter Notes:</strong> Explain what students will learn today and how it links to real ICT projects. 
+      This knowledge is critical for project managers, business analysts, and solution architects.
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3: Contractual Scope -->
+<div class="slide">
+  <div class="slide-container">
+    <h2><span class="number-badge">1</span> Contractual Scope</h2>
+    <div class="content-section">
+      <h3>What is Contractual Scope?</h3>
+      <p>
+        <strong>Contractual scope</strong> defines the boundaries of work in a contract. It specifies what is included 
+        and excluded, guiding all solution planning activities. Think of it as a fence that clearly marks what you 
+        must deliver and what is outside your responsibility.
+      </p>
+    </div>
+    
+    <div class="key-point">
+      <h4><i class="ri-checkbox-circle-line"></i> Key Characteristics:</h4>
+      <ul>
+        <li><strong>Defines boundaries:</strong> Clearly states what work is included</li>
+        <li><strong>Specifies exclusions:</strong> Explicitly lists what is NOT included</li>
+        <li><strong>Guides planning:</strong> All solution activities must align with scope</li>
+        <li><strong>Legal protection:</strong> Protects both client and vendor</li>
+      </ul>
+    </div>
+
+    <div class="example-box">
+      <h4><i class="ri-lightbulb-line"></i> Real-World Example:</h4>
+      <p>
+        <strong>Scenario:</strong> A company contracts to develop an e-commerce website.
+      </p>
+      <p><strong>In Scope:</strong> Product catalog, shopping cart, payment processing, user accounts</p>
+      <p><strong>Out of Scope:</strong> Mobile app development, inventory management system, customer support chat</p>
+    </div>
+
+    <div class="image-container">
+      <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80" 
+           alt="Contract Document" 
+           class="slide-image"
+           onerror="this.style.display='none'">
+    </div>
+
+    <div class="notes">
+      <strong>Presenter Notes:</strong> Explain inclusions, exclusions, and why scope is legally important. 
+      Use the example to illustrate how scope prevents misunderstandings and disputes.
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4: Contractual Documents -->
+<div class="slide">
+  <div class="slide-container">
+    <h2><span class="number-badge">2</span> Contractual Documents</h2>
+    <div class="content-section">
+      <p>
+        Contractual documents contain requirements, constraints, and deliverables. They serve as the foundation 
+        for solution design and must be carefully analyzed before planning any solution.
+      </p>
+    </div>
+
+    <div class="grid-2">
+      <div class="grid-item">
+        <h4><i class="ri-file-search-line"></i> RFP (Request for Proposal)</h4>
+        <p>Document requesting vendors to submit proposals for a project. Contains initial requirements and evaluation criteria.</p>
+      </div>
+      <div class="grid-item">
+        <h4><i class="ri-file-text-line"></i> SOW (Statement of Work)</h4>
+        <p>Detailed description of work to be performed, deliverables, timelines, and acceptance criteria.</p>
+      </div>
+      <div class="grid-item">
+        <h4><i class="ri-file-shield-line"></i> SLA (Service Level Agreement)</h4>
+        <p>Defines performance metrics, availability requirements, and service quality standards.</p>
+      </div>
+      <div class="grid-item">
+        <h4><i class="ri-file-contract-line"></i> Agreements</h4>
+        <p>Legal contracts specifying terms, conditions, payment, and responsibilities of all parties.</p>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <h4><i class="ri-file-list-line"></i> Document Hierarchy:</h4>
+      <ol>
+        <li><strong>RFP</strong> → Client requests solutions</li>
+        <li><strong>Proposal</strong> → Vendor responds with solution</li>
+        <li><strong>SOW</strong> → Detailed work description</li>
+        <li><strong>Contract</strong> → Legal agreement signed</li>
+        <li><strong>SLA</strong> → Ongoing service standards</li>
+      </ol>
+    </div>
+
+    <div class="image-container">
+      <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80" 
+           alt="Documents" 
+           class="slide-image"
+           onerror="this.style.display='none'">
+    </div>
+
+    <div class="notes">
+      <strong>Presenter Notes:</strong> Show or describe real contract documents used in ICT companies. 
+      Explain how each document type serves a different purpose in the project lifecycle.
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5: Scope Identification -->
+<div class="slide">
+  <div class="slide-container">
+    <h2><span class="number-badge">3</span> Scope Identification</h2>
+    <div class="content-section">
+      <p>
+        Identifying scope involves extracting all requirements, constraints, and deliverables from contractual 
+        documents. This process ensures nothing is missed and nothing extra is included.
+      </p>
+    </div>
+
+    <div class="grid-2">
+      <div class="grid-item">
+        <h4><i class="ri-function-line"></i> Functional Requirements</h4>
+        <p><strong>What the system must DO:</strong></p>
+        <ul style="font-size: 16px;">
+          <li>User authentication</li>
+          <li>Data processing</li>
+          <li>Report generation</li>
+          <li>Business logic implementation</li>
+        </ul>
+      </div>
+      <div class="grid-item">
+        <h4><i class="ri-settings-3-line"></i> Non-Functional Requirements</h4>
+        <p><strong>How the system must PERFORM:</strong></p>
+        <ul style="font-size: 16px;">
+          <li>Performance (speed, response time)</li>
+          <li>Security (encryption, access control)</li>
+          <li>Scalability (handle growth)</li>
+          <li>Usability (user-friendly interface)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="key-point">
+      <h4><i class="ri-list-check-2-line"></i> Additional Scope Components:</h4>
+      <ul>
+        <li><strong>Deliverables:</strong> Tangible outputs (software, documentation, training)</li>
+        <li><strong>Timelines:</strong> Milestones and deadlines</li>
+        <li><strong>Constraints:</strong> Budget limits, technology restrictions, compliance requirements</li>
+        <li><strong>Assumptions:</strong> Conditions believed to be true (e.g., client will provide data)</li>
+      </ul>
+    </div>
+
+    <div class="example-box">
+      <h4><i class="ri-lightbulb-line"></i> Example: E-Learning Platform</h4>
+      <p><strong>Functional:</strong> Course enrollment, video playback, quiz system, certificate generation</p>
+      <p><strong>Non-Functional:</strong> Support 1000 concurrent users, 99.9% uptime, SSL encryption, mobile responsive</p>
+      <p><strong>Deliverables:</strong> Web application, admin panel, user documentation, training sessions</p>
+      <p><strong>Timeline:</strong> 6 months with monthly milestones</p>
+      <p><strong>Constraints:</strong> Must use cloud hosting, comply with GDPR, budget: $200,000</p>
+    </div>
+
+    <div class="image-container">
+      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80" 
+           alt="Analysis" 
+           class="slide-image"
+           onerror="this.style.display='none'">
+    </div>
+
+    <div class="notes">
+      <strong>Presenter Notes:</strong> Explain difference between functional and non-functional requirements with examples. 
+      Use the e-learning platform example to show how all components work together.
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6: Solution Range -->
+<div class="slide">
+  <div class="slide-container">
+    <h2><span class="number-badge">4</span> Solution Range</h2>
+    <div class="content-section">
+      <h3>What is Solution Range?</h3>
+      <p>
+        <strong>Solution range</strong> is a set of possible solutions within the defined scope. These solutions 
+        must fully comply with contractual requirements and should avoid out-of-scope features. The goal is to 
+        identify multiple viable approaches and select the best one.
+      </p>
+    </div>
+
+    <div class="key-point">
+      <h4><i class="ri-checkbox-circle-line"></i> Solution Range Characteristics:</h4>
+      <ul>
+        <li><strong>Within scope:</strong> All solutions must meet contractual requirements</li>
+        <li><strong>Feasible:</strong> Technically and financially achievable</li>
+        <li><strong>Realistic:</strong> Can be delivered within timeline and budget</li>
+        <li><strong>Compliant:</strong> Follows all standards and regulations</li>
+      </ul>
+    </div>
+
+    <div class="example-box">
+      <h4><i class="ri-lightbulb-line"></i> Example: Database Solution Range</h4>
+      <p><strong>Requirement:</strong> Store customer data with high availability</p>
+      <p><strong>Solution Options:</strong></p>
+      <ol>
+        <li><strong>Option A:</strong> MySQL on-premise server (Cost: $50K, Setup: 2 weeks)</li>
+        <li><strong>Option B:</strong> PostgreSQL cloud-hosted (Cost: $30K, Setup: 1 week)</li>
+        <li><strong>Option C:</strong> MongoDB NoSQL solution (Cost: $40K, Setup: 1.5 weeks)</li>
+      </ol>
+      <p><strong>Best Choice:</strong> Option B - balances cost, performance, and setup time</p>
+    </div>
+
+    <div class="warning-box">
+      <h4><i class="ri-error-warning-line"></i> Common Mistake:</h4>
+      <p>Proposing solutions with features not in the contract (e.g., adding AI features when not requested) 
+      leads to scope creep and budget overruns.</p>
+    </div>
+
+    <div class="image-container">
+      <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80" 
+           alt="Solutions" 
+           class="slide-image"
+           onerror="this.style.display='none'">
+    </div>
+
+    <div class="notes">
+      <strong>Presenter Notes:</strong> Explain solution alternatives using software examples. 
+      Emphasize that all options must be within scope and feasible.
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7: Solution Range Outlining -->
+<div class="slide">
+  <div class="slide-container">
+    <h2><span class="number-badge">5</span> Solution Range Outlining</h2>
+    <div class="content-section">
+      <p>
+        Outlining solution range is a systematic process that ensures all contractual requirements are met 
+        while identifying the best possible approaches.
+      </p>
+    </div>
+
+    <div class="key-point">
+      <h4><i class="ri-list-ordered"></i> Step-by-Step Process:</h4>
+      <ol>
+        <li><strong>Analyze the contractual scope</strong>
+          <ul style="margin-top: 10px; font-size: 16px;">
+            <li>Read all contract documents thoroughly</li>
+            <li>Identify all requirements and constraints</li>
+            <li>Note any ambiguities and seek clarification</li>
+          </ul>
+        </li>
+        <li><strong>List mandatory requirements</strong>
+          <ul style="margin-top: 10px; font-size: 16px;">
+            <li>Must-have features and functionalities</li>
+            <li>Non-negotiable constraints</li>
+            <li>Critical deliverables</li>
+          </ul>
+        </li>
+        <li><strong>Identify optional requirements</strong>
+          <ul style="margin-top: 10px; font-size: 16px;">
+            <li>Nice-to-have features</li>
+            <li>Enhancements that add value</li>
+            <li>Future-proofing considerations</li>
+          </ul>
+        </li>
+        <li><strong>Propose feasible and realistic solutions</strong>
+          <ul style="margin-top: 10px; font-size: 16px;">
+            <li>Evaluate technical feasibility</li>
+            <li>Assess cost and timeline</li>
+            <li>Consider risk factors</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+
+    <div class="example-box">
+      <h4><i class="ri-file-edit-line"></i> Example: CRM System Outline</h4>
+      <p><strong>Step 1 - Analysis:</strong> Contract requires customer management, sales tracking, reporting</p>
+      <p><strong>Step 2 - Mandatory:</strong> Contact database, sales pipeline, basic reports, user authentication</p>
+      <p><strong>Step 3 - Optional:</strong> Email integration, mobile app, advanced analytics, API access</p>
+      <p><strong>Step 4 - Solutions:</strong></p>
+      <ul style="font-size: 16px;">
+        <li>Solution A: Custom-built CRM (6 months, $150K)</li>
+        <li>Solution B: Configured Salesforce (3 months, $80K)</li>
+        <li>Solution C: Open-source SuiteCRM (4 months, $60K)</li>
+      </ul>
+    </div>
+
+    <div class="image-container">
+      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80" 
+           alt="Planning" 
+           class="slide-image"
+           onerror="this.style.display='none'">
+    </div>
+
+    <div class="notes">
+      <strong>Presenter Notes:</strong> Walk through the process step-by-step. Use the CRM example to show 
+      how to systematically analyze and outline solutions.
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8: Organizational Standards -->
+<div class="slide">
+  <div class="slide-container">
+    <h2><span class="number-badge">6</span> Organizational Standards</h2>
+    <div class="content-section">
+      <h3>What are Organizational Standards?</h3>
+      <p>
+        <strong>Organizational standards</strong> are company rules and documentation guidelines that ensure 
+        consistency and quality across all projects. They include templates, formats, and approval processes 
+        that every team member must follow.
+      </p>
+    </div>
+
+    <div class="grid-2">
+      <div class="grid-item">
+        <h4><i class="ri-file-text-line"></i> Templates</h4>
+        <p>Standardized document formats for proposals, SOWs, reports, and presentations</p>
+      </div>
+      <div class="grid-item">
+        <h4><i class="ri-book-open-line"></i> Guidelines</h4>
+        <p>Writing standards, naming conventions, coding standards, and best practices</p>
+      </div>
+      <div class="grid-item">
+        <h4><i class="ri-checkbox-multiple-line"></i> Approval Processes</h4>
+        <p>Workflow for document review, sign-offs, and quality checks</p>
+      </div>
+      <div class="grid-item">
+        <h4><i class="ri-shield-check-line"></i> Quality Standards</h4>
+        <p>Minimum quality requirements, testing standards, and compliance rules</p>
+      </div>
+    </div>
+
+    <div class="key-point">
+      <h4><i class="ri-star-line"></i> Why Standards Matter:</h4>
+      <ul>
+        <li><strong>Consistency:</strong> All documents look professional and uniform</li>
+        <li><strong>Quality Assurance:</strong> Reduces errors and improves accuracy</li>
+        <li><strong>Efficiency:</strong> Saves time with ready-to-use templates</li>
+        <li><strong>Compliance:</strong> Meets industry and regulatory requirements</li>
+        <li><strong>Brand Image:</strong> Projects professional company image</li>
+      </ul>
+    </div>
+
+    <div class="example-box">
+      <h4><i class="ri-building-line"></i> Example: Company Documentation Standards</h4>
+      <ul>
+        <li><strong>Template:</strong> All proposals use "Company_Proposal_Template_v2.1.docx"</li>
+        <li><strong>Format:</strong> Arial 11pt, 1.5 line spacing, page numbers, company logo</li>
+        <li><strong>Structure:</strong> Executive Summary → Requirements → Solution → Timeline → Budget</li>
+        <li><strong>Approval:</strong> Team Lead → Department Head → Client (3-step process)</li>
+        <li><strong>Version Control:</strong> All documents tracked in SharePoint with version numbers</li>
+      </ul>
+    </div>
+
+    <div class="image-container">
+      <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80" 
+           alt="Standards" 
+           class="slide-image"
+           onerror="this.style.display='none'">
+    </div>
+
+    <div class="notes">
+      <strong>Presenter Notes:</strong> Explain why organizations enforce standards. Relate to audits, 
+      quality checks, and professional image. Show examples of company templates if available.
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9: Applying Standards to Solutions -->
+<div class="slide">
+  <div class="slide-container">
+    <h2><span class="number-badge">7</span> Applying Standards to Solutions</h2>
+    <div class="content-section">
+      <p>
+        When creating solution documents, you must use standard templates, follow defined structure and format, 
+        and produce professional solution documents that meet organizational quality standards.
+      </p>
+    </div>
+
+    <div class="key-point">
+      <h4><i class="ri-tools-line"></i> Application Process:</h4>
+      <ol>
+        <li><strong>Use Standard Templates</strong>
+          <ul style="margin-top: 10px; font-size: 16px;">
+            <li>Download latest version from company repository</li>
+            <li>Ensure template is approved and current</li>
+            <li>Follow template structure exactly</li>
+          </ul>
+        </li>
+        <li><strong>Follow Defined Structure</strong>
+          <ul style="margin-top: 10px; font-size: 16px;">
+            <li>Use required sections in correct order</li>
+            <li>Include all mandatory elements</li>
+            <li>Maintain consistent formatting</li>
+          </ul>
+        </li>
+        <li><strong>Produce Professional Documents</strong>
+          <ul style="margin-top: 10px; font-size: 16px;">
+            <li>Proofread for errors</li>
+            <li>Ensure visual consistency</li>
+            <li>Include proper branding</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+
+    <div class="example-box">
+      <h4><i class="ri-file-edit-line"></i> Example: Solution Document Structure</h4>
+      <p><strong>Standard Template Sections:</strong></p>
+      <ol style="font-size: 16px;">
+        <li>Cover Page (with logo, project name, date)</li>
+        <li>Executive Summary (1-2 pages)</li>
+        <li>Table of Contents</li>
+        <li>Project Overview</li>
+        <li>Requirements Analysis</li>
+        <li>Proposed Solution</li>
+        <li>Technical Architecture</li>
+        <li>Implementation Timeline</li>
+        <li>Budget Breakdown</li>
+        <li>Risk Assessment</li>
+        <li>Appendices</li>
+      </ol>
+    </div>
+
+    <div class="warning-box">
+      <h4><i class="ri-error-warning-line"></i> Common Mistakes:</h4>
+      <ul style="font-size: 16px;">
+        <li>Using outdated templates</li>
+        <li>Skipping required sections</li>
+        <li>Inconsistent formatting</li>
+        <li>Missing approval signatures</li>
+      </ul>
+    </div>
+
+    <div class="image-container">
+      <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80" 
+           alt="Documentation" 
+           class="slide-image"
+           onerror="this.style.display='none'">
+    </div>
+
+    <div class="notes">
+      <strong>Presenter Notes:</strong> Show a sample solution document structure. Demonstrate how to 
+      apply standards consistently. Provide a checklist for students to use.
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 10: Analysis and Application -->
+<div class="slide">
+  <div class="slide-container">
+    <h2><span class="number-badge">8</span> Analysis and Application</h2>
+    <div class="content-section">
+      <p>
+        The practical application involves analyzing contractual scope and applying standards to create 
+        structured solution outlines for real-world scenarios.
+      </p>
+    </div>
+
+    <div class="grid-2">
+      <div class="grid-item">
+        <h4><i class="ri-search-line"></i> Analysis Phase</h4>
+        <ul style="font-size: 16px;">
+          <li>Review contract documents</li>
+          <li>Extract scope boundaries</li>
+          <li>Identify requirements</li>
+          <li>List constraints</li>
+          <li>Document assumptions</li>
+        </ul>
+      </div>
+      <div class="grid-item">
+        <h4><i class="ri-tools-line"></i> Application Phase</h4>
+        <ul style="font-size: 16px;">
+          <li>Use standard templates</li>
+          <li>Create solution outline</li>
+          <li>Apply formatting standards</li>
+          <li>Include all required sections</li>
+          <li>Get approvals</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <h4><i class="ri-lightbulb-line"></i> Case Study: Hospital Management System</h4>
+      <p><strong>Contract Analysis:</strong></p>
+      <ul style="font-size: 16px;">
+        <li>Scope: Patient records, appointment scheduling, billing</li>
+        <li>Exclusions: Pharmacy management, lab systems</li>
+        <li>Constraints: HIPAA compliance, 24/7 availability, $500K budget</li>
+      </ul>
+      <p><strong>Solution Outline:</strong></p>
+      <ul style="font-size: 16px;">
+        <li>Option 1: Custom development (8 months, $450K)</li>
+        <li>Option 2: Configured Epic system (6 months, $480K)</li>
+        <li>Option 3: Hybrid approach (7 months, $420K) ✓ Recommended</li>
+      </ul>
+      <p><strong>Documentation:</strong> Used company template, followed structure, included compliance section</p>
+    </div>
+
+    <div class="key-point">
+      <h4><i class="ri-checkbox-circle-line"></i> Best Practices:</h4>
+      <ul>
+        <li>Always start with contract analysis</li>
+        <li>Document everything clearly</li>
+        <li>Use visual aids (diagrams, charts)</li>
+        <li>Get stakeholder feedback early</li>
+        <li>Review and revise before submission</li>
+      </ul>
+    </div>
+
+    <div class="image-container">
+      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80" 
+           alt="Analysis" 
+           class="slide-image"
+           onerror="this.style.display='none'">
+    </div>
+
+    <div class="notes">
+      <strong>Presenter Notes:</strong> Guide students step-by-step through analysis and application. 
+      Use the case study to demonstrate the complete process. Encourage questions and discussion.
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 11: Common Mistakes to Avoid -->
+<div class="slide">
+  <div class="slide-container">
+    <h2><span class="number-badge">9</span> Common Mistakes to Avoid</h2>
+    <div class="content-section">
+      <p>
+        Understanding common mistakes helps prevent project failures, budget overruns, and client dissatisfaction. 
+        Learn from these errors to improve your solution planning.
+      </p>
+    </div>
+
+    <div class="warning-box">
+      <h4><i class="ri-error-warning-line"></i> Critical Mistakes:</h4>
+      <ol>
+        <li><strong>Including Out-of-Scope Features</strong>
+          <ul style="margin-top: 10px; font-size: 16px;">
+            <li>Adding features not in contract</li>
+            <li>Result: Scope creep, budget overruns, timeline delays</li>
+            <li><strong>Solution:</strong> Always refer back to contract documents</li>
+          </ul>
+        </li>
+        <li><strong>Ignoring Contractual Constraints</strong>
+          <ul style="margin-top: 10px; font-size: 16px;">
+            <li>Proposing solutions that violate budget, timeline, or technology limits</li>
+            <li>Result: Proposal rejection, contract breach</li>
+            <li><strong>Solution:</strong> List all constraints and verify compliance</li>
+          </ul>
+        </li>
+        <li><strong>Not Following Organizational Standards</strong>
+          <ul style="margin-top: 10px; font-size: 16px;">
+            <li>Using wrong templates, skipping sections, poor formatting</li>
+            <li>Result: Document rejection, rework, professional image damage</li>
+            <li><strong>Solution:</strong> Use standard templates and follow guidelines</li>
+          </ul>
+        </li>
+        <li><strong>Incomplete Requirements Analysis</strong>
+          <ul style="margin-top: 10px; font-size: 16px;">
+            <li>Missing requirements or misunderstanding scope</li>
+            <li>Result: Incomplete solutions, client dissatisfaction</li>
+            <li><strong>Solution:</strong> Thorough analysis and clarification meetings</li>
+          </ul>
+        </li>
+        <li><strong>Unrealistic Solutions</strong>
+          <ul style="margin-top: 10px; font-size: 16px;">
+            <li>Proposing solutions that can't be delivered</li>
+            <li>Result: Project failure, reputation damage</li>
+            <li><strong>Solution:</strong> Honest feasibility assessment</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+
+    <div class="example-box">
+      <h4><i class="ri-alert-line"></i> Real Example: Failed Project</h4>
+      <p><strong>Mistake:</strong> Developer added mobile app feature not in contract</p>
+      <p><strong>Impact:</strong> 
+        - Extra $50K cost not approved<br>
+        - 2-month delay<br>
+        - Client refused to pay extra<br>
+        - Project went over budget by 25%
+      </p>
+      <p><strong>Lesson:</strong> Always stick to contractual scope. Propose extras separately as change requests.</p>
+    </div>
+
+    <div class="image-container">
+      <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80" 
+           alt="Mistakes" 
+           class="slide-image"
+           onerror="this.style.display='none'">
+    </div>
+
+    <div class="notes">
+      <strong>Presenter Notes:</strong> Highlight mistakes seen in exams/projects. Provide a checklist 
+      approach to avoid these errors. Share real examples if available.
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 12: Learning Outcomes -->
+<div class="slide">
+  <div class="slide-container">
+    <h2><span class="number-badge">10</span> Learning Outcomes</h2>
+    <div class="content-section">
+      <p>
+        By the end of this session, you will have developed essential skills for solution planning within 
+        contractual boundaries.
+      </p>
+    </div>
+
+    <div class="key-point">
+      <h4><i class="ri-graduation-cap-line"></i> Key Skills Developed:</h4>
+      <div class="grid-2">
+        <div class="grid-item">
+          <h4><i class="ri-focus-3-line"></i> Improved Understanding of Scope Control</h4>
+          <ul style="font-size: 16px;">
+            <li>Identify scope boundaries accurately</li>
+            <li>Distinguish in-scope vs out-of-scope</li>
+            <li>Prevent scope creep</li>
+            <li>Manage scope changes properly</li>
+          </ul>
+        </div>
+        <div class="grid-item">
+          <h4><i class="ri-file-plan-line"></i> Ability to Plan Compliant Solutions</h4>
+          <ul style="font-size: 16px;">
+            <li>Analyze contractual requirements</li>
+            <li>Design solutions within boundaries</li>
+            <li>Ensure compliance with constraints</li>
+            <li>Create realistic implementation plans</li>
+          </ul>
+        </div>
+        <div class="grid-item">
+          <h4><i class="ri-file-text-line"></i> Enhanced Professional Documentation Skills</h4>
+          <ul style="font-size: 16px;">
+            <li>Use standard templates effectively</li>
+            <li>Follow organizational guidelines</li>
+            <li>Create professional documents</li>
+            <li>Present solutions clearly</li>
+          </ul>
+        </div>
+        <div class="grid-item">
+          <h4><i class="ri-checkbox-circle-line"></i> Practical Application Ability</h4>
+          <ul style="font-size: 16px;">
+            <li>Apply concepts to real scenarios</li>
+            <li>Analyze case studies</li>
+            <li>Create solution outlines</li>
+            <li>Avoid common mistakes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <h4><i class="ri-target-line"></i> Assessment Criteria:</h4>
+      <p>You will be assessed on your ability to:</p>
+      <ol style="font-size: 16px;">
+        <li>Correctly identify contractual scope from documents</li>
+        <li>Outline feasible solutions within scope</li>
+        <li>Apply organizational standards to documentation</li>
+        <li>Avoid common mistakes in solution planning</li>
+        <li>Create professional, compliant solution outlines</li>
+      </ol>
+    </div>
+
+    <div class="image-container">
+      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80" 
+           alt="Success" 
+           class="slide-image"
+           onerror="this.style.display='none'">
+    </div>
+
+    <div class="notes">
+      <strong>Presenter Notes:</strong> Confirm outcomes with students. Ask them to reflect on what they've 
+      learned. Provide assessment information and next steps.
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 13: Summary -->
+<div class="slide">
+  <div class="slide-container">
+    <h2><i class="ri-refresh-line"></i> Session Recap</h2>
+    <div class="content-section">
+      <h3>The Complete Process Flow:</h3>
+      <div style="text-align: center; font-size: 24px; margin: 30px 0;">
+        <p><strong>Contract</strong> → <strong>Scope</strong> → <strong>Standards</strong> → <strong>Solution</strong></p>
+      </div>
+    </div>
+
+    <div class="key-point">
+      <h4><i class="ri-list-check-2-line"></i> Key Takeaways:</h4>
+      <ol>
+        <li><strong>Contractual Scope</strong> defines boundaries - always respect them</li>
+        <li><strong>Contractual Documents</strong> (RFP, SOW, SLA) contain all requirements</li>
+        <li><strong>Scope Identification</strong> extracts functional, non-functional requirements, and constraints</li>
+        <li><strong>Solution Range</strong> must be within scope, feasible, and realistic</li>
+        <li><strong>Solution Outlining</strong> follows systematic analysis process</li>
+        <li><strong>Organizational Standards</strong> ensure consistency and quality</li>
+        <li><strong>Applying Standards</strong> creates professional, compliant documents</li>
+        <li><strong>Avoid Common Mistakes</strong> to prevent project failures</li>
+      </ol>
+    </div>
+
+    <div class="example-box">
+      <h4><i class="ri-lightbulb-line"></i> Remember:</h4>
+      <p style="font-size: 22px; text-align: center; font-weight: bold;">
+        "A solution is only good if it's within scope, compliant with standards, and deliverable within constraints."
+      </p>
+    </div>
+
+    <div class="image-container">
+      <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80" 
+           alt="Summary" 
+           class="slide-image"
+           onerror="this.style.display='none'">
+    </div>
+
+    <div class="notes">
+      <strong>Presenter Notes:</strong> Summarize entire lesson flow. Reinforce key concepts. 
+      Provide time for questions and clarification.
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 14: Thank You -->
+<div class="slide">
+  <div class="slide-container">
+    <i class="ri-question-line icon" style="font-size: 120px;"></i>
+    <h1>Thank You!</h1>
+    <h3>Questions & Discussion</h3>
+    <div class="content-section" style="margin-top: 40px;">
+      <p style="text-align: center; font-size: 22px;">
+        We're here to help you succeed in solution planning and project management.
+      </p>
+      <div class="grid-2" style="margin-top: 40px;">
+        <div class="grid-item">
+          <h4><i class="ri-mail-line"></i> Contact</h4>
+          <p>For questions or clarifications</p>
+        </div>
+        <div class="grid-item">
+          <h4><i class="ri-book-open-line"></i> Resources</h4>
+          <p>Templates and guidelines available</p>
+        </div>
+      </div>
+    </div>
+    <div class="notes">
+      <strong>Presenter Notes:</strong> Invite questions and discussion. Provide contact information 
+      and resources. Thank students for their attention.
+    </div>
+  </div>
+</div>
+
+<!-- Navigation -->
+<div class="navigation">
+  <button class="nav-btn" onclick="previousSlide()">
+    <i class="ri-arrow-left-line"></i> Previous
+  </button>
+  <button class="nav-btn" onclick="nextSlide()">
+    Next <i class="ri-arrow-right-line"></i>
+  </button>
+</div>
+
+<script>
+let slides = document.querySelectorAll(".slide");
+let current = 0;
+const totalSlides = slides.length;
+
+// Update slide counter
+document.getElementById('total-slides').textContent = totalSlides;
+
+function showSlide(n) {
+  slides[current].classList.remove("active");
+  current = (n + totalSlides) % totalSlides;
+  slides[current].classList.add("active");
+  document.getElementById('current-slide').textContent = current + 1;
+  
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextSlide() {
+  showSlide(current + 1);
+}
+
+function previousSlide() {
+  showSlide(current - 1);
+}
+
+// Keyboard navigation
+document.addEventListener("keydown", e => {
+  if (e.key === "ArrowRight" || e.key === " ") {
+    nextSlide();
+  }
+  if (e.key === "ArrowLeft") {
+    previousSlide();
+  }
+  if (e.key === "Home") {
+    showSlide(0);
+  }
+  if (e.key === "End") {
+    showSlide(totalSlides - 1);
+  }
+});
+
+// Touch/swipe support for mobile
+let touchStartX = 0;
+let touchEndX = 0;
+
+document.addEventListener('touchstart', e => {
+  touchStartX = e.changedTouches[0].screenX;
+});
+
+document.addEventListener('touchend', e => {
+  touchEndX = e.changedTouches[0].screenX;
+  handleSwipe();
+});
+
+function handleSwipe() {
+  if (touchEndX < touchStartX - 50) {
+    nextSlide();
+  }
+  if (touchEndX > touchStartX + 50) {
+    previousSlide();
+  }
+}
+
+// Initialize
+showSlide(0);
+</script>
+
+</body>
+</html>

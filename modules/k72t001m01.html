@@ -1,0 +1,2828 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Requirements for Software Solution - NVQ Level 5 ICT</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e8f0f5 100%);
+      padding-top: 70px;
+      line-height: 1.7;
+      color: #2d3748;
+    }
+
+    /* Navbar Styling */
+    .navbar {
+      background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      padding: 0.75rem 0;
+    }
+
+    .navbar-brand {
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-brand:hover {
+      transform: translateX(-3px);
+    }
+
+    /* Module Header */
+    .module-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 2.5rem 0;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .module-header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .module-header .lead {
+      font-size: 1.1rem;
+      opacity: 0.95;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    /* Content Cards */
+    .content-card {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      margin-bottom: 2rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .content-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .content-card h3 {
+      color: #1e40af;
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 3px solid #e0e7ff;
+    }
+
+    .content-card h4 {
+      color: #2563eb;
+      font-weight: 600;
+      font-size: 1.3rem;
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .content-card h5 {
+      color: #4b5563;
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-top: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Badges */
+    .hour-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+      color: #1e40af;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin: 0.25rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .info-badge {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #4338ca;
+      padding: 0.4rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin: 0.2rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Table Styling with Mobile Scroll */
+    .table-wrapper {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 1rem 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      width: 100%;
+      display: block;
+    }
+
+    .table-wrapper::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .table-wrapper::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 4px;
+    }
+
+    .table-wrapper::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+
+    .table-wrapper::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    table {
+      width: 100%;
+      font-size: 0.95rem;
+      border-collapse: separate;
+      border-spacing: 0;
+      min-width: 600px;
+    }
+
+    table th {
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      font-weight: 700;
+      border: 1px solid #e2e8f0;
+      padding: 1rem 0.75rem;
+      text-align: left;
+      color: #1e293b;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    table td {
+      border: 1px solid #e2e8f0;
+      vertical-align: top;
+      padding: 1rem 0.75rem;
+      background: white;
+    }
+
+    table tbody tr:hover {
+      background: #f8fafc;
+    }
+
+    table tbody tr:nth-child(even) {
+      background: #fafbfc;
+    }
+
+    table tbody tr:nth-child(even):hover {
+      background: #f1f5f9;
+    }
+
+    /* Session Title */
+    .session-title {
+      color: #2563eb;
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-bottom: 1.25rem;
+      margin-top: 2rem;
+      line-height: 1.4;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid #e0e7ff;
+    }
+
+    .session-title:first-child {
+      margin-top: 0;
+    }
+
+    /* Topic Items */
+    .topic-item {
+      padding: 1rem 0;
+      margin: 0.5rem 0;
+      padding-left: 1.5rem;
+    }
+
+    .topic-item h5 {
+      margin-bottom: 0.5rem;
+      color: #1e40af;
+    }
+
+    /* Phase Badges */
+    .phase-badge {
+      display: inline-block;
+      padding: 0.35rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-right: 0.5rem;
+      white-space: nowrap;
+    }
+
+    .phase-intro {
+      background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+      color: #1e40af;
+    }
+
+    .phase-dev {
+      background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+      color: #166534;
+    }
+
+    .phase-app {
+      background: linear-gradient(135deg, #fef3c7, #fde68a);
+      color: #92400e;
+    }
+
+    .phase-cons {
+      background: linear-gradient(135deg, #fce7f3, #fbcfe8);
+      color: #9f1239;
+    }
+
+    /* Alert Boxes */
+    .alert {
+      border-radius: 10px;
+      border: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .alert h6 {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Lists */
+    ul,
+    ol {
+      padding-left: 1.5rem;
+    }
+
+    ul li,
+    ol li {
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      body {
+        padding-top: 60px;
+        font-size: 0.95rem;
+      }
+
+      .container {
+        padding: 0 10px;
+      }
+
+      .module-header {
+        padding: 1.5rem 0;
+        margin-bottom: 1.5rem;
+      }
+
+      .module-header h1 {
+        font-size: 1.5rem;
+        line-height: 1.3;
+      }
+
+      .module-header .lead {
+        font-size: 0.95rem;
+        padding: 0 10px;
+      }
+
+      .content-card {
+        padding: 1.25rem;
+        border-radius: 12px;
+        margin-bottom: 1.5rem;
+      }
+
+      .content-card h3 {
+        font-size: 1.25rem;
+        margin-bottom: 1.25rem;
+        line-height: 1.4;
+      }
+
+      .content-card h4 {
+        font-size: 1.1rem;
+        margin-top: 1.25rem;
+        margin-bottom: 1rem;
+        line-height: 1.4;
+      }
+
+      .content-card h5 {
+        font-size: 1rem;
+        margin-top: 1rem;
+        margin-bottom: 0.75rem;
+        line-height: 1.4;
+      }
+
+      .hour-badge,
+      .info-badge {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.75rem;
+        margin: 0.15rem;
+        display: inline-block;
+      }
+
+      .session-title {
+        font-size: 1.1rem;
+        line-height: 1.4;
+        margin-bottom: 1rem;
+        word-wrap: break-word;
+      }
+
+      .topic-item {
+        padding: 0.75rem 0;
+        margin: 0.5rem 0;
+        padding-left: 1rem;
+      }
+
+      .topic-item h5 {
+        font-size: 1rem;
+        line-height: 1.4;
+      }
+
+      .table-wrapper {
+        margin: 1rem 0;
+        border-radius: 8px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+        display: block;
+      }
+
+      table {
+        font-size: 0.85rem;
+        min-width: 700px;
+        width: 100%;
+        display: table;
+      }
+
+      table th {
+        font-size: 0.8rem;
+        padding: 0.75rem 0.5rem;
+        white-space: nowrap;
+      }
+
+      table td {
+        padding: 0.75rem 0.5rem;
+        word-wrap: break-word;
+        line-height: 1.5;
+      }
+
+      .phase-badge {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.7rem;
+        display: inline-block;
+        margin-bottom: 0.25rem;
+        white-space: nowrap;
+      }
+
+      .navbar-brand {
+        font-size: 0.9rem;
+      }
+
+      ul, ol {
+        padding-left: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      li {
+        margin-bottom: 0.5rem;
+        line-height: 1.6;
+      }
+
+      p {
+        line-height: 1.6;
+        margin-bottom: 1rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      body {
+        padding-top: 55px;
+        font-size: 0.9rem;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      .module-header {
+        padding: 1.25rem 0;
+      }
+
+      .module-header h1 {
+        font-size: 1.25rem;
+        line-height: 1.3;
+      }
+
+      .module-header .lead {
+        font-size: 0.9rem;
+        padding: 0 8px;
+      }
+
+      .content-card {
+        padding: 1rem;
+        margin-bottom: 1.25rem;
+      }
+
+      .content-card h3 {
+        font-size: 1.15rem;
+        margin-bottom: 1rem;
+      }
+
+      .content-card h4 {
+        font-size: 1rem;
+        margin-top: 1rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .content-card h5 {
+        font-size: 0.95rem;
+        margin-top: 0.75rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .hour-badge,
+      .info-badge {
+        font-size: 0.75rem;
+        padding: 0.35rem 0.65rem;
+        margin: 0.1rem;
+      }
+
+      .session-title {
+        font-size: 1rem;
+        line-height: 1.3;
+        margin-bottom: 0.75rem;
+      }
+
+      .table-wrapper {
+        margin: 0.75rem 0;
+      }
+
+      table {
+        font-size: 0.8rem;
+        min-width: 800px;
+      }
+
+      table th {
+        font-size: 0.75rem;
+        padding: 0.6rem 0.4rem;
+      }
+
+      table td {
+        padding: 0.6rem 0.4rem;
+        font-size: 0.8rem;
+      }
+
+      ul, ol {
+        padding-left: 1.25rem;
+      }
+
+      li {
+        margin-bottom: 0.4rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Print Styles */
+    @media print {
+      .navbar {
+        display: none;
+      }
+
+      .module-header {
+        page-break-after: avoid;
+      }
+
+      .content-card {
+        page-break-inside: avoid;
+      }
+
+      .table-wrapper {
+        overflow: visible;
+      }
+
+      table {
+        min-width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">
+        <i class="fas fa-arrow-left"></i> Back to Index
+      </a>
+    </div>
+  </nav>
+
+  <div class="module-header">
+    <div class="container">
+      <a href="../index.html" class="text-white text-decoration-none"><i class="fas fa-arrow-left"></i> Back to Course
+        Index</a>
+      <h1 class="mt-3">User Requirements for Software Solution</h1>
+      <p class="lead mb-2">Module Code: K72T001M01 / Level 05</p>
+      <div class="mt-3">
+        <span class="info-badge"><i class="fas fa-tag"></i> Compulsory</span>
+        <span class="info-badge"><i class="fas fa-link"></i> Relevant Unit: K72T001U01</span>
+        <span class="hour-badge"><i class="fas fa-clock"></i> 100 Notional Hours</span>
+        <span class="hour-badge"><i class="fas fa-chalkboard-teacher"></i> 60 Theory</span>
+        <span class="hour-badge"><i class="fas fa-laptop-code"></i> 30 Practical</span>
+        <span class="hour-badge"><i class="fas fa-book"></i> 10 Self-study</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+   
+
+    <!-- Learning Outcomes -->
+    <div class="content-card">
+      <h3><i class="fas fa-graduation-cap text-primary"></i> Learning Outcomes</h3>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-bullseye text-success"></i> General Objective</h5>
+      <p class="lead">At the end of this module, students will <strong>understand</strong> business processes,
+        <strong>acquire</strong> knowledge of requirement gathering, and <strong>know</strong> requirement
+        analysis and feasibility study report preparation.
+      </p>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-list-check text-primary"></i> Specific Objectives</h5>
+      <p>At the end of this module the student shall be able to:</p>
+      <ol>
+        <li>Analyze business processes and identify key stakeholders</li>
+        <li>Apply requirements gathering techniques and analyze strengths and weaknesses</li>
+        <li>Break down requirements and define project scope</li>
+        <li>Evaluate feasibility aspects of software solutions</li>
+        <li>Prepare and present reports</li>
+      </ol>
+    </div>
+
+    <!-- Learning Content / Topics and Session Plans -->
+    <div class="content-card">
+      <h3><i class="fas fa-book text-primary"></i> Learning Content / Topics</h3>
+
+      1. Introduction to various business processes (15 hrs.) <br>
+      2. Study of business processes (15 hrs.) <br>
+      3. Requirements Gathering (12 hrs.) <br>
+      4. Requirement analysis (12 hrs.) <br>
+      5. Feasibility study (6 hrs.) <br>
+
+      <h3 class="mt-5"><i class="fas fa-calendar-alt text-primary"></i> Session Plans</h3>
+
+      <!-- Element 1: Plan the scope -->
+      <h4 class="mt-4 mb-3" style="color: #2563eb; padding-bottom: 10px;">
+        <i class="fas fa-tasks"></i> Element 1:  Introduction to various business processes (15 hrs.)
+      </h4>
+
+      <!-- Session 1.1 -->
+      <div class="session-title">1.1 Identify and Outline Range of Proposed Solution (4 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>understand</strong> solution range identification and outlining within contractual scope.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Identify contractual document scope</li>
+                <li>Outline solution range within defined scope</li>
+                <li>Apply organizational standards to document solutions</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Discussion, Practical exercises</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Practical exercise, Oral questioning</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>45 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall contractual documents and scope definitions</td>
+              <td>The teacher presents contractual documents and asks students to identify scope elements</td>
+              <td>Students identify and recall key elements of contractual documents and scope</td>
+              <td>Slides, Sample contracts</td>
+            </tr>
+            <tr>
+              <td>2 hrs</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe how to outline proposed solution range within defined scope according to
+                organizational standards</td>
+              <td>The teacher explains organizational standards and demonstrates the outlining process</td>
+              <td>Students explain standards and describe how to outline solution range</td>
+              <td>Board, Organizational standards documents</td>
+            </tr>
+            <tr>
+              <td>1 hr</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply organizational standards to analyze contractual scope and create solution range outline</td>
+              <td>The teacher facilitates analysis and application of standards</td>
+              <td>Students apply standards to analyze scope and create solution outlines</td>
+              <td>Case studies, Templates, Worksheets</td>
+            </tr>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate solution outlines and synthesize key concepts</td>
+              <td>The teacher evaluates student work and assesses comprehension</td>
+              <td>Students evaluate their outlines and synthesize learning</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-primary mt-4 mb-0">
+        <h6 class="mb-2"><i class="fas fa-bullseye"></i> <strong>Performance Criteria:</strong></h6>
+        <p class="mb-0"><strong>PC 1.1:</strong> Range of the proposed solution within the scope defined in the
+          contractual document identified and outlined as per the organizational standards</p>
+      </div>
+
+      <!-- Session 1.2 -->
+      <div class="session-title">1.2 Identify and Agree Upon Key Stakeholders  (5 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>know</strong> key stakeholder identification and agreement with clients.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Identify stakeholders from different functional areas</li>
+                <li>Explain stakeholder roles and involvement</li>
+                <li>Agree upon stakeholders with clients</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Discussion, Role play, Practical exercises</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Practical exercise, Stakeholder identification assignment</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>45 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and list stakeholders from different functional areas</td>
+              <td>The teacher presents stakeholder concepts and functional areas for identification</td>
+              <td>Students identify and list stakeholders from various functional areas</td>
+              <td>Slides, Whiteboard</td>
+            </tr>
+            <tr>
+              <td>2.5 hrs</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe stakeholder roles, involvement, and agreement processes with clients</td>
+              <td>The teacher explains stakeholder identification and agreement techniques</td>
+              <td>Students explain stakeholder roles and describe agreement processes</td>
+              <td>Charts, Case studies, Templates</td>
+            </tr>
+            <tr>
+              <td>1.5 hrs</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply stakeholder identification techniques to analyze functional areas and create stakeholder
+                agreement documents</td>
+              <td>The teacher facilitates application and analysis of stakeholder identification</td>
+              <td>Students apply techniques to analyze and create stakeholder agreements</td>
+              <td>Role play scenarios, Worksheets</td>
+            </tr>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate stakeholder identification and synthesize key concepts</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their stakeholder identification and synthesize learning</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-primary mt-4 mb-0">
+        <h6 class="mb-2"><i class="fas fa-bullseye"></i> <strong>Performance Criteria:</strong></h6>
+        <p class="mb-0"><strong>PC 1.2:</strong> Key stakeholders from respective functional areas identified and agreed
+          upon with the client</p>
+      </div>
+
+      <!-- Session 1.3 -->
+      <div class="session-title">1.3 Plan Time Schedule and Arrange Meetings (6 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>understand</strong> schedule planning and meeting arrangement with stakeholders.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Identify time requirements for requirement gathering activities</li>
+                <li>Create time schedules for requirement gathering process</li>
+                <li>Arrange meetings with key stakeholders</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Discussion, Practical exercises, Project management tools</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Schedule creation assignment, Meeting arrangement exercise</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Define and identify key stakeholders in business processes</td>
+              <td>The teacher presents stakeholder concepts for definition and identification</td>
+              <td>Students define stakeholders and identify key stakeholders</td>
+              <td>Slides</td>
+            </tr>
+            <tr>
+              <td>1.5 hrs</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe roles and responsibilities of stakeholders</td>
+              <td>The teacher explains stakeholder roles to build understanding</td>
+              <td>Students explain and describe stakeholder roles and involvement</td>
+              <td>Board, Charts</td>
+            </tr>
+            <tr>
+              <td>45 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply stakeholder analysis techniques to create stakeholder maps</td>
+              <td>The teacher guides application of mapping techniques</td>
+              <td>Students apply techniques to create and analyze stakeholder maps</td>
+              <td>Worksheets</td>
+            </tr>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate stakeholder relationships and synthesize key concepts</td>
+              <td>The teacher assesses understanding through Q&A</td>
+              <td>Students evaluate stakeholder relationships and synthesize learning</td>
+              <td>Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-primary mt-4 mb-0">
+        <h6 class="mb-2"><i class="fas fa-bullseye"></i> <strong>Performance Criteria:</strong></h6>
+        <p class="mb-0"><strong>PC 1.3:</strong> Time schedule for the requirement gathering process planned and
+          conveyed to the respective key stakeholders and meetings arranged accordingly</p>
+      </div>
+
+      <!-- Practical Sessions for Element 1 -->
+      <h4 class="mt-5 mb-3" style="color: #2563eb; padding-bottom: 10px;">
+        <i class="fas fa-laptop-code"></i> Practical: Introduction to various business processes (6 Hours)
+      </h4>
+
+      <div class="session-title">P1.1 Practical: Identify and Outline Solution Range (2 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>acquire</strong> skills to identify and outline solution range within contractual scope through practical application.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Analyze sample contractual documents and identify scope elements</li>
+                <li>Create solution range outlines using organizational templates</li>
+                <li>Document solution ranges according to organizational standards</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Practical exercises, Hands-on practice, Case studies, Templates</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Practical exercise submission, Peer review</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall contractual document elements and scope definitions</td>
+              <td>The teacher presents sample contractual documents for identification</td>
+              <td>Students identify and recall key elements of contractual documents and scope</td>
+              <td>Sample contracts, Slides</td>
+            </tr>
+            <tr>
+              <td>45 min</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe solution range outlining process using organizational templates</td>
+              <td>The teacher explains organizational standards and demonstrates outlining process</td>
+              <td>Students explain standards and describe outlining approaches</td>
+              <td>Organizational templates, Standards documents</td>
+            </tr>
+            <tr>
+              <td>45 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply organizational standards to analyze contractual scope and create solution range outlines</td>
+              <td>The teacher guides application and analysis of solution outlining</td>
+              <td>Students apply standards to analyze scope and create solution outlines</td>
+              <td>Case studies, Templates, Worksheets</td>
+            </tr>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate solution outlines and synthesize key concepts</td>
+              <td>The teacher evaluates student work and guides peer review</td>
+              <td>Students evaluate their outlines and synthesize learning</td>
+              <td>Student work, Peer review forms</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">P1.2 Practical: Stakeholder Identification and Agreement (2 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>acquire</strong> skills to identify key stakeholders and agree with clients through role-play and practical exercises.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Conduct stakeholder identification exercises using case scenarios</li>
+                <li>Practice stakeholder agreement documentation</li>
+                <li>Role-play stakeholder identification meetings with clients</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Role-play, Practical exercises, Case scenarios, Group activities</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Stakeholder identification assignment, Role-play evaluation</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall stakeholder types and functional areas</td>
+              <td>The teacher presents case scenarios and stakeholder concepts for identification</td>
+              <td>Students identify and recall stakeholder types from case scenarios</td>
+              <td>Case scenarios, Slides</td>
+            </tr>
+            <tr>
+              <td>45 min</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe stakeholder identification and agreement processes</td>
+              <td>The teacher explains identification techniques and demonstrates agreement documentation</td>
+              <td>Students explain techniques and describe agreement processes</td>
+              <td>Stakeholder templates, Agreement forms</td>
+            </tr>
+            <tr>
+              <td>45 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply stakeholder identification techniques through role-play and create agreement documents</td>
+              <td>The teacher facilitates role-play sessions and guides agreement creation</td>
+              <td>Students apply techniques through role-play and create stakeholder agreements</td>
+              <td>Role-play scripts, Worksheets, Templates</td>
+            </tr>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate stakeholder identification and synthesize key concepts</td>
+              <td>The teacher evaluates role-play performance and guides synthesis</td>
+              <td>Students evaluate their identification process and synthesize learning</td>
+              <td>Student work, Evaluation forms</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">P1.3 Practical: Schedule Planning and Meeting Arrangement (2 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>acquire</strong> skills to plan schedules and arrange meetings with stakeholders using project management tools.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Create time schedules for requirement gathering using project management software</li>
+                <li>Practice arranging meetings with stakeholders</li>
+                <li>Develop meeting agendas and documentation</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Hands-on practice, Project management tools, Practical exercises</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Schedule creation assignment, Meeting arrangement exercise</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall project management tools and scheduling concepts</td>
+              <td>The teacher presents project management software and scheduling concepts</td>
+              <td>Students identify and recall scheduling and meeting arrangement tools</td>
+              <td>Project management software, Slides</td>
+            </tr>
+            <tr>
+              <td>45 min</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe schedule creation and meeting arrangement processes</td>
+              <td>The teacher explains scheduling techniques and demonstrates meeting arrangement</td>
+              <td>Students explain techniques and describe scheduling approaches</td>
+              <td>Software tutorials, Meeting templates</td>
+            </tr>
+            <tr>
+              <td>45 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply project management tools to create schedules and arrange meetings</td>
+              <td>The teacher guides application and analysis of schedule creation</td>
+              <td>Students apply tools to create schedules and arrange meetings</td>
+              <td>Project management software, Calendar tools, Case studies</td>
+            </tr>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate schedules and meeting arrangements and synthesize key concepts</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their schedules and synthesize learning</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Element 2: Study of business processes -->
+      <h4 class="mt-5 mb-3" style="color: #22c55e; padding-bottom: 10px;">
+        <i class="fas fa-search"></i> Element 2: Study of business processes (15 hrs.)
+      </h4>
+
+      <!-- Session 2.1 -->
+      <div class="session-title">2.1 Identify Requirements through Data Gathering Techniques (5 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>know</strong> data gathering techniques and <strong>acquire</strong> skills to gather requirements from users.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Identify various data gathering techniques</li>
+                <li>Select appropriate techniques for different situations</li>
+                <li>Gather requirements from users using selected techniques</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Demonstration, Practical exercises, Role play</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Practical exercises, Requirements gathering assignment</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1 hr</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and list data gathering techniques (document review, interview, questionnaires, workshops,
+                observations, prototypes)</td>
+              <td>The teacher presents data gathering techniques for identification</td>
+              <td>Students identify and list various data gathering techniques</td>
+              <td>Slides, Whiteboard</td>
+            </tr>
+            <tr>
+              <td>2.5 hrs</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe when and how to use each technique with users</td>
+              <td>The teacher explains each technique and demonstrates usage</td>
+              <td>Students explain techniques and describe application scenarios</td>
+              <td>Board, Examples, Role play scenarios</td>
+            </tr>
+            <tr>
+              <td>1.5 hrs</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply appropriate techniques to analyze user needs and gather requirements</td>
+              <td>The teacher guides application and analysis of techniques</td>
+              <td>Students apply techniques to analyze and gather requirements from users</td>
+              <td>Case studies, Worksheets, Interview guides</td>
+            </tr>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate requirement gathering process and synthesize key learnings</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their gathering process and synthesize techniques</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-success mt-4 mb-0">
+        <h6 class="mb-2"><i class="fas fa-bullseye"></i> <strong>Performance Criteria:</strong></h6>
+        <p class="mb-0"><strong>PC 2.1:</strong> Requirements identified through <strong>data gathering
+            techniques</strong> (document review, interview, questionnaires, workshops, observations, prototypes) with
+          respective users</p>
+      </div>
+
+      <!-- Session 2.2 -->
+      <div class="session-title">2.2 Recognize Present Workflow by Observing Existing Processes (4 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>understand</strong> present workflow recognition through observing existing processes.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Identify observation techniques for process analysis</li>
+                <li>Explain how to recognize and document workflows</li>
+                <li>Apply observation skills to analyze existing processes</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Demonstration, Practical exercises, Observation practice</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Observation exercise, Workflow documentation assignment</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>45 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall observation techniques for process analysis</td>
+              <td>The teacher presents observation techniques for identification</td>
+              <td>Students identify and recall observation and workflow recognition methods</td>
+              <td>Slides, Whiteboard</td>
+            </tr>
+            <tr>
+              <td>1.5 hrs</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe how to recognize and document workflows through observation</td>
+              <td>The teacher explains observation techniques and demonstrates workflow recognition</td>
+              <td>Students explain observation methods and describe workflow documentation</td>
+              <td>Board, Examples, Video demonstrations</td>
+            </tr>
+            <tr>
+              <td>1.5 hrs</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply observation skills to analyze existing processes and create workflow documentation</td>
+              <td>The teacher guides application and analysis of observation techniques</td>
+              <td>Students apply skills to observe and document existing workflows</td>
+              <td>Case studies, Observation checklists, Worksheets</td>
+            </tr>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate workflow documentation and synthesize observation techniques</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their documentation and synthesize observation skills</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-success mt-4 mb-0">
+        <h6 class="mb-2"><i class="fas fa-bullseye"></i> <strong>Performance Criteria:</strong></h6>
+        <p class="mb-0"><strong>PC 2.2:</strong> Present work flow recognized by observing the existing processes</p>
+      </div>
+
+      <!-- Session 2.3 -->
+      <div class="session-title">2.3 Identify Source Documents from Present System  (3 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>know</strong> source document identification from the present system as per organization standards.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Identify types of source documents in existing systems</li>
+                <li>Explain organization standards for document identification</li>
+                <li>Apply standards to identify and classify source documents</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Discussion, Practical exercises</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Document identification exercise, Assignment</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and list types of source documents in existing systems</td>
+              <td>The teacher presents source document types for identification</td>
+              <td>Students identify and list various source documents</td>
+              <td>Slides, Sample documents</td>
+            </tr>
+            <tr>
+              <td>1.5 hrs</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe organization standards for document identification</td>
+              <td>The teacher explains standards and demonstrates identification process</td>
+              <td>Students explain standards and describe identification procedures</td>
+              <td>Board, Organization standards, Examples</td>
+            </tr>
+            <tr>
+              <td>1 hr</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply organization standards to analyze systems and identify source documents</td>
+              <td>The teacher guides application and analysis of document identification</td>
+              <td>Students apply standards to analyze and identify source documents</td>
+              <td>Case studies, Document samples, Worksheets</td>
+            </tr>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate document identification and synthesize standards application</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their identification and synthesize standards</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-success mt-4 mb-0">
+        <h6 class="mb-2"><i class="fas fa-bullseye"></i> <strong>Performance Criteria:</strong></h6>
+        <p class="mb-0"><strong>PC 2.3:</strong> Source documents generated from the present system identified as per the organization standards</p>
+      </div>
+
+      <!-- Session 2.4 -->
+      <div class="session-title">2.4 Record Key Decisions from Client Meetings  (3 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>acquire</strong> skills to record key decisions of client meetings according to Standard Operating Procedures (SOP).</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Identify key decisions in client meetings</li>
+                <li>Explain SOP for meeting documentation</li>
+                <li>Apply SOP to record and document meeting decisions</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Discussion, Role play, Practical exercises</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Meeting minutes exercise, Documentation assignment</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall SOP requirements for meeting documentation</td>
+              <td>The teacher presents SOP concepts for identification</td>
+              <td>Students identify and recall SOP requirements</td>
+              <td>Slides, SOP documents</td>
+            </tr>
+            <tr>
+              <td>1.5 hrs</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe how to identify and record key decisions according to SOP</td>
+              <td>The teacher explains decision recording techniques and SOP compliance</td>
+              <td>Students explain recording techniques and describe SOP procedures</td>
+              <td>Board, SOP templates, Examples</td>
+            </tr>
+            <tr>
+              <td>1 hr</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply SOP to analyze meeting scenarios and create decision documentation</td>
+              <td>The teacher guides application and analysis of meeting documentation</td>
+              <td>Students apply SOP to analyze and document meeting decisions</td>
+              <td>Role play scenarios, Meeting templates, Worksheets</td>
+            </tr>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate meeting documentation and synthesize SOP application</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their documentation and synthesize SOP compliance</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-success mt-4 mb-0">
+        <h6 class="mb-2"><i class="fas fa-bullseye"></i> <strong>Performance Criteria:</strong></h6>
+        <p class="mb-0"><strong>PC 2.4:</strong> Key decisions of the client meetings recorded according to the <strong>SOP</strong> (Standard Operating Procedures)</p>
+      </div>
+
+      <!-- Practical Sessions for Element 2 -->
+      <h4 class="mt-5 mb-3" style="color: #22c55e; padding-bottom: 10px;">
+        <i class="fas fa-laptop-code"></i> Practical: Study of business processes (6 Hours)
+      </h4>
+
+      <div class="session-title">P2.1 Practical: Data Gathering Techniques Application (3 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>acquire</strong> skills to gather requirements from users using data gathering techniques through hands-on practice.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Conduct interviews with simulated users</li>
+                <li>Create and distribute questionnaires</li>
+                <li>Practice document review and analysis</li>
+                <li>Conduct workshop sessions</li>
+                <li>Create observation checklists and practice observation</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Hands-on practice, Role-play, Practical exercises, Simulation</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Requirements gathering assignment, Interview recording, Questionnaire analysis</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>20 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall data gathering techniques and their applications</td>
+              <td>The teacher presents data gathering techniques and scenarios for identification</td>
+              <td>Students identify and recall various data gathering techniques</td>
+              <td>Interview guides, Slides</td>
+            </tr>
+            <tr>
+              <td>1 hr</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe when and how to use each technique with users</td>
+              <td>The teacher explains each technique and demonstrates usage</td>
+              <td>Students explain techniques and describe application scenarios</td>
+              <td>Questionnaire templates, Document samples, Workshop materials</td>
+            </tr>
+            <tr>
+              <td>1.5 hrs</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply appropriate techniques to analyze user needs and gather requirements</td>
+              <td>The teacher guides application and analysis of techniques</td>
+              <td>Students apply techniques to conduct interviews, create questionnaires, review documents, and observe processes</td>
+              <td>Interview guides, Questionnaire templates, Sample documents, Observation checklists</td>
+            </tr>
+            <tr>
+              <td>10 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate requirement gathering process and synthesize key learnings</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their gathering process and synthesize techniques</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">P2.2 Practical: Workflow Observation and Documentation (2 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>acquire</strong> skills to recognize present workflow through observing existing processes in practical scenarios.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Observe existing business processes in case studies</li>
+                <li>Document workflows using process mapping tools</li>
+                <li>Create workflow diagrams and documentation</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Observation practice, Process mapping, Hands-on exercises</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Workflow documentation assignment, Process diagrams</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall observation techniques for process analysis</td>
+              <td>The teacher presents observation techniques and case study videos</td>
+              <td>Students identify and recall observation and workflow recognition methods</td>
+              <td>Case study videos, Observation forms</td>
+            </tr>
+            <tr>
+              <td>45 min</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe workflow recognition and documentation through observation</td>
+              <td>The teacher explains observation techniques and demonstrates workflow documentation</td>
+              <td>Students explain techniques and describe workflow documentation approaches</td>
+              <td>Process mapping software, Workflow templates</td>
+            </tr>
+            <tr>
+              <td>45 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply observation skills to analyze existing processes and create workflow documentation</td>
+              <td>The teacher guides application and analysis of observation techniques</td>
+              <td>Students apply skills to observe and document existing workflows</td>
+              <td>Case studies, Process mapping tools, Worksheets</td>
+            </tr>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate workflow documentation and synthesize observation techniques</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their documentation and synthesize observation skills</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">P2.3 Practical: Source Document Identification (1 Hour)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>acquire</strong> skills to identify source documents from the present system as per organization standards.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Identify and classify source documents from sample systems</li>
+                <li>Create source document inventory</li>
+                <li>Apply organization standards to document identification</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Hands-on practice, Classification exercises, Practical work</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Source document inventory assignment</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>10 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall types of source documents in existing systems</td>
+              <td>The teacher presents sample system documents for identification</td>
+              <td>Students identify and recall source document types</td>
+              <td>Sample system documents, Slides</td>
+            </tr>
+            <tr>
+              <td>25 min</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe organization standards for document identification</td>
+              <td>The teacher explains organization standards and demonstrates classification</td>
+              <td>Students explain standards and describe identification approaches</td>
+              <td>Organization standards, Classification templates</td>
+            </tr>
+            <tr>
+              <td>20 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply standards to identify and classify source documents and create inventory</td>
+              <td>The teacher guides application and analysis of document identification</td>
+              <td>Students apply standards to identify and create source document inventory</td>
+              <td>Sample documents, Classification templates, Inventory forms</td>
+            </tr>
+            <tr>
+              <td>5 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate document inventory and synthesize identification techniques</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their inventory and synthesize techniques</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Element 3: Requirements Gathering -->
+      <h4 class="mt-5 mb-3" style="color: #f59e0b; padding-bottom: 10px;">
+        <i class="fas fa-file-alt"></i> Element 3: Requirements Gathering (12 hrs.)
+      </h4>
+
+      <!-- Session 3.1 -->
+      <div class="session-title">3.1 Document Requirement Specifications  (6 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>understand</strong> requirement specification documentation as per organization standards and guidelines.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Identify organization standards and guidelines for documentation</li>
+                <li>Explain requirement specification documentation structure</li>
+                <li>Apply standards to create comprehensive requirement specifications</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Demonstration, Practical exercises</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Documentation assignment, Practical work</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>45 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall organization standards and guidelines for documentation</td>
+              <td>The teacher presents standards and guidelines for identification</td>
+              <td>Students identify and recall documentation standards</td>
+              <td>Slides, Standards documents</td>
+            </tr>
+            <tr>
+              <td>3 hrs</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe requirement specification documentation structure and format</td>
+              <td>The teacher explains documentation structure and demonstrates creation</td>
+              <td>Students explain structure and describe documentation format</td>
+              <td>Board, Templates, Examples</td>
+            </tr>
+            <tr>
+              <td>2 hrs</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply organization standards to analyze requirements and create specification documents</td>
+              <td>The teacher guides application and analysis of documentation</td>
+              <td>Students apply standards to analyze and create requirement specifications</td>
+              <td>Templates, Case studies, Word processing software</td>
+            </tr>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate requirement specifications and synthesize documentation standards</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their documents and synthesize standards application</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-success mt-4 mb-0">
+        <h6 class="mb-2"><i class="fas fa-bullseye"></i> <strong>Performance Criteria:</strong></h6>
+        <p class="mb-0"><strong>PC 3.1:</strong> Requirement specifications documented as per the organization standards and guidelines</p>
+      </div>
+
+      <!-- Session 3.2 -->
+      <div class="session-title">3.2 Highlight Functional and Non-functional Requirements (4 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>know</strong> functional and non-functional requirement highlighting as per organization standards.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Define functional and non-functional requirements</li>
+                <li>Explain how to highlight and categorize requirements</li>
+                <li>Apply standards to document functional and non-functional requirements</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Discussion, Practical exercises</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Assignment, Practical work</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Define and identify functional and non-functional requirements</td>
+              <td>The teacher presents requirement types for definition</td>
+              <td>Students define and identify functional vs non-functional requirements</td>
+              <td>Slides</td>
+            </tr>
+            <tr>
+              <td>2 hrs</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe how to highlight and categorize requirements according to standards</td>
+              <td>The teacher explains categorization techniques and demonstrates highlighting</td>
+              <td>Students explain techniques and describe categorization methods</td>
+              <td>Board, Charts, Examples</td>
+            </tr>
+            <tr>
+              <td>1.5 hrs</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply standards to analyze requirements and create categorized requirement documents</td>
+              <td>The teacher guides application and analysis of requirement categorization</td>
+              <td>Students apply standards to analyze and categorize requirements</td>
+              <td>Templates, Case studies, Worksheets</td>
+            </tr>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate requirement categorization and synthesize standards application</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their categorization and synthesize techniques</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-success mt-4 mb-0">
+        <h6 class="mb-2"><i class="fas fa-bullseye"></i> <strong>Performance Criteria:</strong></h6>
+        <p class="mb-0"><strong>PC 3.2:</strong> Functional and non-functional requirements of the proposed solutions highlighted, as per the organization standards and guidelines</p>
+      </div>
+
+      <!-- Session 3.3 -->
+      <div class="session-title">3.3 Include Suggested Business Process Improvements (2 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>acquire</strong> skills to include suggested business process improvements in requirement documents.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Identify business process improvement opportunities</li>
+                <li>Explain how to suggest and document improvements</li>
+                <li>Apply knowledge to create improvement recommendations</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Discussion, Case studies</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Improvement proposal assignment</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>20 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall business process improvement concepts</td>
+              <td>The teacher presents improvement concepts for identification</td>
+              <td>Students identify and recall improvement opportunities</td>
+              <td>Slides</td>
+            </tr>
+            <tr>
+              <td>1 hr</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe how to suggest and document business process improvements</td>
+              <td>The teacher explains improvement documentation techniques</td>
+              <td>Students explain techniques and describe improvement processes</td>
+              <td>Board, Examples, Case studies</td>
+            </tr>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply knowledge to analyze processes and create improvement recommendations</td>
+              <td>The teacher guides application and analysis of improvement creation</td>
+              <td>Students apply knowledge to analyze and create improvement suggestions</td>
+              <td>Case studies, Templates</td>
+            </tr>
+            <tr>
+              <td>10 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate improvement suggestions and synthesize improvement concepts</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their suggestions and synthesize improvement techniques</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-success mt-4 mb-0">
+        <h6 class="mb-2"><i class="fas fa-bullseye"></i> <strong>Performance Criteria:</strong></h6>
+        <p class="mb-0"><strong>PC 3.3:</strong> Suggested business process improvements included as per the requirements</p>
+      </div>
+
+      <!-- Practical Sessions for Element 3 -->
+      <h4 class="mt-5 mb-3" style="color: #f59e0b; padding-bottom: 10px;">
+        <i class="fas fa-laptop-code"></i> Practical: Requirements Gathering (5 Hours)
+      </h4>
+
+      <div class="session-title">P3.1 Practical: Requirement Specification Documentation (3 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>acquire</strong> skills to document requirement specifications as per organization standards and guidelines.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Create requirement specification documents using templates</li>
+                <li>Document requirements from gathered data</li>
+                <li>Apply organization standards to requirement documentation</li>
+                <li>Highlight functional and non-functional requirements</li>
+                <li>Include business process improvements in documents</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Hands-on practice, Template application, Documentation exercises</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Requirement specification document assignment</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>20 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall requirement specification structure and organization standards</td>
+              <td>The teacher presents requirement templates and standards for identification</td>
+              <td>Students identify and recall specification structure and standards</td>
+              <td>Requirement templates, Organization standards</td>
+            </tr>
+            <tr>
+              <td>1 hr</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe requirement documentation techniques and categorization</td>
+              <td>The teacher explains documentation techniques and demonstrates requirement categorization</td>
+              <td>Students explain techniques and describe documentation approaches</td>
+              <td>Sample requirements, Documentation guidelines</td>
+            </tr>
+            <tr>
+              <td>1.5 hrs</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply organization standards to document requirements and create specification documents</td>
+              <td>The teacher guides application and analysis of requirement documentation</td>
+              <td>Students apply standards to document requirements and create specification documents</td>
+              <td>Requirement templates, Word processing software, Gathered data</td>
+            </tr>
+            <tr>
+              <td>10 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate requirement documents and synthesize documentation techniques</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their documents and synthesize techniques</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">P3.2 Practical: Client Meeting Recording and Documentation (2 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>acquire</strong> skills to record key decisions from client meetings according to Standard Operating Procedures (SOP).</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Record key decisions from simulated client meetings</li>
+                <li>Create meeting minutes using SOP templates</li>
+                <li>Practice decision documentation and tracking</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Role-play, Hands-on practice, Simulation exercises</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Meeting minutes assignment, Decision documentation</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall meeting recording techniques and SOP requirements</td>
+              <td>The teacher presents meeting scenarios and SOP templates for identification</td>
+              <td>Students identify and recall meeting recording and decision documentation methods</td>
+              <td>SOP templates, Meeting scenarios</td>
+            </tr>
+            <tr>
+              <td>45 min</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe key decision identification and documentation according to SOP</td>
+              <td>The teacher explains decision recording techniques and demonstrates documentation</td>
+              <td>Students explain techniques and describe documentation approaches</td>
+              <td>SOP documents, Meeting minutes templates</td>
+            </tr>
+            <tr>
+              <td>45 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply SOP to record key decisions from meetings and create meeting minutes</td>
+              <td>The teacher guides application and analysis of meeting recording</td>
+              <td>Students apply SOP to record decisions and create meeting minutes</td>
+              <td>Meeting recording tools, SOP templates, Decision tracking forms</td>
+            </tr>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate meeting documentation and synthesize recording techniques</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their documentation and synthesize techniques</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Element 4: Requirement analysis -->
+      <h4 class="mt-5 mb-3" style="color: #ec4899; padding-bottom: 10px;">
+        <i class="fas fa-check-circle"></i> Element 4: Requirement analysis (12 hrs.)
+      </h4>
+
+      <!-- Session 4.1 -->
+      <div class="session-title">4.1 Present and Explain Requirement Specifications to Client (4 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>understand</strong> requirement specification presentation and explanation to clients as per organization standards.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Identify presentation techniques and organization standards</li>
+                <li>Explain how to present and explain requirements effectively</li>
+                <li>Apply presentation skills to communicate requirements to clients</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Demonstration, Role play, Presentation practice</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Presentation exercise, Role play assessment</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall presentation techniques and organization standards</td>
+              <td>The teacher presents presentation concepts for identification</td>
+              <td>Students identify and recall presentation standards and techniques</td>
+              <td>Slides, Presentation guidelines</td>
+            </tr>
+            <tr>
+              <td>2 hrs</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe how to present and explain requirements effectively to clients</td>
+              <td>The teacher explains presentation techniques and demonstrates effective communication</td>
+              <td>Students explain techniques and describe client communication methods</td>
+              <td>Board, Examples, Video demonstrations</td>
+            </tr>
+            <tr>
+              <td>1.5 hrs</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply presentation skills to analyze requirements and create client presentations</td>
+              <td>The teacher guides application and analysis of presentation creation</td>
+              <td>Students apply skills to analyze and create requirement presentations</td>
+              <td>Presentation software, Role play scenarios, Templates</td>
+            </tr>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate presentations and synthesize communication techniques</td>
+              <td>The teacher evaluates student presentations and guides synthesis</td>
+              <td>Students evaluate their presentations and synthesize communication skills</td>
+              <td>Student presentations, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-success mt-4 mb-0">
+        <h6 class="mb-2"><i class="fas fa-bullseye"></i> <strong>Performance Criteria:</strong></h6>
+        <p class="mb-0"><strong>PC 4.1:</strong> Requirement specifications, presented and explained to the client as per the organization standards</p>
+      </div>
+
+      <!-- Session 4.2 -->
+      <div class="session-title">4.2 Develop and Present Prototypes  (6 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>acquire</strong> skills to develop and present prototypes of proposed solutions as per requirement specification document.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Identify prototyping techniques and tools</li>
+                <li>Explain prototype development process</li>
+                <li>Apply prototyping skills to create and present solution prototypes</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Demonstration, Practical exercises, Prototyping tools</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Prototype development project, Presentation</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>45 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and list prototyping techniques and tools</td>
+              <td>The teacher presents prototyping concepts for identification</td>
+              <td>Students identify and list prototyping methods and tools</td>
+              <td>Slides, Prototyping tools</td>
+            </tr>
+            <tr>
+              <td>2.5 hrs</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe prototype development process based on requirement specifications</td>
+              <td>The teacher explains development process and demonstrates prototyping</td>
+              <td>Students explain process and describe prototype creation</td>
+              <td>Board, Prototyping software, Examples</td>
+            </tr>
+            <tr>
+              <td>2.5 hrs</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply prototyping skills to analyze requirements and create solution prototypes</td>
+              <td>The teacher guides application and analysis of prototype development</td>
+              <td>Students apply skills to analyze and create prototypes</td>
+              <td>Prototyping tools, Case studies, Templates</td>
+            </tr>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate prototypes and synthesize development techniques</td>
+              <td>The teacher evaluates student prototypes and guides synthesis</td>
+              <td>Students evaluate their prototypes and synthesize development skills</td>
+              <td>Student prototypes, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-success mt-4 mb-0">
+        <h6 class="mb-2"><i class="fas fa-bullseye"></i> <strong>Performance Criteria:</strong></h6>
+        <p class="mb-0"><strong>PC 4.2:</strong> Prototypes of the proposed solution developed and presented to the client as per the requirement specification document</p>
+      </div>
+
+      <!-- Session 4.3 -->
+      <div class="session-title">4.3 Obtain Client Confirmation for Requirement Specification  (2 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>know</strong> client confirmation obtaining for requirement specification document according to organization standards.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Identify confirmation processes and organization standards</li>
+                <li>Explain how to obtain and document client confirmation</li>
+                <li>Apply standards to secure client approval</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Discussion, Role play, Practical exercises</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Confirmation process exercise, Documentation assignment</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>20 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall confirmation processes and organization standards</td>
+              <td>The teacher presents confirmation concepts for identification</td>
+              <td>Students identify and recall confirmation procedures</td>
+              <td>Slides, Standards documents</td>
+            </tr>
+            <tr>
+              <td>1 hr</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe how to obtain and document client confirmation according to standards</td>
+              <td>The teacher explains confirmation techniques and demonstrates documentation</td>
+              <td>Students explain techniques and describe confirmation processes</td>
+              <td>Board, Templates, Examples</td>
+            </tr>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply standards to analyze scenarios and create confirmation documentation</td>
+              <td>The teacher guides application and analysis of confirmation process</td>
+              <td>Students apply standards to analyze and create confirmation documents</td>
+              <td>Role play scenarios, Confirmation templates</td>
+            </tr>
+            <tr>
+              <td>10 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate confirmation processes and synthesize approval techniques</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their processes and synthesize confirmation skills</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-success mt-4 mb-0">
+        <h6 class="mb-2"><i class="fas fa-bullseye"></i> <strong>Performance Criteria:</strong></h6>
+        <p class="mb-0"><strong>PC 4.3:</strong> Client confirmation obtained for requirement specification document according to the organization standards</p>
+      </div>
+
+      <!-- Practical Sessions for Element 4 -->
+      <h4 class="mt-5 mb-3" style="color: #ec4899; padding-bottom: 10px;">
+        <i class="fas fa-laptop-code"></i> Practical: Requirement analysis (5 Hours)
+      </h4>
+
+      <div class="session-title">P4.1 Practical: Requirement Presentation and Prototype Development (3 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>acquire</strong> skills to present requirement specifications and develop prototypes as per requirement specification document.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Prepare and deliver requirement specification presentations</li>
+                <li>Develop low-fidelity prototypes using design tools</li>
+                <li>Create prototype demonstrations</li>
+                <li>Practice client presentation skills</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Hands-on practice, Presentation practice, Prototyping exercises</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Presentation assignment, Prototype submission</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>20 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall presentation techniques and prototyping concepts</td>
+              <td>The teacher presents presentation and prototyping tools for identification</td>
+              <td>Students identify and recall presentation and prototyping techniques</td>
+              <td>Presentation software, Prototyping tools</td>
+            </tr>
+            <tr>
+              <td>1 hr</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe requirement presentation and prototype development approaches</td>
+              <td>The teacher explains presentation techniques and demonstrates prototype creation</td>
+              <td>Students explain techniques and describe presentation and prototyping approaches</td>
+              <td>Design templates, Sample requirements</td>
+            </tr>
+            <tr>
+              <td>1.5 hrs</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply techniques to prepare presentations and develop prototypes</td>
+              <td>The teacher guides application and analysis of presentation and prototype creation</td>
+              <td>Students apply techniques to prepare presentations and develop prototypes</td>
+              <td>Presentation software, Prototyping tools, Design templates</td>
+            </tr>
+            <tr>
+              <td>10 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate presentations and prototypes and synthesize key concepts</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their presentations and prototypes and synthesize learning</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">P4.2 Practical: Client Confirmation Process (2 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>acquire</strong> skills to obtain client confirmation for requirement specification document according to organization standards.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Practice obtaining client confirmation through role-play</li>
+                <li>Create confirmation documents</li>
+                <li>Document confirmation process according to organization standards</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Role-play, Hands-on practice, Simulation exercises</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Confirmation process assignment, Documentation submission</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall confirmation processes and organization standards</td>
+              <td>The teacher presents confirmation templates and standards for identification</td>
+              <td>Students identify and recall confirmation procedures</td>
+              <td>Confirmation templates, Organization standards</td>
+            </tr>
+            <tr>
+              <td>45 min</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe client confirmation obtaining and documentation according to standards</td>
+              <td>The teacher explains confirmation processes and demonstrates documentation</td>
+              <td>Students explain processes and describe documentation approaches</td>
+              <td>Organization standards, Documentation forms</td>
+            </tr>
+            <tr>
+              <td>45 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply organization standards to obtain confirmation and create documentation</td>
+              <td>The teacher guides application and analysis of confirmation process</td>
+              <td>Students apply standards through role-play to obtain confirmation and create documents</td>
+              <td>Role-play scenarios, Confirmation templates, Documentation forms</td>
+            </tr>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate confirmation process and synthesize key concepts</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their confirmation process and synthesize learning</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Element 5: Feasibility study -->
+      <h4 class="mt-5 mb-3" style="color: #8b5cf6; padding-bottom: 10px;">
+        <i class="fas fa-chart-line"></i> Element 5: Feasibility study (6 hrs.)
+      </h4>
+
+      <!-- Session 5.1 -->
+      <div class="session-title">5.1 Conduct Feasibility Study for Software Solutions (6 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>understand</strong> feasibility study conduction for software solutions considering technical, economical, practical, organizational, and legal aspects.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Identify feasibility study aspects and evaluation criteria</li>
+                <li>Explain technical, economical, practical, organizational, and legal feasibility</li>
+                <li>Apply feasibility analysis techniques to evaluate software solutions</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Discussion, Case studies, Practical exercises</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Feasibility study report assignment, Case study analysis</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>45 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall feasibility study concepts and evaluation aspects</td>
+              <td>The teacher presents feasibility study concepts for identification</td>
+              <td>Students identify and recall feasibility study aspects and criteria</td>
+              <td>Slides, Whiteboard</td>
+            </tr>
+            <tr>
+              <td>3 hrs</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe technical, economical, practical, organizational, and legal feasibility aspects</td>
+              <td>The teacher explains each feasibility aspect and demonstrates evaluation methods</td>
+              <td>Students explain feasibility aspects and describe evaluation techniques</td>
+              <td>Board, Case studies, Examples, Charts</td>
+            </tr>
+            <tr>
+              <td>2 hrs</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply feasibility analysis techniques to evaluate software solutions and create feasibility study reports</td>
+              <td>The teacher guides application and analysis of feasibility evaluation</td>
+              <td>Students apply techniques to analyze and create feasibility study reports</td>
+              <td>Case studies, Templates, Worksheets, Feasibility study frameworks</td>
+            </tr>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate feasibility study reports and synthesize feasibility analysis concepts</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their feasibility studies and synthesize analysis techniques</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-success mt-4 mb-0">
+        <h6 class="mb-2"><i class="fas fa-bullseye"></i> <strong>Performance Criteria:</strong></h6>
+        <p class="mb-0"><strong>PC 5.1:</strong> Feasibility study conducted for software solutions considering <strong>technical, economical, practical, organizational, and legal aspects</strong></p>
+      </div>
+
+      <!-- Practical Sessions for Element 5 -->
+      <h4 class="mt-5 mb-3" style="color: #8b5cf6; padding-bottom: 10px;">
+        <i class="fas fa-laptop-code"></i> Practical: Feasibility study (8 Hours)
+      </h4>
+
+      <div class="session-title">P5.1 Practical: Feasibility Study Report Preparation (8 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>acquire</strong> skills to conduct feasibility study for software solutions considering technical, economical, practical, organizational, and legal aspects.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Conduct technical feasibility analysis for given scenarios</li>
+                <li>Perform economic feasibility study (cost-benefit analysis)</li>
+                <li>Evaluate practical feasibility aspects</li>
+                <li>Assess organizational feasibility</li>
+                <li>Analyze legal and regulatory feasibility</li>
+                <li>Prepare comprehensive feasibility study report</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Hands-on practice, Analysis exercises, Report writing, Case studies</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Feasibility study report assignment (Assignment 02)</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall feasibility study aspects and analysis techniques</td>
+              <td>The teacher presents feasibility study concepts and case scenarios for identification</td>
+              <td>Students identify and recall feasibility aspects and analysis methods</td>
+              <td>Case scenarios, Feasibility study templates</td>
+            </tr>
+            <tr>
+              <td>3 hrs</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe feasibility analysis techniques for technical, economic, practical, organizational, and legal aspects</td>
+              <td>The teacher explains each feasibility aspect and demonstrates analysis techniques</td>
+              <td>Students explain techniques and describe analysis approaches for each aspect</td>
+              <td>Analysis tools, Financial calculation templates, Legal requirement checklists</td>
+            </tr>
+            <tr>
+              <td>4 hrs</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply feasibility analysis techniques to evaluate scenarios and create comprehensive reports</td>
+              <td>The teacher guides application and analysis of feasibility study creation</td>
+              <td>Students apply techniques to analyze all feasibility aspects and create comprehensive reports</td>
+              <td>Feasibility study templates, Case scenarios, Analysis tools, Financial templates</td>
+            </tr>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate feasibility reports and synthesize key concepts</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their reports and synthesize learning</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <!-- Practical Assignments -->
+    <div class="content-card">
+      <h3><i class="fas fa-tasks text-primary"></i> Practical Assignments</h3>
+      <div class="topic-item">
+        <h5><strong>Assignment 01:</strong> Prepare a user requirement document</h5>
+        <p>Students will gather requirements for a selected business organization and prepare a comprehensive user
+          requirement document.</p>
+      </div>
+      <div class="topic-item">
+        <h5><strong>Assignment 02:</strong> Prepare a feasibility study report for a given industry specific scenario
+        </h5>
+        <p>Students will conduct a feasibility study covering technical, economical, practical, organizational, and
+          legal aspects for a given scenario.</p>
+      </div>
+    </div>
+
+   
+
+    <!-- Assessment Plan -->
+    <div class="content-card">
+      <h3><i class="fas fa-clipboard-check text-primary"></i> Assessment & Weighting</h3>
+
+      <h5 class="mt-3">Continuous Assessment:</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Assessment</th>
+              <th>Description</th>
+              <th>Weightage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Individual Assignment</strong></td>
+              <td>Prepare a user requirement document and feasibility study report for a given industry specific scenario</td>
+              <td>40%</td>
+            </tr>
+            <tr>
+              <td><strong>Written Assessment 01</strong></td>
+              <td>Topics: Introduction to various business processes, Study of business processes, Requirements Gathering</td>
+              <td>10%</td>
+            </tr>
+            <tr>
+              <td><strong>Written Assessment 02</strong></td>
+              <td>Topics: Requirement analysis, Feasibility study</td>
+              <td>10%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h5 class="mt-4">Summative Assessment:</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Assessment</th>
+              <th>Description</th>
+              <th>Weightage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Written Exam</strong></td>
+              <td>Minimum 3 hours of paper</td>
+              <td>40%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-info mt-3">
+        <strong>Total Duration:</strong> 100 hrs. (60T + 30P + 10S)<br>
+        <small>T = Theory, P = Practical, S = Self Studies</small>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
