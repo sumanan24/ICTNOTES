@@ -1,0 +1,1334 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mathematics for Computing - NVQ Level 5 ICT</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e8f0f5 100%);
+      padding-top: 70px;
+      line-height: 1.7;
+      color: #2d3748;
+    }
+
+    /* Navbar Styling */
+    .navbar {
+      background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      padding: 0.75rem 0;
+    }
+
+    .navbar-brand {
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-brand:hover {
+      transform: translateX(-3px);
+    }
+
+    /* Module Header */
+    .module-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 2.5rem 0;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .module-header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .module-header .lead {
+      font-size: 1.1rem;
+      opacity: 0.95;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    /* Content Cards */
+    .content-card {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      margin-bottom: 2rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .content-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .content-card h3 {
+      color: #1e40af;
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 3px solid #e0e7ff;
+    }
+
+    .content-card h4 {
+      color: #2563eb;
+      font-weight: 600;
+      font-size: 1.3rem;
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+      padding-bottom: 10px;
+    }
+
+    .content-card h5 {
+      color: #4b5563;
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-top: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Badges */
+    .hour-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+      color: #1e40af;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin: 0.25rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .info-badge {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #4338ca;
+      padding: 0.4rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin: 0.2rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Table Styling with Mobile Scroll */
+    .table-wrapper {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 1rem 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      width: 100%;
+      display: block;
+    }
+
+    .table-wrapper::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .table-wrapper::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 4px;
+    }
+
+    .table-wrapper::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+
+    .table-wrapper::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    table {
+      width: 100%;
+      font-size: 0.95rem;
+      border-collapse: separate;
+      border-spacing: 0;
+      min-width: 600px;
+    }
+
+    table th {
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      font-weight: 700;
+      border: 1px solid #e2e8f0;
+      padding: 1rem 0.75rem;
+      text-align: left;
+      color: #1e293b;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    table td {
+      border: 1px solid #e2e8f0;
+      vertical-align: top;
+      padding: 1rem 0.75rem;
+      background: white;
+    }
+
+    table tbody tr:hover {
+      background: #f8fafc;
+    }
+
+    table tbody tr:nth-child(even) {
+      background: #fafbfc;
+    }
+
+    table tbody tr:nth-child(even):hover {
+      background: #f1f5f9;
+    }
+
+    /* Session Title */
+    .session-title {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      color: #1e40af;
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin: 1.5rem 0 1rem 0;
+      border-left: 4px solid #2563eb;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Phase Badges */
+    .phase-badge {
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .phase-intro {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    .phase-dev {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .phase-app {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .phase-cons {
+      background: #fce7f3;
+      color: #9f1239;
+    }
+
+    /* Alert Boxes */
+    .alert {
+      border-radius: 10px;
+      border: none;
+      padding: 1.25rem;
+      margin: 1rem 0;
+    }
+
+    .alert-primary {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      color: #1e40af;
+      border-left: 4px solid #2563eb;
+    }
+
+    .alert-success {
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+      color: #166534;
+      border-left: 4px solid #22c55e;
+    }
+
+    .alert-info {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      color: #0c4a6e;
+      border-left: 4px solid #0ea5e9;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 10px;
+      }
+
+      .content-card {
+        padding: 1.25rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .content-card h3 {
+        font-size: 1.25rem;
+      }
+
+      .content-card h4 {
+        font-size: 1.1rem;
+      }
+
+      .session-title {
+        font-size: 1rem;
+        padding: 0.75rem 1rem;
+      }
+
+      table {
+        font-size: 0.85rem;
+      }
+
+      table th,
+      table td {
+        padding: 0.75rem 0.5rem;
+      }
+
+      .module-header {
+        padding: 1.5rem 0;
+      }
+
+      .module-header h1 {
+        font-size: 1.5rem;
+      }
+
+      .hour-badge,
+      .info-badge {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+        margin: 0.2rem;
+      }
+    }
+
+    ul {
+      margin-bottom: 0.5rem;
+    }
+
+    ul.mb-0 {
+      margin-bottom: 0;
+    }
+
+    li {
+      margin-bottom: 0.4rem;
+      font-size: 0.9rem;
+    }
+
+    /* Print Styles */
+    @media print {
+      .navbar {
+        display: none;
+      }
+
+      .module-header {
+        page-break-after: avoid;
+      }
+
+      .content-card {
+        page-break-inside: avoid;
+      }
+
+      .table-wrapper {
+        overflow: visible;
+      }
+
+      table {
+        min-width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">
+        <i class="fas fa-arrow-left"></i> Back to Index
+      </a>
+    </div>
+  </nav>
+
+  <div class="module-header">
+    <div class="container">
+      <a href="../index.html" class="text-white text-decoration-none"><i class="fas fa-arrow-left"></i> Back to Course
+        Index</a>
+      <h1 class="mt-3">Mathematics for Computing</h1>
+      <p class="lead mb-2">Module Code: K72T001M03 / Level 05</p>
+      <div class="mt-3">
+        <span class="info-badge"><i class="fas fa-tag"></i> Compulsory</span>
+        <span class="info-badge"><i class="fas fa-link"></i> Relevant Unit: All Units</span>
+        <span class="hour-badge"><i class="fas fa-clock"></i> 25 Notional Hours</span>
+        <span class="hour-badge"><i class="fas fa-chalkboard-teacher"></i> 20 Theory</span>
+        <span class="hour-badge"><i class="fas fa-laptop-code"></i> 0 Practical</span>
+        <span class="hour-badge"><i class="fas fa-book"></i> 5 Self-study</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- Learning Outcomes -->
+    <div class="content-card">
+      <h3><i class="fas fa-graduation-cap text-primary"></i> Learning Outcomes</h3>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-bullseye text-success"></i> General Objective</h5>
+      <p class="lead">At the end of this module, students will <strong>understand</strong> different types of number systems,
+        <strong>know</strong> conversion between different bases, <strong>acquire</strong> skills in calculations using different number bases,
+        and <strong>understand</strong> basic statistics concepts and computer coding systems.
+      </p>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-list-check text-primary"></i> Specific Objectives</h5>
+      <p>At the end of this module the student shall be able to:</p>
+      <ol>
+        <li>Number systems classification and conversion techniques</li>
+        <li>Arithmetic operations in different number bases</li>
+        <li>Fractional number representation methods</li>
+        <li>Set theory concepts and applications</li>
+        <li>Statistical measures calculation</li>
+        <li>Computer coding systems identification and usage</li>
+      </ol>
+    </div>
+
+    <!-- Learning Content / Topics and Session Plans -->
+    <div class="content-card">
+      <h3><i class="fas fa-book text-primary"></i> Learning Content / Topics</h3>
+
+      1. Types of Number Systems (01 hrs.) <br>
+      2. Conversion between different bases (06 hrs.) <br>
+      3. Calculation using different number bases (04 hrs.) <br>
+      4. Fractional number representation (02 hrs.) <br>
+      5. Sets theory (02 hrs.) <br>
+      6. Statistics fundamentals (03 hrs.) <br>
+      7. Computer Codes (02 hrs.) <br>
+
+      <h3 class="mt-5"><i class="fas fa-calendar-alt text-primary"></i> Session Plans</h3>
+
+      <!-- Element 1: Types of Number Systems -->
+      <h4 class="mt-4 mb-3" style="color: #2563eb; padding-bottom: 10px;">
+        <i class="fas fa-tasks"></i> Element 1: Types of Number Systems (1 hr.)
+      </h4>
+
+      <!-- Session 1.1 -->
+      <div class="session-title">1.1 Types of Number Systems (1 Hour)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>understand</strong> different types of number systems including positional and non-positional systems.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Positional and non-positional number systems classification</li>
+                <li>Factors affecting the value of numbers in different systems</li>
+                <li>Number system characteristics and applications</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Discussion, Examples</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Class participation, Quick quiz</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>10 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall number system concepts</td>
+              <td>The teacher presents examples of different number systems for identification</td>
+              <td>Students identify and recall number system types</td>
+              <td>Slides, Examples</td>
+            </tr>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe positional and non-positional number systems and factors affecting number values</td>
+              <td>The teacher explains number system types and demonstrates value determination</td>
+              <td>Students explain systems and describe value calculation methods</td>
+              <td>Board, Examples, Charts</td>
+            </tr>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply knowledge to classify number systems and analyze value factors</td>
+              <td>The teacher guides application and analysis of number system classification</td>
+              <td>Students apply knowledge to classify and analyze number systems</td>
+              <td>Worksheets, Practice problems</td>
+            </tr>
+            <tr>
+              <td>5 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate understanding and synthesize number system concepts</td>
+              <td>The teacher evaluates student responses and guides synthesis</td>
+              <td>Students evaluate their understanding and synthesize concepts</td>
+              <td>Summary, Quick quiz</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Element 2: Conversion between different bases -->
+      <h4 class="mt-5 mb-3" style="color: #22c55e; padding-bottom: 10px;">
+        <i class="fas fa-exchange-alt"></i> Element 2: Conversion between different bases (6 hrs.)
+      </h4>
+
+      <!-- Session 2.1 -->
+      <div class="session-title">2.1 Decimal to Other Bases Conversion (2 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>acquire</strong> skills to convert decimal numbers to binary, octal, and hexadecimal bases.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Decimal to binary conversion methods</li>
+                <li>Decimal to octal conversion techniques</li>
+                <li>Decimal to hexadecimal conversion procedures</li>
+                <li>Fractional decimal number conversion</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Demonstration, Practical exercises</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Conversion exercises, Assignment</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall decimal number system and base conversion concepts</td>
+              <td>The teacher presents decimal numbers and conversion examples for identification</td>
+              <td>Students identify and recall decimal system and conversion methods</td>
+              <td>Slides, Examples</td>
+            </tr>
+            <tr>
+              <td>60 min</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe conversion methods for decimal to binary, octal, and hexadecimal</td>
+              <td>The teacher explains conversion algorithms and demonstrates step-by-step procedures</td>
+              <td>Students explain methods and describe conversion procedures</td>
+              <td>Board, Examples, Conversion charts</td>
+            </tr>
+            <tr>
+              <td>35 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply conversion methods to convert decimal numbers to different bases</td>
+              <td>The teacher guides application and analysis of conversion exercises</td>
+              <td>Students apply methods to perform conversions and verify results</td>
+              <td>Worksheets, Practice problems, Calculators</td>
+            </tr>
+            <tr>
+              <td>10 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate conversions and synthesize conversion techniques</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their conversions and synthesize techniques</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Session 2.2 -->
+      <div class="session-title">2.2 Other Bases to Decimal Conversion (2 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>acquire</strong> skills to convert numbers from binary, octal, and hexadecimal bases to decimal.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Binary to decimal conversion methods</li>
+                <li>Octal to decimal conversion techniques</li>
+                <li>Hexadecimal to decimal conversion procedures</li>
+                <li>Positional value calculation</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Demonstration, Practical exercises</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Conversion exercises, Assignment</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall positional value concepts and base systems</td>
+              <td>The teacher presents numbers in different bases for identification</td>
+              <td>Students identify and recall positional values and base systems</td>
+              <td>Slides, Examples</td>
+            </tr>
+            <tr>
+              <td>60 min</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe conversion methods from binary, octal, and hexadecimal to decimal</td>
+              <td>The teacher explains positional value method and demonstrates conversions</td>
+              <td>Students explain methods and describe conversion procedures</td>
+              <td>Board, Examples, Conversion charts</td>
+            </tr>
+            <tr>
+              <td>35 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply conversion methods to convert numbers from different bases to decimal</td>
+              <td>The teacher guides application and analysis of conversion exercises</td>
+              <td>Students apply methods to perform conversions and verify results</td>
+              <td>Worksheets, Practice problems, Calculators</td>
+            </tr>
+            <tr>
+              <td>10 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate conversions and synthesize conversion techniques</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their conversions and synthesize techniques</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Session 2.3 -->
+      <div class="session-title">2.3 Non-Decimal Bases to Non-Decimal Bases Conversion (2 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>acquire</strong> skills to convert numbers between non-decimal bases (binary, octal, hexadecimal).</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Binary to octal and hexadecimal conversion</li>
+                <li>Octal to binary and hexadecimal conversion</li>
+                <li>Hexadecimal to binary and octal conversion</li>
+                <li>Grouping and substitution methods</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Demonstration, Practical exercises</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Conversion exercises, Assignment</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall relationships between binary, octal, and hexadecimal bases</td>
+              <td>The teacher presents base relationships and grouping concepts for identification</td>
+              <td>Students identify and recall base relationships and grouping methods</td>
+              <td>Slides, Examples</td>
+            </tr>
+            <tr>
+              <td>60 min</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe conversion methods between non-decimal bases using grouping and substitution</td>
+              <td>The teacher explains grouping methods and demonstrates conversions between bases</td>
+              <td>Students explain methods and describe conversion procedures</td>
+              <td>Board, Examples, Conversion charts</td>
+            </tr>
+            <tr>
+              <td>35 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply conversion methods to convert numbers between non-decimal bases</td>
+              <td>The teacher guides application and analysis of conversion exercises</td>
+              <td>Students apply methods to perform conversions and verify results</td>
+              <td>Worksheets, Practice problems</td>
+            </tr>
+            <tr>
+              <td>10 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate conversions and synthesize conversion techniques</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their conversions and synthesize techniques</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Element 3: Calculation using different number bases -->
+      <h4 class="mt-5 mb-3" style="color: #f59e0b; padding-bottom: 10px;">
+        <i class="fas fa-calculator"></i> Element 3: Calculation using different number bases (4 hrs.)
+      </h4>
+
+      <!-- Session 3.1 -->
+      <div class="session-title">3.1 Addition in Different Number Bases (2 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>acquire</strong> skills to perform addition operations in binary, octal, and hexadecimal number bases.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Binary addition with carry operations</li>
+                <li>Octal addition procedures</li>
+                <li>Hexadecimal addition techniques</li>
+                <li>Carry handling in different bases</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Demonstration, Practical exercises</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Addition exercises, Assignment</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall addition concepts and carry operations</td>
+              <td>The teacher presents addition examples in different bases for identification</td>
+              <td>Students identify and recall addition procedures and carry concepts</td>
+              <td>Slides, Examples</td>
+            </tr>
+            <tr>
+              <td>60 min</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe addition methods for binary, octal, and hexadecimal with carry handling</td>
+              <td>The teacher explains addition algorithms and demonstrates step-by-step procedures</td>
+              <td>Students explain methods and describe addition procedures</td>
+              <td>Board, Examples, Addition tables</td>
+            </tr>
+            <tr>
+              <td>35 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply addition methods to perform calculations in different number bases</td>
+              <td>The teacher guides application and analysis of addition exercises</td>
+              <td>Students apply methods to perform additions and verify results</td>
+              <td>Worksheets, Practice problems</td>
+            </tr>
+            <tr>
+              <td>10 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate additions and synthesize calculation techniques</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their calculations and synthesize techniques</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Session 3.2 -->
+      <div class="session-title">3.2 Subtraction in Different Number Bases (2 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>acquire</strong> skills to perform subtraction operations using one's complement and two's complement methods.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>One's complement method for subtraction</li>
+                <li>Two's complement method for subtraction</li>
+                <li>Borrow handling in different bases</li>
+                <li>Complement calculation procedures</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Demonstration, Practical exercises</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Subtraction exercises, Assignment</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall subtraction concepts and complement methods</td>
+              <td>The teacher presents subtraction examples and complement concepts for identification</td>
+              <td>Students identify and recall subtraction procedures and complement methods</td>
+              <td>Slides, Examples</td>
+            </tr>
+            <tr>
+              <td>60 min</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe one's complement and two's complement methods for subtraction</td>
+              <td>The teacher explains complement methods and demonstrates subtraction procedures</td>
+              <td>Students explain methods and describe subtraction procedures</td>
+              <td>Board, Examples, Complement tables</td>
+            </tr>
+            <tr>
+              <td>35 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply complement methods to perform subtraction in different number bases</td>
+              <td>The teacher guides application and analysis of subtraction exercises</td>
+              <td>Students apply methods to perform subtractions and verify results</td>
+              <td>Worksheets, Practice problems</td>
+            </tr>
+            <tr>
+              <td>10 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate subtractions and synthesize calculation techniques</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their calculations and synthesize techniques</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Element 4: Fractional number representation -->
+      <h4 class="mt-5 mb-3" style="color: #ec4899; padding-bottom: 10px;">
+        <i class="fas fa-fraction"></i> Element 4: Fractional number representation (2 hrs.)
+      </h4>
+
+      <!-- Session 4.1 -->
+      <div class="session-title">4.1 Fixed Point and Floating Point Representation (2 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>understand</strong> fixed point and floating point representation methods for fractional numbers.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Fixed point representation format and applications</li>
+                <li>Floating point representation format and components</li>
+                <li>Mantissa and exponent concepts</li>
+                <li>Precision and range considerations</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Discussion, Examples</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Representation exercises, Assignment</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall fractional number representation concepts</td>
+              <td>The teacher presents fractional numbers and representation formats for identification</td>
+              <td>Students identify and recall representation methods</td>
+              <td>Slides, Examples</td>
+            </tr>
+            <tr>
+              <td>60 min</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe fixed point and floating point representation formats and components</td>
+              <td>The teacher explains representation formats and demonstrates conversion procedures</td>
+              <td>Students explain formats and describe representation methods</td>
+              <td>Board, Examples, Format charts</td>
+            </tr>
+            <tr>
+              <td>35 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply representation methods to convert fractional numbers to fixed and floating point formats</td>
+              <td>The teacher guides application and analysis of representation exercises</td>
+              <td>Students apply methods to represent fractional numbers and verify formats</td>
+              <td>Worksheets, Practice problems</td>
+            </tr>
+            <tr>
+              <td>10 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate representations and synthesize representation techniques</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their representations and synthesize techniques</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Element 5: Sets theory -->
+      <h4 class="mt-5 mb-3" style="color: #8b5cf6; padding-bottom: 10px;">
+        <i class="fas fa-project-diagram"></i> Element 5: Sets theory (2 hrs.)
+      </h4>
+
+      <!-- Session 5.1 -->
+      <div class="session-title">5.1 Sets Theory Concepts and Operations (2 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>understand</strong> set theory concepts and operations including union, intersection, and complement.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Set notation and representation methods</li>
+                <li>Union and intersection operations</li>
+                <li>Complement and difference operations</li>
+                <li>Set theory applications in computing</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Discussion, Practical exercises</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Set operations exercises, Assignment</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall set concepts and notation</td>
+              <td>The teacher presents set examples and notation for identification</td>
+              <td>Students identify and recall set concepts and notation</td>
+              <td>Slides, Examples</td>
+            </tr>
+            <tr>
+              <td>60 min</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe set operations including union, intersection, complement, and difference</td>
+              <td>The teacher explains set operations and demonstrates procedures</td>
+              <td>Students explain operations and describe calculation methods</td>
+              <td>Board, Examples, Venn diagrams</td>
+            </tr>
+            <tr>
+              <td>35 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply set operations to solve problems and analyze set relationships</td>
+              <td>The teacher guides application and analysis of set operation exercises</td>
+              <td>Students apply operations to solve problems and verify results</td>
+              <td>Worksheets, Practice problems</td>
+            </tr>
+            <tr>
+              <td>10 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate set operations and synthesize set theory concepts</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their operations and synthesize concepts</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Element 6: Statistics fundamentals -->
+      <h4 class="mt-5 mb-3" style="color: #10b981; padding-bottom: 10px;">
+        <i class="fas fa-chart-bar"></i> Element 6: Statistics fundamentals (3 hrs.)
+      </h4>
+
+      <!-- Session 6.1 -->
+      <div class="session-title">6.1 Statistical Measures: Mean, Median, Mode, and Standard Deviation (3 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>understand</strong> statistical measures including mean, median, mode, and standard deviation calculations.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Mean calculation methods for different data types</li>
+                <li>Median determination procedures</li>
+                <li>Mode identification techniques</li>
+                <li>Standard deviation calculation and interpretation</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Demonstration, Practical exercises</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Statistical calculation exercises, Assignment</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>20 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall statistical concepts and data types</td>
+              <td>The teacher presents data sets and statistical concepts for identification</td>
+              <td>Students identify and recall statistical measures and data types</td>
+              <td>Slides, Examples, Data sets</td>
+            </tr>
+            <tr>
+              <td>90 min</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe calculation methods for mean, median, mode, and standard deviation</td>
+              <td>The teacher explains calculation formulas and demonstrates step-by-step procedures</td>
+              <td>Students explain formulas and describe calculation methods</td>
+              <td>Board, Examples, Formula sheets</td>
+            </tr>
+            <tr>
+              <td>50 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply statistical formulas to calculate measures and analyze data sets</td>
+              <td>The teacher guides application and analysis of statistical exercises</td>
+              <td>Students apply formulas to calculate measures and interpret results</td>
+              <td>Worksheets, Practice problems, Calculators</td>
+            </tr>
+            <tr>
+              <td>20 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate calculations and synthesize statistical concepts</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their calculations and synthesize concepts</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Element 7: Computer Codes -->
+      <h4 class="mt-5 mb-3" style="color: #f97316; padding-bottom: 10px;">
+        <i class="fas fa-code"></i> Element 7: Computer Codes (2 hrs.)
+      </h4>
+
+      <!-- Session 7.1 -->
+      <div class="session-title">7.1 Computer Coding Systems: BCD, EBCDIC, ASCII, and Unicode (2 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>understand</strong> various computer coding systems including BCD, EBCDIC, ASCII, and Unicode.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>BCD (Binary Coded Decimal) format and usage</li>
+                <li>EBCDIC (Extended Binary Coded Decimal Interchange Code) characteristics</li>
+                <li>ASCII (American Standard Code for Information Interchange) encoding</li>
+                <li>Unicode encoding system and applications</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Discussion, Examples</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Code identification exercises, Assignment</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall character encoding concepts and coding systems</td>
+              <td>The teacher presents character codes and encoding examples for identification</td>
+              <td>Students identify and recall coding systems and encoding concepts</td>
+              <td>Slides, Examples</td>
+            </tr>
+            <tr>
+              <td>60 min</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe BCD, EBCDIC, ASCII, and Unicode coding systems and their applications</td>
+              <td>The teacher explains each coding system and demonstrates encoding procedures</td>
+              <td>Students explain systems and describe encoding methods</td>
+              <td>Board, Examples, Code tables</td>
+            </tr>
+            <tr>
+              <td>35 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply coding systems to encode and decode characters and analyze code representations</td>
+              <td>The teacher guides application and analysis of encoding exercises</td>
+              <td>Students apply systems to encode/decode characters and verify codes</td>
+              <td>Worksheets, Practice problems, Code tables</td>
+            </tr>
+            <tr>
+              <td>10 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate encoding/decoding and synthesize coding system concepts</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their work and synthesize concepts</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <!-- Assessment Plan -->
+    <div class="content-card">
+      <h3><i class="fas fa-clipboard-check text-primary"></i> Assessment & Weighting</h3>
+
+      <h5 class="mt-3">Continuous Assessment:</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Assessment</th>
+              <th>Description</th>
+              <th>Weightage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Assignment</strong></td>
+              <td>Mathematical problems covering number systems, conversions, calculations, statistics, and computer codes</td>
+              <td>40%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h5 class="mt-4">Summative Assessment:</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Assessment</th>
+              <th>Description</th>
+              <th>Weightage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Written Test</strong></td>
+              <td>Written test (2 hours)</td>
+              <td>60%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-info mt-3">
+        <strong>Total Duration:</strong> 25 hrs. (20T + 0P + 5S)<br>
+        <small>T = Theory, P = Practical, S = Self Studies</small>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

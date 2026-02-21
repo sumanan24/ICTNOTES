@@ -1,0 +1,2616 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Electronics and Computer Architecture - NVQ Level 5 ICT</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e8f0f5 100%);
+      padding-top: 70px;
+      line-height: 1.7;
+      color: #2d3748;
+    }
+
+    /* Navbar Styling */
+    .navbar {
+      background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      padding: 0.75rem 0;
+    }
+
+    .navbar-brand {
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-brand:hover {
+      transform: translateX(-3px);
+    }
+
+    /* Module Header */
+    .module-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 2.5rem 0;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .module-header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .module-header .lead {
+      font-size: 1.1rem;
+      opacity: 0.95;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    /* Content Cards */
+    .content-card {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      margin-bottom: 2rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .content-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .content-card h3 {
+      color: #1e40af;
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 3px solid #e0e7ff;
+    }
+
+    .content-card h4 {
+      color: #2563eb;
+      font-weight: 600;
+      font-size: 1.3rem;
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+      padding-bottom: 10px;
+    }
+
+    .content-card h5 {
+      color: #4b5563;
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-top: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Badges */
+    .hour-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+      color: #1e40af;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin: 0.25rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .info-badge {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #4338ca;
+      padding: 0.4rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin: 0.2rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Table Styling with Mobile Scroll */
+    .table-wrapper {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 1rem 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      width: 100%;
+      display: block;
+    }
+
+    .table-wrapper::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .table-wrapper::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 4px;
+    }
+
+    .table-wrapper::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+
+    .table-wrapper::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    table {
+      width: 100%;
+      font-size: 0.95rem;
+      border-collapse: separate;
+      border-spacing: 0;
+      min-width: 600px;
+    }
+
+    table th {
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      font-weight: 700;
+      border: 1px solid #e2e8f0;
+      padding: 1rem 0.75rem;
+      text-align: left;
+      color: #1e293b;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    table td {
+      border: 1px solid #e2e8f0;
+      vertical-align: top;
+      padding: 1rem 0.75rem;
+      background: white;
+    }
+
+    table tbody tr:hover {
+      background: #f8fafc;
+    }
+
+    table tbody tr:nth-child(even) {
+      background: #fafbfc;
+    }
+
+    table tbody tr:nth-child(even):hover {
+      background: #f1f5f9;
+    }
+
+    /* Session Title */
+    .session-title {
+      color: #2563eb;
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-bottom: 1.25rem;
+      margin-top: 2rem;
+      line-height: 1.4;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid #e0e7ff;
+    }
+
+    .session-title:first-child {
+      margin-top: 0;
+    }
+
+    /* Phase Badges */
+    .phase-badge {
+      display: inline-block;
+      padding: 0.35rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-right: 0.5rem;
+      white-space: nowrap;
+    }
+
+    .phase-intro {
+      background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+      color: #1e40af;
+    }
+
+    .phase-dev {
+      background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+      color: #166534;
+    }
+
+    .phase-app {
+      background: linear-gradient(135deg, #fef3c7, #fde68a);
+      color: #92400e;
+    }
+
+    .phase-cons {
+      background: linear-gradient(135deg, #fce7f3, #fbcfe8);
+      color: #9f1239;
+    }
+
+    /* Alert Boxes */
+    .alert {
+      border-radius: 10px;
+      border: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .alert h6 {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .alert-info {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      color: #0c4a6e;
+      border-left: 4px solid #0ea5e9;
+      padding: 1.25rem;
+      margin: 1rem 0;
+    }
+
+    /* Lists */
+    ul,
+    ol {
+      padding-left: 1.5rem;
+    }
+
+    ul li,
+    ol li {
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      body {
+        padding-top: 60px;
+        font-size: 0.95rem;
+      }
+
+      .container {
+        padding: 0 10px;
+      }
+
+      .module-header {
+        padding: 1.5rem 0;
+        margin-bottom: 1.5rem;
+      }
+
+      .module-header h1 {
+        font-size: 1.5rem;
+        line-height: 1.3;
+      }
+
+      .module-header .lead {
+        font-size: 0.95rem;
+        padding: 0 10px;
+      }
+
+      .content-card {
+        padding: 1.25rem;
+        border-radius: 12px;
+        margin-bottom: 1.5rem;
+      }
+
+      .content-card h3 {
+        font-size: 1.25rem;
+        margin-bottom: 1.25rem;
+        line-height: 1.4;
+      }
+
+      .content-card h4 {
+        font-size: 1.1rem;
+        margin-top: 1.25rem;
+        margin-bottom: 1rem;
+        line-height: 1.4;
+      }
+
+      .content-card h5 {
+        font-size: 1rem;
+        margin-top: 1rem;
+        margin-bottom: 0.75rem;
+        line-height: 1.4;
+      }
+
+      .hour-badge,
+      .info-badge {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.75rem;
+        margin: 0.15rem;
+        display: inline-block;
+      }
+
+      .session-title {
+        font-size: 1.1rem;
+        line-height: 1.4;
+        margin-bottom: 1rem;
+        word-wrap: break-word;
+      }
+
+      .table-wrapper {
+        margin: 1rem 0;
+        border-radius: 8px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+        display: block;
+      }
+
+      table {
+        font-size: 0.85rem;
+        min-width: 700px;
+        width: 100%;
+        display: table;
+      }
+
+      table th {
+        font-size: 0.8rem;
+        padding: 0.75rem 0.5rem;
+        white-space: nowrap;
+      }
+
+      table td {
+        padding: 0.75rem 0.5rem;
+        word-wrap: break-word;
+        line-height: 1.5;
+      }
+
+      .phase-badge {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.7rem;
+        display: inline-block;
+        margin-bottom: 0.25rem;
+        white-space: nowrap;
+      }
+
+      .navbar-brand {
+        font-size: 0.9rem;
+      }
+
+      ul, ol {
+        padding-left: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      li {
+        margin-bottom: 0.5rem;
+        line-height: 1.6;
+      }
+
+      p {
+        line-height: 1.6;
+        margin-bottom: 1rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      body {
+        padding-top: 55px;
+        font-size: 0.9rem;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      .module-header {
+        padding: 1.25rem 0;
+      }
+
+      .module-header h1 {
+        font-size: 1.25rem;
+        line-height: 1.3;
+      }
+
+      .module-header .lead {
+        font-size: 0.9rem;
+        padding: 0 8px;
+      }
+
+      .content-card {
+        padding: 1rem;
+        margin-bottom: 1.25rem;
+      }
+
+      .content-card h3 {
+        font-size: 1.15rem;
+        margin-bottom: 1rem;
+      }
+
+      .content-card h4 {
+        font-size: 1rem;
+        margin-top: 1rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .content-card h5 {
+        font-size: 0.95rem;
+        margin-top: 0.75rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .hour-badge,
+      .info-badge {
+        font-size: 0.75rem;
+        padding: 0.35rem 0.65rem;
+        margin: 0.1rem;
+      }
+
+      .session-title {
+        font-size: 1rem;
+        line-height: 1.3;
+        margin-bottom: 0.75rem;
+      }
+
+      .table-wrapper {
+        margin: 0.75rem 0;
+      }
+
+      table {
+        font-size: 0.8rem;
+        min-width: 800px;
+      }
+
+      table th {
+        font-size: 0.75rem;
+        padding: 0.6rem 0.4rem;
+      }
+
+      table td {
+        padding: 0.6rem 0.4rem;
+        font-size: 0.8rem;
+      }
+
+      ul, ol {
+        padding-left: 1.25rem;
+      }
+
+      li {
+        margin-bottom: 0.4rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Print Styles */
+    @media print {
+      .navbar {
+        display: none;
+      }
+
+      .module-header {
+        page-break-after: avoid;
+      }
+
+      .content-card {
+        page-break-inside: avoid;
+      }
+
+      .table-wrapper {
+        overflow: visible;
+      }
+
+      table {
+        min-width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">
+        <i class="fas fa-arrow-left"></i> Back to Index
+      </a>
+    </div>
+  </nav>
+
+  <div class="module-header">
+    <div class="container">
+      <a href="../index.html" class="text-white text-decoration-none"><i class="fas fa-arrow-left"></i> Back to Course
+        Index</a>
+      <h1 class="mt-3">Digital Electronics and Computer Architecture</h1>
+      <p class="lead mb-2">Module Code: K72T001M04 / Level 05</p>
+      <div class="mt-3">
+        <span class="info-badge"><i class="fas fa-tag"></i> Compulsory</span>
+        <span class="info-badge"><i class="fas fa-link"></i> Relevant Unit: All Units</span>
+        <span class="info-badge"><i class="fas fa-book"></i> Pre-Requisites: K72T001M03</span>
+        <span class="hour-badge"><i class="fas fa-clock"></i> 75 Notional Hours</span>
+        <span class="hour-badge"><i class="fas fa-chalkboard-teacher"></i> 42 Theory</span>
+        <span class="hour-badge"><i class="fas fa-laptop-code"></i> 18 Practical</span>
+        <span class="hour-badge"><i class="fas fa-book"></i> 15 Self-study</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- Learning Outcomes -->
+    <div class="content-card">
+      <h3><i class="fas fa-graduation-cap text-primary"></i> Learning Outcomes</h3>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-bullseye text-success"></i> General Objective</h5>
+      <p class="lead">At the end of this module, students will <strong>understand</strong> logic gates, <strong>describe</strong> basic computer components and functional organization, <strong>describe</strong> processor organization, and <strong>know</strong> software systems and IoT integration.</p>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-list-check text-primary"></i> Specific Objectives</h5>
+      <p>At the end of this module the student shall be able to:</p>
+      <ol>
+        <li>Demonstrate an understanding of logic gates</li>
+        <li>Design a logic circuit for a given scenario</li>
+      </ol>
+    </div>
+
+    <!-- Learning Content / Topics and Session Plans -->
+    <div class="content-card">
+      <h3><i class="fas fa-book text-primary"></i> Learning Content / Topics</h3>
+
+      1. Logic Gates (12 hrs.) <br>
+      2. Computer Organization and Architecture (21 hrs.) <br>
+      3. Von-Neumann architecture (3 hrs.) <br>
+      4. Beyond Von-Neumann architecture (6 hrs.) <br>
+
+      <h3 class="mt-5"><i class="fas fa-calendar-alt text-primary"></i> Session Plans</h3>
+
+      <!-- Element 1: Logic Gates -->
+      <h4 class="mt-4 mb-3" style="color: #2563eb; padding-bottom: 10px;">
+        <i class="fas fa-microchip"></i> Element 1: Logic Gates (12 hrs.)
+      </h4>
+
+      <!-- Session 1.1 -->
+      <div class="session-title">1.1 Basic Logic Gates (3 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>understand</strong> basic logic gates and their operations.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Identify basic logic gates (AND, OR, NOT, XOR, NAND, NOR)</li>
+                <li>Explain truth tables and logic operations</li>
+                <li>Apply logic gates to solve Boolean expressions</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Demonstration, Practical exercises</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Practical exercises, Truth table construction</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall digital logic concepts and binary operations</td>
+              <td>The teacher introduces digital logic and binary number systems</td>
+              <td>Students identify and recall binary operations and logic concepts</td>
+              <td>Slides, Whiteboard</td>
+            </tr>
+            <tr>
+              <td>1.5 hrs</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe basic logic gates, truth tables, and logic operations</td>
+              <td>The teacher explains AND, OR, NOT, XOR, NAND, NOR gates with truth tables</td>
+              <td>Students explain logic gates and describe truth table construction</td>
+              <td>Board, Logic gate diagrams, Truth tables</td>
+            </tr>
+            <tr>
+              <td>1 hr</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply logic gates to solve Boolean expressions and construct truth tables</td>
+              <td>The teacher guides application of logic gates to solve problems</td>
+              <td>Students apply logic gates to solve Boolean expressions</td>
+              <td>Worksheets, Practice problems, Logic simulators</td>
+            </tr>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate understanding of logic gates and synthesize key concepts</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their understanding and synthesize learning</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Session 1.2 -->
+      <div class="session-title">1.2 Universal Logic Gates (2 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>understand</strong> universal logic gates and their applications.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Identify NAND and NOR as universal gates</li>
+                <li>Explain how to implement any logic function using universal gates</li>
+                <li>Apply universal gates to implement basic logic functions</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Demonstration, Practical exercises</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Practical exercises, Circuit implementation</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>20 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall NAND and NOR gate properties</td>
+              <td>The teacher introduces universal gate concept</td>
+              <td>Students identify and recall NAND and NOR gate characteristics</td>
+              <td>Slides, Previous session notes</td>
+            </tr>
+            <tr>
+              <td>1 hr</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe universal gate implementation of basic logic functions</td>
+              <td>The teacher explains how to implement AND, OR, NOT using NAND/NOR gates</td>
+              <td>Students explain universal gate implementations and describe conversion methods</td>
+              <td>Board, Circuit diagrams, Examples</td>
+            </tr>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply universal gates to implement logic functions</td>
+              <td>The teacher guides implementation of logic functions using universal gates</td>
+              <td>Students apply universal gates to implement given logic functions</td>
+              <td>Logic simulators, Practice problems</td>
+            </tr>
+            <tr>
+              <td>10 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate universal gate implementations and synthesize concepts</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their implementations and synthesize learning</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Session 1.3 -->
+      <div class="session-title">1.3 Simplification of Boolean Expressions (4 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>acquire</strong> skills to simplify Boolean expressions using Boolean Algebra laws and Karnaugh maps.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Identify Boolean Algebra laws and theorems</li>
+                <li>Explain Karnaugh map construction and grouping</li>
+                <li>Apply Boolean Algebra and K-maps to simplify expressions</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Demonstration, Practical exercises</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Simplification exercises, K-map problems</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall Boolean Algebra laws and theorems</td>
+              <td>The teacher introduces Boolean Algebra laws and theorems</td>
+              <td>Students identify and recall Boolean Algebra properties</td>
+              <td>Slides, Reference charts</td>
+            </tr>
+            <tr>
+              <td>2 hrs</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe Boolean simplification methods and Karnaugh map techniques</td>
+              <td>The teacher explains Boolean Algebra laws and demonstrates K-map construction and grouping</td>
+              <td>Students explain simplification methods and describe K-map techniques</td>
+              <td>Board, K-map templates, Examples</td>
+            </tr>
+            <tr>
+              <td>1.5 hrs</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply Boolean Algebra and K-maps to simplify Boolean expressions</td>
+              <td>The teacher guides simplification of Boolean expressions using both methods</td>
+              <td>Students apply Boolean Algebra and K-maps to simplify given expressions</td>
+              <td>Worksheets, Practice problems, K-map templates</td>
+            </tr>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate simplification techniques and synthesize key concepts</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their simplifications and synthesize learning</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Session 1.4 -->
+      <div class="session-title">1.4 Sequential Logic Circuits (2 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>understand</strong> sequential logic circuits and their applications.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Identify flip-flops and latches</li>
+                <li>Explain sequential circuit operation and state diagrams</li>
+                <li>Apply sequential circuits to design basic state machines</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Demonstration, Practical exercises</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Practical exercises, State diagram construction</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>20 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall difference between combinational and sequential circuits</td>
+              <td>The teacher introduces sequential logic concepts</td>
+              <td>Students identify and recall combinational vs sequential circuit differences</td>
+              <td>Slides, Circuit diagrams</td>
+            </tr>
+            <tr>
+              <td>1 hr</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe flip-flops, latches, and state diagrams</td>
+              <td>The teacher explains SR, D, JK flip-flops and demonstrates state diagrams</td>
+              <td>Students explain flip-flop operations and describe state diagram construction</td>
+              <td>Board, Flip-flop diagrams, State diagrams</td>
+            </tr>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply sequential circuits to design basic state machines</td>
+              <td>The teacher guides design of simple state machines using flip-flops</td>
+              <td>Students apply sequential circuits to design state machines</td>
+              <td>Logic simulators, Design templates</td>
+            </tr>
+            <tr>
+              <td>10 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate sequential circuit designs and synthesize concepts</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their designs and synthesize learning</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Session 1.5 -->
+      <div class="session-title">1.5 Design Logic Circuits Using NAND / NOR Gates (1 Hour)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>acquire</strong> skills to design logic circuits using NAND and NOR gates.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Identify NAND/NOR gate implementation methods</li>
+                <li>Explain circuit design using universal gates</li>
+                <li>Apply NAND/NOR gates to design complete logic circuits</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Demonstration, Practical exercises</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Circuit design exercises, Practical implementation</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>10 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall universal gate properties</td>
+              <td>The teacher reviews universal gate concepts</td>
+              <td>Students identify and recall NAND/NOR gate properties</td>
+              <td>Previous session notes</td>
+            </tr>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe circuit design methodology using NAND/NOR gates</td>
+              <td>The teacher explains step-by-step design process using universal gates</td>
+              <td>Students explain design methodology and describe implementation steps</td>
+              <td>Board, Circuit diagrams, Examples</td>
+            </tr>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply NAND/NOR gates to design complete logic circuits</td>
+              <td>The teacher guides design of logic circuits using universal gates</td>
+              <td>Students apply NAND/NOR gates to design circuits for given scenarios</td>
+              <td>Logic simulators, Design software</td>
+            </tr>
+            <tr>
+              <td>5 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate circuit designs and synthesize design concepts</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their designs and synthesize learning</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Practical: Element 1 -->
+      <h4 class="mt-5 mb-3" style="color: #2563eb; padding-bottom: 10px;">
+        <i class="fas fa-laptop-code"></i> Practical: Logic Gates and Circuit Design (8 hrs.)
+      </h4>
+
+      <!-- Practical Session P1.1 -->
+      <div class="session-title">P1.1 Practical: Basic Logic Gates Implementation (2 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>acquire</strong> skills to implement and test basic logic gates using simulation software and hardware.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Implement AND, OR, NOT, XOR, NAND, NOR gates using logic simulators</li>
+                <li>Construct truth tables for basic logic gates</li>
+                <li>Test logic gate operations using breadboards or simulation tools</li>
+                <li>Verify gate functionality with different input combinations</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Hands-on practice, Simulation software, Hardware implementation, Demonstration</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Practical exercises, Circuit implementation, Truth table verification</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>20 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall logic gate components and simulation tools</td>
+              <td>The teacher demonstrates logic simulator interface and basic gate components</td>
+              <td>Students identify simulation tools and recall gate components</td>
+              <td>Logic simulators, Component kits, Tutorial videos</td>
+            </tr>
+            <tr>
+              <td>1 hr</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe logic gate implementation and truth table construction</td>
+              <td>The teacher explains step-by-step implementation of each gate and truth table creation</td>
+              <td>Students implement gates and construct truth tables for verification</td>
+              <td>Logic simulators, Breadboards, IC chips, Multimeters</td>
+            </tr>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply knowledge to implement and test all basic logic gates</td>
+              <td>The teacher guides implementation and testing of logic gates with various inputs</td>
+              <td>Students apply knowledge to implement gates and verify outputs</td>
+              <td>Practice circuits, Test cases, Verification worksheets</td>
+            </tr>
+            <tr>
+              <td>10 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate gate implementations and synthesize logic gate concepts</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their implementations and synthesize learning</td>
+              <td>Student circuits, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Practical Session P1.2 -->
+      <div class="session-title">P1.2 Practical: Boolean Expression Simplification and Circuit Design (3 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>acquire</strong> skills to simplify Boolean expressions and design logic circuits using K-maps and Boolean algebra.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Simplify Boolean expressions using Boolean algebra laws</li>
+                <li>Use Karnaugh maps to minimize Boolean functions</li>
+                <li>Design logic circuits from simplified expressions</li>
+                <li>Implement circuits using universal gates (NAND/NOR)</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Hands-on practice, K-map exercises, Circuit design, Simulation</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Simplification exercises, Circuit design assignment, K-map problems</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall Boolean algebra laws and K-map construction</td>
+              <td>The teacher presents Boolean expressions and K-map templates for identification</td>
+              <td>Students identify simplification methods and recall K-map techniques</td>
+              <td>K-map templates, Boolean algebra reference sheets</td>
+            </tr>
+            <tr>
+              <td>1.5 hrs</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe simplification methods and circuit design procedures</td>
+              <td>The teacher demonstrates Boolean simplification and K-map minimization with circuit design</td>
+              <td>Students simplify expressions, create K-maps, and design circuits</td>
+              <td>K-map templates, Logic simulators, Design worksheets</td>
+            </tr>
+            <tr>
+              <td>1 hr</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply simplification and design methods to create optimized circuits</td>
+              <td>The teacher guides application of simplification to design and implement circuits</td>
+              <td>Students apply methods to simplify expressions and implement circuits</td>
+              <td>Practice problems, Circuit implementation tools, Verification equipment</td>
+            </tr>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate circuit designs and synthesize simplification techniques</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their designs and synthesize learning</td>
+              <td>Student circuits, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Practical Session P1.3 -->
+      <div class="session-title">P1.3 Practical: Sequential Logic Circuits and State Machines (3 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>acquire</strong> skills to implement sequential logic circuits and design basic state machines.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Implement flip-flops (SR, D, JK) using logic simulators</li>
+                <li>Design and implement basic state machines</li>
+                <li>Create state diagrams and transition tables</li>
+                <li>Test sequential circuit behavior</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Hands-on practice, State machine design, Simulation, Hardware implementation</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>State machine design assignment, Sequential circuit implementation</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall flip-flop types and state machine concepts</td>
+              <td>The teacher demonstrates flip-flop circuits and state diagram examples</td>
+              <td>Students identify flip-flop types and recall state machine basics</td>
+              <td>Flip-flop ICs, State diagram examples, Tutorial materials</td>
+            </tr>
+            <tr>
+              <td>1.5 hrs</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe sequential circuit implementation and state machine design</td>
+              <td>The teacher explains flip-flop implementation and demonstrates state machine design process</td>
+              <td>Students implement flip-flops and design state machines with state diagrams</td>
+              <td>Logic simulators, State diagram templates, Design worksheets</td>
+            </tr>
+            <tr>
+              <td>1 hr</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply knowledge to design and implement complete state machines</td>
+              <td>The teacher guides design and implementation of state machines for given scenarios</td>
+              <td>Students apply knowledge to design and implement state machines</td>
+              <td>Design scenarios, Implementation tools, Test equipment</td>
+            </tr>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate state machine implementations and synthesize sequential circuit concepts</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their implementations and synthesize learning</td>
+              <td>Student circuits, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Element 2: Computer Organization and Architecture -->
+      <h4 class="mt-4 mb-3" style="color: #2563eb; padding-bottom: 10px;">
+        <i class="fas fa-server"></i> Element 2: Computer Organization and Architecture (21 hrs.)
+      </h4>
+
+      <!-- Session 2.1 -->
+      <div class="session-title">2.1 Processor Organization (3 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>understand</strong> processor organization and components.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Identify CPU components (ALU, Control Unit, Registers)</li>
+                <li>Explain processor architecture and organization</li>
+                <li>Apply knowledge to analyze processor performance</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Presentation, Discussion</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Oral questioning, Written exercises</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall basic computer components</td>
+              <td>The teacher introduces processor organization concepts</td>
+              <td>Students identify and recall computer components</td>
+              <td>Slides, Diagrams</td>
+            </tr>
+            <tr>
+              <td>1.5 hrs</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe CPU components, ALU, Control Unit, and register organization</td>
+              <td>The teacher explains processor architecture and component functions</td>
+              <td>Students explain processor components and describe their functions</td>
+              <td>Board, Processor diagrams, Presentations</td>
+            </tr>
+            <tr>
+              <td>1 hr</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply knowledge to analyze processor organization and performance</td>
+              <td>The teacher guides analysis of different processor organizations</td>
+              <td>Students apply knowledge to analyze and compare processor architectures</td>
+              <td>Case studies, Processor specifications</td>
+            </tr>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate processor organization understanding and synthesize concepts</td>
+              <td>The teacher evaluates student responses and guides synthesis</td>
+              <td>Students evaluate their understanding and synthesize learning</td>
+              <td>Summary, Q&A</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Session 2.2 -->
+      <div class="session-title">2.2 Fetch and Execution Cycle and Program Execution (3 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>understand</strong> fetch and execution cycle and program execution process.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Identify fetch-decode-execute cycle stages</li>
+                <li>Explain instruction execution process</li>
+                <li>Apply knowledge to trace program execution</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Demonstration, Discussion</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Practical exercises, Execution tracing</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall instruction execution concepts</td>
+              <td>The teacher introduces fetch-execute cycle</td>
+              <td>Students identify and recall instruction execution basics</td>
+              <td>Slides, Diagrams</td>
+            </tr>
+            <tr>
+              <td>1.5 hrs</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe fetch-decode-execute cycle and program execution</td>
+              <td>The teacher explains each stage of the cycle and demonstrates execution</td>
+              <td>Students explain cycle stages and describe execution process</td>
+              <td>Board, Flowcharts, Animations</td>
+            </tr>
+            <tr>
+              <td>1 hr</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply knowledge to trace program execution through cycles</td>
+              <td>The teacher guides tracing of program execution</td>
+              <td>Students apply knowledge to trace execution of sample programs</td>
+              <td>Sample programs, Execution worksheets</td>
+            </tr>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate execution cycle understanding and synthesize concepts</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their understanding and synthesize learning</td>
+              <td>Student work, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Session 2.3 -->
+      <div class="session-title">2.3 Instruction Set Architecture (3 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>understand</strong> Instruction Set Architecture (ISA) and instruction formats.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Identify instruction types and formats</li>
+                <li>Explain addressing modes and instruction encoding</li>
+                <li>Apply knowledge to analyze different ISA designs</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Presentation, Discussion</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Written exercises, ISA analysis</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall instruction concepts</td>
+              <td>The teacher introduces ISA concepts</td>
+              <td>Students identify and recall instruction basics</td>
+              <td>Slides, Examples</td>
+            </tr>
+            <tr>
+              <td>1.5 hrs</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe instruction types, formats, addressing modes, and encoding</td>
+              <td>The teacher explains instruction types, formats, and addressing modes</td>
+              <td>Students explain ISA components and describe instruction encoding</td>
+              <td>Board, Instruction format diagrams, ISA examples</td>
+            </tr>
+            <tr>
+              <td>1 hr</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply knowledge to analyze and compare different ISA designs</td>
+              <td>The teacher guides analysis of RISC vs CISC architectures</td>
+              <td>Students apply knowledge to analyze different ISA designs</td>
+              <td>ISA specifications, Comparison charts</td>
+            </tr>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate ISA understanding and synthesize concepts</td>
+              <td>The teacher evaluates student responses and guides synthesis</td>
+              <td>Students evaluate their understanding and synthesize learning</td>
+              <td>Summary, Q&A</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Session 2.4 -->
+      <div class="session-title">2.4 Memory Organization (3 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>understand</strong> memory organization and hierarchy.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Identify memory types and hierarchy levels</li>
+                <li>Explain cache memory, main memory, and secondary storage</li>
+                <li>Apply knowledge to analyze memory performance</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Presentation, Discussion</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Written exercises, Memory analysis</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall memory concepts</td>
+              <td>The teacher introduces memory organization</td>
+              <td>Students identify and recall memory basics</td>
+              <td>Slides, Memory diagrams</td>
+            </tr>
+            <tr>
+              <td>1.5 hrs</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe memory hierarchy, cache, main memory, and storage</td>
+              <td>The teacher explains memory hierarchy and cache organization</td>
+              <td>Students explain memory organization and describe cache mechanisms</td>
+              <td>Board, Memory hierarchy diagrams, Cache examples</td>
+            </tr>
+            <tr>
+              <td>1 hr</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply knowledge to analyze memory performance and access patterns</td>
+              <td>The teacher guides analysis of memory performance metrics</td>
+              <td>Students apply knowledge to analyze memory performance</td>
+              <td>Performance data, Analysis worksheets</td>
+            </tr>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate memory organization understanding and synthesize concepts</td>
+              <td>The teacher evaluates student responses and guides synthesis</td>
+              <td>Students evaluate their understanding and synthesize learning</td>
+              <td>Summary, Q&A</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Session 2.5 -->
+      <div class="session-title">2.5 Input Output Organization (3 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>understand</strong> input output organization and interfaces.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Identify I/O devices and interfaces</li>
+                <li>Explain I/O transfer methods and bus organization</li>
+                <li>Apply knowledge to analyze I/O performance</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Presentation, Discussion</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Written exercises, I/O analysis</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall I/O concepts</td>
+              <td>The teacher introduces I/O organization</td>
+              <td>Students identify and recall I/O basics</td>
+              <td>Slides, I/O diagrams</td>
+            </tr>
+            <tr>
+              <td>1.5 hrs</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe I/O transfer methods, bus organization, and interfaces</td>
+              <td>The teacher explains programmed I/O, interrupt-driven I/O, and DMA</td>
+              <td>Students explain I/O methods and describe bus organization</td>
+              <td>Board, I/O diagrams, Interface examples</td>
+            </tr>
+            <tr>
+              <td>1 hr</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply knowledge to analyze I/O performance and transfer rates</td>
+              <td>The teacher guides analysis of I/O performance metrics</td>
+              <td>Students apply knowledge to analyze I/O performance</td>
+              <td>Performance data, Analysis worksheets</td>
+            </tr>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate I/O organization understanding and synthesize concepts</td>
+              <td>The teacher evaluates student responses and guides synthesis</td>
+              <td>Students evaluate their understanding and synthesize learning</td>
+              <td>Summary, Q&A</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Session 2.6 -->
+      <div class="session-title">2.6 Performance Evaluation of Program Execution (2 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>understand</strong> performance evaluation methods for program execution.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Identify performance metrics and benchmarks</li>
+                <li>Explain CPU performance factors and measurement techniques</li>
+                <li>Apply knowledge to evaluate program performance</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Demonstration, Discussion</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Performance analysis exercises</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>20 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall performance concepts</td>
+              <td>The teacher introduces performance evaluation</td>
+              <td>Students identify and recall performance basics</td>
+              <td>Slides, Performance charts</td>
+            </tr>
+            <tr>
+              <td>1 hr</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe performance metrics, benchmarks, and measurement techniques</td>
+              <td>The teacher explains CPU time, CPI, MIPS, and benchmark programs</td>
+              <td>Students explain performance metrics and describe measurement methods</td>
+              <td>Board, Performance formulas, Benchmark examples</td>
+            </tr>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply knowledge to evaluate program performance</td>
+              <td>The teacher guides performance evaluation of sample programs</td>
+              <td>Students apply knowledge to evaluate program performance</td>
+              <td>Sample programs, Performance tools</td>
+            </tr>
+            <tr>
+              <td>10 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate performance understanding and synthesize concepts</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their understanding and synthesize learning</td>
+              <td>Summary, Q&A</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Session 2.7 -->
+      <div class="session-title">2.7 Pipeline Architecture (2 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>understand</strong> pipeline architecture and instruction pipelining.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Identify pipeline stages and hazards</li>
+                <li>Explain pipeline performance and hazard handling</li>
+                <li>Apply knowledge to analyze pipeline efficiency</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Demonstration, Discussion</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Pipeline analysis exercises</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>20 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall instruction execution concepts</td>
+              <td>The teacher introduces pipeline architecture</td>
+              <td>Students identify and recall execution basics</td>
+              <td>Slides, Pipeline diagrams</td>
+            </tr>
+            <tr>
+              <td>1 hr</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe pipeline stages, hazards, and performance</td>
+              <td>The teacher explains pipeline stages, data hazards, control hazards, and performance</td>
+              <td>Students explain pipeline concepts and describe hazard handling</td>
+              <td>Board, Pipeline diagrams, Hazard examples</td>
+            </tr>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply knowledge to analyze pipeline efficiency and throughput</td>
+              <td>The teacher guides analysis of pipeline performance</td>
+              <td>Students apply knowledge to analyze pipeline efficiency</td>
+              <td>Pipeline examples, Performance calculations</td>
+            </tr>
+            <tr>
+              <td>10 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate pipeline understanding and synthesize concepts</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their understanding and synthesize learning</td>
+              <td>Summary, Q&A</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Session 2.8 -->
+      <div class="session-title">2.8 High Performance Computers and Multicore Architectures (2 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>understand</strong> high performance computers and multicore architectures.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Identify multicore and parallel processing concepts</li>
+                <li>Explain parallel architectures and performance scaling</li>
+                <li>Apply knowledge to analyze multicore systems</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Presentation, Discussion</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Written exercises, Architecture analysis</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>20 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall parallel processing concepts</td>
+              <td>The teacher introduces multicore architectures</td>
+              <td>Students identify and recall parallel processing basics</td>
+              <td>Slides, Architecture diagrams</td>
+            </tr>
+            <tr>
+              <td>1 hr</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe multicore architectures, parallel processing, and performance scaling</td>
+              <td>The teacher explains multicore designs, shared memory, and performance scaling</td>
+              <td>Students explain multicore architectures and describe parallel processing</td>
+              <td>Board, Architecture diagrams, Performance charts</td>
+            </tr>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply knowledge to analyze multicore system performance</td>
+              <td>The teacher guides analysis of multicore architectures</td>
+              <td>Students apply knowledge to analyze multicore systems</td>
+              <td>System specifications, Performance data</td>
+            </tr>
+            <tr>
+              <td>10 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate multicore understanding and synthesize concepts</td>
+              <td>The teacher evaluates student responses and guides synthesis</td>
+              <td>Students evaluate their understanding and synthesize learning</td>
+              <td>Summary, Q&A</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Practical: Element 2 -->
+      <h4 class="mt-5 mb-3" style="color: #2563eb; padding-bottom: 10px;">
+        <i class="fas fa-laptop-code"></i> Practical: Computer Organization and Architecture (10 hrs.)
+      </h4>
+
+      <!-- Practical Session P2.1 -->
+      <div class="session-title">P2.1 Practical: Processor Organization Analysis (3 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>acquire</strong> skills to analyze processor organization and components using simulation tools and specifications.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Analyze CPU components (ALU, Control Unit, Registers) using simulators</li>
+                <li>Trace instruction execution through processor components</li>
+                <li>Compare different processor architectures</li>
+                <li>Evaluate processor performance metrics</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Simulation software, Processor analysis tools, Case studies, Practical exercises</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Processor analysis report, Architecture comparison assignment</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall processor components and simulation tools</td>
+              <td>The teacher demonstrates processor simulator interface and component identification</td>
+              <td>Students identify processor components and recall simulation tools</td>
+              <td>Processor simulators, Component diagrams, Tutorial guides</td>
+            </tr>
+            <tr>
+              <td>1.5 hrs</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe processor organization analysis and instruction tracing</td>
+              <td>The teacher explains processor analysis methods and demonstrates instruction tracing</td>
+              <td>Students analyze processor organization and trace instruction execution</td>
+              <td>Processor simulators, Instruction sets, Analysis worksheets</td>
+            </tr>
+            <tr>
+              <td>1 hr</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply knowledge to analyze and compare different processor architectures</td>
+              <td>The teacher guides analysis and comparison of different processor architectures</td>
+              <td>Students apply knowledge to analyze processors and create comparison reports</td>
+              <td>Processor specifications, Comparison templates, Analysis tools</td>
+            </tr>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate processor analysis and synthesize architecture concepts</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their analysis and synthesize learning</td>
+              <td>Student reports, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Practical Session P2.2 -->
+      <div class="session-title">P2.2 Practical: Memory Organization and Cache Analysis (2 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>acquire</strong> skills to analyze memory organization and cache performance using tools and simulations.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Analyze memory hierarchy using system tools</li>
+                <li>Evaluate cache performance and hit rates</li>
+                <li>Simulate cache replacement policies</li>
+                <li>Measure memory access patterns</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>System analysis tools, Cache simulators, Performance measurement, Practical exercises</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Memory analysis report, Cache performance evaluation</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>20 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall memory hierarchy and cache concepts</td>
+              <td>The teacher demonstrates memory analysis tools and cache simulators</td>
+              <td>Students identify memory components and recall cache concepts</td>
+              <td>Memory analysis tools, Cache simulators, System information tools</td>
+            </tr>
+            <tr>
+              <td>1 hr</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe memory organization analysis and cache performance evaluation</td>
+              <td>The teacher explains memory analysis methods and demonstrates cache performance evaluation</td>
+              <td>Students analyze memory organization and evaluate cache performance</td>
+              <td>Cache simulators, Performance tools, Analysis worksheets</td>
+            </tr>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply knowledge to analyze memory performance and optimize cache configurations</td>
+              <td>The teacher guides analysis of memory performance and cache optimization</td>
+              <td>Students apply knowledge to analyze memory and optimize cache settings</td>
+              <td>Performance benchmarks, Optimization tools, Analysis templates</td>
+            </tr>
+            <tr>
+              <td>10 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate memory analysis and synthesize memory organization concepts</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their analysis and synthesize learning</td>
+              <td>Student reports, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Practical Session P2.3 -->
+      <div class="session-title">P2.3 Practical: Pipeline Architecture and Performance Evaluation (3 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>acquire</strong> skills to analyze pipeline architecture and evaluate performance using simulators.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Simulate instruction pipeline execution</li>
+                <li>Analyze pipeline hazards and stalls</li>
+                <li>Evaluate pipeline performance and throughput</li>
+                <li>Compare pipelined vs non-pipelined performance</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Pipeline simulators, Performance analysis, Case studies, Practical exercises</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Pipeline analysis report, Performance evaluation assignment</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall pipeline concepts and simulation tools</td>
+              <td>The teacher demonstrates pipeline simulator interface and basic concepts</td>
+              <td>Students identify pipeline stages and recall simulation tools</td>
+              <td>Pipeline simulators, Tutorial materials, Example pipelines</td>
+            </tr>
+            <tr>
+              <td>1.5 hrs</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe pipeline execution simulation and hazard analysis</td>
+              <td>The teacher explains pipeline simulation and demonstrates hazard detection and handling</td>
+              <td>Students simulate pipeline execution and analyze hazards</td>
+              <td>Pipeline simulators, Hazard examples, Analysis worksheets</td>
+            </tr>
+            <tr>
+              <td>1 hr</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply knowledge to evaluate pipeline performance and optimize throughput</td>
+              <td>The teacher guides performance evaluation and pipeline optimization</td>
+              <td>Students apply knowledge to evaluate performance and optimize pipelines</td>
+              <td>Performance benchmarks, Optimization tools, Evaluation templates</td>
+            </tr>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate pipeline analysis and synthesize performance concepts</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their analysis and synthesize learning</td>
+              <td>Student reports, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Practical Session P2.4 -->
+      <div class="session-title">P2.4 Practical: Instruction Set Architecture and Program Execution (2 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>acquire</strong> skills to analyze instruction sets and trace program execution using simulators.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Analyze instruction formats and encoding</li>
+                <li>Trace program execution through fetch-decode-execute cycle</li>
+                <li>Compare RISC vs CISC instruction sets</li>
+                <li>Evaluate instruction execution performance</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Instruction set simulators, Execution tracing, Comparison exercises, Practical analysis</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>ISA analysis report, Execution tracing assignment</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>20 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall instruction formats and execution cycle</td>
+              <td>The teacher demonstrates instruction set simulators and execution tracing tools</td>
+              <td>Students identify instruction formats and recall execution cycle</td>
+              <td>ISA simulators, Instruction format examples, Tutorial guides</td>
+            </tr>
+            <tr>
+              <td>1 hr</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe instruction analysis and execution tracing</td>
+              <td>The teacher explains instruction analysis methods and demonstrates execution tracing</td>
+              <td>Students analyze instruction sets and trace program execution</td>
+              <td>ISA simulators, Execution tracing tools, Analysis worksheets</td>
+            </tr>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply knowledge to compare instruction sets and evaluate execution performance</td>
+              <td>The teacher guides comparison of RISC vs CISC and performance evaluation</td>
+              <td>Students apply knowledge to compare ISAs and evaluate performance</td>
+              <td>Comparison templates, Performance tools, Evaluation worksheets</td>
+            </tr>
+            <tr>
+              <td>10 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate ISA analysis and synthesize instruction execution concepts</td>
+              <td>The teacher evaluates student work and guides synthesis</td>
+              <td>Students evaluate their analysis and synthesize learning</td>
+              <td>Student reports, Summary</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Element 3: Von-Neumann architecture -->
+      <h4 class="mt-4 mb-3" style="color: #2563eb; padding-bottom: 10px;">
+        <i class="fas fa-sitemap"></i> Element 3: Von-Neumann Architecture (3 hrs.)
+      </h4>
+
+      <!-- Session 3.1 -->
+      <div class="session-title">3.1 Von-Neumann Architecture (3 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>understand</strong> Von-Neumann architecture and its principles.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Identify Von-Neumann architecture components</li>
+                <li>Explain stored program concept and architecture principles</li>
+                <li>Apply knowledge to analyze Von-Neumann based systems</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Presentation, Discussion</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Written exercises, Architecture analysis</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall computer architecture concepts</td>
+              <td>The teacher introduces Von-Neumann architecture</td>
+              <td>Students identify and recall architecture basics</td>
+              <td>Slides, Architecture diagrams</td>
+            </tr>
+            <tr>
+              <td>1.5 hrs</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe Von-Neumann architecture components and stored program concept</td>
+              <td>The teacher explains Von-Neumann architecture, stored program concept, and components</td>
+              <td>Students explain architecture components and describe stored program concept</td>
+              <td>Board, Architecture diagrams, Historical context</td>
+            </tr>
+            <tr>
+              <td>1 hr</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply knowledge to analyze Von-Neumann based systems</td>
+              <td>The teacher guides analysis of modern computers based on Von-Neumann architecture</td>
+              <td>Students apply knowledge to analyze Von-Neumann systems</td>
+              <td>System examples, Architecture comparisons</td>
+            </tr>
+            <tr>
+              <td>15 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate Von-Neumann architecture understanding and synthesize concepts</td>
+              <td>The teacher evaluates student responses and guides synthesis</td>
+              <td>Students evaluate their understanding and synthesize learning</td>
+              <td>Summary, Q&A</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Element 4: Beyond Von-Neumann architecture -->
+      <h4 class="mt-4 mb-3" style="color: #2563eb; padding-bottom: 10px;">
+        <i class="fas fa-rocket"></i> Element 4: Beyond Von-Neumann Architecture (6 hrs.)
+      </h4>
+
+      <!-- Session 4.1 -->
+      <div class="session-title">4.1 Quantum Computers (2 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>know</strong> quantum computers and their principles.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Identify quantum computing principles and qubits</li>
+                <li>Explain quantum superposition and entanglement</li>
+                <li>Apply knowledge to understand quantum computing applications</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Presentation, Discussion</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Written exercises, Concept understanding</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>20 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall limitations of classical computing</td>
+              <td>The teacher introduces quantum computing concepts</td>
+              <td>Students identify and recall classical computing limitations</td>
+              <td>Slides, Comparison charts</td>
+            </tr>
+            <tr>
+              <td>1 hr</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe quantum principles, qubits, superposition, and entanglement</td>
+              <td>The teacher explains quantum computing principles, qubits, and quantum phenomena</td>
+              <td>Students explain quantum concepts and describe quantum computing principles</td>
+              <td>Board, Quantum diagrams, Examples</td>
+            </tr>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply knowledge to understand quantum computing applications</td>
+              <td>The teacher guides discussion on quantum computing applications and use cases</td>
+              <td>Students apply knowledge to understand quantum applications</td>
+              <td>Case studies, Application examples</td>
+            </tr>
+            <tr>
+              <td>10 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate quantum computing understanding and synthesize concepts</td>
+              <td>The teacher evaluates student responses and guides synthesis</td>
+              <td>Students evaluate their understanding and synthesize learning</td>
+              <td>Summary, Q&A</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Session 4.2 -->
+      <div class="session-title">4.2 Neuromorphic Computing and Alternative Architectures (2 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>know</strong> neuromorphic computing and alternative computer architectures.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Identify neuromorphic computing principles</li>
+                <li>Explain alternative architectures and their advantages</li>
+                <li>Apply knowledge to compare different computing paradigms</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Presentation, Discussion</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Written exercises, Architecture comparison</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>20 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall limitations of traditional architectures</td>
+              <td>The teacher introduces alternative computing architectures</td>
+              <td>Students identify and recall traditional architecture limitations</td>
+              <td>Slides, Architecture diagrams</td>
+            </tr>
+            <tr>
+              <td>1 hr</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe neuromorphic computing, brain-inspired architectures, and alternatives</td>
+              <td>The teacher explains neuromorphic computing, brain-inspired designs, and alternative architectures</td>
+              <td>Students explain alternative architectures and describe their characteristics</td>
+              <td>Board, Architecture diagrams, Examples</td>
+            </tr>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply knowledge to compare different computing paradigms</td>
+              <td>The teacher guides comparison of Von-Neumann, quantum, and neuromorphic architectures</td>
+              <td>Students apply knowledge to compare different computing paradigms</td>
+              <td>Comparison charts, Case studies</td>
+            </tr>
+            <tr>
+              <td>10 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate alternative architecture understanding and synthesize concepts</td>
+              <td>The teacher evaluates student responses and guides synthesis</td>
+              <td>Students evaluate their understanding and synthesize learning</td>
+              <td>Summary, Q&A</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Session 4.3 -->
+      <div class="session-title">4.3 Software Systems and IoT Integration (2 Hours)</div>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-clipboard-list text-primary"></i> Session Details</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 25%;">General Objective</th>
+            <td>Trainees will <strong>familiarize</strong> with software systems and IoT integration in modern computing.</td>
+          </tr>
+          <tr>
+            <th>Specific Objectives</th>
+            <td>
+              <ul class="mb-0">
+                <li>Identify software system layers and components</li>
+                <li>Explain IoT architecture and integration principles</li>
+                <li>Apply knowledge to understand modern computing ecosystems</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Teaching Methods</th>
+            <td>Lecture, Presentation, Discussion</td>
+          </tr>
+          <tr>
+            <th>Assessment</th>
+            <td>Written exercises, System analysis</td>
+          </tr>
+        </table>
+      </div>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Phase</th>
+              <th>Teaching Points</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>20 min</td>
+              <td><span class="phase-badge phase-intro">Introduction</span></td>
+              <td>Identify and recall software and hardware interaction concepts</td>
+              <td>The teacher introduces software systems and IoT concepts</td>
+              <td>Students identify and recall software-hardware interaction basics</td>
+              <td>Slides, System diagrams</td>
+            </tr>
+            <tr>
+              <td>1 hr</td>
+              <td><span class="phase-badge phase-dev">Development</span></td>
+              <td>Explain and describe software system layers, IoT architecture, and integration methods</td>
+              <td>The teacher explains software system architecture, IoT components, and integration principles</td>
+              <td>Students explain software systems and describe IoT integration methods</td>
+              <td>Board, System architecture diagrams, IoT examples</td>
+            </tr>
+            <tr>
+              <td>30 min</td>
+              <td><span class="phase-badge phase-app">Application</span></td>
+              <td>Apply knowledge to understand modern computing ecosystems</td>
+              <td>The teacher guides analysis of modern computing ecosystems and IoT applications</td>
+              <td>Students apply knowledge to understand computing ecosystems</td>
+              <td>Case studies, Real-world examples</td>
+            </tr>
+            <tr>
+              <td>10 min</td>
+              <td><span class="phase-badge phase-cons">Consolidation</span></td>
+              <td>Evaluate software systems and IoT understanding and synthesize concepts</td>
+              <td>The teacher evaluates student responses and guides synthesis</td>
+              <td>Students evaluate their understanding and synthesize learning</td>
+              <td>Summary, Q&A</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+   
+
+    <!-- Assessment Plan -->
+    <div class="content-card">
+      <h3><i class="fas fa-clipboard-check text-primary"></i> Assessment & Weighting</h3>
+
+      <h5 class="mt-3">Continuous Assessment:</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Assessment</th>
+              <th>Description</th>
+              <th>Weightage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Assessment 1</strong></td>
+              <td>Practical exercises covering logic gates, circuit design, and Boolean algebra</td>
+              <td>20%</td>
+            </tr>
+            <tr>
+              <td><strong>Assessment 2</strong></td>
+              <td>Practical exercises covering computer architecture, processor organization, and modern computing systems</td>
+              <td>20%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h5 class="mt-4">Summative Assessment:</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Assessment</th>
+              <th>Description</th>
+              <th>Weightage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Written Test</strong></td>
+              <td>Written test (2 hours)</td>
+              <td>60%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-info mt-3">
+        <strong>Total Duration:</strong> 75 hrs. (42T + 18P + 15S)<br>
+        <small>T = Theory, P = Practical, S = Self Studies</small>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

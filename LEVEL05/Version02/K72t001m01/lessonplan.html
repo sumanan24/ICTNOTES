@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Requirements for Software Solution - NVQ Level 5 ICT</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e8f0f5 100%);
+      padding-top: 70px;
+      line-height: 1.7;
+      color: #2d3748;
+    }
+
+    /* Navbar Styling */
+    .navbar {
+      background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      padding: 0.75rem 0;
+    }
+
+    .navbar-brand {
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-brand:hover {
+      transform: translateX(-3px);
+    }
+
+    /* Module Header */
+    .module-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 2.5rem 0;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .module-header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .module-header .lead {
+      font-size: 1.1rem;
+      opacity: 0.95;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    /* Content Cards */
+    .content-card {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      margin-bottom: 2rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .content-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .content-card h3 {
+      color: #1e40af;
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 3px solid #e0e7ff;
+    }
+
+    .content-card h4 {
+      color: #2563eb;
+      font-weight: 600;
+      font-size: 1.3rem;
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .content-card h5 {
+      color: #4b5563;
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-top: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Badges */
+    .hour-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+      color: #1e40af;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin: 0.25rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .info-badge {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #4338ca;
+      padding: 0.4rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin: 0.2rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Table Styling with Mobile Scroll */
+    .table-wrapper {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 1rem 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      width: 100%;
+      display: block;
+    }
+
+    .table-wrapper::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .table-wrapper::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 4px;
+    }
+
+    .table-wrapper::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+
+    .table-wrapper::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    table {
+      width: 100%;
+      font-size: 0.95rem;
+      border-collapse: separate;
+      border-spacing: 0;
+      min-width: 600px;
+    }
+
+    table th {
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      font-weight: 700;
+      border: 1px solid #e2e8f0;
+      padding: 1rem 0.75rem;
+      text-align: left;
+      color: #1e293b;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    table td {
+      border: 1px solid #e2e8f0;
+      vertical-align: top;
+      padding: 1rem 0.75rem;
+      background: white;
+    }
+
+    table tbody tr:hover {
+      background: #f8fafc;
+    }
+
+    table tbody tr:nth-child(even) {
+      background: #fafbfc;
+    }
+
+    table tbody tr:nth-child(even):hover {
+      background: #f1f5f9;
+    }
+
+    /* Session Title */
+    .session-title {
+      color: #2563eb;
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-bottom: 1.25rem;
+      margin-top: 2rem;
+      line-height: 1.4;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid #e0e7ff;
+    }
+
+    .session-title:first-child {
+      margin-top: 0;
+    }
+
+    /* Topic Items */
+    .topic-item {
+      padding: 1rem 0;
+      margin: 0.5rem 0;
+      padding-left: 1.5rem;
+    }
+
+    .topic-item h5 {
+      margin-bottom: 0.5rem;
+      color: #1e40af;
+    }
+
+    /* Phase Badges */
+    .phase-badge {
+      display: inline-block;
+      padding: 0.35rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-right: 0.5rem;
+      white-space: nowrap;
+    }
+
+    .phase-intro {
+      background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+      color: #1e40af;
+    }
+
+    .phase-dev {
+      background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+      color: #166534;
+    }
+
+    .phase-app {
+      background: linear-gradient(135deg, #fef3c7, #fde68a);
+      color: #92400e;
+    }
+
+    .phase-cons {
+      background: linear-gradient(135deg, #fce7f3, #fbcfe8);
+      color: #9f1239;
+    }
+
+    /* Alert Boxes */
+    .alert {
+      border-radius: 10px;
+      border: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .alert h6 {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Lists */
+    ul,
+    ol {
+      padding-left: 1.5rem;
+    }
+
+    ul li,
+    ol li {
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      body {
+        padding-top: 60px;
+        font-size: 0.95rem;
+      }
+
+      .container {
+        padding: 0 10px;
+      }
+
+      .module-header {
+        padding: 1.5rem 0;
+        margin-bottom: 1.5rem;
+      }
+
+      .module-header h1 {
+        font-size: 1.5rem;
+        line-height: 1.3;
+      }
+
+      .module-header .lead {
+        font-size: 0.95rem;
+        padding: 0 10px;
+      }
+
+      .content-card {
+        padding: 1.25rem;
+        border-radius: 12px;
+        margin-bottom: 1.5rem;
+      }
+
+      .content-card h3 {
+        font-size: 1.25rem;
+        margin-bottom: 1.25rem;
+        line-height: 1.4;
+      }
+
+      .content-card h4 {
+        font-size: 1.1rem;
+        margin-top: 1.25rem;
+        margin-bottom: 1rem;
+        line-height: 1.4;
+      }
+
+      .content-card h5 {
+        font-size: 1rem;
+        margin-top: 1rem;
+        margin-bottom: 0.75rem;
+        line-height: 1.4;
+      }
+
+      .hour-badge,
+      .info-badge {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.75rem;
+        margin: 0.15rem;
+        display: inline-block;
+      }
+
+      .session-title {
+        font-size: 1.1rem;
+        line-height: 1.4;
+        margin-bottom: 1rem;
+        word-wrap: break-word;
+      }
+
+      .topic-item {
+        padding: 0.75rem 0;
+        margin: 0.5rem 0;
+        padding-left: 1rem;
+      }
+
+      .topic-item h5 {
+        font-size: 1rem;
+        line-height: 1.4;
+      }
+
+      .table-wrapper {
+        margin: 1rem 0;
+        border-radius: 8px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+        display: block;
+      }
+
+      table {
+        font-size: 0.85rem;
+        min-width: 700px;
+        width: 100%;
+        display: table;
+      }
+
+      table th {
+        font-size: 0.8rem;
+        padding: 0.75rem 0.5rem;
+        white-space: nowrap;
+      }
+
+      table td {
+        padding: 0.75rem 0.5rem;
+        word-wrap: break-word;
+        line-height: 1.5;
+      }
+
+      .phase-badge {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.7rem;
+        display: inline-block;
+        margin-bottom: 0.25rem;
+        white-space: nowrap;
+      }
+
+      .navbar-brand {
+        font-size: 0.9rem;
+      }
+
+      ul, ol {
+        padding-left: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      li {
+        margin-bottom: 0.5rem;
+        line-height: 1.6;
+      }
+
+      p {
+        line-height: 1.6;
+        margin-bottom: 1rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      body {
+        padding-top: 55px;
+        font-size: 0.9rem;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      .module-header {
+        padding: 1.25rem 0;
+      }
+
+      .module-header h1 {
+        font-size: 1.25rem;
+        line-height: 1.3;
+      }
+
+      .module-header .lead {
+        font-size: 0.9rem;
+        padding: 0 8px;
+      }
+
+      .content-card {
+        padding: 1rem;
+        margin-bottom: 1.25rem;
+      }
+
+      .content-card h3 {
+        font-size: 1.15rem;
+        margin-bottom: 1rem;
+      }
+
+      .content-card h4 {
+        font-size: 1rem;
+        margin-top: 1rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .content-card h5 {
+        font-size: 0.95rem;
+        margin-top: 0.75rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .hour-badge,
+      .info-badge {
+        font-size: 0.75rem;
+        padding: 0.35rem 0.65rem;
+        margin: 0.1rem;
+      }
+
+      .session-title {
+        font-size: 1rem;
+        line-height: 1.3;
+        margin-bottom: 0.75rem;
+      }
+
+      .table-wrapper {
+        margin: 0.75rem 0;
+      }
+
+      table {
+        font-size: 0.8rem;
+        min-width: 800px;
+      }
+
+      table th {
+        font-size: 0.75rem;
+        padding: 0.6rem 0.4rem;
+      }
+
+      table td {
+        padding: 0.6rem 0.4rem;
+        font-size: 0.8rem;
+      }
+
+      ul, ol {
+        padding-left: 1.25rem;
+      }
+
+      li {
+        margin-bottom: 0.4rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Print Styles */
+    @media print {
+      .navbar {
+        display: none;
+      }
+
+      .module-header {
+        page-break-after: avoid;
+      }
+
+      .content-card {
+        page-break-inside: avoid;
+      }
+
+      .table-wrapper {
+        overflow: visible;
+      }
+
+      table {
+        min-width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  
+
+  <div class="module-header">
+    <div class="container">
+      
+      <h1 class="mt-3">User Requirements for Software Solution</h1>
+      <p class="lead mb-2">Module Code: K72T001M01 / Level 05</p>
+      <div class="mt-3">
+        <span class="info-badge"><i class="fas fa-tag"></i> Compulsory</span>
+        <span class="info-badge"><i class="fas fa-link"></i> Relevant Unit: K72T001U01</span>
+        <span class="hour-badge"><i class="fas fa-clock"></i> 100 Notional Hours</span>
+        <span class="hour-badge"><i class="fas fa-chalkboard-teacher"></i> 60 Theory</span>
+        <span class="hour-badge"><i class="fas fa-laptop-code"></i> 30 Practical</span>
+        <span class="hour-badge"><i class="fas fa-book"></i> 10 Self-study</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+   
+
+    <!-- Learning Outcomes -->
+    <div class="content-card">
+      <h3><i class="fas fa-graduation-cap text-primary"></i> Learning Outcomes</h3>
+
+      <h5 class="mt-3 mb-3"><i class="fas fa-bullseye text-success"></i> General Objective</h5>
+      <p class="lead">At the end of this module, students will <strong>understand</strong> business processes,
+        <strong>acquire</strong> knowledge of requirement gathering, and <strong>know</strong> requirement
+        analysis and feasibility study report preparation.
+      </p>
+
+      <h5 class="mt-4 mb-3"><i class="fas fa-list-check text-primary"></i> Specific Objectives</h5>
+      <p>At the end of this module the student shall be able to:</p>
+      <ol>
+        <li>Analyze business processes and identify key stakeholders</li>
+        <li>Apply requirements gathering techniques and analyze strengths and weaknesses</li>
+        <li>Break down requirements and define project scope</li>
+        <li>Evaluate feasibility aspects of software solutions</li>
+        <li>Prepare and present reports</li>
+      </ol>
+    </div>
+
+    <!-- Training Plan - Scheme of Training -->
+    <div class="content-card">
+      <h3><i class="fas fa-calendar-check text-primary"></i> Training Plan – Scheme of Training</h3>
+      <p class="text-muted small mb-3">K72T001M01 – User Requirements for Software Solution &nbsp;|&nbsp; 100 Notional Hrs (60T + 30P + 10S)</p>
+      <div class="table-wrapper">
+        <table class="table table-bordered table-sm">
+          <thead>
+            <tr>
+              <th>Month</th>
+              <th>Week no</th>
+              <th>Session Hrs</th>
+              <th>Tasks expected to cover</th>
+              <th>Resources</th>
+              <th>Assessment</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>1–2</td><td>15</td><td>MODULE 1 – Introduction to Business &amp; Business Process (Ch 1–10)</td><td>PP Slide, LMS, White Board, PC</td><td>Ass-st-01, Ass-st-02</td></tr>
+            <tr><td>2</td><td>3–4</td><td>15</td><td>MODULE 2 – Study of Business Processes (Ch 11–20)</td><td>PP Slide, LMS, White Board, Multimedia, PC</td><td>Ass-st-03, Ass-st-04</td></tr>
+            <tr><td>3</td><td>5–6</td><td>12</td><td>MODULE 3 – Requirements Gathering (Ch 21–28)</td><td>PP Slide, LMS, White Board, Flip chart</td><td>Ass-st-05, Ass-st-06</td></tr>
+            <tr><td>4</td><td>7–8</td><td>12</td><td>MODULE 4 – Requirement Analysis (Ch 29–36)</td><td>PP Slide, LMS, PC, Multimedia</td><td>Ass-st-07, Ass-st-08</td></tr>
+            <tr><td>5</td><td>9–10</td><td>6</td><td>MODULE 5 – Feasibility Study (Ch 37–40)</td><td>PP Slide, LMS, PC, Templates</td><td>Ass-st-09, Ass-st-10</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Learning Content / Topics and Session Plans -->
+    <div class="content-card">
+      <h3><i class="fas fa-book text-primary"></i> Learning Content / Topics</h3>
+
+      1. Introduction to various business processes  <br>
+      2. Study of business processes  <br>
+      3. Requirements Gathering  <br>
+      4. Requirement analysis  <br>
+      5. Feasibility study <br>
+
+      <h3 class="mt-5"><i class="fas fa-calendar-alt text-primary"></i> Session Plans</h3>
+
+      <h4 class="mt-4 mb-3" style="color: #2563eb; padding-bottom: 10px;"><i class="fas fa-book-open"></i> MODULE 1: Introduction to Business &amp; Business Process (15 Hours)</h4>
+
+      <div class="session-title">Chapter 1 – Introduction to Business &amp; Business Process</div>
+      <ul class="mb-4">
+        <li>Definition of Business</li>
+        <li>What is a Business Process?</li>
+        <li>Input → Process → Output Model</li>
+        <li>Examples from Sri Lanka (Tea Shop, Mobile Shop)</li>
+        <li><strong>Activity:</strong> Draw a simple business process</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce business and business process; recall prior knowledge</td><td>Present objectives; ask what trainees know about business</td><td>Listen, recall, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Definition of Business; What is a Business Process?; Input → Process → Output Model; Examples (Tea Shop, Mobile Shop)</td><td>Explain, demonstrate I-P-O with examples; show Sri Lanka cases</td><td>Take notes, discuss examples</td><td>PP Slide, LMS, White Board</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Draw a simple business process</td><td>Facilitate activity; guide drawing</td><td>Draw business process in pairs/groups</td><td>Chart paper, Markers</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise business process concepts</td><td>Q&amp;A; review key points</td><td>Summarise, ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 2 – Types of Business Processes</div>
+      <ul class="mb-4">
+        <li>Core Processes</li>
+        <li>Support Processes</li>
+        <li>Management Processes</li>
+        <li>Example in supermarket</li>
+        <li><strong>Activity:</strong> Group discussion activity</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce types of processes; recall Chapter 1</td><td>Present objectives; link to previous chapter</td><td>Listen, recall</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Core, Support, Management processes; example in supermarket</td><td>Explain each type; demonstrate with examples</td><td>Take notes, discuss</td><td>PP Slide, LMS</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Group discussion activity</td><td>Facilitate discussion; monitor groups</td><td>Discuss in groups; present</td><td>Flip chart</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise process types</td><td>Q&amp;A; review</td><td>Summarise, clarify</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 3 – Business Domains Overview</div>
+      <ul class="mb-4">
+        <li>What is a Business Domain?</li>
+        <li>Public vs Private sectors</li>
+        <li>Service vs Manufacturing</li>
+        <li>ICT involvement in domains</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 4 – Telecommunication Domain</div>
+      <ul class="mb-4">
+        <li>Example: Dialog, Mobitel</li>
+        <li>SIM registration process</li>
+        <li>Recharge process</li>
+        <li>Stakeholders in telecom</li>
+        <li>Software used (Billing system, CRM)</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 5 – Hotel Industry Domain</div>
+      <ul class="mb-4">
+        <li>Booking process</li>
+        <li>Check-in / Check-out process</li>
+        <li>Room management</li>
+        <li>Hotel software systems</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 6 – Health Sector Domain</div>
+      <ul class="mb-4">
+        <li>Patient registration</li>
+        <li>Appointment system</li>
+        <li>Laboratory process</li>
+        <li>Hospital Information Systems (HIS)</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 7 – Transport Domain</div>
+      <ul class="mb-4">
+        <li>Ticket booking process</li>
+        <li>Fleet management</li>
+        <li>GPS tracking</li>
+        <li>E-ticketing systems</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 8 – Supermarket Domain</div>
+      <ul class="mb-4">
+        <li>Inventory management</li>
+        <li>Billing process</li>
+        <li>Supplier management</li>
+        <li>POS system</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 9 – Education Domain</div>
+      <ul class="mb-4">
+        <li>Student registration</li>
+        <li>Examination process</li>
+        <li>LMS systems</li>
+        <li>Result processing</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 10 – Stakeholders in Business Process</div>
+      <ul class="mb-4">
+        <li>Internal stakeholders</li>
+        <li>External stakeholders</li>
+        <li>Customers, Suppliers, Government</li>
+        <li>Stakeholder responsibilities</li>
+        <li>Stakeholder relationship diagram</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4 class="mt-5 mb-3" style="color: #22c55e; padding-bottom: 10px;"><i class="fas fa-search"></i> MODULE 2: Study of Business Processes (15 Hours)</h4>
+
+      <div class="session-title">Chapter 11 – Understanding Current Systems</div>
+      <ul class="mb-4">
+        <li>What is Current System Study?</li>
+        <li>Why analyze existing systems?</li>
+        <li>Real-world example</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 12 – Process Mapping Techniques</div>
+      <ul class="mb-4">
+        <li>Flowcharts</li>
+        <li>Swimlane diagrams</li>
+        <li>BPMN basics</li>
+        <li><strong>Activity:</strong> Practical drawing activity</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 13 – Identifying Process Problems</div>
+      <ul class="mb-4">
+        <li>Bottlenecks</li>
+        <li>Delays</li>
+        <li>Manual errors</li>
+        <li>Duplicate data entry</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 14 – Stakeholder Role Analysis</div>
+      <ul class="mb-4">
+        <li>Role identification</li>
+        <li>Responsibility matrix (RACI)</li>
+        <li><strong>Activity:</strong> Case study discussion</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 15 – Data Flow in Business Process</div>
+      <ul class="mb-4">
+        <li>What is Data Flow?</li>
+        <li>DFD Level 0</li>
+        <li>Data Stores</li>
+        <li>Practical example</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 16 – Performance Measurement</div>
+      <ul class="mb-4">
+        <li>KPIs</li>
+        <li>Productivity metrics</li>
+        <li>Customer satisfaction</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 17 – Risk Identification in Processes</div>
+      <ul class="mb-4">
+        <li>Operational risks</li>
+        <li>Financial risks</li>
+        <li>Technical risks</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 18 – Business Process Documentation</div>
+      <ul class="mb-4">
+        <li>Writing system documentation</li>
+        <li>Process manuals</li>
+        <li>Standard Operating Procedures</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 19 – Introduction to Business Process Re-engineering (BPR)</div>
+      <ul class="mb-4">
+        <li>Definition of BPR</li>
+        <li>Need for BPR</li>
+        <li>Examples</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 20 – BPR Implementation Strategies</div>
+      <ul class="mb-4">
+        <li>Process redesign</li>
+        <li>Automation</li>
+        <li>Digital transformation</li>
+        <li><strong>Activity:</strong> Case study</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4 class="mt-5 mb-3" style="color: #d97706; padding-bottom: 10px;"><i class="fas fa-clipboard-list"></i> MODULE 3: Requirements Gathering (12 Hours)</h4>
+
+      <div class="session-title">Chapter 21 – Introduction to Requirements Engineering</div>
+      <ul class="mb-4">
+        <li>What are requirements?</li>
+        <li>Importance of requirements</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 22 – Importance of Requirements Gathering</div>
+      <ul class="mb-4">
+        <li>Avoid project failure</li>
+        <li>Reduce cost</li>
+        <li>Improve quality</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 23 – Stakeholder Identification for Requirements</div>
+      <ul class="mb-4">
+        <li>Primary users</li>
+        <li>Secondary users</li>
+        <li>IT team</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 24 – Document Review Technique</div>
+      <ul class="mb-4">
+        <li>Studying manuals</li>
+        <li>Existing reports</li>
+        <li>Forms and templates</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 25 – Interview Technique</div>
+      <ul class="mb-4">
+        <li>Structured interviews</li>
+        <li>Open-ended questions</li>
+        <li>Interview preparation</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 26 – Surveys &amp; Questionnaires</div>
+      <ul class="mb-4">
+        <li>Designing surveys</li>
+        <li>Online tools (Google Forms)</li>
+        <li>Data collection</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 27 – Observation Technique</div>
+      <ul class="mb-4">
+        <li>Direct observation</li>
+        <li>Shadowing employees</li>
+        <li>Recording findings</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 28 – Workshops &amp; Brainstorming</div>
+      <ul class="mb-4">
+        <li>Group sessions</li>
+        <li>JAD sessions</li>
+        <li>Idea generation</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4 class="mt-5 mb-3" style="color: #7c3aed; padding-bottom: 10px;"><i class="fas fa-tasks"></i> MODULE 4: Requirement Analysis (12 Hours)</h4>
+
+      <div class="session-title">Chapter 29 – Project Scope Definition</div>
+      <ul class="mb-4">
+        <li>Objectives</li>
+        <li>Boundaries</li>
+        <li>Constraints</li>
+        <li>Limitations</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 30 – Functional Requirements</div>
+      <ul class="mb-4">
+        <li>System features</li>
+        <li>User actions</li>
+        <li>Use case examples</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 31 – Non-Functional Requirements</div>
+      <ul class="mb-4">
+        <li>Performance</li>
+        <li>Security</li>
+        <li>Usability</li>
+        <li>Reliability</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 32 – Requirement Prioritization</div>
+      <ul class="mb-4">
+        <li>Must Have</li>
+        <li>Should Have</li>
+        <li>Could Have</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 33 – Use Case Modeling</div>
+      <ul class="mb-4">
+        <li>Actors</li>
+        <li>Use case diagram</li>
+        <li>Scenario writing</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 34 – Requirement Documentation (SRS)</div>
+      <ul class="mb-4">
+        <li>Structure of SRS</li>
+        <li>Writing clear requirements</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 35 – Requirement Validation</div>
+      <ul class="mb-4">
+        <li>Reviewing requirements</li>
+        <li>Client approval</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 36 – Requirement Traceability</div>
+      <ul class="mb-4">
+        <li>Traceability matrix</li>
+        <li>Change management</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4 class="mt-5 mb-3" style="color: #dc2626; padding-bottom: 10px;"><i class="fas fa-check-double"></i> MODULE 5: Feasibility Study (6 Hours)</h4>
+
+      <div class="session-title">Chapter 37 – Introduction to Feasibility Study</div>
+      <ul class="mb-4">
+        <li>Why feasibility study?</li>
+        <li>Project approval process</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 38 – Technical Feasibility</div>
+      <ul class="mb-4">
+        <li>Hardware</li>
+        <li>Software</li>
+        <li>Skills availability</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 39 – Economic &amp; Practical Feasibility</div>
+      <ul class="mb-4">
+        <li>Cost-benefit analysis</li>
+        <li>ROI</li>
+        <li>Time feasibility</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="session-title">Chapter 40 – Organizational &amp; Legal Feasibility</div>
+      <ul class="mb-4">
+        <li>Policy compliance</li>
+        <li>Legal regulations</li>
+        <li>Organizational readiness</li>
+      </ul>
+      <h5 class="mt-3 mb-2"><i class="fas fa-tasks text-primary"></i> Session Development</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead><tr><th>Time</th><th>Phase</th><th>Teaching Points</th><th>Teacher Activity</th><th>Student Activity</th><th>Aids</th></tr></thead>
+          <tbody>
+            <tr><td>15 min</td><td><span class="phase-badge phase-intro">Introduction</span></td><td>Introduce topic; recall prior learning</td><td>Present objectives</td><td>Listen, respond</td><td>Slides, Whiteboard</td></tr>
+            <tr><td>25 min</td><td><span class="phase-badge phase-dev">Development</span></td><td>Cover chapter topics as per list above</td><td>Explain, demonstrate, facilitate</td><td>Take notes, participate</td><td>PP Slide, LMS, PC</td></tr>
+            <tr><td>15 min</td><td><span class="phase-badge phase-app">Application</span></td><td>Apply concepts; activities as listed</td><td>Guide application</td><td>Complete activities</td><td>Worksheets</td></tr>
+            <tr><td>5 min</td><td><span class="phase-badge phase-cons">Consolidation</span></td><td>Summarise; check understanding</td><td>Q&amp;A; review</td><td>Summarise; ask questions</td><td>Summary</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <!-- Practical Assignments -->
+    <div class="content-card">
+      <h3><i class="fas fa-tasks text-primary"></i> Practical Assignments</h3>
+      <div class="topic-item">
+        <h5><strong>Assignment 01:</strong> Prepare a user requirement document</h5>
+        <p>Students will gather requirements for a selected business organization and prepare a comprehensive user
+          requirement document.</p>
+      </div>
+      <div class="topic-item">
+        <h5><strong>Assignment 02:</strong> Prepare a feasibility study report for a given industry specific scenario
+        </h5>
+        <p>Students will conduct a feasibility study covering technical, economical, practical, organizational, and
+          legal aspects for a given scenario.</p>
+      </div>
+    </div>
+
+   
+
+    <!-- Assessment Plan -->
+    <div class="content-card">
+      <h3><i class="fas fa-clipboard-check text-primary"></i> Assessment & Weighting</h3>
+
+      <h5 class="mt-3">Continuous Assessment:</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Assessment</th>
+              <th>Description</th>
+              <th>Weightage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Individual Assignment</strong></td>
+              <td>Prepare a user requirement document and feasibility study report for a given industry specific scenario</td>
+              <td>40%</td>
+            </tr>
+            <tr>
+              <td><strong>Written Assessment 01</strong></td>
+              <td>Topics: Introduction to various business processes, Study of business processes, Requirements Gathering</td>
+              <td>10%</td>
+            </tr>
+            <tr>
+              <td><strong>Written Assessment 02</strong></td>
+              <td>Topics: Requirement analysis, Feasibility study</td>
+              <td>10%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h5 class="mt-4">Summative Assessment:</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Assessment</th>
+              <th>Description</th>
+              <th>Weightage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Written Exam</strong></td>
+              <td>Minimum 3 hours of paper</td>
+              <td>40%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-info mt-3">
+        <strong>Total Duration:</strong> 100 hrs. (60T + 30P + 10S)<br>
+        <small>T = Theory, P = Practical, S = Self Studies</small>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
