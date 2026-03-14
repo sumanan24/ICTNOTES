@@ -735,6 +735,83 @@
           <p class="simple-english"><strong></strong> Organisational feasibility asks: will the staff and management accept and use the new system? Do we need training? Is there resistance? Legal feasibility asks: does the project follow the law? For example, if we store customer data, we must follow data protection rules. Policy compliance means we also follow the organisation’s own internal rules. We check all of this before saying the project is feasible.</p><div class="q-box"><strong>Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>What is organisational feasibility?</li><li>Give one legal concern for a system that stores customer data.</li></ol></div><div class="activity-box"><strong>Activity</strong><p class="mb-0 mt-1">For a school management system, list one organisational and one legal feasibility check.</p></div></article>
       </section>
 
+      <!-- DETAILED EXPLANATION WITH BEGINNER-LEVEL EXAMPLES (after all modules) -->
+      <section id="detailed-explanation" class="module-block">
+        <h2 class="module-title"><i class="fas fa-lightbulb me-2"></i> Detailed Explanation with Beginner-Level Examples</h2>
+        <article class="chapter-card">
+          <p><strong>What you have learned in this module:</strong> This course is about understanding how businesses work, what users need from software, and how to check if a software project is practical. Below is a simple summary with everyday examples so you can see how everything fits together.</p>
+
+          <h3>1. Business and processes (Modules 1 &amp; 2)</h3>
+          <p class="simple-english"><strong>In simple words:</strong> A <strong>business</strong> is any place or activity that gives people something they need (goods or services) and gets money in return. A <strong>business process</strong> is the set of steps that the business follows again and again to do that work.</p>
+          <p><strong>Example – A small tea shop:</strong></p>
+          <ul>
+            <li><strong>Input:</strong> Customer’s order (“one plain tea”), tea leaves, sugar, milk, water.</li>
+            <li><strong>Process:</strong> Boil water, add tea and ingredients, pour into cup.</li>
+            <li><strong>Output:</strong> A cup of tea for the customer and payment (e.g. Rs. 50).</li>
+          </ul>
+          <p>The same steps every time give the same quality. If the shop also sells biscuits, that is another small process (take biscuit packet → give to customer → take payment).</p>
+
+          <h3>2. Types of processes</h3>
+          <p class="simple-english"><strong>In simple words:</strong> Not all work is the same. <strong>Core</strong> work is what the customer pays for (e.g. selling, making tea). <strong>Support</strong> work is what happens behind the scenes (cleaning, keeping stock). <strong>Management</strong> work is planning and deciding (what to sell, when to open, who works when).</p>
+          <p><strong>Example – A mobile shop:</strong></p>
+          <ul>
+            <li><strong>Core:</strong> Selling a phone, recharging a number, repairing a phone.</li>
+            <li><strong>Support:</strong> Keeping the shop clean, ordering stock from the supplier, keeping bills.</li>
+            <li><strong>Management:</strong> Owner decides which phones to keep, what price to set, and who works on which day.</li>
+          </ul>
+
+          <h3>3. Studying the current system before building software</h3>
+          <p class="simple-english"><strong>In simple words:</strong> Before we build or change any software, we must understand how the work is done <em>today</em>. We look at the steps, who does what, what forms and tools they use, and where there are problems (delays, mistakes, waste). This is called studying the current system.</p>
+          <p><strong>Example – A school registration:</strong></p>
+          <ul>
+            <li>Today: Student brings a form → office staff writes details in a book → another person types the same details in a computer later. Problems: same data written twice (waste and more errors), and the book and computer can get out of sync.</li>
+            <li>After study: We see that “enter data once and use it everywhere” would be better. So we write a requirement: “The system shall allow the office to enter student details once and use that record for fee, attendance, and results.”</li>
+          </ul>
+
+          <h3>4. Gathering requirements (what the system must do)</h3>
+          <p class="simple-english"><strong>In simple words:</strong> <strong>Requirements</strong> are the list of what the system must do (e.g. “print a receipt”) and how well it must do it (e.g. “respond within 3 seconds”). We get these by talking to users, reading forms and reports, and watching how work is done.</p>
+          <p><strong>Example – A simple billing system for a shop:</strong></p>
+          <ul>
+            <li><strong>Functional requirement:</strong> “The system shall allow the cashier to scan or type each item and show the total. After payment, the system shall print a receipt.”</li>
+            <li><strong>Non-functional requirement:</strong> “The system shall be available during shop hours (e.g. 8 a.m. to 8 p.m.) and shall not lose data if the power goes off for a short time.”</li>
+          </ul>
+          <p>We write requirements in clear, simple English so that both the shop owner and the programmer understand the same thing.</p>
+
+          <h3>5. Analysing and documenting requirements</h3>
+          <p class="simple-english"><strong>In simple words:</strong> We put all requirements in one document (often called SRS – Software Requirements Specification). We decide what is “Must Have” (without it the system is not useful), “Should Have” (important but we can manage without it for a while), and “Could Have” (nice to have). We also draw use case diagrams to show who uses the system and what they can do.</p>
+          <p><strong>Example – Library system:</strong></p>
+          <ul>
+            <li><strong>Actor:</strong> Member (student), Librarian.</li>
+            <li><strong>Use cases:</strong> Search catalogue, Issue book, Return book.</li>
+            <li>Member can search, issue, and return. Librarian can issue and return. The diagram does not show the order of steps inside each use case; it only shows the “menu” of what the system offers.</li>
+          </ul>
+
+          <h3>6. Feasibility – Can we do it and is it worth it?</h3>
+          <p class="simple-english"><strong>In simple words:</strong> Before spending a lot of time and money, we check: Can we build and run the system? (technical). Will the benefits be more than the cost? (economic). Can we finish in time? (time). Will the organisation use it? (organisational). Is it legal? (legal). This is the feasibility study.</p>
+          <p><strong>Example – New POS for a small shop:</strong></p>
+          <ul>
+            <li><strong>Technical:</strong> Do we have a computer and space for it? Can we get a barcode scanner and printer? If yes, it is technically feasible.</li>
+            <li><strong>Economic:</strong> Cost = computer + software + training. Benefit = faster billing, fewer calculation errors, automatic stock update. If benefit is greater than cost over one or two years, it is economically feasible.</li>
+            <li><strong>Organisational:</strong> Will the cashier and owner accept the new system? If we train them and they are willing, it is organisationally feasible.</li>
+            <li><strong>Legal:</strong> If we store customer data (e.g. for loyalty), we must follow data protection rules. If we do, it is legally feasible.</li>
+          </ul>
+
+          <h3>7. Putting it all together – One full example</h3>
+          <p><strong>Scenario:</strong> A small clinic wants a simple appointment and patient record system.</p>
+          <ol>
+            <li><strong>Current system:</strong> Patients call or come to the clinic. The receptionist writes names in a notebook and tells the doctor who is next. Sometimes the notebook is lost or names are unclear.</li>
+            <li><strong>Problems:</strong> No clear record of who came when; hard to remind patients; no easy way to see past visits.</li>
+            <li><strong>Requirements (examples):</strong> (1) Receptionist can add a patient and book an appointment with date and time. (2) System can show today’s list of appointments. (3) System can store basic visit notes (e.g. “fever, medicine given”). (4) Only staff with login can see patient data (security).</li>
+            <li><strong>Feasibility:</strong> Clinic has one computer and internet; doctor and receptionist are ready to learn. Cost of a simple system is low. So technically, economically, and organisationally it is feasible. They must keep patient data private (legal).</li>
+            <li><strong>Result:</strong> A clear list of what the system must do (requirements) and a decision that the project is feasible. Next step would be to design and build the system, then test it against these requirements.</li>
+          </ol>
+
+          <div class="info-box">
+            <strong>Summary for beginners:</strong> This module teaches you to (1) understand how a business works (inputs, processes, outputs, core/support/management), (2) study the current way of working before building software, (3) gather and write clear requirements from users, (4) analyse and document them (e.g. SRS, use cases), and (5) check if the project is feasible (technical, economic, organisational, legal). Use simple examples like a tea shop, a mobile shop, a school, or a clinic to see how these ideas apply in real life.
+          </div>
+        </article>
+      </section>
+
     </main>
   </div>
 
@@ -783,7 +860,8 @@
       {mod:37, id:"ch37", title:"Ch 37 – Introduction to Feasibility"},
       {mod:38, id:"ch38", title:"Ch 38 – Technical Feasibility"},
       {mod:39, id:"ch39", title:"Ch 39 – Economic & Practical Feasibility"},
-      {mod:40, id:"ch40", title:"Ch 40 – Organizational & Legal Feasibility"}
+      {mod:40, id:"ch40", title:"Ch 40 – Organizational & Legal Feasibility"},
+      {mod:41, id:"detailed-explanation", title:"Detailed Explanation & Examples"}
     ];
     var list = document.getElementById("tocList");
     if(list){
