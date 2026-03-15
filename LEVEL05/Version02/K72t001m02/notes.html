@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Analysis and Design – Teaching Notes | Level 5 ICT</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box}
+    :root{
+      --header-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --accent: #2563eb;
+      --accent-light: #e0e7ff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+    }
+    html{scroll-behavior:smooth;overflow-x:hidden}
+    body{font-family:'Segoe UI',system-ui,sans-serif;background:linear-gradient(180deg,#f5f7fa 0%,#e8f0f5 100%);color:var(--text);line-height:1.65;padding:0;min-height:100vh;overflow-x:hidden;max-width:100%}
+
+    @media (min-width:992px){
+      .toc-sidebar{position:fixed!important;left:0;top:0;width:260px;height:100vh;z-index:40;margin:0;border-right:1px solid rgba(102,126,234,0.2);overflow-y:auto}
+      .page-wrapper{margin-left:260px;max-width:100%}
+    }
+    @media (max-width:991px){
+      .toc-sidebar .toc-list{max-height:0;overflow:hidden;padding:0!important;transition:max-height 0.25s ease}
+      .toc-sidebar.toc-open .toc-list{max-height:70vh;overflow-y:auto;padding:0.5rem 0 1.25rem!important}
+      .toc-sidebar .toc-toggle{display:flex!important;align-items:center;justify-content:space-between;padding:0.75rem 1rem;min-height:3rem}
+      .page-wrapper{padding-top:3.25rem}
+    }
+
+    .container-main{max-width:900px;margin:0 auto;padding:0 clamp(1rem,4vw,1.5rem)}
+    .toc-sidebar{background:#fff;padding:0;box-shadow:0 4px 20px rgba(0,0,0,0.08)}
+    .toc-sidebar .toc-header{padding:0.875rem 1rem;background:var(--header-bg);color:#fff;font-weight:700;font-size:0.95rem;text-align:center}
+    .toc-sidebar .toc-toggle{display:none;width:100%;padding:0.75rem 1rem;background:var(--header-bg);color:#fff;border:none;font-size:0.95rem;font-weight:600;cursor:pointer;text-align:left}
+    .toc-sidebar .toc-list{padding:0.5rem 0 1.25rem;background:#fff}
+    .toc-sidebar .toc-list a{display:flex;align-items:flex-start;gap:0.5rem;font-size:0.8125rem;color:var(--text);text-decoration:none;padding:0.5rem 0.75rem 0.5rem 1rem;line-height:1.4;border-bottom:1px solid #f1f5f9}
+    .toc-sidebar .toc-list a:hover{color:var(--accent);background:#e0e7ff}
+    .toc-sidebar .toc-list a .ch-num-side{flex-shrink:0;min-width:1.75rem;font-weight:700;color:var(--accent)}
+    .toc-sidebar .toc-list a .ch-title-side{flex:1;min-width:0}
+    @media (max-width:991px){ .toc-sidebar .toc-header{display:none}.toc-sidebar .toc-toggle{display:flex!important} }
+
+    .content-area{min-width:0}
+    .module-block{margin-bottom:2.5rem}
+    .module-title{background:var(--header-bg);color:#fff;padding:1rem 1.25rem;border-radius:12px;margin-bottom:1.5rem;font-size:1.2rem;font-weight:700;display:flex;align-items:center;gap:0.75rem;box-shadow:0 4px 14px rgba(0,0,0,0.12)}
+    .chapter-card{background:#fff;border-radius:14px;padding:clamp(1.25rem,4vw,2rem);margin-bottom:1.5rem;box-shadow:0 4px 20px rgba(0,0,0,0.08);border:1px solid rgba(102,126,234,0.1);border-left:4px solid var(--accent)}
+    .chapter-card > .lead-in{background:linear-gradient(90deg,#e0e7ff 0%,#fff 100%);padding:0.5rem 0.75rem;border-radius:8px;border-left:3px solid var(--accent);font-size:0.9rem;margin-bottom:1rem}
+    .chapter-card h2{color:var(--accent);font-size:clamp(1.15rem,3vw,1.4rem);margin-bottom:0.75rem;padding-bottom:0.5rem;border-bottom:2px solid var(--accent-light);display:flex;align-items:center;gap:0.5rem}
+    .chapter-card .ch-num{width:2rem;height:2rem;background:var(--accent);color:#fff;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem}
+    .chapter-card h3{color:#1e40af;font-size:1.08rem;margin-top:1.25rem;margin-bottom:0.5rem}
+    .chapter-card ul,.chapter-card ol{padding-left:1.5rem;margin:0.5rem 0 1rem}
+    .chapter-card li{margin-bottom:0.35rem}
+    .info-box{background:linear-gradient(135deg,#eff6ff 0%,#e0e7ff 100%);border-left:4px solid var(--accent);padding:1rem 1.25rem;border-radius:0 10px 10px 0;margin:1rem 0}
+    .key-term{background:#f8fafc;padding:0.4rem 0.6rem;border-radius:6px;font-weight:600;color:#1e40af}
+    .q-box{background:linear-gradient(135deg,#eff6ff 0%,#dbeafe 100%);border-left:4px solid #3b82f6;padding:1rem 1.25rem;border-radius:0 10px 10px 0;margin:1rem 0}
+    .activity-box{background:linear-gradient(135deg,#fefce8 0%,#fef9c3 100%);border-left:4px solid #eab308;padding:1rem 1.25rem;border-radius:0 10px 10px 0;margin:1rem 0}
+    .table-wrap{overflow-x:auto;margin:1rem 0;border-radius:12px;border:1px solid #e2e8f0;box-shadow:0 2px 10px rgba(0,0,0,0.04)}
+    .compare-table{width:100%;border-collapse:collapse;font-size:0.9rem;background:#fff}
+    .compare-table th,.compare-table td{padding:0.65rem 0.85rem;text-align:left;border-bottom:1px solid #e2e8f0}
+    .compare-table th{background:linear-gradient(135deg,#eff6ff 0%,#e0e7ff 100%);color:#1e40af;font-weight:700}
+    .compare-table tr:hover td{background:#f8fafc}
+    .page-footer{text-align:center;padding:2rem 1rem;font-size:0.9rem;color:var(--text-muted)}
+    .book-hero{background:linear-gradient(145deg,#667eea 0%,#764ba2 100%);color:#fff;padding:2rem 1rem 2.5rem;text-align:center;border-radius:0 0 24px 24px;box-shadow:0 8px 30px rgba(102,126,234,0.35)}
+    .book-hero h1{margin:0 0 0.35rem;font-size:clamp(1.4rem,4vw,1.85rem);font-weight:800}
+    .book-hero .lead{margin:0;font-size:0.95rem;opacity:0.95}
+    .detail-block{background:#f8fafc;border-left:3px solid var(--accent);padding:1rem 1.25rem;margin:1rem 0;border-radius:0 8px 8px 0;font-size:0.95rem}
+    .detail-block strong{color:#1e40af}
+    .example-block{background:#f0fdf4;border:1px solid #86efac;padding:1rem 1.25rem;margin:1rem 0;border-radius:8px;font-size:0.9rem}
+    .example-block .ex-title{font-weight:700;color:#166534;margin-bottom:0.5rem}
+    .diagram-fig{background:linear-gradient(180deg,#f8fafc 0%,#f1f5f9 100%);border-radius:12px;padding:1.25rem;margin:1rem 0;border:1px solid #e2e8f0;text-align:center}
+    .diagram-fig .fig-title{font-weight:700;color:#1e40af;font-size:0.95rem;margin-bottom:0.75rem}
+    .diagram-fig svg{max-width:100%;height:auto;display:block;margin:0 auto}
+    .diagram-fig .fig-caption{font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem}
+    .symbol-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1rem;margin:1rem 0}
+    .symbol-item{text-align:center;padding:0.75rem;background:#fff;border-radius:8px;border:1px solid #e2e8f0}
+    .symbol-item svg{width:80px;height:80px;margin:0 auto 0.5rem;display:block}
+    .symbol-item .sym-label{font-size:0.8rem;font-weight:600;color:#1e40af}
+  </style>
+</head>
+<body>
+  <aside class="toc-sidebar" id="tocSidebar" aria-label="Chapter navigation">
+    <div class="toc-header"><i class="fas fa-list me-2"></i>Chapters</div>
+    <button type="button" class="toc-toggle" aria-expanded="false" aria-controls="tocList" id="tocToggle">
+      <span><i class="fas fa-list me-2"></i>Chapters</span>
+      <i class="fas fa-chevron-down" id="tocChevron"></i>
+    </button>
+    <div class="toc-list" id="tocList"></div>
+  </aside>
+
+  <div class="page-wrapper">
+    <div id="top"></div>
+    <div class="container-main">
+      <main class="content-area">
+
+        <section class="book-hero">
+          <h1>System Analysis and Design</h1>
+          <p class="lead">K72T001M02 / Level 05 – Teaching Notes &amp; E-book</p>
+          <p class="lead">Relevant Unit: K72T001U02 &nbsp;|&nbsp; Pre-requisite: K72T001M01</p>
+        </section>
+
+        <!-- MODULE OVERVIEW -->
+        <section id="overview" class="module-block">
+          <h2 class="module-title"><i class="fas fa-book-open me-2"></i>Module Overview</h2>
+          <article id="ch0" class="chapter-card">
+            <h2><span class="ch-num">0</span> Objectives</h2>
+            <p class="lead-in"><strong>Module aim:</strong> Apply concepts to identify, analyze, prioritize, document, and manage user requirements using requirement gathering and identification techniques.</p>
+            <h3>General Objective</h3>
+            <p>At the end of this module, students will be able to apply system analysis and design concepts to analyze requirements, produce logical designs, document components and data, use standard templates, develop test cases, and prepare the final requirement document.</p>
+            <h3>Specific Objectives</h3>
+            <ol>
+              <li>Analyze requirements specified in documentation.</li>
+              <li>Apply system analysis techniques for logical design.</li>
+              <li>Identify components and document functionality and data.</li>
+              <li>Document requirement outcomes according to standard templates.</li>
+              <li>Develop test cases based on design specifications.</li>
+              <li>Prepare the final requirement document.</li>
+            </ol>
+            <h3>What You Will Learn (In Practice)</h3>
+            <p><strong>Objective 1 – Analyze requirements:</strong> You will read requirement documents (e.g. from interviews or workshops), identify what the system must do, and extract clear, testable statements. This means spotting missing or unclear requirements and asking the right follow-up questions.</p>
+            <p><strong>Objective 2 – Apply analysis techniques:</strong> You will use tools such as Data Flow Diagrams (DFD), Use Case diagrams, and ER diagrams to model the system logically before any coding. These diagrams help everyone agree on what the system does and how data moves.</p>
+            <p><strong>Objective 3 – Identify and document components:</strong> You will break the system into parts (processes, data stores, actors, entities) and describe what each part does and what data it uses. This is the basis for design and implementation.</p>
+            <p><strong>Objective 4 – Document with standard templates:</strong> You will write requirement outcomes in a standard format (e.g. numbered requirements, SRS sections) so that designers, developers, and testers can use the same document without confusion.</p>
+            <p><strong>Objective 5 – Develop test cases:</strong> From each requirement or use case, you will write test cases (steps, expected result) so that we can later verify that the built system meets the specification.</p>
+            <p><strong>Objective 6 – Prepare final requirement document:</strong> You will produce one complete SRS that includes introduction, requirements, proposed solution, schedule, and test cases, ready for approval and handover to the development team.</p>
+          </article>
+        </section>
+
+        <!-- CHAPTERS 1–14 -->
+        <section id="chapters" class="module-block">
+          <h2 class="module-title"><i class="fas fa-graduation-cap me-2"></i>Teaching Material (Weeks 1–14)</h2>
+
+          <article id="ch1" class="chapter-card">
+            <h2><span class="ch-num">1</span> Introduction to Systems &amp; SDLC</h2>
+            <p class="lead-in"><strong>Week 1.</strong> Systems, system analysis, and SDLC concepts.</p>
+            <h3>What is a System?</h3>
+            <div class="info-box">A <strong>system</strong> is a set of interrelated components that work together to achieve a common goal. It has inputs, processing, outputs, and often feedback.</div>
+            <p>In more detail: a system takes <strong>inputs</strong> (e.g. raw data, user actions, materials), applies <strong>processing</strong> (rules, calculations, workflows), and produces <strong>outputs</strong> (reports, screens, decisions). Many systems also have <strong>feedback</strong>: the output or its effect is measured and used to adjust future inputs or processing (e.g. a thermostat adjusts heating based on current temperature).</p>
+            <p>Examples: an <em>information system</em> (inputs: transactions; process: validate, store, summarize; output: reports, screens); an <em>education system</em> (inputs: students, curriculum; process: teaching, assessment; output: qualified graduates); a <em>banking system</em> (inputs: deposits, withdrawals; process: update accounts, apply rules; output: balances, statements).</p>
+            <h3>Types of Systems</h3>
+            <ul>
+              <li><span class="key-term">Natural systems</span> – e.g. weather, human body.</li>
+              <li><span class="key-term">Physical systems</span> – e.g. machines, buildings.</li>
+              <li><span class="key-term">Abstract systems</span> – e.g. ideas, plans.</li>
+              <li><span class="key-term">Information systems</span> – collect, process, store, and distribute data to support decision-making.</li>
+            </ul>
+            <h3>Role of a System Analyst</h3>
+            <p>The system analyst acts as a <strong>bridge between business users and technical teams</strong>. Business users know what they want the system to do but may not express it in technical terms; developers know how to build software but may not understand the business. The analyst translates needs into clear, structured specifications.</p>
+            <p>Responsibilities in detail:</p>
+            <ul>
+              <li><strong>Gathering and analyzing requirements:</strong> Conduct interviews, workshops, and surveys; observe current work; study existing documents. Then filter, clarify, and prioritize what the system must do (functional requirements) and how well (non-functional requirements).</li>
+              <li><strong>Designing solutions:</strong> Produce logical models (e.g. DFDs for processes and data flow, ER diagrams for data, use cases for user actions) and suggest high-level architecture. The analyst focuses on <em>what</em> the system does and how it is structured, not on writing code.</li>
+              <li><strong>Communicating with stakeholders:</strong> Present findings, explain diagrams, run review meetings, and resolve conflicts. The analyst must be able to explain technical choices in simple language and capture feedback accurately.</li>
+              <li><strong>Documenting specifications and test cases:</strong> Write the SRS (Software/System Requirements Specification), maintain requirement IDs, and derive test cases so that testers can verify each requirement later.</li>
+            </ul>
+            <h3>System Development Life Cycle (SDLC)</h3>
+            <p>SDLC is a <strong>structured process for building information systems</strong>. It ensures that we do not jump straight to coding; we first understand the problem, specify requirements, design the solution, then implement and maintain. This reduces the risk of building the wrong system or missing critical needs.</p>
+            <p>Main phases explained briefly:</p>
+            <ol>
+              <li><strong>Planning</strong> – Define scope (what is in and out), objectives, resources, and timeline. Carry out a feasibility study (technical, economic, operational) to decide if the project should go ahead.</li>
+              <li><strong>Analysis</strong> – Gather requirements from users and stakeholders; document functional and non-functional requirements; produce a requirement specification (e.g. SRS). This module focuses heavily on this phase.</li>
+              <li><strong>Design</strong> – Logical design (what the system does: DFDs, ER, use cases) and physical design (how it is built: technology, database structure, screen layouts).</li>
+              <li><strong>Implementation</strong> – Code the system; perform unit and integration testing; conduct user acceptance testing (UAT); deploy to the live environment and train users.</li>
+              <li><strong>Maintenance</strong> – Fix defects, adapt to changes in the business or technology, and improve performance. Most of the cost of a system over its lifetime is in maintenance.</li>
+            </ol>
+            <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Review</strong><br>Define a system. Name three types. What does a system analyst do? List the SDLC phases.</div>
+          </article>
+
+          <article id="ch2" class="chapter-card">
+            <h2><span class="ch-num">2</span> System Development Life Cycle (SDLC)</h2>
+            <p class="lead-in"><strong>Week 2.</strong> SDLC phases in detail and SDLC models.</p>
+            <h3>SDLC Phases in Detail</h3>
+            <ul>
+              <li><strong>Planning:</strong> Define project scope (what will and will not be built), objectives, resources (people, budget, tools), and timeline. The <strong>feasibility study</strong> answers: Can we build it with our technology? (technical) Is it worth the cost? (economic) Will users accept it? (operational). A go/no-go decision is made at the end of planning.</li>
+              <li><strong>Analysis:</strong> Gather requirements using techniques such as interviews, surveys, observation, and workshops. Document <strong>functional requirements</strong> (what the system must do—e.g. “The system shall allow users to reset password”) and <strong>non-functional requirements</strong> (quality—e.g. “The system shall respond within 2 seconds”). The main deliverable is the <strong>requirement specification</strong> (SRS), which may include diagrams (DFD, use cases, ER) to clarify behaviour and data.</li>
+              <li><strong>Design:</strong> <strong>Logical design</strong> describes what the system does without tying it to a specific technology (DFD, ER, use cases). <strong>Physical design</strong> specifies how it will be built: chosen technology (e.g. web, mobile), database schema, screen layouts, and interfaces. Design documents are the input for implementation.</li>
+              <li><strong>Implementation:</strong> Developers build the system according to the design. <strong>Unit testing</strong> checks individual components; <strong>integration testing</strong> checks that components work together; <strong>user acceptance testing (UAT)</strong> confirms that the system meets user needs. After sign-off, the system is <strong>deployed</strong> (installed, configured) and users are trained.</li>
+              <li><strong>Maintenance:</strong> After go-live, the system is maintained: fix defects (bugs), adapt to new regulations or business rules, and improve performance or usability. Maintenance continues until the system is retired or replaced.</li>
+            </ul>
+            <h3>SDLC Models</h3>
+            <div class="table-wrap">
+              <table class="compare-table">
+                <thead><tr><th>Model</th><th>Description</th><th>When to use</th></tr></thead>
+                <tbody>
+                  <tr><td>Waterfall</td><td>Strictly sequential: Planning → Analysis → Design → Implementation → Maintenance. Each phase is completed and signed off before the next starts. Documentation is produced at each step.</td><td>When requirements are clear and stable (e.g. regulatory systems, well-defined processes). Not ideal when requirements may change often.</td></tr>
+                  <tr><td>Iterative</td><td>Repeated cycles: do a subset of design, then implement and test that subset; then add more in the next cycle. The system grows incrementally. Each iteration delivers a working (but possibly incomplete) version.</td><td>When you want early feedback and can refine requirements as you learn. Reduces risk by exposing problems early.</td></tr>
+                  <tr><td>Agile</td><td>Short time-boxed <strong>sprints</strong> (e.g. 2 weeks). Customer prioritizes a backlog; team delivers working features at the end of each sprint. Scope can change between sprints. Emphasis on collaboration and responding to change.</td><td>When requirements are expected to change and the customer wants to see progress frequently. Common in product and web development.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="detail-block"><strong>Deliverables of the Analysis phase</strong> typically include: (1) Software/System Requirements Specification (SRS) document, (2) requirement list with IDs and priorities, (3) diagrams such as context/level-0 DFD, use case diagram, and possibly ER diagram, (4) glossary of terms. These are used by designers and developers in the next phase.</div>
+            <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Review</strong><br>What are the deliverables of the Analysis phase? Compare Waterfall and Agile.</div>
+          </article>
+
+          <article id="ch3" class="chapter-card">
+            <h2><span class="ch-num">3</span> Requirement Gathering Techniques</h2>
+            <p class="lead-in"><strong>Week 3.</strong> How to gather and document requirements.</p>
+            <h3>Why Requirements Matter</h3>
+            <p>Clear, complete requirements reduce rework and help deliver the right solution. Poor or vague requirements lead to <strong>scope creep</strong> (unplanned features), <strong>delays</strong> (redo work), and <strong>user dissatisfaction</strong> (the system does not match what they needed). Many project failures are traced back to inadequate requirement gathering and documentation. Spending time in the analysis phase saves time and cost later.</p>
+            <h3>Requirement Gathering Techniques</h3>
+            <ul>
+              <li><span class="key-term">Interviews</span> – One-to-one or group discussions with users and stakeholders. Use <strong>open questions</strong> (“How do you currently process orders?”) for depth and <strong>closed questions</strong> (“Do you need a report daily or weekly?”) for specific facts. <em>Pros:</em> Rich detail, follow-up possible. <em>Cons:</em> Time-consuming; may be biased by who you interview. Prepare a list of questions in advance and take notes or record (with permission).</li>
+              <li><span class="key-term">Surveys / Questionnaires</span> – Written or online questions sent to many people. Answers are standardized (e.g. yes/no, scale 1–5, multiple choice). <em>Pros:</em> Reach many people quickly; easy to analyse quantitatively. <em>Cons:</em> Less depth; no immediate follow-up. Use when you need to know how many users do X or prefer Y, or when stakeholders are geographically spread.</li>
+              <li><span class="key-term">Observation</span> – Watch users doing their job in the real environment (e.g. at their desk, on the shop floor). You see what they actually do, which may differ from what they say. <em>Pros:</em> Reveals real workflow, bottlenecks, and workarounds. <em>Cons:</em> Requires permission and time; users may behave differently when observed. Combine with a short interview after observation to clarify what you saw.</li>
+              <li><span class="key-term">Workshops</span> – Facilitated group sessions with several stakeholders (e.g. users, managers, IT). Activities include brainstorming features, prioritization (e.g. must-have vs nice-to-have), and agreeing on scope. <em>Pros:</em> Quick agreement, shared understanding, reduced misunderstandings. <em>Cons:</em> Dominant participants may overshadow others; need a skilled facilitator.</li>
+              <li><span class="key-term">Document analysis</span> – Study existing documents: forms, reports, procedure manuals, policy documents. You understand current process, data items, and business rules. <em>Pros:</em> No need to interrupt users for basic facts. <em>Cons:</em> Documents may be outdated or incomplete. Use together with interviews to validate and fill gaps.</li>
+              <li><span class="key-term">Prototyping</span> – Build a simple, clickable version of the system (or key screens) and show it to users for feedback. <em>Pros:</em> Users find it easier to react to something they can see and touch; reveals misunderstandings early. <em>Cons:</em> Users may focus on look and feel rather than completeness of requirements. Start with low-fidelity (sketches, wireframes) before high-fidelity (realistic UI).</li>
+            </ul>
+            <h3>Documenting Requirements</h3>
+            <p>Record each requirement in a <strong>structured format</strong> so that nothing is lost and everyone reads the same thing. A typical format includes: <strong>ID</strong> (e.g. FR-001), <strong>description</strong> (clear, testable statement), <strong>type</strong> (functional or non-functional), <strong>priority</strong> (e.g. must-have, should-have, could-have), and <strong>source</strong> (e.g. interview with Manager, workshop 1). Use a standard template or a requirement management tool. Avoid vague words like “user-friendly” unless you define them (e.g. “first-time user can complete order in under 3 minutes”).</p>
+            <div class="example-block"><span class="ex-title">Example requirement entry</span><br>ID: FR-007 | Type: Functional | Priority: Must-have | Source: Interview, Librarian (12 Jan). Description: The system shall allow a librarian to search for a book by title, author, or ISBN and display availability (available / on loan / reserved).</div>
+            <div class="activity-box"><strong><i class="fas fa-tasks me-1"></i> Activity</strong><br>Design 5 interview questions for a library system. Then design 5 questionnaire items for the same system.</div>
+          </article>
+
+          <article id="ch4" class="chapter-card">
+            <h2><span class="ch-num">4</span> Data Flow Diagrams (DFD)</h2>
+            <p class="lead-in"><strong>Week 4.</strong> Symbols and drawing context and level-0 DFDs.</p>
+            <h3>What is a DFD?</h3>
+            <div class="info-box">A <strong>Data Flow Diagram (DFD)</strong> shows how data moves through a system. It uses processes, data flows, data stores, and external entities.</div>
+            <h3>DFD Symbols</h3>
+            <ul>
+              <li><span class="key-term">Process</span> – Transforms data. Shown as a circle or rounded rectangle. Label: verb + noun (e.g. Validate Order).</li>
+              <li><span class="key-term">Data flow</span> – Movement of data. Arrow with label (e.g. Order details, Customer name).</li>
+              <li><span class="key-term">Data store</span> – Where data is kept. Two parallel lines or rectangle. Label: noun (e.g. Orders, Customers).</li>
+              <li><span class="key-term">External entity</span> – Source or destination outside the system. Rectangle. E.g. Customer, Supplier, Bank.</li>
+            </ul>
+            <div class="diagram-fig">
+              <p class="fig-title">DFD symbol examples</p>
+              <div class="symbol-grid">
+                <div class="symbol-item">
+                  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="38" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/><text x="50" y="55" text-anchor="middle" font-size="11" fill="#1e40af">1.0 Process</text></svg>
+                  <span class="sym-label">Process</span>
+                </div>
+                <div class="symbol-item">
+                  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M20 50 L70 50" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow)"/><polygon id="arrow" points="0,0 10,4 10,-4" fill="#2563eb" transform="translate(70,50)"/><text x="45" y="42" text-anchor="middle" font-size="9" fill="#64748b">Order</text></svg>
+                  <span class="sym-label">Data flow</span>
+                </div>
+                <div class="symbol-item">
+                  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect x="25" y="30" width="50" height="12" fill="none" stroke="#2563eb" stroke-width="2"/><rect x="25" y="48" width="50" height="12" fill="none" stroke="#2563eb" stroke-width="2"/><text x="50" y="82" text-anchor="middle" font-size="10" fill="#1e40af">D1 Orders</text></svg>
+                  <span class="sym-label">Data store</span>
+                </div>
+                <div class="symbol-item">
+                  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect x="15" y="25" width="70" height="40" rx="4" fill="#e0e7ff" stroke="#2563eb" stroke-width="2"/><text x="50" y="50" text-anchor="middle" font-size="11" fill="#1e40af">Customer</text></svg>
+                  <span class="sym-label">External entity</span>
+                </div>
+              </div>
+              <p class="fig-caption">Process (circle), Data flow (arrow + label), Data store (parallel lines), External entity (rectangle)</p>
+            </div>
+            <div class="diagram-fig">
+              <p class="fig-title">Simple context diagram example</p>
+              <svg viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg" style="max-width:400px">
+                <rect x="20" y="60" width="80" height="40" rx="4" fill="#e0e7ff" stroke="#2563eb" stroke-width="1.5"/><text x="60" y="85" text-anchor="middle" font-size="11">Customer</text>
+                <circle cx="200" cy="80" r="50" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/><text x="200" y="75" text-anchor="middle" font-size="10">Order</text><text x="200" y="90" text-anchor="middle" font-size="10">Processing</text><text x="200" y="105" text-anchor="middle" font-size="10">System</text>
+                <rect x="300" y="60" width="80" height="40" rx="4" fill="#e0e7ff" stroke="#2563eb" stroke-width="1.5"/><text x="340" y="85" text-anchor="middle" font-size="11">Warehouse</text>
+                <path d="M100 80 L150 80" stroke="#2563eb" stroke-width="1.5"/><polygon points="155,80 148,76 148,84" fill="#2563eb"/><text x="125" y="72" text-anchor="middle" font-size="9">Order</text>
+                <path d="M250 80 L300 80" stroke="#2563eb" stroke-width="1.5"/><polygon points="295,80 288,76 288,84" fill="#2563eb"/><text x="272" y="72" text-anchor="middle" font-size="9">Confirmation</text>
+              </svg>
+              <p class="fig-caption">Customer → Order → [Order Processing System] → Confirmation → Warehouse</p>
+            </div>
+            <h3>Context Diagram (Level 0)</h3>
+            <p>The <strong>context diagram</strong> is the highest-level view: it shows the system as <strong>one process</strong> in the centre, surrounded by <strong>external entities</strong>. Arrows show <strong>data flows in and out</strong>. There are <strong>no data stores</strong> here because stores are inside the system boundary. <strong>How to draw:</strong> (1) Write the system name in the centre process. (2) List who sends data in and who receives data out. (3) Draw arrows to/from the centre and label each with the data (e.g. Order, Confirmation, Invoice).</p>
+            <h3>Level-0 DFD</h3>
+            <p>The <strong>level-0 DFD</strong> explodes the single process into <strong>major sub-processes</strong> (typically 3 to 7). Show data flows between processes and to/from <strong>data stores</strong> and <strong>external entities</strong>. Number processes 1.0, 2.0, 3.0. Each process should do one main function (e.g. 1.0 Validate Order, 2.0 Check Stock). <strong>Rules:</strong> Every data flow must connect to a process. Process names: verb + noun. Data flow names: noun or noun phrase. When you create level-1, inputs and outputs of the child must match the parent (balancing).</p>
+            <div class="detail-block"><strong>Common mistakes:</strong> Forgetting to label a data flow; using vague process names (e.g. "Process data"); showing control flow instead of data; putting data stores in the context diagram.</div>
+            <h3>Rules</h3>
+            <ul>
+              <li>Every data flow must connect to a process.</li>
+              <li>Process names: verb + noun. Data flow names: noun or noun phrase.</li>
+              <li>Balance: inputs and outputs at child level must match parent.</li>
+            </ul>
+            <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Review</strong><br>Draw a context diagram for a simple “Order Processing” system. Then draw a level-0 DFD with at least 3 processes.</div>
+          </article>
+
+          <article id="ch5" class="chapter-card">
+            <h2><span class="ch-num">5</span> DFD Leveling &amp; Case Study</h2>
+            <p class="lead-in"><strong>Week 5.</strong> Level-1 and level-2 DFDs; balancing; full case study.</p>
+            <h3>Leveling</h3>
+            <p><strong>Leveling</strong> means breaking one process into smaller sub-processes. For example, process <strong>1.0</strong> in the level-0 DFD becomes a separate diagram (level-1) with processes <strong>1.1</strong>, <strong>1.2</strong>, <strong>1.3</strong>, etc. If one of those is still too complex, you can level again: 1.1 becomes 1.1.1, 1.1.2, 1.1.3 in a level-2 DFD. Stop leveling when each process is simple enough to describe in a few sentences or when you have reached a reasonable level of detail for your audience.</p>
+            <h3>Balancing</h3>
+            <p><strong>Balancing</strong> means that the child DFD must have exactly the same inputs and outputs as the parent process. For example, if in level-0 process 2.0 has one input flow “Order” and one output flow “Confirmation”, then the level-1 diagram that expands 2.0 must show “Order” entering the diagram (from an entity or another process) and “Confirmation” leaving it. You cannot add new external inputs or outputs at the child level that were not at the parent. Internal flows between 2.1, 2.2, 2.3 and internal data stores used only inside 2.0 are allowed. Checking balance avoids inconsistencies and missing data.</p>
+            <div class="example-block"><span class="ex-title">Balancing example</span><br>Parent: Process 3.0 “Create Invoice” has input “Approved Order” and output “Invoice”. Child (level-1 for 3.0): “Approved Order” must enter (e.g. into 3.1); “Invoice” must leave (e.g. from 3.3). Flows between 3.1→3.2→3.3 and a data store “Orders” used only inside this diagram are fine.</div>
+            <h3>Case Study Approach</h3>
+            <ol>
+              <li><strong>Read the case</strong> and list external entities (who sends/receives data?), main processes (what does the system do?), and data stores (where is data kept?). Underline key nouns (entities, data) and verbs (actions, processes).</li>
+              <li><strong>Draw the context diagram</strong>: one process (system name), entities, and main data flows in/out. Get it reviewed before going deeper.</li>
+              <li><strong>Draw level-0:</strong> Break the system into 3–7 major processes. Show flows between them and to/from entities and data stores. Number processes 1.0, 2.0, …</li>
+              <li><strong>Choose one or two processes to level</strong> (usually the most complex). Draw level-1; ensure every input and output of the parent process appears in the child. Label internal flows clearly.</li>
+            </ol>
+            <div class="activity-box"><strong><i class="fas fa-tasks me-1"></i> Assignment</strong><br>For a given case (e.g. Library, Hospital OPD), produce context, level-0, and one level-1 DFD. Ensure balancing.</div>
+          </article>
+
+          <article id="ch6" class="chapter-card">
+            <h2><span class="ch-num">6</span> Use Case Diagrams (UML)</h2>
+            <p class="lead-in"><strong>Week 6.</strong> UML use cases: actors, use cases, relationships.</p>
+            <h3>What is a Use Case?</h3>
+            <div class="info-box">A <strong>use case</strong> is a goal that an actor wants to achieve with the system. The diagram shows actors, use cases, and relationships between them.</div>
+            <h3>Elements</h3>
+            <ul>
+              <li><span class="key-term">Actor</span> – User or external system that interacts with the system. Shown as a stick figure or rectangle. E.g. Customer, Admin, Payment Gateway.</li>
+              <li><span class="key-term">Use case</span> – Action or function. Oval. Name: verb phrase (e.g. Place Order, Login, Generate Report).</li>
+              <li><span class="key-term">Association</span> – Line between actor and use case (actor participates in that use case).</li>
+              <li><span class="key-term">Include</span> – One use case always includes another (e.g. Place Order includes Validate Payment). Arrow from base to included, stereotype «include».</li>
+              <li><span class="key-term">Extend</span> – Optional extension (e.g. Login may extend with Reset Password). Arrow from extension to base, stereotype «extend».</li>
+            </ul>
+            <div class="diagram-fig">
+              <p class="fig-title">Use case diagram symbols</p>
+              <div class="symbol-grid">
+                <div class="symbol-item">
+                  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="28" r="10" fill="none" stroke="#2563eb" stroke-width="2"/><line x1="50" y1="38" x2="50" y2="58" stroke="#2563eb" stroke-width="2"/><line x1="30" y1="70" x2="70" y2="70" stroke="#2563eb" stroke-width="2"/><line x1="50" y1="58" x2="35" y2="70" stroke="#2563eb" stroke-width="2"/><line x1="50" y1="58" x2="65" y2="70" stroke="#2563eb" stroke-width="2"/><line x1="50" y1="58" x2="50" y2="68" stroke="#2563eb" stroke-width="2"/></svg>
+                  <span class="sym-label">Actor</span>
+                </div>
+                <div class="symbol-item">
+                  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><ellipse cx="50" cy="50" rx="38" ry="22" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/><text x="50" y="54" text-anchor="middle" font-size="9" fill="#1e40af">Login</text></svg>
+                  <span class="sym-label">Use case</span>
+                </div>
+                <div class="symbol-item">
+                  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><line x1="20" y1="50" x2="80" y2="50" stroke="#2563eb" stroke-width="1.5"/><text x="50" y="85" text-anchor="middle" font-size="9">Association</text></svg>
+                  <span class="sym-label">Association</span>
+                </div>
+                <div class="symbol-item">
+                  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 20 L50 45 M50 55 L65 75 M50 55 L35 75" stroke="#2563eb" stroke-width="1.5" fill="none"/><polygon points="65,75 58,72 62,75 58,78" fill="#2563eb"/><text x="50" y="92" text-anchor="middle" font-size="8">&#171;include&#187;</text></svg>
+                  <span class="sym-label">Include</span>
+                </div>
+              </div>
+              <p class="fig-caption">Actor (stick figure), Use case (oval), Association (line), Include (arrow + stereotype)</p>
+            </div>
+            <h3>Include vs Extend (Detailed)</h3>
+            <p><strong>«include»</strong>: The base use case <em>always</em> includes the included use case. Example: “Place Order” always includes “Validate Payment”—you cannot place an order without validating payment. The arrow goes from the base (Place Order) to the included (Validate Payment). Use include when one use case is a required sub-step.</p>
+            <p><strong>«extend»</strong>: The extending use case is <em>optional</em>; it adds behaviour to the base under certain conditions. Example: “Login” may be extended by “Reset Password” when the user has forgotten the password. The arrow goes from the extending use case (Reset Password) to the base (Login). Use extend when the base is complete on its own but can optionally be extended.</p>
+            <h3>Drawing Tips</h3>
+            <p>(1) <strong>Identify actors</strong> from requirements: who interacts with the system? (users, other systems). (2) <strong>List use cases</strong>: what goals can each actor achieve? Use verb phrases (Login, View Balance, Generate Report). (3) <strong>Connect</strong> actors to use cases with lines (association). (4) Add <strong>«include»</strong> when a use case always calls another; add <strong>«extend»</strong> when one use case optionally extends another. (5) Place the system boundary (rectangle) around use cases if you want to show what is inside the system.</p>
+            <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Review</strong><br>Draw a use case diagram for an Online Book Store with at least 2 actors and 5 use cases. Use one «include» relationship.</div>
+          </article>
+
+          <article id="ch7" class="chapter-card">
+            <h2><span class="ch-num">7</span> ER / EER Diagrams</h2>
+            <p class="lead-in"><strong>Week 7.</strong> Entity-Relationship and Enhanced ER modelling.</p>
+            <h3>ER Diagram Concepts</h3>
+            <ul>
+              <li><span class="key-term">Entity</span> – Something we store data about (e.g. Student, Course, Order). Rectangle.</li>
+              <li><span class="key-term">Attribute</span> – Property of an entity (e.g. StudentID, Name, DoB). Oval or listed in entity box. Underline key attribute(s).</li>
+              <li><span class="key-term">Relationship</span> – How entities are related (e.g. Student enrolls in Course). Diamond or line. Cardinality: 1:1, 1:N, M:N.</li>
+            </ul>
+            <div class="diagram-fig">
+              <p class="fig-title">ER diagram symbols</p>
+              <div class="symbol-grid">
+                <div class="symbol-item">
+                  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect x="20" y="25" width="60" height="50" rx="2" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/><text x="50" y="42" text-anchor="middle" font-size="10" font-weight="bold">Student</text><text x="50" y="58" text-anchor="middle" font-size="9">StudentID</text><text x="50" y="70" text-anchor="middle" font-size="9">Name</text></svg>
+                  <span class="sym-label">Entity</span>
+                </div>
+                <div class="symbol-item">
+                  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><ellipse cx="50" cy="50" rx="28" ry="18" fill="#e0e7ff" stroke="#2563eb" stroke-width="1.5"/><text x="50" y="55" text-anchor="middle" font-size="9">Name</text></svg>
+                  <span class="sym-label">Attribute</span>
+                </div>
+                <div class="symbol-item">
+                  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 15 L75 50 L50 85 L25 50 Z" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/><text x="50" y="54" text-anchor="middle" font-size="8">enrolls</text></svg>
+                  <span class="sym-label">Relationship</span>
+                </div>
+                <div class="symbol-item">
+                  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect x="25" y="20" width="50" height="25" fill="#dbeafe" stroke="#2563eb"/><text x="50" y="37" text-anchor="middle" font-size="9">Person</text><line x1="50" y1="45" x2="50" y2="55" stroke="#2563eb"/><rect x="15" y="55" width="35" height="22" fill="#e0e7ff" stroke="#2563eb"/><text x="32" y="70" text-anchor="middle" font-size="8">Student</text><rect x="50" y="55" width="35" height="22" fill="#e0e7ff" stroke="#2563eb"/><text x="67" y="70" text-anchor="middle" font-size="8">Staff</text></svg>
+                  <span class="sym-label">EER (super/subtype)</span>
+                </div>
+              </div>
+              <p class="fig-caption">Entity (rectangle), Attribute (oval), Relationship (diamond), EER supertype/subtype</p>
+            </div>
+            <h3>Cardinality</h3>
+            <p><strong>Cardinality</strong> says how many instances of one entity relate to how many of the other. <strong>One-to-One (1:1):</strong> e.g. one employee has one staff ID card. <strong>One-to-Many (1:N):</strong> e.g. one department has many employees; one order has many order lines. <strong>Many-to-Many (M:N):</strong> e.g. many students enroll in many courses. Show cardinality on the relationship (e.g. 1 next to Department, N next to Employee). In some notations you use 1, N, or * (meaning many).</p>
+            <h3>Attributes: Key, Simple, Composite, Multivalued</h3>
+            <p><strong>Key attribute</strong> (primary key): uniquely identifies an entity instance (e.g. StudentID). Underline it. <strong>Simple attribute:</strong> single value (e.g. Name, Age). <strong>Composite attribute:</strong> can be split (e.g. Address into Street, City, PostCode). <strong>Multivalued attribute:</strong> more than one value (e.g. Phone numbers); often moved to a separate entity in normalized design.</p>
+            <h3>EER (Enhanced ER)</h3>
+            <p><strong>EER</strong> adds <strong>supertype/subtype</strong> (inheritance). A <strong>supertype</strong> is a general entity (e.g. Person); <strong>subtypes</strong> are special cases (e.g. Student, Staff). Subtypes inherit all attributes of the supertype and may have additional attributes. This avoids repeating common attributes and models is-a relationships. Notation: supertype connected to subtypes via a circle with IS-A or a discriminator attribute (e.g. PersonType: Student | Staff).</p>
+            <h3>Drawing an ER Diagram</h3>
+            <ol>
+              <li>Identify entities from requirements.</li>
+              <li>List attributes and primary keys.</li>
+              <li>Identify relationships and cardinality.</li>
+              <li>Add subtypes if some entities are special cases of another.</li>
+            </ol>
+            <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Review</strong><br>Draw an ER diagram for a Library (Members, Books, Loans). Show attributes and cardinality. Optionally use EER for Member subtypes (e.g. Student Member, Staff Member).</div>
+          </article>
+
+          <article id="ch8" class="chapter-card">
+            <h2><span class="ch-num">8</span> Flowcharts &amp; Pseudocode</h2>
+            <p class="lead-in"><strong>Week 8.</strong> Representing logic with flowcharts and pseudocode.</p>
+            <h3>Flowchart Symbols</h3>
+            <ul>
+              <li><strong>Start/End</strong> – Oval</li>
+              <li><strong>Process</strong> – Rectangle (e.g. “Calculate total”)</li>
+              <li><strong>Decision</strong> – Diamond (Yes/No or True/False)</li>
+              <li><strong>Input/Output</strong> – Parallelogram (e.g. “Read price”, “Print total”)</li>
+              <li><strong>Flow line</strong> – Arrow (direction of flow)</li>
+            </ul>
+            <div class="diagram-fig">
+              <p class="fig-title">Flowchart symbol examples</p>
+              <div class="symbol-grid">
+                <div class="symbol-item">
+                  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><ellipse cx="50" cy="50" rx="40" ry="25" fill="#d1fae5" stroke="#059669" stroke-width="2"/><text x="50" y="54" text-anchor="middle" font-size="10">START</text></svg>
+                  <span class="sym-label">Start/End</span>
+                </div>
+                <div class="symbol-item">
+                  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect x="15" y="30" width="70" height="40" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/><text x="50" y="55" text-anchor="middle" font-size="9">Process</text></svg>
+                  <span class="sym-label">Process</span>
+                </div>
+                <div class="symbol-item">
+                  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 15 L85 50 L50 85 L15 50 Z" fill="#fef3c7" stroke="#d97706" stroke-width="2"/><text x="50" y="48" text-anchor="middle" font-size="8">Yes</text><text x="50" y="60" text-anchor="middle" font-size="8">No?</text></svg>
+                  <span class="sym-label">Decision</span>
+                </div>
+                <div class="symbol-item">
+                  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M35 25 L65 25 L75 45 L65 65 L35 65 L25 45 Z" fill="#e0e7ff" stroke="#2563eb" stroke-width="2"/><text x="50" y="52" text-anchor="middle" font-size="8">Read/Print</text></svg>
+                  <span class="sym-label">Input/Output</span>
+                </div>
+                <div class="symbol-item">
+                  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M20 50 L60 50" stroke="#64748b" stroke-width="2"/><polygon points="68,50 60,45 60,55" fill="#64748b"/></svg>
+                  <span class="sym-label">Flow line</span>
+                </div>
+              </div>
+              <p class="fig-caption">Start/End (oval), Process (rectangle), Decision (diamond), Input/Output (parallelogram), Flow line (arrow)</p>
+            </div>
+            <div class="diagram-fig">
+              <p class="fig-title">Simple flowchart example: Check even/odd</p>
+              <svg viewBox="0 0 280 260" xmlns="http://www.w3.org/2000/svg" style="max-width:280px">
+                <ellipse cx="140" cy="25" rx="50" ry="18" fill="#d1fae5" stroke="#059669" stroke-width="1.5"/><text x="140" y="29" text-anchor="middle" font-size="10">START</text>
+                <path d="M140 43 L140 62" stroke="#64748b" stroke-width="1.5"/><polygon points="140,65 137,58 143,58" fill="#64748b"/>
+                <rect x="90" y="62" width="100" height="36" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><text x="140" y="82" text-anchor="middle" font-size="9">Read number n</text>
+                <path d="M140 98 L140 115" stroke="#64748b" stroke-width="1.5"/><polygon points="140,118 137,111 143,111" fill="#64748b"/>
+                <path d="M140 115 L195 115 L215 145 L195 175 L140 175 L120 145 Z" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/><text x="140" y="138" text-anchor="middle" font-size="8">n % 2</text><text x="140" y="150" text-anchor="middle" font-size="8">= 0?</text>
+                <path d="M120 145 L85 145" stroke="#64748b" stroke-width="1.5"/><polygon points="82,145 89,142 89,148" fill="#64748b"/><text x="100" y="138" font-size="8">Yes</text>
+                <path d="M215 145 L250 145" stroke="#64748b" stroke-width="1.5"/><polygon points="253,145 246,142 246,148" fill="#64748b"/><text x="230" y="138" font-size="8">No</text>
+                <rect x="30" y="130" width="55" height="30" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><text x="57" y="148" text-anchor="middle" font-size="8">Print Even</text>
+                <rect x="225" y="130" width="55" height="30" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><text x="252" y="148" text-anchor="middle" font-size="8">Print Odd</text>
+                <path d="M57 160 L57 220 L140 220 L140 193" stroke="#64748b" stroke-width="1.5"/><polygon points="140,190 137,197 143,197" fill="#64748b"/>
+                <path d="M252 160 L252 220 L140 220" stroke="#64748b" stroke-width="1.5"/><polygon points="140,190 137,197 143,197" fill="#64748b"/>
+                <ellipse cx="140" cy="235" rx="50" ry="18" fill="#fecaca" stroke="#dc2626" stroke-width="1.5"/><text x="140" y="239" text-anchor="middle" font-size="10">END</text>
+              </svg>
+              <p class="fig-caption">Flow: START → Read n → Decision (n%2=0?) → Yes: Print Even → END; No: Print Odd → END</p>
+            </div>
+            <h3>Pseudocode</h3>
+            <p><strong>Pseudocode</strong> is an informal, language-like description of logic. It is not a real programming language but is easy to read and later translate into code. Use keywords such as START, END, READ, PRINT, IF…THEN…ELSE, WHILE, FOR, and use <strong>indentation</strong> to show blocks (what is inside the IF, inside the loop). Use meaningful variable names (e.g. totalPrice, customerName).</p>
+            <div class="info-box"><strong>Example.</strong> READ price, quantity. total = price * quantity. IF total > 1000 THEN discount = 0.1 * total ELSE discount = 0. END IF. PRINT total - discount.</div>
+            <p><strong>Conventions:</strong> One statement per line; use = for assignment; use indentation for nested blocks; capitalize keywords if you like (IF, THEN, ELSE, WHILE, FOR).</p>
+            <h3>When to Use</h3>
+            <p><strong>Flowcharts</strong> are good when you want to show flow and decisions visually (e.g. to explain to a stakeholder or to spot missing branches). <strong>Pseudocode</strong> is good when you are designing an algorithm and plan to code it next; it is closer to actual code and easier to translate. Both can represent the same logic—choose based on audience and purpose.</p>
+            <div class="activity-box"><strong><i class="fas fa-tasks me-1"></i> In-class task</strong><br>Draw a flowchart for “Check if a number is even or odd”. Then write the same logic in pseudocode.</div>
+          </article>
+
+          <article id="ch9" class="chapter-card">
+            <h2><span class="ch-num">9</span> UI/UX Design Principles</h2>
+            <p class="lead-in"><strong>Week 9.</strong> User interface and user experience basics.</p>
+            <h3>UI vs UX</h3>
+            <p><span class="key-term">UI (User Interface)</span> – What the user sees and touches (buttons, forms, layout). <span class="key-term">UX (User Experience)</span> – Overall experience: ease of use, clarity, satisfaction.</p>
+            <h3>Key Principles</h3>
+            <ul>
+              <li><strong>Consistency</strong> – Same actions and patterns across screens (e.g. Save always in same place).</li>
+              <li><strong>Feedback</strong> – System responds to user actions (messages, loading, success/error).</li>
+              <li><strong>Simplicity</strong> – Only necessary elements; avoid clutter.</li>
+              <li><strong>Visibility</strong> – Important options and status are visible.</li>
+              <li><strong>Accessibility</strong> – Usable by people with different abilities (contrast, labels, keyboard).</li>
+            </ul>
+            <h3>Wireframes and Prototypes</h3>
+            <p>A <strong>wireframe</strong> is a simple sketch of layout: boxes for header, navigation, main content, buttons, and key elements. No colours or real text needed—focus on structure and placement. A <strong>prototype</strong> can be a clickable version that shows user flow (e.g. click Login → see dashboard). Start with <strong>low-fidelity</strong> (paper sketch or simple tool like Balsamiq) to get feedback on structure; then move to <strong>high-fidelity</strong> (realistic look and feel) if needed. Wireframes and prototypes help users and designers agree on the UI before development.</p>
+            <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Review</strong><br>Sketch a wireframe for a login screen. Label main elements and explain one UI principle you applied.</div>
+          </article>
+
+          <article id="ch10" class="chapter-card">
+            <h2><span class="ch-num">10</span> System Requirements Specification (SRS) – Introduction</h2>
+            <p class="lead-in"><strong>Week 10.</strong> Purpose and structure of an SRS document.</p>
+            <h3>What is an SRS?</h3>
+            <div class="info-box">A <strong>Software/System Requirements Specification (SRS)</strong> is a document that describes what the system must do (functional requirements), how well it must do it (non-functional requirements), and other constraints. It is the contract between stakeholders and the development team.</div>
+            <h3>Purpose</h3>
+            <p>The SRS serves as (1) a <strong>single reference</strong> for what the system must do, so that business, design, development, and testing all work from the same document; (2) a way to <strong>reduce misunderstandings</strong> by stating requirements clearly and in one place; (3) a basis for <strong>design</strong> (designers use it to produce technical design), <strong>testing</strong> (test cases are derived from requirements), and <strong>acceptance</strong> (the customer signs off against the SRS).</p>
+            <h3>Typical SRS Sections</h3>
+            <ol>
+              <li>Introduction (purpose, scope, definitions)</li>
+              <li>Executive summary</li>
+              <li>Overall description (product perspective, user classes, constraints)</li>
+              <li>Functional requirements</li>
+              <li>Non-functional requirements (performance, security, usability)</li>
+              <li>Proposed solution / design overview</li>
+              <li>Appendices (diagrams, glossary, test cases)</li>
+            </ol>
+            <h3>Sources for SRS</h3>
+            <p>Interviews, workshops, existing documents, DFDs, use cases, ER diagrams, and earlier requirement lists.</p>
+            <div class="activity-box"><strong><i class="fas fa-tasks me-1"></i> Draft preparation</strong><br>Select a project. Create an SRS outline with section headings. Draft the Introduction and Scope (1–2 paragraphs).</div>
+          </article>
+
+          <article id="ch11" class="chapter-card">
+            <h2><span class="ch-num">11</span> SRS Structure (Executive Summary, Requirements)</h2>
+            <p class="lead-in"><strong>Week 11.</strong> Writing executive summary and requirements sections.</p>
+            <h3>Executive Summary</h3>
+            <p>The <strong>executive summary</strong> is a short overview (often one page) for managers and decision-makers who may not read the full document. It should state: (1) <strong>What</strong> the project is (system name, purpose); (2) <strong>Main goals</strong> (what problem it solves or what opportunity it supports); (3) <strong>Key features</strong> (3–5 high-level capabilities); (4) <strong>Main benefits</strong> (e.g. faster processing, fewer errors, better reporting). Write it <em>after</em> you have the rest of the SRS so you can summarize accurately. Use clear, non-technical language.</p>
+            <h3>Structuring Requirements</h3>
+            <ul>
+              <li>Number requirements (e.g. FR-001, FR-002 for functional; NFR-001 for non-functional).</li>
+              <li>One requirement per statement; use “The system shall…” for functional.</li>
+              <li>Group by feature or module (e.g. User Management, Order Processing).</li>
+              <li>Include diagrams (DFD, use case, ER) in the document and refer to them in the text.</li>
+            </ul>
+            <h3>Traceability</h3>
+            <p>Trace requirements to their source (e.g. interview, use case) and later to design and test cases. This helps ensure nothing is missed.</p>
+            <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Draft review</strong><br>Review your draft: Are requirements numbered? Is each statement clear and testable? Do diagrams match the text?</div>
+          </article>
+
+          <article id="ch12" class="chapter-card">
+            <h2><span class="ch-num">12</span> Proposed Solution &amp; Schedule Structure</h2>
+            <p class="lead-in"><strong>Week 12.</strong> Describing the solution and project schedule in the SRS.</p>
+            <h3>Proposed Solution Section</h3>
+            <p>This section describes <strong>how</strong> the system will be built at a high level. Include: (1) <strong>Architecture</strong>—e.g. web application, client–server, mobile app; (2) <strong>Main technologies</strong>—e.g. database (MySQL, PostgreSQL), backend (Java, .NET), frontend (React, Angular), or generic categories if specific tools are not yet chosen; (3) <strong>How major requirements will be met</strong>—e.g. “User management will use role-based access; orders will be stored in a relational database and validated via business rules.” Refer to your DFDs and use cases where they support the description.</p>
+            <h3>Schedule Structure</h3>
+            <p>Show the <strong>project timeline</strong> so that stakeholders know when to expect deliverables. Use <strong>phases or milestones</strong> (e.g. Requirements complete, Design complete, Development complete, Testing complete, Go-live). Present in a simple table (Phase, Start date, End date, Deliverable) or a Gantt chart. Be <strong>realistic</strong> about time and show <strong>dependencies</strong> (e.g. design must finish before development starts).</p>
+            <h3>Group Work</h3>
+            <p>In groups, complete the proposed solution and schedule for your project. Peer-review each other’s SRS for clarity and completeness.</p>
+            <div class="activity-box"><strong><i class="fas fa-tasks me-1"></i> Workshop</strong><br>Add “Proposed Solution” and “Schedule” sections to your SRS. Include at least 4 milestones with target dates.</div>
+          </article>
+
+          <article id="ch13" class="chapter-card">
+            <h2><span class="ch-num">13</span> Test Case Development</h2>
+            <p class="lead-in"><strong>Week 13.</strong> Writing test cases from design and requirements.</p>
+            <h3>What is a Test Case?</h3>
+            <div class="info-box">A <strong>test case</strong> describes one test: preconditions, steps to run, expected result, and (when run) actual result. It is used to verify that the system meets requirements.</div>
+            <h3>Test Case Components</h3>
+            <ul>
+              <li>Test case ID</li>
+              <li>Requirement ID (traceability)</li>
+              <li>Description / objective</li>
+              <li>Preconditions</li>
+              <li>Test steps (numbered)</li>
+              <li>Expected result</li>
+              <li>Actual result (filled during execution)</li>
+              <li>Pass / Fail</li>
+            </ul>
+            <h3>Deriving Test Cases from Requirements</h3>
+            <p>For each functional requirement, ask: “What would we do to check this?” Write at least one <strong>positive test</strong> (normal case, valid input, expected behaviour) and, where useful, <strong>negative tests</strong> (invalid input, wrong user) and <strong>boundary tests</strong> (min/max values). Use cases and DFDs help identify scenarios. Trace each test case to a requirement ID for coverage.</p>
+            <div class="example-block"><span class="ex-title">Example</span><br>Requirement FR-012: The system shall allow login with valid username and password. Test cases: TC-012a (positive: valid credentials → success); TC-012b (negative: wrong password → error message); TC-012c (negative: empty username → validation message).</div>
+            <h3>Where to Put Test Cases in SRS</h3>
+            <p>Either in an appendix “Test Cases” or in a separate test specification document. In the SRS, you can list “Test case IDs” under each requirement for traceability.</p>
+            <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Review</strong><br>Write 3 test cases for one requirement (e.g. “User can login with valid username and password”). Use the standard format.</div>
+          </article>
+
+          <article id="ch14" class="chapter-card">
+            <h2><span class="ch-num">14</span> Final SRS Preparation &amp; Presentation</h2>
+            <p class="lead-in"><strong>Week 14.</strong> Completing the SRS and presenting it (Group Assignment 60%).</p>
+            <h3>Final SRS Checklist</h3>
+            <ul>
+              <li>All sections complete (intro, executive summary, requirements, proposed solution, schedule, appendices).</li>
+              <li>Requirements numbered and traceable; no duplicates or contradictions.</li>
+              <li>Diagrams included and referred to in text (DFD, use case, ER as applicable).</li>
+              <li>Test cases section or appendix with at least a sample set.</li>
+              <li>Consistent formatting, table of contents, and page numbers.</li>
+              <li>Spell-check and proofread.</li>
+            </ul>
+            <h3>Presentation Guidelines</h3>
+            <p>Present <strong>key parts</strong> in a clear order: (1) project aim and scope; (2) main requirements (summarize; refer to numbering); (3) proposed solution (architecture, technology); (4) one or two sample test cases to show traceability. Use <strong>slides</strong> (title, bullet points, one or two diagrams); avoid long paragraphs. <strong>Keep to time</strong>; rehearse. Prepare for <strong>questions</strong> on requirements (e.g. “Why did you prioritise this?”), design (e.g. “Why this architecture?”), and test cases (e.g. “How do you test this requirement?”).</p>
+            <h3>Group Assignment (60%)</h3>
+            <p><strong>Deliverables:</strong> (1) Final SRS document (complete, formatted, with all sections and diagrams); (2) Group presentation (typically 10–15 minutes plus Q&amp;A). <strong>Marking</strong> typically covers: completeness and clarity of the SRS; quality and correctness of requirements and diagrams (DFD, use case, ER); structure and traceability (numbering, test cases linked to requirements); and presentation delivery (clarity, timekeeping, handling of questions).</p>
+            <div class="info-box"><strong>Tip.</strong> Rehearse the presentation. Assign roles (who presents which section). Have one person handle questions or share the role.</div>
+          </article>
+
+        </section>
+
+        <footer class="page-footer">
+          <p><strong>Department of Information and Communication Technology – SLGTI</strong></p>
+          <p class="mb-0">System Analysis and Design (K72T001M02) – Teaching Notes &amp; E-book</p>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      var toc = document.getElementById('tocList');
+      var cards = document.querySelectorAll('.chapter-card');
+      if (!toc || !cards.length) return;
+      cards.forEach(function(card, i) {
+        var id = card.id;
+        var num = card.querySelector('.ch-num');
+        var title = card.querySelector('h2');
+        if (!id || !title) return;
+        var numText = num ? num.textContent : (i + 1);
+        var titleText = title.innerText.replace(/^\s*\d+\s*/, '').trim();
+        var a = document.createElement('a');
+        a.href = '#' + id;
+        a.innerHTML = '<span class="ch-num-side">' + numText + '</span><span class="ch-title-side">' + titleText + '</span>';
+        toc.appendChild(a);
+      });
+      var toggle = document.getElementById('tocToggle');
+      var list = document.getElementById('tocList');
+      var chevron = document.getElementById('tocChevron');
+      if (toggle && list) {
+        toggle.addEventListener('click', function() {
+          var open = list.classList.toggle('toc-open');
+          toggle.setAttribute('aria-expanded', open);
+          if (chevron) chevron.style.transform = open ? 'rotate(180deg)' : '';
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

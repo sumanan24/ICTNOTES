@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Training Plan - System Analysis and Design</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e8f0f5 100%);
+      padding-top: 36px;
+      line-height: 1.7;
+      color: #2d3748;
+    }
+
+    .module-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 2.5rem 0;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .module-header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .module-header .lead {
+      font-size: 1.05rem;
+      opacity: 0.95;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    .content-card {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      margin-bottom: 2rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .content-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .content-card h3 {
+      color: #1e40af;
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 3px solid #e0e7ff;
+    }
+
+    .info-badge {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #4338ca;
+      padding: 0.4rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin: 0.2rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 1rem 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      width: 100%;
+      display: block;
+      background: white;
+    }
+
+    table {
+      width: 100%;
+      font-size: 0.95rem;
+      border-collapse: separate;
+      border-spacing: 0;
+      min-width: 600px;
+    }
+
+    table th {
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      font-weight: 700;
+      border: 1px solid #e2e8f0;
+      padding: 0.9rem 0.75rem;
+      text-align: left;
+      color: #1e293b;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    table td {
+      border: 1px solid #e2e8f0;
+      vertical-align: top;
+      padding: 0.9rem 0.75rem;
+      background: white;
+    }
+
+    table tbody tr:nth-child(even) {
+      background: #fafbfc;
+    }
+
+    .content-card-weeks {
+      background: #f3f4f6;
+    }
+
+    .week-card {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 1.4rem 1.5rem;
+      margin-top: 1.2rem;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+      border: 1px solid #e5e7eb;
+    }
+
+    .week-card h4 {
+      margin-top: 0;
+      margin-bottom: 0.75rem;
+      padding: 0.7rem 1rem;
+      background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+      color: #ffffff;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .content-card-weeks h5 {
+      font-size: 1rem;
+      margin-top: 1.1rem;
+      margin-bottom: 0.4rem;
+      color: #1f2937;
+      font-weight: 600;
+    }
+
+    .content-card-weeks p,
+    .content-card-weeks ul {
+      margin-bottom: 0.75rem;
+    }
+
+    .page-footer {
+      margin-top: 2rem;
+      padding: 1.25rem;
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      color: rgba(255, 255, 255, 0.9);
+      text-align: center;
+      font-size: 0.95rem;
+      border-radius: 0 0 15px 15px;
+    }
+
+    .page-footer p {
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      body { padding-top: 28px; font-size: 0.95rem; }
+      .module-header h1 { font-size: 1.5rem; }
+      .content-card { padding: 1.4rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="module-header">
+    <div class="container">
+      <h1>System Analysis and Design</h1>
+      <p class="lead mb-2">
+        Module Code: <strong>K72T001M02</strong> / Level 05 &nbsp;|&nbsp;
+        Module Type: <strong>Compulsory</strong> &nbsp;|&nbsp;
+        Relevant Unit/s: <strong>K72T001U02</strong> &nbsp;|&nbsp;
+        Pre-requisite: <strong>K72T001M01</strong>
+      </p>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- Module Aim -->
+    <div class="content-card">
+      <h3><i class="fas fa-bullseye text-primary"></i> Module Aim</h3>
+      <p class="mb-0">
+        To enable the students to apply concepts related to identifying, analyzing, prioritizing, documenting, and managing user requirements for software solutions by applying requirement gathering and requirement identification techniques.
+      </p>
+    </div>
+
+    <!-- General Objective -->
+    <div class="content-card">
+      <h3><i class="fas fa-bullseye text-primary"></i> General Objective</h3>
+      <p class="mb-0">
+        At the end of this module, students will be able to apply system analysis and design concepts to analyze requirements from documentation, produce logical designs using appropriate techniques, identify and document system components and data, document requirement outcomes using standard templates, develop test cases from design specifications, and prepare a complete requirement document.
+      </p>
+    </div>
+
+    <!-- Specific Objectives -->
+    <div class="content-card">
+      <h3><i class="fas fa-graduation-cap text-primary"></i> Specific Objectives</h3>
+      <p class="mb-2">At the end of this module the student shall be able to:</p>
+      <ol>
+        <li>Analyze requirements specified in documentation and extract key information for design and implementation.</li>
+        <li>Apply system analysis techniques to produce a logical design for a given software solution.</li>
+        <li>Identify system components and document functionality and data flows using appropriate notations.</li>
+        <li>Document requirement outcomes according to standard templates and conventions.</li>
+        <li>Develop test cases based on design specifications to verify and validate the solution.</li>
+        <li>Prepare the final requirement document incorporating analysis, design, and test specifications.</li>
+      </ol>
+    </div>
+
+    <!-- Training Plan -->
+    <div class="content-card">
+      <h3><i class="fas fa-calendar-check text-primary"></i> Training Plan</h3>
+      <div class="table-wrapper">
+        <table class="table table-bordered table-sm">
+          <thead>
+            <tr>
+              <th>Week</th>
+              <th>Topic</th>
+              <th>Hours</th>
+              <th>Teaching Method</th>
+              <th>Assessment</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Introduction to Systems &amp; System Analysis</td>
+              <td>4.5</td>
+              <td>Lecture + Discussion</td>
+              <td>Q&amp;A</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>System Development Life Cycle (SDLC)</td>
+              <td>4.5</td>
+              <td>Lecture + Case Study</td>
+              <td>Short Exercise</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Requirement Gathering Techniques</td>
+              <td>4.5</td>
+              <td>Practical + Group Work</td>
+              <td>Activity</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Data Flow Diagrams (DFD)</td>
+              <td>4.5</td>
+              <td>Lecture + Drawing Practice</td>
+              <td>Class Task</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>DFD Leveling &amp; Case Study</td>
+              <td>4.5</td>
+              <td>Practical</td>
+              <td>Assignment</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>Use Case Diagrams (UML)</td>
+              <td>4.5</td>
+              <td>Practical</td>
+              <td>Diagram Submission</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>ER / EER Diagrams</td>
+              <td>4.5</td>
+              <td>Practical</td>
+              <td>Diagram Exercise</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>Flowcharts &amp; Pseudocode</td>
+              <td>4.5</td>
+              <td>Practical</td>
+              <td>In-class Task</td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>UI/UX Design Principles</td>
+              <td>4.5</td>
+              <td>Demonstration</td>
+              <td>Prototype Sketch</td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>System Requirements Specification (SRS) – Introduction</td>
+              <td>4.5</td>
+              <td>Lecture</td>
+              <td>Draft Preparation</td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>SRS Structure (Executive Summary, Requirements)</td>
+              <td>4.5</td>
+              <td>Practical</td>
+              <td>Draft Review</td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td>Proposed Solution &amp; Schedule Structure</td>
+              <td>4.5</td>
+              <td>Workshop</td>
+              <td>Group Work</td>
+            </tr>
+            <tr>
+              <td>13</td>
+              <td>Test Case Development</td>
+              <td>4.5</td>
+              <td>Practical</td>
+              <td>Test Case Writing</td>
+            </tr>
+            <tr>
+              <td>14</td>
+              <td>Final SRS Preparation &amp; Presentation</td>
+              <td>4.5</td>
+              <td>Presentation</td>
+              <td>Group Assignment (60%)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Detailed Week-wise Lesson Plans -->
+    <div class="content-card content-card-weeks">
+      <h3><i class="fas fa-calendar-alt text-primary"></i> Lesson Plans</h3>
+
+      <!-- Week 1 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 1 &ndash; Introduction to Systems &amp; SDLC</h4>
+        <h5>General Objective</h5>
+        <ul>
+          <li>To introduce students to systems, system analysis, and SDLC concepts.</li>
+        </ul>
+        <h5>Specific Objectives</h5>
+        <p>Students will be able to:</p>
+        <ul>
+          <li>Define a system.</li>
+          <li>Identify types of systems.</li>
+          <li>Explain the role of a system analyst.</li>
+          <li>Describe SDLC phases.</li>
+        </ul>
+        <h5>Lesson Plan</h5>
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Teaching Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>45 min</td>
+                <td>Module Overview</td>
+                <td>Explain syllabus &amp; outcomes</td>
+                <td>Listen &amp; ask questions</td>
+                <td>PPT</td>
+              </tr>
+              <tr>
+                <td>60 min</td>
+                <td>Concept of System</td>
+                <td>Explain with examples</td>
+                <td>Identify real-life systems</td>
+                <td>Whiteboard</td>
+              </tr>
+              <tr>
+                <td>60 min</td>
+                <td>Role of System Analyst</td>
+                <td>Discuss responsibilities</td>
+                <td>Group discussion</td>
+                <td>Case sheet</td>
+              </tr>
+              <tr>
+                <td>60 min</td>
+                <td>SDLC Models</td>
+                <td>Explain phases</td>
+                <td>Draw SDLC cycle</td>
+                <td>Smart board</td>
+              </tr>
+              <tr>
+                <td>45 min</td>
+                <td>Summary &amp; Quiz</td>
+                <td>Review key points; conduct short quiz</td>
+                <td>Answer questions; participate in quiz</td>
+                <td>Board</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h5>Assessment</h5>
+        <p>Students will be assessed through a short quiz and oral questioning on system concepts and SDLC.</p>
+      </div>
+
+      <!-- Week 2 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 2 &ndash; System Development Life Cycle (SDLC)</h4>
+        <h5>General Objective</h5>
+        <ul>
+          <li>To deepen understanding of SDLC phases and apply them through case study.</li>
+        </ul>
+        <h5>Specific Objectives</h5>
+        <p>Students will be able to:</p>
+        <ul>
+          <li>List and describe each phase of the SDLC.</li>
+          <li>Compare different SDLC models (Waterfall, Iterative, Agile).</li>
+          <li>Apply SDLC concepts to a given case scenario.</li>
+          <li>Identify deliverables for each phase.</li>
+        </ul>
+        <h5>Lesson Plan</h5>
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Teaching Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>60 min</td>
+                <td>SDLC Phases Recap</td>
+                <td>Review phases in detail; show diagram</td>
+                <td>Take notes; clarify doubts</td>
+                <td>PPT, Smart board</td>
+              </tr>
+              <tr>
+                <td>60 min</td>
+                <td>SDLC Models Comparison</td>
+                <td>Explain Waterfall, Iterative, Agile</td>
+                <td>Compare models in groups</td>
+                <td>Slides, handouts</td>
+              </tr>
+              <tr>
+                <td>90 min</td>
+                <td>Case Study Application</td>
+                <td>Present case; guide phase-wise analysis</td>
+                <td>Analyze case; identify phases &amp; deliverables</td>
+                <td>Case study sheet</td>
+              </tr>
+              <tr>
+                <td>60 min</td>
+                <td>Short Exercise &amp; Review</td>
+                <td>Distribute exercise; mark and discuss</td>
+                <td>Complete short exercise; participate in review</td>
+                <td>Worksheet</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h5>Assessment</h5>
+        <p>Students will be assessed through a short exercise on SDLC phases and case study application.</p>
+      </div>
+
+      <!-- Week 3 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 3 &ndash; Requirement Gathering Techniques</h4>
+        <h5>General Objective</h5>
+        <ul>
+          <li>To enable students to apply various techniques for gathering and documenting requirements.</li>
+        </ul>
+        <h5>Specific Objectives</h5>
+        <p>Students will be able to:</p>
+        <ul>
+          <li>List requirement gathering techniques (interviews, surveys, observation, workshops).</li>
+          <li>Choose appropriate techniques for a given scenario.</li>
+          <li>Conduct a simple interview or survey for requirements.</li>
+          <li>Document gathered requirements in a structured format.</li>
+        </ul>
+        <h5>Lesson Plan</h5>
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Teaching Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>60 min</td>
+                <td>Introduction to Requirement Gathering</td>
+                <td>Explain techniques and when to use each</td>
+                <td>Listen; note key techniques</td>
+                <td>PPT</td>
+              </tr>
+              <tr>
+                <td>60 min</td>
+                <td>Interviews &amp; Questionnaires</td>
+                <td>Demonstrate question design; role play</td>
+                <td>Design sample questions; practise in pairs</td>
+                <td>Sample questionnaires</td>
+              </tr>
+              <tr>
+                <td>90 min</td>
+                <td>Group Activity</td>
+                <td>Assign scenario; facilitate group requirement gathering</td>
+                <td>Apply techniques in groups; document findings</td>
+                <td>Scenario sheets</td>
+              </tr>
+              <tr>
+                <td>60 min</td>
+                <td>Sharing &amp; Documentation</td>
+                <td>Guide documentation format; review outputs</td>
+                <td>Present group findings; complete requirement list</td>
+                <td>Template, Whiteboard</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h5>Assessment</h5>
+        <p>Students will be assessed through group activity output and requirement documentation.</p>
+      </div>
+
+      <!-- Week 4 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 4 &ndash; Data Flow Diagrams (DFD)</h4>
+        <h5>General Objective</h5>
+        <ul>
+          <li>To introduce Data Flow Diagrams and enable students to draw context and level-0 DFDs.</li>
+        </ul>
+        <h5>Specific Objectives</h5>
+        <p>Students will be able to:</p>
+        <ul>
+          <li>Define DFD and its symbols (process, data flow, data store, external entity).</li>
+          <li>Draw a context diagram for a given system.</li>
+          <li>Draw a level-0 DFD from a narrative or case.</li>
+          <li>Label data flows correctly.</li>
+        </ul>
+        <h5>Lesson Plan</h5>
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Teaching Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>60 min</td>
+                <td>DFD Symbols &amp; Rules</td>
+                <td>Explain symbols and naming conventions</td>
+                <td>Take notes; draw symbols</td>
+                <td>PPT, Whiteboard</td>
+              </tr>
+              <tr>
+                <td>60 min</td>
+                <td>Context Diagram</td>
+                <td>Demonstrate context diagram for sample system</td>
+                <td>Identify entities and main flow; draw with guidance</td>
+                <td>Smart board</td>
+              </tr>
+              <tr>
+                <td>90 min</td>
+                <td>Level-0 DFD Drawing Practice</td>
+                <td>Give case; guide step-by-step level-0 DFD</td>
+                <td>Draw level-0 DFD in pairs; label flows</td>
+                <td>Case sheet, Chart paper</td>
+              </tr>
+              <tr>
+                <td>60 min</td>
+                <td>Class Task &amp; Feedback</td>
+                <td>Set class task; review and give feedback</td>
+                <td>Complete class task; correct errors</td>
+                <td>Worksheet</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h5>Assessment</h5>
+        <p>Students will be assessed through class task on context and level-0 DFD.</p>
+      </div>
+
+      <!-- Week 5 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 5 &ndash; DFD Leveling &amp; Case Study</h4>
+        <h5>General Objective</h5>
+        <ul>
+          <li>To develop skills in leveling DFDs and applying DFD to a full case study.</li>
+        </ul>
+        <h5>Specific Objectives</h5>
+        <p>Students will be able to:</p>
+        <ul>
+          <li>Explain the purpose of DFD leveling.</li>
+          <li>Decompose a process into level-1 (and level-2) DFD.</li>
+          <li>Balance parent and child DFDs.</li>
+          <li>Produce a complete set of DFDs for a case study.</li>
+        </ul>
+        <h5>Lesson Plan</h5>
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Teaching Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>60 min</td>
+                <td>Leveling Concepts</td>
+                <td>Explain level-1, level-2; show balancing rules</td>
+                <td>Take notes; ask questions</td>
+                <td>PPT</td>
+              </tr>
+              <tr>
+                <td>90 min</td>
+                <td>Level-1 DFD Practice</td>
+                <td>Decompose sample process; guide balancing</td>
+                <td>Draw level-1 DFD; check balance</td>
+                <td>Smart board, Case sheet</td>
+              </tr>
+              <tr>
+                <td>90 min</td>
+                <td>Case Study DFD</td>
+                <td>Assign case study; support DFD set development</td>
+                <td>Produce context + level-0 + level-1 for case</td>
+                <td>Case document</td>
+              </tr>
+              <tr>
+                <td>30 min</td>
+                <td>Assignment Brief</td>
+                <td>Explain assignment requirements and submission</td>
+                <td>Clarify doubts; note deadline</td>
+                <td>Assignment sheet</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h5>Assessment</h5>
+        <p>Students will be assessed through assignment on DFD leveling and case study.</p>
+      </div>
+
+      <!-- Week 6 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 6 &ndash; Use Case Diagrams (UML)</h4>
+        <h5>General Objective</h5>
+        <ul>
+          <li>To introduce UML use case diagrams and enable students to model system functionality.</li>
+        </ul>
+        <h5>Specific Objectives</h5>
+        <p>Students will be able to:</p>
+        <ul>
+          <li>Define actor, use case, and relationships (include, extend).</li>
+          <li>Identify actors and use cases from a requirement description.</li>
+          <li>Draw a use case diagram for a given system.</li>
+          <li>Use standard notation (e.g. draw.io or paper).</li>
+        </ul>
+        <h5>Lesson Plan</h5>
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Teaching Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>60 min</td>
+                <td>UML &amp; Use Case Basics</td>
+                <td>Introduce UML; explain use case elements</td>
+                <td>Listen; draw sample symbols</td>
+                <td>PPT</td>
+              </tr>
+              <tr>
+                <td>60 min</td>
+                <td>Actors &amp; Use Cases</td>
+                <td>Show how to identify from requirements</td>
+                <td>Identify from sample scenario</td>
+                <td>Scenario sheet</td>
+              </tr>
+              <tr>
+                <td>90 min</td>
+                <td>Drawing Use Case Diagrams</td>
+                <td>Demonstrate tool/paper drawing; guide practice</td>
+                <td>Draw use case diagram for given system</td>
+                <td>Smart board, Software / Paper</td>
+              </tr>
+              <tr>
+                <td>60 min</td>
+                <td>Review &amp; Submission</td>
+                <td>Review diagrams; explain submission criteria</td>
+                <td>Refine diagram; submit for assessment</td>
+                <td>Checklist</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h5>Assessment</h5>
+        <p>Students will be assessed through diagram submission (use case diagram).</p>
+      </div>
+
+      <!-- Week 7 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 7 &ndash; ER / EER Diagrams</h4>
+        <h5>General Objective</h5>
+        <ul>
+          <li>To introduce Entity-Relationship and Enhanced ER modelling for data design.</li>
+        </ul>
+        <h5>Specific Objectives</h5>
+        <p>Students will be able to:</p>
+        <ul>
+          <li>Define entity, attribute, relationship, cardinality.</li>
+          <li>Draw an ER diagram for a given scenario.</li>
+          <li>Apply EER concepts (subtype, supertype, inheritance).</li>
+          <li>Interpret ER diagrams for data requirements.</li>
+        </ul>
+        <h5>Lesson Plan</h5>
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Teaching Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>60 min</td>
+                <td>ER Diagram Concepts</td>
+                <td>Explain entities, attributes, relationships, cardinality</td>
+                <td>Take notes; identify in examples</td>
+                <td>PPT</td>
+              </tr>
+              <tr>
+                <td>60 min</td>
+                <td>Drawing ER Diagrams</td>
+                <td>Demonstrate ER for sample domain</td>
+                <td>Draw ER diagram from scenario</td>
+                <td>Smart board</td>
+              </tr>
+              <tr>
+                <td>90 min</td>
+                <td>EER (Subtypes &amp; Inheritance)</td>
+                <td>Explain supertype/subtype; show notation</td>
+                <td>Extend ER to EER for given case</td>
+                <td>Handouts</td>
+              </tr>
+              <tr>
+                <td>60 min</td>
+                <td>Diagram Exercise</td>
+                <td>Set diagram exercise; mark and feedback</td>
+                <td>Complete ER/EER diagram exercise</td>
+                <td>Worksheet</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h5>Assessment</h5>
+        <p>Students will be assessed through diagram exercise (ER/EER).</p>
+      </div>
+
+      <!-- Week 8 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 8 &ndash; Flowcharts &amp; Pseudocode</h4>
+        <h5>General Objective</h5>
+        <ul>
+          <li>To enable students to represent logic using flowcharts and pseudocode.</li>
+        </ul>
+        <h5>Specific Objectives</h5>
+        <p>Students will be able to:</p>
+        <ul>
+          <li>Use flowchart symbols correctly (start/end, process, decision, input/output).</li>
+          <li>Draw a flowchart for a given process or algorithm.</li>
+          <li>Write pseudocode for a simple process.</li>
+          <li>Convert between flowchart and pseudocode.</li>
+        </ul>
+        <h5>Lesson Plan</h5>
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Teaching Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>60 min</td>
+                <td>Flowchart Symbols &amp; Rules</td>
+                <td>Explain symbols and flow; show examples</td>
+                <td>Practise drawing symbols; follow flow</td>
+                <td>PPT, Whiteboard</td>
+              </tr>
+              <tr>
+                <td>60 min</td>
+                <td>Flowchart Drawing</td>
+                <td>Demonstrate flowchart for sample process</td>
+                <td>Draw flowchart for given scenario</td>
+                <td>Smart board</td>
+              </tr>
+              <tr>
+                <td>60 min</td>
+                <td>Pseudocode</td>
+                <td>Introduce pseudocode; show structure</td>
+                <td>Write pseudocode for simple logic</td>
+                <td>Handouts</td>
+              </tr>
+              <tr>
+                <td>90 min</td>
+                <td>In-class Task</td>
+                <td>Set task (flowchart + pseudocode); support</td>
+                <td>Complete in-class task; submit</td>
+                <td>Task sheet</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h5>Assessment</h5>
+        <p>Students will be assessed through in-class task on flowcharts and pseudocode.</p>
+      </div>
+
+      <!-- Week 9 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 9 &ndash; UI/UX Design Principles</h4>
+        <h5>General Objective</h5>
+        <ul>
+          <li>To introduce UI/UX design principles and low-fidelity prototyping.</li>
+        </ul>
+        <h5>Specific Objectives</h5>
+        <p>Students will be able to:</p>
+        <ul>
+          <li>State key UI/UX principles (consistency, feedback, simplicity).</li>
+          <li>Identify good and poor design in examples.</li>
+          <li>Sketch a simple screen layout (wireframe).</li>
+          <li>Produce a basic prototype sketch for a given scenario.</li>
+        </ul>
+        <h5>Lesson Plan</h5>
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Teaching Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>60 min</td>
+                <td>UI vs UX; Design Principles</td>
+                <td>Explain UI/UX; demonstrate principles with examples</td>
+                <td>Discuss examples; note principles</td>
+                <td>PPT, Sample screens</td>
+              </tr>
+              <tr>
+                <td>60 min</td>
+                <td>Wireframes &amp; Sketching</td>
+                <td>Show wireframe examples; demonstrate sketching</td>
+                <td>Sketch sample screen layout</td>
+                <td>Smart board, Paper</td>
+              </tr>
+              <tr>
+                <td>90 min</td>
+                <td>Prototype Sketch Activity</td>
+                <td>Assign scenario; guide prototype sketch</td>
+                <td>Produce prototype sketch for scenario</td>
+                <td>Scenario sheet</td>
+              </tr>
+              <tr>
+                <td>60 min</td>
+                <td>Sharing &amp; Feedback</td>
+                <td>Facilitate short presentations; give feedback</td>
+                <td>Present sketch; receive feedback</td>
+                <td>Board</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h5>Assessment</h5>
+        <p>Students will be assessed through prototype sketch submission and feedback.</p>
+      </div>
+
+      <!-- Week 10 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 10 &ndash; System Requirements Specification (SRS) – Introduction</h4>
+        <h5>General Objective</h5>
+        <ul>
+          <li>To introduce the purpose, structure, and importance of an SRS document.</li>
+        </ul>
+        <h5>Specific Objectives</h5>
+        <p>Students will be able to:</p>
+        <ul>
+          <li>Define SRS and its role in the project.</li>
+          <li>List typical sections of an SRS.</li>
+          <li>Identify sources of information for drafting SRS.</li>
+          <li>Begin drafting an SRS outline for a selected project.</li>
+        </ul>
+        <h5>Lesson Plan</h5>
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Teaching Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>60 min</td>
+                <td>What is an SRS?</td>
+                <td>Explain purpose, audience, and importance</td>
+                <td>Listen; ask questions</td>
+                <td>PPT</td>
+              </tr>
+              <tr>
+                <td>60 min</td>
+                <td>SRS Sections Overview</td>
+                <td>Walk through standard SRS template</td>
+                <td>Note sections; relate to prior work (DFD, use case)</td>
+                <td>SRS template, Sample SRS</td>
+              </tr>
+              <tr>
+                <td>90 min</td>
+                <td>Selecting Project &amp; Outline</td>
+                <td>Guide project selection; help outline</td>
+                <td>Select project; prepare SRS outline</td>
+                <td>Project list, Template</td>
+              </tr>
+              <tr>
+                <td>60 min</td>
+                <td>Draft Preparation</td>
+                <td>Support first draft of intro and scope</td>
+                <td>Draft introduction and scope; save for Week 11</td>
+                <td>Computer lab / Paper</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h5>Assessment</h5>
+        <p>Students will be assessed through draft preparation (outline and initial sections).</p>
+      </div>
+
+      <!-- Week 11 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 11 &ndash; SRS Structure (Executive Summary, Requirements)</h4>
+        <h5>General Objective</h5>
+        <ul>
+          <li>To develop the executive summary and requirements sections of the SRS.</li>
+        </ul>
+        <h5>Specific Objectives</h5>
+        <p>Students will be able to:</p>
+        <ul>
+          <li>Write an executive summary for the SRS.</li>
+          <li>Structure functional and non-functional requirements.</li>
+          <li>Number and trace requirements correctly.</li>
+          <li>Incorporate diagrams (DFD, use case) into SRS.</li>
+        </ul>
+        <h5>Lesson Plan</h5>
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Teaching Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>60 min</td>
+                <td>Executive Summary</td>
+                <td>Explain content and style; show example</td>
+                <td>Draft executive summary</td>
+                <td>Sample SRS</td>
+              </tr>
+              <tr>
+                <td>90 min</td>
+                <td>Requirements Section</td>
+                <td>Guide requirement numbering and wording</td>
+                <td>List and structure requirements; add diagrams</td>
+                <td>Template, Previous diagrams</td>
+              </tr>
+              <tr>
+                <td>90 min</td>
+                <td>Draft Review</td>
+                <td>Review drafts; give individual feedback</td>
+                <td>Revise draft based on feedback</td>
+                <td>Computer lab</td>
+              </tr>
+              <tr>
+                <td>30 min</td>
+                <td>Recap &amp; Next Steps</td>
+                <td>Summarise; introduce proposed solution section</td>
+                <td>Note improvements; clarify next week</td>
+                <td>Board</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h5>Assessment</h5>
+        <p>Students will be assessed through draft review (executive summary and requirements).</p>
+      </div>
+
+      <!-- Week 12 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 12 &ndash; Proposed Solution &amp; Schedule Structure</h4>
+        <h5>General Objective</h5>
+        <ul>
+          <li>To complete the proposed solution and schedule sections of the SRS.</li>
+        </ul>
+        <h5>Specific Objectives</h5>
+        <p>Students will be able to:</p>
+        <ul>
+          <li>Describe the proposed solution (high-level design, technology).</li>
+          <li>Structure a simple project schedule (phases/milestones).</li>
+          <li>Present solution and schedule in SRS format.</li>
+          <li>Work in groups to refine and peer-review.</li>
+        </ul>
+        <h5>Lesson Plan</h5>
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Teaching Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>60 min</td>
+                <td>Proposed Solution Section</td>
+                <td>Explain content: solution overview, technology, architecture</td>
+                <td>Draft proposed solution for project</td>
+                <td>Template, Samples</td>
+              </tr>
+              <tr>
+                <td>60 min</td>
+                <td>Schedule Structure</td>
+                <td>Show Gantt or phase list; explain milestones</td>
+                <td>Create simple schedule for project</td>
+                <td>PPT, Template</td>
+              </tr>
+              <tr>
+                <td>120 min</td>
+                <td>Workshop – Group Work</td>
+                <td>Facilitate group work; answer queries</td>
+                <td>Complete solution &amp; schedule in groups; peer review</td>
+                <td>Computer lab</td>
+              </tr>
+              <tr>
+                <td>30 min</td>
+                <td>Wrap-up</td>
+                <td>Summarise; link to test cases (Week 13)</td>
+                <td>Clarify doubts</td>
+                <td>Board</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h5>Assessment</h5>
+        <p>Students will be assessed through group work output (proposed solution and schedule).</p>
+      </div>
+
+      <!-- Week 13 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 13 &ndash; Test Case Development</h4>
+        <h5>General Objective</h5>
+        <ul>
+          <li>To enable students to develop test cases based on design specifications.</li>
+        </ul>
+        <h5>Specific Objectives</h5>
+        <p>Students will be able to:</p>
+        <ul>
+          <li>Define test case and its components (steps, expected result, actual result).</li>
+          <li>Derive test cases from requirements and use cases.</li>
+          <li>Write test cases in a standard format.</li>
+          <li>Include test cases in the SRS or appendix.</li>
+        </ul>
+        <h5>Lesson Plan</h5>
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Teaching Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>60 min</td>
+                <td>Test Case Concepts</td>
+                <td>Explain test case structure and types</td>
+                <td>Take notes; identify from sample</td>
+                <td>PPT, Sample test cases</td>
+              </tr>
+              <tr>
+                <td>60 min</td>
+                <td>From Requirements to Test Cases</td>
+                <td>Show traceability; demonstrate derivation</td>
+                <td>Map requirements to test cases</td>
+                <td>Template</td>
+              </tr>
+              <tr>
+                <td>120 min</td>
+                <td>Test Case Writing</td>
+                <td>Guide writing; review format</td>
+                <td>Write test cases for own project</td>
+                <td>Test case template, Computer lab</td>
+              </tr>
+              <tr>
+                <td>30 min</td>
+                <td>Integration with SRS</td>
+                <td>Explain where to place test cases in SRS</td>
+                <td>Add test case section to SRS draft</td>
+                <td>Board</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h5>Assessment</h5>
+        <p>Students will be assessed through test case writing (format and coverage).</p>
+      </div>
+
+      <!-- Week 14 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 14 &ndash; Final SRS Preparation &amp; Presentation</h4>
+        <h5>General Objective</h5>
+        <ul>
+          <li>To finalise the SRS document and deliver a group presentation (60% assignment).</li>
+        </ul>
+        <h5>Specific Objectives</h5>
+        <p>Students will be able to:</p>
+        <ul>
+          <li>Complete and proofread the final SRS.</li>
+          <li>Prepare a structured presentation of the SRS.</li>
+          <li>Present key sections (objectives, requirements, solution, test cases) to audience.</li>
+          <li>Respond to questions and feedback.</li>
+        </ul>
+        <h5>Lesson Plan</h5>
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Teaching Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>60 min</td>
+                <td>Final SRS Checklist</td>
+                <td>Run through completeness checklist; formatting tips</td>
+                <td>Finalise SRS; check all sections</td>
+                <td>Checklist, Template</td>
+              </tr>
+              <tr>
+                <td>60 min</td>
+                <td>Presentation Guidelines</td>
+                <td>Explain presentation structure and marking criteria</td>
+                <td>Prepare slides/structure in groups</td>
+                <td>Rubric, PPT</td>
+              </tr>
+              <tr>
+                <td>150 min</td>
+                <td>Group Presentations</td>
+                <td>Chair presentations; assess using rubric (60%)</td>
+                <td>Present SRS; answer questions</td>
+                <td>Projector, Smart board</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h5>Assessment</h5>
+        <p>Students will be assessed through Group Assignment (60%): final SRS document and presentation.</p>
+      </div>
+
+    </div>
+
+    <!-- Assessment Plan -->
+    <div class="content-card">
+      <h3><i class="fas fa-clipboard-check text-primary"></i> Assessment Plan</h3>
+      <div class="table-wrapper">
+        <table class="table table-bordered table-sm">
+          <thead>
+            <tr>
+              <th>Assessment Type</th>
+              <th>Method</th>
+              <th>Weeks</th>
+              <th>Weighting</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td rowspan="3">Continuous Assessment</td>
+              <td>Diagrams &amp; design deliverables (DFD, Use Case, ER/EER, flowcharts, prototype)</td>
+              <td>4–9</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>SRS draft, proposed solution &amp; test cases</td>
+              <td>10–13</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><strong>Group Assignment (SRS Document + Presentation)</strong></td>
+              <td><strong>14</strong></td>
+              <td><strong>60%</strong></td>
+            </tr>
+            <tr>
+              <td>Summative Assessment</td>
+              <td>Written Examination</td>
+              <td>End of module</td>
+              <td>40%</td>
+            </tr>
+            <tr>
+              <td colspan="2"><strong>Total</strong></td>
+              <td></td>
+              <td><strong>100%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+     
+    </div>
+
+  </div>
+
+  <footer class="page-footer">
+    <div class="container">
+      <p><strong>Department of Information and Communication Technology - SLGTI</strong></p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

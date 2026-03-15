@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mathematics for Computing – Training Plan | Level 5 ICT</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    :root {
+      --header-bg: linear-gradient(135deg, #0ea5e9 0%, #6366f1 45%, #8b5cf6 100%);
+      --accent: #2563eb;
+      --accent-soft: #e0f2fe;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --surface: #ffffff;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #eff6ff 0, #e5f4ff 35%, #eef2ff 70%, #f9fafb 100%);
+      color: var(--text);
+      margin: 0;
+      min-height: 100vh;
+    }
+
+    .page-shell {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: clamp(1.25rem, 3vw, 2rem) clamp(1rem, 3vw, 1.75rem) 3rem;
+    }
+
+    .module-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #ffffff;
+      padding: 2.5rem 0;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    .module-header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .module-header .lead {
+      font-size: 1.05rem;
+      opacity: 0.95;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 0.55rem 0.9rem;
+      margin-top: 0.75rem;
+    }
+    .meta-item {
+      font-size: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.18rem;
+    }
+    .meta-label {
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      opacity: 0.8;
+    }
+    .meta-value {
+      font-weight: 600;
+    }
+
+    .section {
+      margin-top: 1.75rem;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: #1d4ed8;
+    }
+    .section-title i {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(59, 130, 246, 0.09);
+      color: #1d4ed8;
+      font-size: 0.88rem;
+    }
+    .section-subtitle {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+
+    .outcomes-card {
+      background: var(--surface);
+      border-radius: 18px;
+      padding: 1.15rem 1.1rem 1.1rem;
+      box-shadow: 0 14px 45px rgba(15, 23, 42, 0.07);
+      border: 1px solid rgba(148, 163, 184, 0.28);
+    }
+    .outcomes-card h3 {
+      font-size: 0.98rem;
+      margin: 0 0 0.4rem;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .outcomes-card h3 i {
+      color: #22c55e;
+    }
+    .outcomes-list {
+      margin: 0.3rem 0 0.5rem;
+      padding-left: 1.25rem;
+      font-size: 0.9rem;
+    }
+    .outcomes-list li {
+      margin-bottom: 0.2rem;
+    }
+
+    .plan-card {
+      background: var(--surface);
+      border-radius: 18px;
+      padding: 1.15rem 1.15rem 1.25rem;
+      box-shadow: 0 16px 48px rgba(15, 23, 42, 0.08);
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      margin-top: 0.4rem;
+    }
+    .plan-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 0.9rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 0.65rem;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-weight: 500;
+    }
+    .pill i {
+      font-size: 0.85rem;
+    }
+    .pill-soft {
+      background: #ecfdf3;
+      color: #15803d;
+    }
+
+    .table-responsive {
+      border-radius: 14px;
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+      background: #f8fafc;
+    }
+    .table-wrapper {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 0.8rem 0 0.9rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+      background: #ffffff;
+    }
+    table.training-plan {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+    }
+    .training-plan thead {
+      background: linear-gradient(120deg, #eff6ff, #e0f2fe);
+    }
+    .training-plan th,
+    .training-plan td {
+      padding: 0.5rem 0.6rem;
+      vertical-align: top;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .training-plan th {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #1f2937;
+      white-space: nowrap;
+    }
+    .training-plan tbody tr:nth-child(even) td {
+      background: #f9fafb;
+    }
+    .training-plan tbody tr:hover td {
+      background: #eff6ff;
+    }
+    .week-col {
+      font-weight: 700;
+      color: #1d4ed8;
+      white-space: nowrap;
+    }
+    .hours-col {
+      font-weight: 600;
+      color: #0f172a;
+      white-space: nowrap;
+    }
+    .unit-col {
+      font-weight: 600;
+      color: #0f172a;
+    }
+    .topics-col {
+      color: #111827;
+    }
+    .topics-col ul {
+      padding-left: 1rem;
+      margin: 0;
+    }
+    .topics-col li {
+      margin-bottom: 0.1rem;
+    }
+    .activity-col {
+      font-size: 0.82rem;
+      color: #4b5563;
+    }
+
+    .week-list {
+      margin-top: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+    .week-card {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 1rem 1rem 0.9rem;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+      border: 1px solid #e5e7eb;
+    }
+    .week-card h3 {
+      margin: 0 0 0.4rem;
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: #1d4ed8;
+    }
+    .week-card h4 {
+      margin: 0.5rem 0 0.25rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #0f172a;
+    }
+    .week-card ul {
+      margin: 0 0 0.35rem;
+      padding-left: 1.1rem;
+      font-size: 0.86rem;
+    }
+    .week-card p {
+      margin: 0 0 0.25rem;
+      font-size: 0.86rem;
+      color: #374151;
+    }
+
+    .page-footer {
+      margin-top: 2rem;
+      padding: 1.25rem;
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      color: rgba(255, 255, 255, 0.9);
+      text-align: center;
+      font-size: 0.95rem;
+      border-radius: 0 0 15px 15px;
+    }
+    .page-footer p {
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .meta-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .section-subtitle {
+        font-size: 0.82rem;
+      }
+      .training-plan th:nth-child(4),
+      .training-plan td:nth-child(4),
+      .training-plan th:nth-child(5),
+      .training-plan td:nth-child(5) {
+        min-width: 180px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="module-header">
+    <div class="container">
+      <h1>Mathematics for Computing</h1>
+      <p class="lead mb-2">
+        Module Code: <strong>K72T001M03</strong> / Level 05 &nbsp;|&nbsp;
+        Module Type: <strong>Compulsory</strong> &nbsp;|&nbsp;
+        Total Duration: <strong>20 hours</strong>
+      </p>
+    </div>
+  </div>
+
+  <div class="page-shell">
+    <section class="section" id="plan-summary">
+      <div class="section-header">
+        <div class="section-title">
+          <i class="fas fa-calendar-check"></i>
+          <span>Training Plan (Summary)</span>
+        </div>
+        <p class="section-subtitle">
+          Overview of weekly coverage for 14 weeks at 1.5 hours per week.
+        </p>
+      </div>
+
+      <div class="plan-card">
+        <div class="table-wrapper">
+          <table class="training-plan">
+            <thead>
+              <tr>
+                <th>Week</th>
+                <th>Topic</th>
+                <th>Hours</th>
+                <th>Teaching Method</th>
+                <th>Assessment</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="week-col">1</td>
+                <td class="unit-col">Number systems – introduction</td>
+                <td class="hours-col">1.5</td>
+                <td class="activity-col">Lecture + short discussion</td>
+                <td class="activity-col">In‑class quiz</td>
+              </tr>
+              <tr>
+                <td class="week-col">2</td>
+                <td class="unit-col">Decimal to binary</td>
+                <td class="hours-col">1.5</td>
+                <td class="activity-col">Board examples + individual practice</td>
+                <td class="activity-col">Worksheet checking</td>
+              </tr>
+              <tr>
+                <td class="week-col">3</td>
+                <td class="unit-col">Decimal to octal &amp; hex</td>
+                <td class="hours-col">1.5</td>
+                <td class="activity-col">Guided exercises</td>
+                <td class="activity-col">Homework / tutorial problems</td>
+              </tr>
+              <tr>
+                <td class="week-col">4</td>
+                <td class="unit-col">Other bases to decimal</td>
+                <td class="hours-col">1.5</td>
+                <td class="activity-col">Problem‑solving session</td>
+                <td class="activity-col">Short test items</td>
+              </tr>
+              <tr>
+                <td class="week-col">5</td>
+                <td class="unit-col">Non‑decimal to non‑decimal</td>
+                <td class="hours-col">1.5</td>
+                <td class="activity-col">Group activity</td>
+                <td class="activity-col">Group work review</td>
+              </tr>
+              <tr>
+                <td class="week-col">6</td>
+                <td class="unit-col">Fractional conversions</td>
+                <td class="hours-col">1.5</td>
+                <td class="activity-col">Examples + calculator practice</td>
+                <td class="activity-col">Practice questions marked</td>
+              </tr>
+              <tr>
+                <td class="week-col">7</td>
+                <td class="unit-col">Binary arithmetic</td>
+                <td class="hours-col">1.5</td>
+                <td class="activity-col">Worked examples + drills</td>
+                <td class="activity-col">In‑class exercises</td>
+              </tr>
+              <tr>
+                <td class="week-col">8</td>
+                <td class="unit-col">Octal &amp; hex arithmetic</td>
+                <td class="hours-col">1.5</td>
+                <td class="activity-col">Problem‑solving</td>
+                <td class="activity-col">Worksheet / quiz</td>
+              </tr>
+              <tr>
+                <td class="week-col">9</td>
+                <td class="unit-col">Complements</td>
+                <td class="hours-col">1.5</td>
+                <td class="activity-col">Demonstration + guided practice</td>
+                <td class="activity-col">Short test or quiz</td>
+              </tr>
+              <tr>
+                <td class="week-col">10</td>
+                <td class="unit-col">Number representation</td>
+                <td class="hours-col">1.5</td>
+                <td class="activity-col">Lecture + examples</td>
+                <td class="activity-col">Homework problems</td>
+              </tr>
+              <tr>
+                <td class="week-col">11</td>
+                <td class="unit-col">Set theory</td>
+                <td class="hours-col">1.5</td>
+                <td class="activity-col">Board work + practice</td>
+                <td class="activity-col">Tutorial sheet</td>
+              </tr>
+              <tr>
+                <td class="week-col">12</td>
+                <td class="unit-col">Statistics – mean, median, mode</td>
+                <td class="hours-col">1.5</td>
+                <td class="activity-col">Examples + pair work</td>
+                <td class="activity-col">In‑class problem set</td>
+              </tr>
+              <tr>
+                <td class="week-col">13</td>
+                <td class="unit-col">Statistics – standard deviation</td>
+                <td class="hours-col">1.5</td>
+                <td class="activity-col">Guided derivation + exercises</td>
+                <td class="activity-col">Short quiz</td>
+              </tr>
+              <tr>
+                <td class="week-col">14</td>
+                <td class="unit-col">Computer codes</td>
+                <td class="hours-col">1.5</td>
+                <td class="activity-col">Demonstration + recap</td>
+                <td class="activity-col">Review activity / MCQ</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="outcomes">
+      <div class="section-header">
+        <div class="section-title">
+          <i class="fas fa-bullseye"></i>
+          <span>Module Aim &amp; Objectives</span>
+        </div>
+        <p class="section-subtitle">
+          Overall aim of the module, followed by the general objective and specific objectives for Mathematics for Computing.
+        </p>
+      </div>
+      <div class="outcomes-card">
+        <h3><i class="fas fa-bullseye me-1"></i> Module Aim</h3>
+        <p>
+          To provide students with the core mathematical foundations required to understand data representation, numeric computation and basic statistics used in computing.
+        </p>
+
+        <h3><i class="fas fa-flag-checkered me-1"></i> General Objective</h3>
+        <p>
+          At the end of this module, students will be able to apply number systems, set theory, statistical measures and computer coding concepts to analyse and solve basic computing‑related problems.
+        </p>
+
+        <h3><i class="fas fa-list-check me-1"></i> Specific Objectives</h3>
+        <ul class="outcomes-list">
+          <li>Convert numbers between decimal, binary, octal and hexadecimal (including fractional values) and perform base‑specific arithmetic.</li>
+          <li>Use complements (one’s and two’s complement) for signed number representation and binary subtraction.</li>
+          <li>Explain and apply fixed‑point and floating‑point number representations in a computing context.</li>
+          <li>Apply basic set theory concepts and notations relevant to algorithms and data structures.</li>
+          <li>Calculate and interpret basic statistical measures (mean, median, mode, standard deviation) for data sets used in computing.</li>
+          <li>Identify and describe common computer codes (BCD, EBCDIC, ASCII, Unicode) and their usage in data representation.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="lesson-plans">
+      <div class="section-header">
+        <div class="section-title">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <span>Lesson Plans (Week-wise)</span>
+        </div>
+        <p class="section-subtitle">
+          Detailed lesson plans for each 1.5‑hour session, aligned with the training plan.
+        </p>
+      </div>
+
+      <div class="plan-card">
+        <div class="week-list">
+          <article class="week-card">
+            <h3>Week 1 – Number systems: introduction</h3>
+            <h4>General Objective</h4>
+            <p>To introduce number systems used in computing and distinguish positional from non‑positional systems.</p>
+            <h4>Specific Objectives</h4>
+            <ul>
+              <li>Define a number system and give everyday examples.</li>
+              <li>Differentiate positional and non‑positional number systems.</li>
+              <li>Identify factors affecting the value of a digit (base, position, digit).</li>
+            </ul>
+            <h4>Lesson Plan</h4>
+            <div class="table-wrapper">
+              <table class="table table-bordered table-sm">
+                <thead>
+                  <tr>
+                    <th>TIME</th>
+                    <th>TOPIC</th>
+                    <th>TEACHER ACTIVITY</th>
+                    <th>STUDENT ACTIVITY</th>
+                    <th>TEACHING AIDS</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>20 min</td>
+                    <td>Motivation &amp; everyday counting</td>
+                    <td>Relate counting in daily life (money, time, calendars) to number systems; elicit prior knowledge.</td>
+                    <td>Listen, share examples, respond to questions.</td>
+                    <td>PPT, whiteboard</td>
+                  </tr>
+                  <tr>
+                    <td>40 min</td>
+                    <td>Positional vs non‑positional</td>
+                    <td>Explain place value, base and symbols; compare decimal with Roman numerals.</td>
+                    <td>Identify given systems as positional/non‑positional; take notes.</td>
+                    <td>Slides, board examples</td>
+                  </tr>
+                  <tr>
+                    <td>30 min</td>
+                    <td>Practice &amp; recap</td>
+                    <td>Give short questions to classify systems and explain value of digits; summarise key points.</td>
+                    <td>Answer questions individually; participate in recap discussion.</td>
+                    <td>Worksheet, board</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <h4>Assessment</h4>
+            <p>Students will be assessed through oral questioning and a brief written exercise on types of number systems and positional value.</p>
+          </article>
+
+          <article class="week-card">
+            <h3>Week 2 – Decimal to binary conversion</h3>
+            <h4>General Objective</h4>
+            <p>To enable students to convert decimal integers to binary accurately.</p>
+            <h4>Specific Objectives</h4>
+            <ul>
+              <li>Explain the repeated division by 2 method.</li>
+              <li>Convert positive decimal integers to binary.</li>
+              <li>Verify conversions by reconverting binary to decimal.</li>
+            </ul>
+            <h4>Lesson Plan</h4>
+            <div class="table-wrapper">
+              <table class="table table-bordered table-sm">
+                <thead>
+                  <tr>
+                    <th>TIME</th>
+                    <th>TOPIC</th>
+                    <th>TEACHER ACTIVITY</th>
+                    <th>STUDENT ACTIVITY</th>
+                    <th>TEACHING AIDS</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>20 min</td>
+                    <td>Method explanation</td>
+                    <td>Introduce repeated division by 2; show simple example.</td>
+                    <td>Observe steps; ask clarification questions.</td>
+                    <td>Board, marker</td>
+                  </tr>
+                  <tr>
+                    <td>40 min</td>
+                    <td>Guided conversions</td>
+                    <td>Solve several examples on board with class participation.</td>
+                    <td>Work along in notebooks; volunteer answers.</td>
+                    <td>PPT / board</td>
+                  </tr>
+                  <tr>
+                    <td>30 min</td>
+                    <td>Individual practice</td>
+                    <td>Distribute worksheet with mixed decimal values; monitor and support.</td>
+                    <td>Complete worksheet; check answers with teacher.</td>
+                    <td>Worksheet</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <h4>Assessment</h4>
+            <p>Students will be assessed through the marked worksheet on decimal‑to‑binary conversions.</p>
+          </article>
+
+          <article class="week-card">
+            <h3>Week 3 – Decimal to octal and hexadecimal</h3>
+            <h4>General Objective</h4>
+            <p>To develop skills in converting decimal numbers to octal and hexadecimal.</p>
+            <h4>Specific Objectives</h4>
+            <ul>
+              <li>Use repeated division to convert decimal to octal and hexadecimal.</li>
+              <li>Relate octal and hexadecimal numbers to binary groupings.</li>
+              <li>Check answers using the reverse conversion.</li>
+            </ul>
+            <h4>Lesson Plan</h4>
+            <div class="table-wrapper">
+              <table class="table table-bordered table-sm">
+                <thead>
+                  <tr>
+                    <th>TIME</th>
+                    <th>TOPIC</th>
+                    <th>TEACHER ACTIVITY</th>
+                    <th>STUDENT ACTIVITY</th>
+                    <th>TEACHING AIDS</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>25 min</td>
+                    <td>Decimal to octal</td>
+                    <td>Explain and demonstrate conversion using division by 8.</td>
+                    <td>Follow examples; note steps.</td>
+                    <td>Board, slides</td>
+                  </tr>
+                  <tr>
+                    <td>35 min</td>
+                    <td>Decimal to hexadecimal</td>
+                    <td>Demonstrate conversion using division by 16; emphasise hex digits A–F.</td>
+                    <td>Answer guided questions; practise in pairs.</td>
+                    <td>PPT, board</td>
+                  </tr>
+                  <tr>
+                    <td>30 min</td>
+                    <td>Binary grouping link</td>
+                    <td>Show how binary groups map to octal/hex; give short practice set.</td>
+                    <td>Complete practice; present answers.</td>
+                    <td>Worksheet</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <h4>Assessment</h4>
+            <p>Students will complete a homework / tutorial sheet on decimal–octal–hex conversions for checking next week.</p>
+          </article>
+
+          <article class="week-card">
+            <h3>Week 4 – Other bases to decimal</h3>
+            <h4>General Objective</h4>
+            <p>To enable students to convert numbers from any base to decimal using positional expansion.</p>
+            <h4>Specific Objectives</h4>
+            <ul>
+              <li>State the general positional expansion formula.</li>
+              <li>Convert binary, octal and hexadecimal numbers to decimal.</li>
+              <li>Check answers using calculator or reverse conversion.</li>
+            </ul>
+            <h4>Lesson Plan</h4>
+            <div class="table-wrapper">
+              <table class="table table-bordered table-sm">
+                <thead>
+                  <tr>
+                    <th>TIME</th>
+                    <th>TOPIC</th>
+                    <th>TEACHER ACTIVITY</th>
+                    <th>STUDENT ACTIVITY</th>
+                    <th>TEACHING AIDS</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>25 min</td>
+                    <td>Positional expansion formula</td>
+                    <td>Derive formula on board with a simple example.</td>
+                    <td>Copy derivation; ask questions.</td>
+                    <td>Board, marker</td>
+                  </tr>
+                  <tr>
+                    <td>35 min</td>
+                    <td>Worked examples</td>
+                    <td>Solve examples from binary, octal, hex to decimal.</td>
+                    <td>Participate in solving; complete steps in notebooks.</td>
+                    <td>Slides, board</td>
+                  </tr>
+                  <tr>
+                    <td>30 min</td>
+                    <td>Short test practice</td>
+                    <td>Give a short in‑class practice set similar to test items.</td>
+                    <td>Attempt questions individually; compare solutions.</td>
+                    <td>Worksheet</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <h4>Assessment</h4>
+            <p>Students will sit a brief in‑class test on mixed‑base to decimal conversions.</p>
+          </article>
+
+          <article class="week-card">
+            <h3>Week 5 – Non‑decimal to non‑decimal</h3>
+            <h4>General Objective</h4>
+            <p>To practise converting directly between non‑decimal bases using binary as an intermediate base.</p>
+            <h4>Specific Objectives</h4>
+            <ul>
+              <li>Convert from binary to octal/hex and back.</li>
+              <li>Convert between octal and hexadecimal via binary.</li>
+              <li>Use a conversion map to speed up calculations.</li>
+            </ul>
+            <h4>Lesson Plan</h4>
+            <div class="table-wrapper">
+              <table class="table table-bordered table-sm">
+                <thead>
+                  <tr>
+                    <th>TIME</th>
+                    <th>TOPIC</th>
+                    <th>TEACHER ACTIVITY</th>
+                    <th>STUDENT ACTIVITY</th>
+                    <th>TEACHING AIDS</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>20 min</td>
+                    <td>Binary as intermediate base</td>
+                    <td>Explain idea of converting through binary; show examples.</td>
+                    <td>Observe examples; ask questions.</td>
+                    <td>Board, PPT</td>
+                  </tr>
+                  <tr>
+                    <td>40 min</td>
+                    <td>Group conversion map activity</td>
+                    <td>Assign groups to build base‑conversion charts.</td>
+                    <td>Prepare charts; practise conversions using chart.</td>
+                    <td>Chart paper, markers</td>
+                  </tr>
+                  <tr>
+                    <td>30 min</td>
+                    <td>Question practice</td>
+                    <td>Provide mixed non‑decimal conversion questions.</td>
+                    <td>Solve individually; share answers.</td>
+                    <td>Worksheet</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <h4>Assessment</h4>
+            <p>Students will be assessed through group work review and spot‑checks on individual conversions.</p>
+          </article>
+
+          <article class="week-card">
+            <h3>Week 6 – Fractional number conversions</h3>
+            <h4>General Objective</h4>
+            <p>To convert fractional numbers between decimal and other bases and recognise rounding effects.</p>
+            <h4>Specific Objectives</h4>
+            <ul>
+              <li>Convert decimal fractions to binary (and other bases) using repeated multiplication.</li>
+              <li>Convert binary fractions back to decimal.</li>
+              <li>Explain rounding and truncation in fractional conversions.</li>
+            </ul>
+            <h4>Lesson Plan</h4>
+            <div class="table-wrapper">
+              <table class="table table-bordered table-sm">
+                <thead>
+                  <tr>
+                    <th>TIME</th>
+                    <th>TOPIC</th>
+                    <th>TEACHER ACTIVITY</th>
+                    <th>STUDENT ACTIVITY</th>
+                    <th>TEACHING AIDS</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>25 min</td>
+                    <td>Decimal fraction to binary</td>
+                    <td>Explain repeated multiplication by base; solve example.</td>
+                    <td>Copy example; ask questions.</td>
+                    <td>Board</td>
+                  </tr>
+                  <tr>
+                    <td>35 min</td>
+                    <td>Practice conversions</td>
+                    <td>Give several decimal fraction examples; guide students.</td>
+                    <td>Work individually or in pairs; verify with teacher.</td>
+                    <td>Worksheet, calculators (if available)</td>
+                  </tr>
+                  <tr>
+                    <td>30 min</td>
+                    <td>Rounding and truncation</td>
+                    <td>Show examples where binary fractions repeat; discuss rounding.</td>
+                    <td>Discuss implications; complete short reflection question.</td>
+                    <td>PPT, board</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <h4>Assessment</h4>
+            <p>Students will submit a practice sheet including conversions and a short written note on rounding error.</p>
+          </article>
+
+          <article class="week-card">
+            <h3>Week 7 – Binary arithmetic</h3>
+            <h4>General Objective</h4>
+            <p>To develop proficiency in binary addition and subtraction.</p>
+            <h4>Specific Objectives</h4>
+            <ul>
+              <li>Perform binary addition with carries.</li>
+              <li>Perform binary subtraction with borrowing.</li>
+              <li>Recognise overflow in simple binary sums.</li>
+            </ul>
+            <h4>Lesson Plan</h4>
+            <div class="table-wrapper">
+              <table class="table table-bordered table-sm">
+                <thead>
+                  <tr>
+                    <th>TIME</th>
+                    <th>TOPIC</th>
+                    <th>TEACHER ACTIVITY</th>
+                    <th>STUDENT ACTIVITY</th>
+                    <th>TEACHING AIDS</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>25 min</td>
+                    <td>Binary addition</td>
+                    <td>Demonstrate addition rules and sample sums.</td>
+                    <td>Follow examples; solve easy sums.</td>
+                    <td>Board, PPT</td>
+                  </tr>
+                  <tr>
+                    <td>35 min</td>
+                    <td>Binary subtraction</td>
+                    <td>Explain borrowing and show examples with and without borrow.</td>
+                    <td>Practise on given questions.</td>
+                    <td>Worksheet</td>
+                  </tr>
+                  <tr>
+                    <td>30 min</td>
+                    <td>Practice drill</td>
+                    <td>Provide mixed addition/subtraction drill; highlight overflow cases.</td>
+                    <td>Complete drill; identify overflow where it occurs.</td>
+                    <td>Board, worksheet</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <h4>Assessment</h4>
+            <p>Students will be assessed through an in‑class exercise set on binary addition and subtraction.</p>
+          </article>
+
+          <article class="week-card">
+            <h3>Week 8 – Octal and hexadecimal arithmetic</h3>
+            <h4>General Objective</h4>
+            <p>To practise arithmetic operations in octal and hexadecimal systems.</p>
+            <h4>Specific Objectives</h4>
+            <ul>
+              <li>Perform addition and subtraction in octal.</li>
+              <li>Perform addition and subtraction in hexadecimal.</li>
+              <li>Relate octal and hexadecimal calculations to binary.</li>
+            </ul>
+            <h4>Lesson Plan</h4>
+            <div class="table-wrapper">
+              <table class="table table-bordered table-sm">
+                <thead>
+                  <tr>
+                    <th>TIME</th>
+                    <th>TOPIC</th>
+                    <th>TEACHER ACTIVITY</th>
+                    <th>STUDENT ACTIVITY</th>
+                    <th>TEACHING AIDS</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>25 min</td>
+                    <td>Octal arithmetic</td>
+                    <td>Explain addition and subtraction rules in base 8.</td>
+                    <td>Work through example sums.</td>
+                    <td>Board</td>
+                  </tr>
+                  <tr>
+                    <td>35 min</td>
+                    <td>Hexadecimal arithmetic</td>
+                    <td>Show hex addition/subtraction, including digits A–F.</td>
+                    <td>Practise using provided questions.</td>
+                    <td>PPT, worksheet</td>
+                  </tr>
+                  <tr>
+                    <td>30 min</td>
+                    <td>Link to binary</td>
+                    <td>Demonstrate checking results by converting to binary.</td>
+                    <td>Verify selected answers via binary conversion.</td>
+                    <td>Board, calculator (optional)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <h4>Assessment</h4>
+            <p>Students will complete a short quiz or worksheet on octal and hexadecimal sums and differences.</p>
+          </article>
+
+          <article class="week-card">
+            <h3>Week 9 – Complements and signed numbers</h3>
+            <h4>General Objective</h4>
+            <p>To understand complements and apply them for representing and subtracting signed binary numbers.</p>
+            <h4>Specific Objectives</h4>
+            <ul>
+              <li>Form one’s complement of a binary number.</li>
+              <li>Form two’s complement and interpret signed values.</li>
+              <li>Use two’s complement for binary subtraction.</li>
+            </ul>
+            <h4>Lesson Plan</h4>
+            <div class="table-wrapper">
+              <table class="table table-bordered table-sm">
+                <thead>
+                  <tr>
+                    <th>TIME</th>
+                    <th>TOPIC</th>
+                    <th>TEACHER ACTIVITY</th>
+                    <th>STUDENT ACTIVITY</th>
+                    <th>TEACHING AIDS</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>25 min</td>
+                    <td>One’s and two’s complement</td>
+                    <td>Explain concept and show how to obtain complements.</td>
+                    <td>Practise forming complements for given numbers.</td>
+                    <td>Board, PPT</td>
+                  </tr>
+                  <tr>
+                    <td>35 min</td>
+                    <td>Signed number representation</td>
+                    <td>Show range and examples of positive/negative values.</td>
+                    <td>Convert between decimal and two’s complement.</td>
+                    <td>Worksheet</td>
+                  </tr>
+                  <tr>
+                    <td>30 min</td>
+                    <td>Subtraction using complements</td>
+                    <td>Demonstrate subtraction via two’s complement; give exercises.</td>
+                    <td>Solve problems individually; compare with direct subtraction.</td>
+                    <td>Board, worksheet</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <h4>Assessment</h4>
+            <p>Students will sit a short in‑class test on forming complements and performing subtraction.</p>
+          </article>
+
+          <article class="week-card">
+            <h3>Week 10 – Fixed‑ and floating‑point representation</h3>
+            <h4>General Objective</h4>
+            <p>To introduce fixed‑ and floating‑point number representation in computers.</p>
+            <h4>Specific Objectives</h4>
+            <ul>
+              <li>Explain the idea of fixed‑point representation.</li>
+              <li>Explain basic floating‑point structure (sign, mantissa, exponent).</li>
+              <li>Convert simple decimal values into a basic fixed‑ or floating‑point form.</li>
+              <li>Compare range and precision informally.</li>
+            </ul>
+            <h4>Lesson Plan</h4>
+            <div class="table-wrapper">
+              <table class="table table-bordered table-sm">
+                <thead>
+                  <tr>
+                    <th>TIME</th>
+                    <th>TOPIC</th>
+                    <th>TEACHER ACTIVITY</th>
+                    <th>STUDENT ACTIVITY</th>
+                    <th>TEACHING AIDS</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>30 min</td>
+                    <td>Fixed‑point representation</td>
+                    <td>Explain concept and show simple examples with implied point.</td>
+                    <td>Observe and copy examples; ask questions.</td>
+                    <td>PPT, board</td>
+                  </tr>
+                  <tr>
+                    <td>30 min</td>
+                    <td>Floating‑point basics</td>
+                    <td>Introduce sign, mantissa, exponent; show normalised examples.</td>
+                    <td>Identify components in sample values.</td>
+                    <td>Slides</td>
+                  </tr>
+                  <tr>
+                    <td>30 min</td>
+                    <td>Conversion practice</td>
+                    <td>Give small set of numbers to write in simple fixed/floating format.</td>
+                    <td>Complete conversion tasks individually.</td>
+                    <td>Worksheet</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <h4>Assessment</h4>
+            <p>Students will complete a homework sheet on fixed‑ and floating‑point representations.</p>
+          </article>
+
+          <article class="week-card">
+            <h3>Week 11 – Set theory</h3>
+            <h4>General Objective</h4>
+            <p>To apply basic set theory concepts and operations relevant to computing.</p>
+            <h4>Specific Objectives</h4>
+            <ul>
+              <li>Use notation for sets, subsets and universal set.</li>
+              <li>Perform union, intersection, difference and complement.</li>
+              <li>Draw and interpret simple Venn diagrams.</li>
+            </ul>
+            <h4>Lesson Plan</h4>
+            <div class="table-wrapper">
+              <table class="table table-bordered table-sm">
+                <thead>
+                  <tr>
+                    <th>TIME</th>
+                    <th>TOPIC</th>
+                    <th>TEACHER ACTIVITY</th>
+                    <th>STUDENT ACTIVITY</th>
+                    <th>TEACHING AIDS</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>25 min</td>
+                    <td>Set notation</td>
+                    <td>Introduce sets, elements, subset notation with examples.</td>
+                    <td>Write examples; respond to questions.</td>
+                    <td>Board, PPT</td>
+                  </tr>
+                  <tr>
+                    <td>35 min</td>
+                    <td>Set operations</td>
+                    <td>Explain union, intersection, difference, complement using diagrams.</td>
+                    <td>Solve small problems; draw diagrams.</td>
+                    <td>Worksheet, board</td>
+                  </tr>
+                  <tr>
+                    <td>30 min</td>
+                    <td>Venn diagram practice</td>
+                    <td>Give practice questions requiring Venn diagrams and answers.</td>
+                    <td>Complete tutorial sheet; compare answers.</td>
+                    <td>Tutorial sheet</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <h4>Assessment</h4>
+            <p>Students will be assessed through a marked tutorial sheet on set operations and Venn diagrams.</p>
+          </article>
+
+          <article class="week-card">
+            <h3>Week 12 – Statistics: mean, median, mode</h3>
+            <h4>General Objective</h4>
+            <p>To calculate and interpret basic measures of central tendency.</p>
+            <h4>Specific Objectives</h4>
+            <ul>
+              <li>Identify different types of data and simple frequency tables.</li>
+              <li>Compute mean, median and mode for small data sets.</li>
+              <li>Interpret results in simple computing contexts.</li>
+            </ul>
+            <h4>Lesson Plan</h4>
+            <div class="table-wrapper">
+              <table class="table table-bordered table-sm">
+                <thead>
+                  <tr>
+                    <th>TIME</th>
+                    <th>TOPIC</th>
+                    <th>TEACHER ACTIVITY</th>
+                    <th>STUDENT ACTIVITY</th>
+                    <th>TEACHING AIDS</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>20 min</td>
+                    <td>Data types &amp; examples</td>
+                    <td>Explain basic data concepts and give computing‑related examples.</td>
+                    <td>Note examples; participate in discussion.</td>
+                    <td>PPT</td>
+                  </tr>
+                  <tr>
+                    <td>40 min</td>
+                    <td>Calculating mean, median, mode</td>
+                    <td>Demonstrate calculations step by step for one data set.</td>
+                    <td>Work along; ask questions.</td>
+                    <td>Board, calculator (optional)</td>
+                  </tr>
+                  <tr>
+                    <td>30 min</td>
+                    <td>Practice problems</td>
+                    <td>Provide 2–3 small data sets for pair work.</td>
+                    <td>Compute mean, median, mode; share answers.</td>
+                    <td>Worksheet</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <h4>Assessment</h4>
+            <p>Students will complete an in‑class problem set on mean, median and mode which will be collected for marking.</p>
+          </article>
+
+          <article class="week-card">
+            <h3>Week 13 – Statistics: standard deviation</h3>
+            <h4>General Objective</h4>
+            <p>To compute and interpret standard deviation for simple data sets.</p>
+            <h4>Specific Objectives</h4>
+            <ul>
+              <li>Explain the concept of spread/dispersion.</li>
+              <li>Calculate standard deviation for ungrouped data.</li>
+              <li>Interpret standard deviation values in simple scenarios.</li>
+            </ul>
+            <h4>Lesson Plan</h4>
+            <div class="table-wrapper">
+              <table class="table table-bordered table-sm">
+                <thead>
+                  <tr>
+                    <th>TIME</th>
+                    <th>TOPIC</th>
+                    <th>TEACHER ACTIVITY</th>
+                    <th>STUDENT ACTIVITY</th>
+                    <th>TEACHING AIDS</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>25 min</td>
+                    <td>Idea of spread</td>
+                    <td>Discuss range, variance conceptually and introduce SD.</td>
+                    <td>Participate in discussion; note key ideas.</td>
+                    <td>PPT, board</td>
+                  </tr>
+                  <tr>
+                    <td>35 min</td>
+                    <td>SD formula and example</td>
+                    <td>Work through formula step by step on a small data set.</td>
+                    <td>Follow steps; copy working.</td>
+                    <td>Board, calculator</td>
+                  </tr>
+                  <tr>
+                    <td>30 min</td>
+                    <td>Practice &amp; short quiz</td>
+                    <td>Provide 1–2 practice questions; finish with short quiz.</td>
+                    <td>Solve problems individually; submit quiz.</td>
+                    <td>Worksheet, quiz paper</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <h4>Assessment</h4>
+            <p>Students will be assessed through a short quiz and worksheet on standard deviation calculations and interpretation.</p>
+          </article>
+
+          <article class="week-card">
+            <h3>Week 14 – Computer codes</h3>
+            <h4>General Objective</h4>
+            <p>To introduce common computer codes for numeric and character data and review module content.</p>
+            <h4>Specific Objectives</h4>
+            <ul>
+              <li>Describe BCD, EBCDIC, ASCII and Unicode.</li>
+              <li>Demonstrate encoding of characters using ASCII/Unicode tables.</li>
+              <li>Revise key concepts from number systems, sets and statistics.</li>
+            </ul>
+            <h4>Lesson Plan</h4>
+            <div class="table-wrapper">
+              <table class="table table-bordered table-sm">
+                <thead>
+                  <tr>
+                    <th>TIME</th>
+                    <th>TOPIC</th>
+                    <th>TEACHER ACTIVITY</th>
+                    <th>STUDENT ACTIVITY</th>
+                    <th>TEACHING AIDS</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>25 min</td>
+                    <td>Overview of codes</td>
+                    <td>Explain BCD, EBCDIC, ASCII, Unicode with simple examples.</td>
+                    <td>Listen; note differences between codes.</td>
+                    <td>PPT, code tables</td>
+                  </tr>
+                  <tr>
+                    <td>35 min</td>
+                    <td>Encoding activity</td>
+                    <td>Show how to encode/decode characters; give practice strings.</td>
+                    <td>Encode/decode sample text using tables.</td>
+                    <td>Printed ASCII/Unicode tables</td>
+                  </tr>
+                  <tr>
+                    <td>30 min</td>
+                    <td>Module review quiz</td>
+                    <td>Conduct short MCQ/short‑answer quiz covering full module.</td>
+                    <td>Answer quiz questions; discuss solutions.</td>
+                    <td>Quiz paper, board</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <h4>Assessment</h4>
+            <p>Students will be assessed through a brief MCQ/short‑answer quiz on computer codes and main module topics.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      <p><strong>Department of Information and Communication Technology - SLGTI</strong></p>
+    </footer>
+  </div>
+</body>
+</html>
