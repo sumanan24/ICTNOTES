@@ -1289,6 +1289,228 @@
                 font-size: 0.85em;
             }
         }
+
+        /* Certificate */
+        .cert-access-btn {
+            background: linear-gradient(135deg, #4CAF50, #45a049) !important;
+            color: white !important;
+            border: none !important;
+        }
+
+        .certificate-section {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .cert-screen-wrap { overflow-x: auto; padding: 8px 0 24px; }
+
+        .cert-input {
+            width: 100%;
+            max-width: 320px;
+            padding: 14px 20px;
+            border: 2px solid #667eea;
+            border-radius: 12px;
+            font-size: 1.1em;
+            font-family: inherit;
+            text-align: center;
+            margin: 16px auto;
+            display: block;
+        }
+
+        .certificate {
+            --cert-royal: #1a237e;
+            --cert-purple: #5e35b1;
+            --cert-gold: #c9a227;
+            --cert-sky: #4fc3f7;
+            position: relative;
+            width: 100%;
+            max-width: 1056px;
+            aspect-ratio: 297 / 210;
+            margin: 0 auto;
+            background: #ffffff;
+            color: #1a237e;
+            font-family: 'Poppins', 'Noto Sans Tamil', Georgia, serif;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(26, 35, 126, 0.15);
+            border: 4px solid var(--cert-gold);
+            outline: 2px solid var(--cert-royal);
+            outline-offset: -6px;
+        }
+
+        .cert-inner {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 36px 48px 28px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .cert-header {
+            width: 100%;
+            background: linear-gradient(135deg, #1a237e 0%, #5e35b1 100%);
+            margin: -36px -48px 0;
+            padding: 20px 48px;
+            color: #fff;
+        }
+
+        .cert-dept-name {
+            font-size: clamp(0.7rem, 1.6vw, 0.9rem);
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            line-height: 1.5;
+        }
+
+        .cert-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 20px 0;
+            gap: 8px;
+        }
+
+        .cert-type {
+            font-size: clamp(0.85rem, 2vw, 1.1rem);
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--cert-gold);
+            margin-top: 16px;
+        }
+
+        .cert-divider {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--cert-sky), var(--cert-purple));
+            border-radius: 2px;
+            margin: 6px 0;
+        }
+
+        .cert-game-title {
+            font-size: clamp(1.1rem, 2.6vw, 1.5rem);
+            font-weight: 800;
+            color: var(--cert-royal);
+        }
+
+        .cert-game-title-ta {
+            font-size: clamp(0.85rem, 1.9vw, 1.05rem);
+            color: var(--cert-purple);
+            font-weight: 600;
+        }
+
+        .cert-awarded-label {
+            font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+            color: #607d8b;
+            margin-top: 12px;
+        }
+
+        .cert-student-name {
+            font-size: clamp(1.5rem, 3.8vw, 2.2rem);
+            font-weight: 800;
+            color: var(--cert-royal);
+            border-bottom: 2px solid var(--cert-gold);
+            padding: 6px 40px 10px;
+            margin: 6px 0;
+        }
+
+        .cert-completed-label {
+            font-size: clamp(0.72rem, 1.4vw, 0.85rem);
+            color: #78909c;
+        }
+
+        .cert-message {
+            max-width: 85%;
+            margin: 12px auto 0;
+            font-size: clamp(0.72rem, 1.4vw, 0.88rem);
+            line-height: 1.65;
+            color: #455a64;
+        }
+
+        .cert-message p { margin: 6px 0; }
+
+        .cert-stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+            font-size: clamp(0.72rem, 1.4vw, 0.88rem);
+            color: var(--cert-royal);
+            font-weight: 600;
+        }
+
+        .cert-stats-row strong { color: var(--cert-purple); font-size: 1.1em; }
+
+        .cert-footer {
+            width: 100%;
+            padding-top: 14px;
+            border-top: 2px solid #e8eaf6;
+        }
+
+        .cert-footer-dept {
+            font-size: clamp(0.62rem, 1.2vw, 0.75rem);
+            font-weight: 700;
+            color: var(--cert-royal);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .cert-footer-tagline {
+            font-size: clamp(0.58rem, 1.1vw, 0.7rem);
+            color: #78909c;
+            margin-top: 4px;
+        }
+
+        .cert-btn-group {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .cert-download-status {
+            text-align: center;
+            margin-top: 14px;
+            font-size: 0.95em;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .cert-download-status.loading { color: #4fc3f7; }
+        .cert-download-status.success { color: #4CAF50; }
+        .cert-download-status.error { color: #f44336; }
+
+        @page { size: A4 landscape; margin: 0; }
+
+        @media print {
+            body, html { margin: 0; padding: 0; background: white !important; }
+            body * { visibility: hidden; }
+            #printCertificate, #printCertificate * { visibility: visible; }
+            #printCertificate {
+                position: fixed;
+                left: 0; top: 0;
+                width: 297mm; height: 210mm;
+                max-width: none;
+                aspect-ratio: auto;
+                box-shadow: none;
+            }
+            .language-selector, .header, .certificate-section > h2,
+            .cert-input, .cert-btn-group, .cert-download-status,
+            .back-btn, #certBackBtn { display: none !important; }
+            #certificateSection { display: block !important; background: none; box-shadow: none; padding: 0; }
+        }
     </style>
 </head>
 <body>
@@ -1296,6 +1518,7 @@
     <div class="language-selector">
         <button class="lang-btn" onclick="setLanguage('en')" id="langEn">English</button>
         <button class="lang-btn active" onclick="setLanguage('ta')" id="langTa">தமிழ்</button>
+        <button class="lang-btn cert-access-btn" id="certAccessBtn" onclick="showCertificateSection()" style="display:none;">📜 சான்றிதழ்</button>
     </div>
 
     <div class="container">
@@ -1537,6 +1760,50 @@
             </div>
         </div>
 
+        <!-- Certificate Section -->
+        <div id="certificateSection" class="certificate-section">
+            <button class="back-btn" onclick="backFromCertificate()" id="certBackBtn">← Back</button>
+            <h2 id="certCongratsTitle" style="text-align:center;color:#667eea;margin-bottom:16px;">🎉 வாழ்த்துகள்!</h2>
+            <input type="text" class="cert-input" id="studentName" placeholder="உங்கள் பெயரை உள்ளிடவும்" maxlength="50">
+            <div class="cert-screen-wrap">
+                <div id="printCertificate" class="certificate" style="display:none;" role="document">
+                    <div class="cert-inner">
+                        <header class="cert-header">
+                            <div class="cert-dept-name">Department of Information and Communication Technology</div>
+                        </header>
+                        <div class="cert-main">
+                            <div class="cert-type">Certificate of Achievement</div>
+                            <div class="cert-divider"></div>
+                            <p class="cert-awarded-label">This certificate is proudly awarded to</p>
+                            <div class="cert-student-name" id="certStudentName">Student Name</div>
+                            <p class="cert-completed-label">for successfully completing</p>
+                            <div class="cert-game-title">Typing Master</div>
+                            <div class="cert-game-title-ta tamil-text">தட்டச்சு மாஸ்டர் பயிற்சி திட்டம்</div>
+                            <div class="cert-message">
+                                <p id="certBodyTa" class="tamil-text">நீங்கள் எளிதானது, நடுத்தரம் மற்றும் கடினம் வகைகளின் அனைத்து பயிற்சி நிலைகள் மற்றும் இறுதித் தேர்வுகளையும் வெற்றிகரமாக நிறைவு செய்துள்ளீர்கள்.</p>
+                                <p id="certBodyEn">You have successfully completed all practice levels and final exams in Easy, Medium, and Hard categories.</p>
+                            </div>
+                            <div class="cert-stats-row">
+                                <span>⭐ Total Score / மொத்த புள்ளி: <strong id="certScore">0</strong></span>
+                                <span>📅 Date / தேதி: <strong id="certDate"></strong></span>
+                            </div>
+                        </div>
+                        <footer class="cert-footer">
+                            <div class="cert-footer-dept">Department of Information and Communication Technology</div>
+                            <div class="cert-footer-tagline">Empowering Digital Skills for the Future</div>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+            <div class="cert-btn-group">
+                <button class="btn btn-primary" onclick="generateCertificate()" id="generateCertBtn">📜 Generate Certificate</button>
+                <button class="btn btn-primary" id="btnDownloadPng" onclick="downloadCertificatePNG()">📥 Download PNG</button>
+                <button class="btn btn-secondary" id="btnDownloadPdf" onclick="downloadCertificatePDF()">📥 Download PDF</button>
+                <button class="btn btn-secondary" onclick="printCertificate()" id="printCertBtn">🖨️ Print</button>
+            </div>
+            <p id="certScreenStatus" class="cert-download-status" style="display:none;" role="status"></p>
+        </div>
+
         <!-- Result Modal -->
         <div id="resultModal" class="result-modal">
             <div class="result-content">
@@ -1608,7 +1875,23 @@
                 congratulationsExam: "🎉 Congratulations! You passed the Final Exam!",
                 allPracticeCompleted: "🎉 All Practice Levels Completed! Final Exam is now unlocked!",
                 practiceNote: "Note: Practice and exam texts are in English only. Typing practice will be done in English characters only.",
-                practiceNoteTitle: "📝 Important Note"
+                practiceNoteTitle: "📝 Important Note",
+                viewCert: "📜 Certificate",
+                congratsTitle: "🎉 Congratulations!",
+                enterName: "Enter your name",
+                generateCert: "📜 Generate Certificate",
+                downloadPNG: "📥 Download PNG",
+                downloadPDF: "📥 Download PDF",
+                printCert: "🖨️ Print",
+                certBackBtn: "← Back",
+                downloading: "Preparing certificate download...",
+                downloadSuccess: "Certificate downloaded successfully!",
+                downloadError: "Download failed. Please try Print instead.",
+                enterNameFirst: "Please enter your name first.",
+                allExamsComplete: "🎉 You completed ALL categories and final exams! Get your certificate now!",
+                getCertificate: "📜 Get Certificate",
+                certBodyTa: "நீங்கள் எளிதானது, நடுத்தரம் மற்றும் கடினம் வகைகளின் அனைத்து பயிற்சி நிலைகள் மற்றும் இறுதித் தேர்வுகளையும் வெற்றிகரமாக நிறைவு செய்துள்ளீர்கள்.",
+                certBodyEn: "You have successfully completed all practice levels and final exams in Easy, Medium, and Hard categories."
             },
             ta: {
                 headerTitle: "⌨️ தட்டச்சு மாஸ்டர்",
@@ -1665,7 +1948,23 @@
                 congratulationsExam: "🎉 வாழ்த்துகள்! நீங்கள் இறுதித் தேர்வில் தேர்ச்சி பெற்றீர்கள்!",
                 allPracticeCompleted: "🎉 அனைத்து பயிற்சி நிலைகளும் முடிந்தன! இறுதித் தேர்வு இப்போது திறக்கப்பட்டது!",
                 practiceNote: "குறிப்பு: பயிற்சி மற்றும் தேர்வு ஆங்கில மொழியில் மட்டுமே இருக்கும். தட்டச்சு பயிற்சி ஆங்கில எழுத்துக்களில் மட்டுமே செய்யப்படும்.",
-                practiceNoteTitle: "📝 முக்கிய குறிப்பு"
+                practiceNoteTitle: "📝 முக்கிய குறிப்பு",
+                viewCert: "📜 சான்றிதழ்",
+                congratsTitle: "🎉 வாழ்த்துகள்!",
+                enterName: "உங்கள் பெயரை உள்ளிடவும்",
+                generateCert: "📜 சான்றிதழ் உருவாக்கு",
+                downloadPNG: "📥 PNG பதிவிறக்கம்",
+                downloadPDF: "📥 PDF பதிவிறக்கம்",
+                printCert: "🖨️ அச்சிடு",
+                certBackBtn: "← பின்செல்",
+                downloading: "சான்றிதழ் தயாராகிறது...",
+                downloadSuccess: "சான்றிதழ் வெற்றிகரமாக பதிவிறக்கம் செய்யப்பட்டது!",
+                downloadError: "பதிவிறக்கம் தோல்வி. அச்சிடு விருப்பத்தை முயற்சிக்கவும்.",
+                enterNameFirst: "முதலில் உங்கள் பெயரை உள்ளிடவும்.",
+                allExamsComplete: "🎉 அனைத்து வகைகள் மற்றும் இறுதித் தேர்வுகளும் முடிந்தன! உங்கள் சான்றிதழைப் பெறுங்கள்!",
+                getCertificate: "📜 சான்றிதழ் பெறுக",
+                certBodyTa: "நீங்கள் எளிதானது, நடுத்தரம் மற்றும் கடினம் வகைகளின் அனைத்து பயிற்சி நிலைகள் மற்றும் இறுதித் தேர்வுகளையும் வெற்றிகரமாக நிறைவு செய்துள்ளீர்கள்.",
+                certBodyEn: "You have successfully completed all practice levels and final exams in Easy, Medium, and Hard categories."
             }
         };
 
@@ -1806,6 +2105,16 @@
             document.getElementById('resetBtn').textContent = t.resetBtn;
             document.getElementById('pauseBtn').textContent = t.pauseBtn;
             document.getElementById('continueBtn').textContent = t.continueBtn;
+            document.getElementById('certAccessBtn').textContent = t.viewCert;
+            document.getElementById('certCongratsTitle').textContent = t.congratsTitle;
+            document.getElementById('studentName').placeholder = t.enterName;
+            document.getElementById('generateCertBtn').textContent = t.generateCert;
+            document.getElementById('btnDownloadPng').textContent = t.downloadPNG;
+            document.getElementById('btnDownloadPdf').textContent = t.downloadPDF;
+            document.getElementById('printCertBtn').textContent = t.printCert;
+            document.getElementById('certBackBtn').textContent = t.certBackBtn;
+            document.getElementById('certBodyTa').textContent = t.certBodyTa;
+            document.getElementById('certBodyEn').textContent = t.certBodyEn;
 
             // Add Tamil class for Tamil text
             if (isTamil) {
@@ -2011,6 +2320,9 @@
             setLanguage(currentLanguage);
             // Initialize game stats
             updateGameStats();
+            updateCertAccessButtons();
+            const savedName = localStorage.getItem('typingStudentName');
+            if (savedName) document.getElementById('studentName').value = savedName;
             const keys = document.querySelectorAll('.key');
             keys.forEach(key => {
                 key.addEventListener('click', function() {
@@ -2325,6 +2637,7 @@
                 // Mark exam as completed
                 examProgress[currentCategory] = true;
                 localStorage.setItem('examProgress', JSON.stringify(examProgress));
+                updateCertAccessButtons();
             } else {
                 // Mark practice level as completed
                 if (!progress[currentCategory]) {
@@ -2363,6 +2676,12 @@
                     <div style="background: #4CAF50; color: white; padding: 15px; border-radius: 10px; margin-top: 15px;">
                         <strong>${t.congratulationsExam}</strong>
                     </div>
+                    ${isAllTypingComplete() ? `
+                    <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 15px; border-radius: 10px; margin-top: 15px;">
+                        <strong>${t.allExamsComplete}</strong>
+                    </div>
+                    <button class="btn btn-success" style="margin-top:15px;width:100%;" onclick="document.getElementById('resultModal').classList.remove('active'); showCertificateSection();">${t.getCertificate}</button>
+                    ` : ''}
                 `;
             } else {
                 title.textContent = t.practiceComplete;
@@ -2443,6 +2762,164 @@
             if (examTimerInterval) clearInterval(examTimerInterval);
             currentLevel = null;
             renderLevels();
+        }
+
+        // ── Certificate ───────────────────────────────────────────
+        function isAllTypingComplete() {
+            return examProgress.easy && examProgress.medium && examProgress.hard;
+        }
+
+        function updateCertAccessButtons() {
+            const show = isAllTypingComplete();
+            const btn = document.getElementById('certAccessBtn');
+            if (btn) btn.style.display = show ? 'inline-block' : 'none';
+        }
+
+        function showCertificateSection() {
+            document.getElementById('tutorialSection').style.display = 'none';
+            document.getElementById('categorySelector').style.display = 'none';
+            document.getElementById('levelSelector').classList.remove('active');
+            document.getElementById('typingArea').classList.remove('active');
+            document.getElementById('certificateSection').style.display = 'block';
+            document.getElementById('resultModal').classList.remove('active');
+            const saved = localStorage.getItem('typingStudentName');
+            if (saved) document.getElementById('studentName').value = saved;
+            document.getElementById('certScore').textContent = totalPoints;
+            document.getElementById('certDate').textContent = formatCertDate();
+            setCertStatus('', '');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function backFromCertificate() {
+            document.getElementById('certificateSection').style.display = 'none';
+            document.getElementById('categorySelector').style.display = 'grid';
+        }
+
+        function formatCertDate() {
+            const d = new Date();
+            return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;
+        }
+
+        function setCertStatus(msg, type) {
+            const el = document.getElementById('certScreenStatus');
+            if (!el) return;
+            el.textContent = msg;
+            el.className = 'cert-download-status' + (type ? ' ' + type : '');
+            el.style.display = msg ? 'block' : 'none';
+        }
+
+        function sanitizeFileName(name) {
+            return name.replace(/[^\w\u0B80-\u0BFF\s-]/g, '').trim().replace(/\s+/g, '-') || 'Student';
+        }
+
+        function loadExternalScript(src) {
+            return new Promise((resolve, reject) => {
+                if (document.querySelector(`script[src="${src}"]`)) { resolve(); return; }
+                const s = document.createElement('script');
+                s.src = src;
+                s.onload = resolve;
+                s.onerror = () => reject(new Error('Script load failed'));
+                document.head.appendChild(s);
+            });
+        }
+
+        function ensureCertificateReady() {
+            const t = translations[currentLanguage];
+            const name = document.getElementById('studentName').value.trim();
+            if (!name) {
+                document.getElementById('studentName').focus();
+                setCertStatus(t.enterNameFirst, 'error');
+                return null;
+            }
+            document.getElementById('certStudentName').textContent = name;
+            document.getElementById('certScore').textContent = totalPoints;
+            document.getElementById('certDate').textContent = formatCertDate();
+            document.getElementById('certBodyTa').textContent = t.certBodyTa;
+            document.getElementById('certBodyEn').textContent = t.certBodyEn;
+            localStorage.setItem('typingStudentName', name);
+            document.getElementById('printCertificate').style.display = 'block';
+            return name;
+        }
+
+        async function captureCertificateCanvas() {
+            await loadExternalScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
+            if (document.fonts && document.fonts.ready) await document.fonts.ready;
+            const cert = document.getElementById('printCertificate');
+            const pw = cert.style.width, ph = cert.style.height;
+            cert.style.width = '1056px';
+            cert.style.height = '744px';
+            await new Promise(r => setTimeout(r, 150));
+            const canvas = await html2canvas(cert, {
+                scale: 2, useCORS: true, backgroundColor: '#ffffff', logging: false, width: 1056, height: 744
+            });
+            cert.style.width = pw;
+            cert.style.height = ph;
+            return canvas;
+        }
+
+        function triggerFileDownload(dataUrl, filename) {
+            const link = document.createElement('a');
+            link.href = dataUrl;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        async function downloadCertificatePNG() {
+            const name = ensureCertificateReady();
+            if (!name) return;
+            const t = translations[currentLanguage];
+            const btn = document.getElementById('btnDownloadPng');
+            if (btn) btn.disabled = true;
+            setCertStatus(t.downloading, 'loading');
+            try {
+                const canvas = await captureCertificateCanvas();
+                triggerFileDownload(canvas.toDataURL('image/png'), `Typing-Master-Certificate-${sanitizeFileName(name)}.png`);
+                setCertStatus(t.downloadSuccess, 'success');
+                createCelebration();
+            } catch (err) {
+                console.error(err);
+                setCertStatus(t.downloadError, 'error');
+            } finally {
+                if (btn) btn.disabled = false;
+            }
+        }
+
+        async function downloadCertificatePDF() {
+            const name = ensureCertificateReady();
+            if (!name) return;
+            const t = translations[currentLanguage];
+            const btn = document.getElementById('btnDownloadPdf');
+            if (btn) btn.disabled = true;
+            setCertStatus(t.downloading, 'loading');
+            try {
+                const canvas = await captureCertificateCanvas();
+                await loadExternalScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
+                pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 297, 210);
+                pdf.save(`Typing-Master-Certificate-${sanitizeFileName(name)}.pdf`);
+                setCertStatus(t.downloadSuccess, 'success');
+                createCelebration();
+            } catch (err) {
+                console.error(err);
+                setCertStatus(t.downloadError, 'error');
+            } finally {
+                if (btn) btn.disabled = false;
+            }
+        }
+
+        function generateCertificate() {
+            const name = ensureCertificateReady();
+            if (!name) return;
+            setCertStatus('', '');
+            createCelebration();
+        }
+
+        function printCertificate() {
+            if (!ensureCertificateReady()) return;
+            window.print();
         }
     </script>
 </body>
