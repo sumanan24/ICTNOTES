@@ -749,44 +749,10 @@
             margin: 24px auto 0;
         }
 
-        /* Certificate */
-        .certificate {
-            background: white;
-            color: #333;
-            padding: 48px;
-            border-radius: 8px;
-            border: 8px double #667eea;
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .certificate h2 {
-            color: #667eea;
-            font-size: 2em;
-            margin-bottom: 8px;
-        }
-
-        .certificate .cert-title {
-            font-size: 1.4em;
-            color: #764ba2;
-            margin-bottom: 24px;
-        }
-
-        .certificate .student-name {
-            font-size: 2em;
-            font-weight: 700;
-            color: #2d3748;
-            border-bottom: 2px solid #667eea;
-            display: inline-block;
-            padding: 8px 32px;
-            margin: 16px 0;
-        }
-
-        .certificate .cert-body {
-            font-size: 1.05em;
-            line-height: 1.8;
-            margin: 24px 0;
+        /* Certificate Screen */
+        .cert-screen-wrap {
+            overflow-x: auto;
+            padding: 8px 0 24px;
         }
 
         .cert-input {
@@ -803,6 +769,172 @@
             margin: 16px auto;
             display: block;
         }
+
+        /* Certificate — Simple Professional A4 Landscape */
+        .certificate {
+            --cert-royal: #1a237e;
+            --cert-purple: #5e35b1;
+            --cert-gold: #c9a227;
+            --cert-sky: #4fc3f7;
+            position: relative;
+            width: 100%;
+            max-width: 1056px;
+            aspect-ratio: 297 / 210;
+            margin: 0 auto;
+            background: #ffffff;
+            color: #1a237e;
+            font-family: 'Poppins', 'Noto Sans Tamil', Georgia, serif;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(26, 35, 126, 0.15);
+            border: 4px solid var(--cert-gold);
+            outline: 2px solid var(--cert-royal);
+            outline-offset: -6px;
+        }
+
+        .cert-inner {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 36px 48px 28px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .cert-header {
+            width: 100%;
+            background: linear-gradient(135deg, #1a237e 0%, #5e35b1 100%);
+            margin: -36px -48px 0;
+            padding: 20px 48px;
+            color: #fff;
+        }
+
+        .cert-dept-name {
+            font-size: clamp(0.7rem, 1.6vw, 0.9rem);
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            line-height: 1.5;
+        }
+
+        .cert-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 20px 0;
+            gap: 8px;
+        }
+
+        .cert-type {
+            font-size: clamp(0.85rem, 2vw, 1.1rem);
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--cert-gold);
+            margin-top: 16px;
+        }
+
+        .cert-divider {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--cert-sky), var(--cert-purple));
+            border-radius: 2px;
+            margin: 6px 0;
+        }
+
+        .cert-game-title {
+            font-size: clamp(1.1rem, 2.6vw, 1.5rem);
+            font-weight: 800;
+            color: var(--cert-royal);
+        }
+
+        .cert-game-title-ta {
+            font-size: clamp(0.85rem, 1.9vw, 1.05rem);
+            color: var(--cert-purple);
+            font-weight: 600;
+        }
+
+        .cert-awarded-label {
+            font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+            color: #607d8b;
+            margin-top: 12px;
+        }
+
+        .cert-student-name {
+            font-size: clamp(1.5rem, 3.8vw, 2.2rem);
+            font-weight: 800;
+            color: var(--cert-royal);
+            border-bottom: 2px solid var(--cert-gold);
+            padding: 6px 40px 10px;
+            margin: 6px 0;
+        }
+
+        .cert-completed-label {
+            font-size: clamp(0.72rem, 1.4vw, 0.85rem);
+            color: #78909c;
+        }
+
+        .cert-message {
+            max-width: 85%;
+            margin: 12px auto 0;
+            font-size: clamp(0.72rem, 1.4vw, 0.88rem);
+            line-height: 1.65;
+            color: #455a64;
+        }
+
+        .cert-message p { margin: 6px 0; }
+
+        .cert-stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+            font-size: clamp(0.72rem, 1.4vw, 0.88rem);
+            color: var(--cert-royal);
+            font-weight: 600;
+        }
+
+        .cert-stats-row strong {
+            color: var(--cert-purple);
+            font-size: 1.1em;
+        }
+
+        .cert-footer {
+            width: 100%;
+            padding-top: 14px;
+            border-top: 2px solid #e8eaf6;
+        }
+
+        .cert-footer-dept {
+            font-size: clamp(0.62rem, 1.2vw, 0.75rem);
+            font-weight: 700;
+            color: var(--cert-royal);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .cert-footer-tagline {
+            font-size: clamp(0.58rem, 1.1vw, 0.7rem);
+            color: #78909c;
+            margin-top: 4px;
+        }
+
+        .cert-download-status {
+            text-align: center;
+            margin-top: 14px;
+            font-size: 0.95em;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .cert-download-status.loading { color: var(--cert-sky, #4fc3f7); }
+        .cert-download-status.success { color: #81c784; }
+        .cert-download-status.error { color: #ef9a9a; }
 
         /* Confetti */
         .confetti-piece {
@@ -871,15 +1003,40 @@
             100% { transform: scale(1); }
         }
 
-        /* Print */
+        /* Print — A4 Landscape */
+        @page {
+            size: A4 landscape;
+            margin: 0;
+        }
+
         @media print {
+            body, html {
+                margin: 0;
+                padding: 0;
+                background: white !important;
+            }
             body * { visibility: hidden; }
             #printCertificate, #printCertificate * { visibility: visible; }
             #printCertificate {
-                position: absolute;
+                position: fixed;
                 left: 0;
                 top: 0;
-                width: 100%;
+                width: 297mm;
+                height: 210mm;
+                max-width: none;
+                aspect-ratio: auto;
+                box-shadow: none;
+                page-break-inside: avoid;
+            }
+            .cert-input, .btn-group, .cert-screen-wrap > .btn-group,
+            .screen:not(#screenCertificate), .top-bar, .mascot,
+            #screenCertificate .glass-card > h2 { display: none !important; }
+            #screenCertificate { display: block !important; }
+            #screenCertificate .glass-card {
+                background: none;
+                border: none;
+                box-shadow: none;
+                padding: 0;
             }
         }
 
@@ -891,6 +1048,9 @@
             .mascot-avatar { width: 56px; height: 56px; font-size: 1.6em; }
             .top-bar { flex-direction: column; align-items: stretch; }
             .top-controls { justify-content: center; }
+            .cert-inner { padding: 24px 28px 20px; }
+            .cert-header { margin: -24px -28px 0; padding: 16px 28px; }
+            .cert-message { max-width: 95%; }
         }
 
         /* Accessibility */
@@ -950,6 +1110,7 @@
                     <button class="btn btn-primary" onclick="startGame()" data-i18n="startBtn">🚀 தொடங்கு</button>
                     <button class="btn btn-secondary" onclick="openModal('instructions')" data-i18n="instructionsBtn">📖 வழிமுறைகள்</button>
                     <button class="btn btn-outline" onclick="openModal('about')" data-i18n="aboutBtn">ℹ️ பற்றி</button>
+                    <button class="btn btn-secondary" id="certAccessBtn" onclick="showScreen('certificate')" style="display:none;" data-i18n="viewCert">📜 சான்றிதழ்</button>
                 </div>
 
                 <div class="badges-section">
@@ -1023,23 +1184,52 @@
         <!-- CERTIFICATE SCREEN -->
         <div id="screenCertificate" class="screen">
             <div class="glass-card">
-                <h2 style="text-align:center;margin-bottom:24px;" data-i18n="congratsTitle">🎉 வாழ்த்துகள்!</h2>
+                <h2 style="text-align:center;margin-bottom:16px;" data-i18n="congratsTitle">🎉 வாழ்த்துகள்!</h2>
                 <input type="text" class="cert-input" id="studentName" data-i18n-placeholder="enterName" placeholder="உங்கள் பெயரை உள்ளிடவும்" maxlength="50">
-                <div id="printCertificate" class="certificate" style="display:none;">
-                    <h2>Mouse Master Challenge</h2>
-                    <p class="cert-title tamil-text">சுட்டி (Mouse) பயன்பாட்டுத் திறன் பயிற்சி விளையாட்டு</p>
-                    <p class="cert-body tamil-text" id="certBodyTa"></p>
-                    <p class="cert-body" id="certBodyEn"></p>
-                    <div class="student-name" id="certStudentName">Student Name</div>
-                    <p><strong data-i18n="finalScore">மொத்த புள்ளி</strong>: <span id="certScore">0</span></p>
-                    <p><strong data-i18n="date">தேதி</strong>: <span id="certDate"></span></p>
+                <div class="cert-screen-wrap">
+                    <div id="printCertificate" class="certificate" style="display:none;" role="document" aria-label="Certificate of Achievement">
+                        <div class="cert-inner">
+                            <header class="cert-header">
+                                <div class="cert-dept-name">Department of Information and Communication Technology</div>
+                            </header>
+
+                            <div class="cert-main">
+                                <div class="cert-type">Certificate of Achievement</div>
+                                <div class="cert-divider"></div>
+
+                                <p class="cert-awarded-label">This certificate is proudly awarded to</p>
+                                <div class="cert-student-name" id="certStudentName">Student Name</div>
+                                <p class="cert-completed-label">for successfully completing</p>
+
+                                <div class="cert-game-title">Mouse Master Challenge</div>
+                                <div class="cert-game-title-ta tamil-text">சுட்டி (Mouse) பயன்பாட்டுத் திறன் பயிற்சி விளையாட்டு</div>
+
+                                <div class="cert-message">
+                                    <p id="certBodyTa" class="tamil-text">நீங்கள் சுட்டி (Mouse) பயன்பாட்டின் அனைத்து அடிப்படைத் திறன்களையும் வெற்றிகரமாக நிறைவு செய்துள்ளீர்கள்.</p>
+                                    <p id="certBodyEn">You have successfully completed all basic mouse operation skills.</p>
+                                </div>
+
+                                <div class="cert-stats-row">
+                                    <span>⭐ Total Score / மொத்த புள்ளி: <strong id="certScore">0</strong></span>
+                                    <span>📅 Date / தேதி: <strong id="certDate"></strong></span>
+                                </div>
+                            </div>
+
+                            <footer class="cert-footer">
+                                <div class="cert-footer-dept">Department of Information and Communication Technology</div>
+                                <div class="cert-footer-tagline">Empowering Digital Skills for the Future</div>
+                            </footer>
+                        </div>
+                    </div>
                 </div>
                 <div class="btn-group" style="margin-top:24px;">
                     <button class="btn btn-primary" onclick="generateCertificate()" data-i18n="generateCert">📜 சான்றிதழ் உருவாக்கு</button>
+                    <button class="btn btn-primary" id="btnDownloadPng" onclick="downloadCertificatePNG()" data-i18n="downloadPNG">📥 PNG பதிவிறக்கம்</button>
+                    <button class="btn btn-secondary" id="btnDownloadPdf" onclick="downloadCertificatePDF()" data-i18n="downloadPDF">📥 PDF பதிவிறக்கம்</button>
                     <button class="btn btn-secondary" onclick="printCertificate()" data-i18n="printCert">🖨️ அச்சிடு</button>
-                    <button class="btn btn-outline" onclick="downloadPDF()" data-i18n="downloadPDF">📥 PDF பதிவிறக்கம்</button>
                     <button class="btn btn-outline" onclick="showScreen('home')" data-i18n="backHome">🏠 முகப்பு</button>
                 </div>
+                <p id="certScreenStatus" class="cert-download-status" style="display:none;" role="status"></p>
             </div>
         </div>
 
@@ -1048,7 +1238,10 @@
             <div class="glass-card">
                 <div class="game-header">
                     <h2 data-i18n="leaderboardTitle">🏆 முன்னணி பட்டியல்</h2>
-                    <button class="btn btn-outline" onclick="showScreen('home')" data-i18n="backHome">🏠 முகப்பு</button>
+                    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                        <button class="btn btn-primary" id="leaderboardCertBtn" onclick="showScreen('certificate')" style="display:none;" data-i18n="viewCert">📜 சான்றிதழ்</button>
+                        <button class="btn btn-outline" onclick="showScreen('home')" data-i18n="backHome">🏠 முகப்பு</button>
+                    </div>
                 </div>
                 <table class="leaderboard-table" id="leaderboardTable">
                     <thead>
@@ -1137,8 +1330,14 @@
             congratsTitle: '🎉 Congratulations!',
             enterName: 'Enter your name',
             generateCert: '📜 Generate Certificate',
-            printCert: '🖨️ Print',
+            downloadPNG: '📥 Download PNG',
             downloadPDF: '📥 Download PDF',
+            viewCert: '📜 Certificate',
+            downloading: 'Preparing certificate download...',
+            downloadSuccess: 'Certificate downloaded successfully!',
+            downloadError: 'Download failed. Please try Print instead.',
+            enterNameFirst: 'Please enter your name first.',
+            printCert: '🖨️ Print',
             finalScore: 'Final Score',
             date: 'Date',
             leaderboardTitle: '🏆 Leaderboard',
@@ -1207,8 +1406,14 @@
             congratsTitle: '🎉 வாழ்த்துகள்!',
             enterName: 'உங்கள் பெயரை உள்ளிடவும்',
             generateCert: '📜 சான்றிதழ் உருவாக்கு',
-            printCert: '🖨️ அச்சிடு',
+            downloadPNG: '📥 PNG பதிவிறக்கம்',
             downloadPDF: '📥 PDF பதிவிறக்கம்',
+            viewCert: '📜 சான்றிதழ்',
+            downloading: 'சான்றிதழ் தயாராகிறது...',
+            downloadSuccess: 'சான்றிதழ் வெற்றிகரமாக பதிவிறக்கம் செய்யப்பட்டது!',
+            downloadError: 'பதிவிறக்கம் தோல்வி. அச்சிடு விருப்பத்தை முயற்சிக்கவும்.',
+            enterNameFirst: 'முதலில் உங்கள் பெயரை உள்ளிடவும்.',
+            printCert: '🖨️ அச்சிடு',
             finalScore: 'மொத்த புள்ளி',
             date: 'தேதி',
             leaderboardTitle: '🏆 முன்னணி பட்டியல்',
@@ -1389,10 +1594,17 @@
         if (name === 'leaderboard') renderLeaderboard();
         if (name === 'certificate') {
             document.getElementById('certScore').textContent = totalScore;
-            document.getElementById('certDate').textContent = new Date().toLocaleDateString(lang === 'ta' ? 'ta-IN' : 'en-GB');
+            document.getElementById('certDate').textContent = formatCertDate();
             document.getElementById('certBodyTa').textContent = t('certBodyTa');
             document.getElementById('certBodyEn').textContent = t('certBodyEn');
+            const savedName = localStorage.getItem('mouseStudentName');
+            if (savedName) {
+                document.getElementById('studentName').value = savedName;
+                document.getElementById('certStudentName').textContent = savedName;
+            }
+            setCertStatus('', '');
         }
+        updateCertAccessButtons();
     }
 
     function startGame() {
@@ -1549,6 +1761,7 @@
             completedLevels.push(currentLevel);
             localStorage.setItem('mouseCompleted', JSON.stringify(completedLevels));
             awardBadge(currentLevel - 1);
+            updateCertAccessButtons();
         }
         flashSuccess();
         createConfetti();
@@ -1927,37 +2140,172 @@
     }
 
     // ── Certificate ───────────────────────────────────────────
-    function generateCertificate() {
+    function formatCertDate() {
+        const d = new Date();
+        const dd = String(d.getDate()).padStart(2, '0');
+        const mm = String(d.getMonth() + 1).padStart(2, '0');
+        const yyyy = d.getFullYear();
+        return `${dd}/${mm}/${yyyy}`;
+    }
+
+    function isAllLevelsComplete() {
+        return completedLevels.length >= 6;
+    }
+
+    function updateCertAccessButtons() {
+        const show = isAllLevelsComplete();
+        const homeBtn = document.getElementById('certAccessBtn');
+        const lbBtn = document.getElementById('leaderboardCertBtn');
+        if (homeBtn) homeBtn.style.display = show ? 'inline-flex' : 'none';
+        if (lbBtn) lbBtn.style.display = show ? 'inline-flex' : 'none';
+    }
+
+    function setCertStatus(msg, type) {
+        const el = document.getElementById('certScreenStatus');
+        if (!el) return;
+        el.textContent = msg;
+        el.className = 'cert-download-status' + (type ? ' ' + type : '');
+        el.style.display = msg ? 'block' : 'none';
+    }
+
+    function sanitizeFileName(name) {
+        return name.replace(/[^\w\u0B80-\u0BFF\s-]/g, '').trim().replace(/\s+/g, '-') || 'Student';
+    }
+
+    function loadExternalScript(src) {
+        return new Promise((resolve, reject) => {
+            if (document.querySelector(`script[src="${src}"]`)) {
+                resolve();
+                return;
+            }
+            const script = document.createElement('script');
+            script.src = src;
+            script.onload = resolve;
+            script.onerror = () => reject(new Error('Script load failed: ' + src));
+            document.head.appendChild(script);
+        });
+    }
+
+    function ensureCertificateReady() {
         const name = document.getElementById('studentName').value.trim();
         if (!name) {
             document.getElementById('studentName').focus();
             playSound('error');
-            return;
+            setCertStatus(t('enterNameFirst'), 'error');
+            return null;
         }
         document.getElementById('certStudentName').textContent = name;
         document.getElementById('certScore').textContent = totalScore;
-        document.getElementById('certDate').textContent = new Date().toLocaleDateString(lang === 'ta' ? 'ta-IN' : 'en-GB');
-        document.getElementById('printCertificate').style.display = 'block';
+        document.getElementById('certDate').textContent = formatCertDate();
+        document.getElementById('certBodyTa').textContent = t('certBodyTa');
+        document.getElementById('certBodyEn').textContent = t('certBodyEn');
+        localStorage.setItem('mouseStudentName', name);
+        const cert = document.getElementById('printCertificate');
+        cert.style.display = 'block';
+        return name;
+    }
+
+    async function captureCertificateCanvas() {
+        await loadExternalScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
+        if (document.fonts && document.fonts.ready) await document.fonts.ready;
+
+        const cert = document.getElementById('printCertificate');
+        const prevWidth = cert.style.width;
+        const prevHeight = cert.style.height;
+        cert.style.width = '1056px';
+        cert.style.height = '744px';
+
+        await new Promise(r => setTimeout(r, 150));
+
+        const canvas = await html2canvas(cert, {
+            scale: 2,
+            useCORS: true,
+            backgroundColor: '#ffffff',
+            logging: false,
+            width: 1056,
+            height: 744
+        });
+
+        cert.style.width = prevWidth;
+        cert.style.height = prevHeight;
+        return canvas;
+    }
+
+    function triggerFileDownload(dataUrl, filename) {
+        const link = document.createElement('a');
+        link.href = dataUrl;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    async function downloadCertificatePNG() {
+        const name = ensureCertificateReady();
+        if (!name) return;
+
+        const btn = document.getElementById('btnDownloadPng');
+        if (btn) btn.disabled = true;
+        setCertStatus(t('downloading'), 'loading');
+
+        try {
+            const canvas = await captureCertificateCanvas();
+            const fileName = `Mouse-Master-Certificate-${sanitizeFileName(name)}.png`;
+            triggerFileDownload(canvas.toDataURL('image/png'), fileName);
+            saveLeaderboard();
+            setCertStatus(t('downloadSuccess'), 'success');
+            playSound('complete');
+            createConfetti();
+        } catch (err) {
+            console.error(err);
+            setCertStatus(t('downloadError'), 'error');
+            playSound('error');
+        } finally {
+            if (btn) btn.disabled = false;
+        }
+    }
+
+    async function downloadCertificatePDF() {
+        const name = ensureCertificateReady();
+        if (!name) return;
+
+        const btn = document.getElementById('btnDownloadPdf');
+        if (btn) btn.disabled = true;
+        setCertStatus(t('downloading'), 'loading');
+
+        try {
+            const canvas = await captureCertificateCanvas();
+            await loadExternalScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');
+            const imgData = canvas.toDataURL('image/png');
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
+            pdf.addImage(imgData, 'PNG', 0, 0, 297, 210);
+            pdf.save(`Mouse-Master-Certificate-${sanitizeFileName(name)}.pdf`);
+            saveLeaderboard();
+            setCertStatus(t('downloadSuccess'), 'success');
+            playSound('complete');
+            createConfetti();
+        } catch (err) {
+            console.error(err);
+            setCertStatus(t('downloadError'), 'error');
+            playSound('error');
+        } finally {
+            if (btn) btn.disabled = false;
+        }
+    }
+
+    function generateCertificate() {
+        const name = ensureCertificateReady();
+        if (!name) return;
+        setCertStatus('', '');
         createConfetti();
         playSound('complete');
         saveLeaderboard();
     }
 
     function printCertificate() {
-        const name = document.getElementById('studentName').value.trim();
-        if (!name) { generateCertificate(); }
-        document.getElementById('printCertificate').style.display = 'block';
-        window.print();
-    }
-
-    function downloadPDF() {
-        const name = document.getElementById('studentName').value.trim();
-        if (!name) { generateCertificate(); }
-        document.getElementById('printCertificate').style.display = 'block';
-        const msg = lang === 'ta'
-            ? 'அச்சு உரையாடலில் "PDF ஆகச் சேமி" என்பதைத் தேர்ந்தெடுக்கவும்.'
-            : 'In the print dialog, choose "Save as PDF" as the destination.';
-        alert(msg);
+        const name = ensureCertificateReady();
+        if (!name) return;
         window.print();
     }
 
@@ -2026,6 +2374,7 @@
         document.getElementById('totalScore').textContent = totalScore;
         setLanguage(lang);
         renderBadges();
+        updateCertAccessButtons();
 
         if (completedLevels.length === 6) {
             document.getElementById('studentName').value =
