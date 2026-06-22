@@ -51,6 +51,17 @@ const T = {
         nextTaskBtn: 'Next Task →',
         clickNextToContinue: '✅ Task done — click Next to continue',
         notepad: 'Notepad', runDialog: 'Run', typeNotepad: 'Type notepad and press Enter',
+        winRunHint: '🪟 Windows: Press Win+R or Ctrl+Alt+R — or click the button below (browsers may block Win key)',
+        openRunBtn: '🪟 Open Run Dialog',
+        openNotepadBtn: '📝 Open Notepad',
+        runOpenLabel: 'Open:',
+        runOk: 'OK', runCancel: 'Cancel',
+        notepadUntitled: 'Untitled - Notepad',
+        notepadSaved: 'ICT_Report.txt - Notepad',
+        charCount: 'Characters',
+        fileSaved: '✅ File saved!',
+        filePanel: 'File Explorer',
+        winShortcutHelp: 'Use keyboard shortcuts shown in each task',
         objectives: [
             'Learn keyboard key locations', 'Improve typing accuracy', 'Increase typing speed',
             'Master common keyboard shortcuts', 'Type without looking at the keyboard',
@@ -88,6 +99,17 @@ const T = {
         nextTaskBtn: 'அடுத்த பணி →',
         clickNextToContinue: '✅ பணி முடிந்தது — தொடர அடுத்து என்பதை அழுத்தவும்',
         notepad: 'குறிப்பேடு', runDialog: 'இயக்கு', typeNotepad: 'notepad என தட்டச்சு செய்து Enter அழுத்தவும்',
+        winRunHint: '🪟 Windows: Win+R அல்லது Ctrl+Alt+R அழுத்தவும் — அல்லது கீழே உள்ள பொத்தானை அழுத்தவும் (உலாவி Win விசையைத் தடுக்கலாம்)',
+        openRunBtn: '🪟 இயக்கு உரையாடலைத் திற',
+        openNotepadBtn: '📝 குறிப்பேட்டைத் திற',
+        runOpenLabel: 'திற:',
+        runOk: 'சரி', runCancel: 'ரத்து',
+        notepadUntitled: 'பெயரிடப்படாதது - குறிப்பேடு',
+        notepadSaved: 'ICT_Report.txt - குறிப்பேடு',
+        charCount: 'எழுத்துகள்',
+        fileSaved: '✅ கோப்பு சேமிக்கப்பட்டது!',
+        filePanel: 'கோப்பு நிர்வாகி',
+        winShortcutHelp: 'ஒவ்வொரு பணியிலும் காட்டப்பட்ட விசைப்பலகை குறுக்குவழிகளைப் பயன்படுத்தவும்',
         objectives: [
             'விசைப்பலகை விசை இருப்பிடங்களைக் கற்றுக்கொள்', 'தட்டச்சு துல்லியத்தை மேம்படுத்து',
             'தட்டச்சு வேகத்தை அதிகரி', 'பொதுவான விசைப்பலகை குறுக்குவழிகளை மாஸ்டர் செய்',
@@ -779,40 +801,47 @@ function renderParagraph(area, lv) {
     });
 }
 
-/* ── Level 9: ICT Master Challenge ── */
+/* ── Level 9: ICT Master Challenge (Windows + In-page Notepad) ── */
+function isWinShortcut(e) {
+    return e.metaKey || e.getModifierState?.('Meta') || e.getModifierState?.('OS');
+}
+
 function renderMaster(area, lv) {
-    const masterSteps = [
-        { label: { en: 'Open Run dialog (Win + R)', ta: 'இயக்கு உரையாடலைத் திற (Win + R)' },
-          done: () => simState.runOpen, trigger: e => { if (e.metaKey && e.key.toLowerCase() === 'r') { simState.runOpen = true; return true; } return false; } },
-        { label: { en: 'Type "notepad" and press Enter', ta: '"notepad" தட்டச்சு செய்து Enter அழுத்தவும்' },
-          done: () => simState.notepadOpen, ui: 'run' },
-        { label: { en: 'Type a paragraph (50+ characters)', ta: 'ஒரு பத்தியை தட்டச்சு செய் (50+ எழுத்துகள்)' },
-          done: () => noteText.length >= 50, ui: 'notepad' },
-        { label: { en: 'Save file (Ctrl + S)', ta: 'கோப்பை சேமி (Ctrl + S)' },
-          done: () => simState.saved, trigger: e => { if ((e.ctrlKey||e.metaKey) && e.key.toLowerCase() === 's') { simState.saved = true; return true; } return false; } },
-        { label: { en: 'Create folder (Ctrl+Shift+N)', ta: 'கோப்புறை உருவாக்கு (Ctrl+Shift+N)' },
-          done: () => simState.folderOk, trigger: e => (e.ctrlKey||e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'n' ? (simState.folderOk=true,true) : false },
-        { label: { en: 'Rename file (F2)', ta: 'கோப்பை மறுபெயரிடு (F2)' },
-          done: () => simState.renamed, trigger: e => e.key === 'F2' ? (simState.renamed=true,true) : false },
-        { label: { en: 'Copy file (Ctrl + C)', ta: 'கோப்பை நகலெடு (Ctrl + C)' },
-          done: () => simState.copied, trigger: e => (e.ctrlKey||e.metaKey) && e.key.toLowerCase() === 'c' ? (simState.copied=true,true) : false },
-        { label: { en: 'Move file (Ctrl + X)', ta: 'கோப்பை நகர்த்து (Ctrl + X)' },
-          done: () => simState.moved, trigger: e => (e.ctrlKey||e.metaKey) && e.key.toLowerCase() === 'x' ? (simState.moved=true,true) : false },
-        { label: { en: 'Delete file (Delete)', ta: 'கோப்பை நீக்கு (Delete)' },
-          done: () => simState.deleted, trigger: e => e.key === 'Delete' ? (simState.deleted=true,true) : false },
-        { label: { en: 'Restore file (Ctrl + Z)', ta: 'கோப்பை மீட்டெடு (Ctrl + Z)' },
-          done: () => simState.restored, trigger: e => (e.ctrlKey||e.metaKey) && e.key.toLowerCase() === 'z' ? (simState.restored=true,true) : false },
-        { label: { en: 'Close application (Alt + F4)', ta: 'பயன்பாட்டை மூடு (Alt + F4)' },
-          done: () => simState.closed, trigger: e => e.altKey && e.key === 'F4' ? (simState.closed=true,true) : false }
+    cleanupLevelHandlers();
+
+    const steps = [
+        { key: 'run', label: { en: 'Open Run dialog (Win + R)', ta: 'இயக்கு உரையாடலைத் திற (Win + R)' } },
+        { key: 'notepad_cmd', label: { en: 'Type "notepad" and press Enter', ta: '"notepad" தட்டச்சு செய்து Enter அழுத்தவும்' } },
+        { key: 'type_text', label: { en: 'Type a paragraph (50+ characters)', ta: 'ஒரு பத்தியை தட்டச்சு செய் (50+ எழுத்துகள்)' } },
+        { key: 'save', label: { en: 'Save file (Ctrl + S)', ta: 'கோப்பை சேமி (Ctrl + S)' } },
+        { key: 'folder', label: { en: 'Create folder (Ctrl+Shift+N)', ta: 'கோப்புறை உருவாக்கு (Ctrl+Shift+N)' } },
+        { key: 'rename', label: { en: 'Rename file (F2)', ta: 'கோப்பை மறுபெயரிடு (F2)' } },
+        { key: 'copy', label: { en: 'Copy file (Ctrl + C)', ta: 'கோப்பை நகலெடு (Ctrl + C)' } },
+        { key: 'move', label: { en: 'Move file (Ctrl + X)', ta: 'கோப்பை நகர்த்து (Ctrl + X)' } },
+        { key: 'delete', label: { en: 'Delete file (Delete)', ta: 'கோப்பை நீக்கு (Delete)' } },
+        { key: 'restore', label: { en: 'Restore file (Ctrl + Z)', ta: 'கோப்பை மீட்டெடு (Ctrl + Z)' } },
+        { key: 'close', label: { en: 'Close Notepad (Alt + F4)', ta: 'குறிப்பேட்டை மூடு (Alt + F4)' } }
     ];
+
     let mStep = 0;
     let runInput = '';
     let noteText = '';
-    simState = { runOpen: false, notepadOpen: false, saved: false, folderOk: false, renamed: false, copied: false, moved: false, deleted: false, restored: false, closed: false };
+    let levelFinished = false;
+    let feedback = '';
+
+    simState = {
+        runOpen: false, notepadOpen: false, saved: false,
+        folderOk: false, renamed: false, copied: false, moved: false,
+        deleted: false, restored: false, closed: false,
+        files: [], trash: null, fileName: 'ICT_Report.txt'
+    };
+
+    function currentStep() { return steps[mStep]; }
 
     function finishMaster() {
-        document.removeEventListener('keydown', keyHandler);
-        clearInterval(noteCheck);
+        if (levelFinished) return;
+        levelFinished = true;
+        cleanupLevelHandlers();
         save.points += 750;
         updateHUD();
         completeLevel(lv, 95, save.bestWPM || 45, 3, 0);
@@ -820,63 +849,205 @@ function renderMaster(area, lv) {
 
     function advance() {
         playSound('correct');
+        feedback = '';
         mStep++;
-        if (mStep >= masterSteps.length) finishMaster();
+        if (mStep >= steps.length) finishMaster();
         else draw();
     }
 
+    function openRun() {
+        if (mStep !== 0 || simState.runOpen) return;
+        simState.runOpen = true;
+        playSound('correct');
+        mStep = 1;
+        draw();
+    }
+
+    function openNotepad() {
+        if (mStep !== 1) return;
+        if (runInput.toLowerCase().trim() !== 'notepad') {
+            feedback = lang === 'ta' ? '"notepad" என தட்டச்சு செய்யவும்' : 'Type "notepad" in the box';
+            draw();
+            return;
+        }
+        simState.notepadOpen = true;
+        simState.runOpen = false;
+        playSound('correct');
+        mStep = 2;
+        draw();
+    }
+
     function draw() {
-        const st = masterSteps[mStep];
+        const step = currentStep();
+        const showRun = simState.runOpen && !simState.notepadOpen;
+        const showNotepad = simState.notepadOpen && !simState.closed;
+        const showFiles = simState.saved && mStep >= 4;
+
         area.innerHTML = `
-            <div class="key-hint">${L(lv.mission)}</div>
-            <div class="sim-window">
-                ${simState.notepadOpen ? `
-                    <div class="sim-titlebar"><span>📝 ${t('notepad')} - ICT_Report.txt ${simState.saved ? '✅' : ''}</span><span>— □ ✕</span></div>
-                    <div class="sim-body"><textarea class="sim-notepad" id="noteArea" placeholder="${lang==='ta'?'உங்கள் பத்தியை இங்கே தட்டச்சு செய்யுங்கள்...':'Type your paragraph here...'}">${noteText}</textarea></div>
-                ` : simState.runOpen ? `
-                    <div class="sim-titlebar"><span>🏃 ${t('runDialog')}</span></div>
-                    <div class="sim-body"><input class="type-input" id="runInput" placeholder="notepad" style="margin:0"></div>
-                ` : `<div class="sim-body" style="text-align:center;padding:40px;color:#999">${lang==='ta'?'Win+R அழுத்தி தொடங்கவும்':'Press Win+R to begin'}</div>`}
+            <div class="key-hint">${t('winRunHint')}</div>
+            <div class="win-desktop">
+                ${!simState.runOpen && !simState.notepadOpen ? `
+                    <div style="text-align:center;padding:50px 20px;color:rgba(255,255,255,.7)">
+                        <div style="font-size:3em;margin-bottom:12px">🪟</div>
+                        <p>${lang === 'ta' ? 'Windows பணிமேசை — Win+R அழுத்தவும்' : 'Windows Desktop — Press Win+R'}</p>
+                        <div class="win-action-row" style="margin-top:20px">
+                            <button class="btn btn-primary" id="btnOpenRun">${t('openRunBtn')}</button>
+                        </div>
+                    </div>
+                ` : ''}
+                ${showRun ? `
+                    <div class="win-run-dialog" id="runDialog">
+                        <div class="win-run-title">🏃 ${t('runDialog')}</div>
+                        <div class="win-run-body">
+                            <label class="win-run-label">${t('runOpenLabel')}</label>
+                            <input class="win-run-input" id="runInput" value="${runInput}" placeholder="notepad" autocomplete="off" spellcheck="false">
+                            <div class="win-run-btns">
+                                <button class="win-btn" id="runCancelBtn">${t('runCancel')}</button>
+                                <button class="win-btn primary" id="runOkBtn">${t('runOk')}</button>
+                            </div>
+                            <div class="win-fallback">
+                                <button class="btn btn-success" id="btnOpenNotepad" style="margin-top:10px;font-size:.9em">${t('openNotepadBtn')}</button>
+                            </div>
+                        </div>
+                    </div>
+                ` : ''}
+                ${showNotepad ? `
+                    <div class="win-notepad" id="notepadWin">
+                        <div class="win-notepad-title">
+                            <span>📝 ${simState.saved ? t('notepadSaved') : t('notepadUntitled')}</span>
+                            <span>— □ ✕</span>
+                        </div>
+                        <div class="win-notepad-menu">
+                            <span>File</span><span>Edit</span><span>Format</span><span>View</span><span>Help</span>
+                        </div>
+                        <textarea class="sim-notepad" id="noteArea" placeholder="${lang === 'ta' ? 'உங்கள் ICT பத்தியை இங்கே தட்டச்சு செய்யுங்கள்...' : 'Type your ICT paragraph here...'}">${noteText}</textarea>
+                        <div class="win-notepad-status">
+                            <span id="noteCharCount">${noteText.length} ${t('charCount')}</span>
+                            <span>${simState.saved ? t('fileSaved') : 'Ln 1, Col 1'}</span>
+                        </div>
+                    </div>
+                ` : ''}
+                ${showFiles ? `
+                    <div class="win-file-panel">
+                        <strong>📁 ${t('filePanel')}</strong>
+                        <div id="fileList" style="margin-top:8px">
+                            ${simState.files.length ? simState.files.map(f => `<div class="win-file-item">📄 ${f}</div>`).join('') : `<em>${lang === 'ta' ? 'கோப்புகள் இல்லை' : 'No files'}</em>`}
+                        </div>
+                    </div>
+                ` : ''}
             </div>
             <ul class="task-list" id="masterTasks"></ul>
             <p style="text-align:center;font-weight:600;margin-top:12px;color:#5e35b1" id="masterPrompt"></p>
-            <div class="stats-row"><div class="stat-box"><div class="stat-val">${mStep}/${masterSteps.length}</div><div>${t('progress')}</div></div></div>`;
+            <p style="text-align:center;color:#f44336;min-height:22px" id="masterFeedback">${feedback}</p>
+            <div class="stats-row"><div class="stat-box"><div class="stat-val">${mStep}/${steps.length}</div><div>${t('progress')}</div></div></div>`;
+
         const list = document.getElementById('masterTasks');
-        masterSteps.forEach((s, i) => { list.innerHTML += `<li class="${i < mStep ? 'done' : 'pending'}">${L(s.label)}</li>`; });
-        if (mStep < masterSteps.length) document.getElementById('masterPrompt').textContent = `👉 ${L(masterSteps[mStep].label)}`;
-        const noteArea = document.getElementById('noteArea');
-        if (noteArea) {
-            noteArea.focus();
-            noteArea.oninput = () => {
-                noteText = noteArea.value;
-                if (mStep === 2 && noteText.length >= 50) advance();
-            };
+        steps.forEach((s, i) => {
+            const done = i < mStep;
+            const active = i === mStep;
+            list.innerHTML += `<li class="${done ? 'done' : 'pending'}" style="${active ? 'background:#e8eaf6;border:2px solid #5e35b1;font-weight:700' : ''}">${L(s.label)}${active ? ' 👈' : ''}</li>`;
+        });
+        if (mStep < steps.length) {
+            document.getElementById('masterPrompt').textContent = `👉 ${L(step.label)}`;
         }
+
+        document.getElementById('btnOpenRun')?.addEventListener('click', openRun);
+        document.getElementById('runOkBtn')?.addEventListener('click', openNotepad);
+        document.getElementById('btnOpenNotepad')?.addEventListener('click', openNotepad);
+        document.getElementById('runCancelBtn')?.addEventListener('click', () => {
+            simState.runOpen = false; mStep = 0; runInput = ''; draw();
+        });
+
         const runIn = document.getElementById('runInput');
         if (runIn) {
             runIn.focus();
             runIn.oninput = () => { runInput = runIn.value; };
             runIn.onkeydown = (e) => {
-                if (e.key === 'Enter' && runInput.toLowerCase().trim() === 'notepad') {
-                    simState.notepadOpen = true;
+                if (e.key === 'Enter') { e.preventDefault(); openNotepad(); }
+                if (e.key === 'Escape') { simState.runOpen = false; mStep = 0; runInput = ''; draw(); }
+            };
+        }
+
+        const noteArea = document.getElementById('noteArea');
+        if (noteArea) {
+            noteArea.focus();
+            noteArea.oninput = () => {
+                noteText = noteArea.value;
+                const cc = document.getElementById('noteCharCount');
+                if (cc) cc.textContent = `${noteText.length} ${t('charCount')}`;
+                if (mStep === 2 && noteText.length >= 50) advance();
+            };
+            noteArea.onkeydown = (e) => {
+                if (mStep === 3 && (e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
+                    e.preventDefault();
+                    simState.saved = true;
+                    simState.files.push(simState.fileName);
+                    advance();
+                }
+                if (e.altKey && e.key === 'F4' && mStep === 10) {
+                    e.preventDefault();
+                    simState.closed = true;
                     advance();
                 }
             };
         }
     }
 
-    function keyHandler(e) {
-        if (mStep >= masterSteps.length) return;
-        const st = masterSteps[mStep];
-        if (st.ui === 'run' || st.ui === 'notepad') return;
-        if (st.trigger && st.trigger(e)) {
-            e.preventDefault();
-            advance();
-        }
-    }
+    activeKeyHandler = (e) => {
+        if (levelFinished || mStep >= steps.length) return;
 
-    const noteCheck = setInterval(() => {}, 1000);
-    document.addEventListener('keydown', keyHandler);
+        // Step 0: Open Run — Win+R or Ctrl+Alt+R (Windows browser fallback)
+        if (mStep === 0) {
+            const winR = isWinShortcut(e) && e.key.toLowerCase() === 'r' && !e.ctrlKey && !e.altKey && !e.shiftKey;
+            const altR = e.ctrlKey && e.altKey && e.key.toLowerCase() === 'r';
+            if (winR || altR) { e.preventDefault(); openRun(); }
+            return;
+        }
+
+        // Step 1: handled in run input
+        if (mStep === 1) return;
+
+        // Step 2: typing in notepad
+        if (mStep === 2) return;
+
+        // Step 3: Ctrl+S — also handled in noteArea
+        if (mStep === 3) {
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's' && simState.notepadOpen) {
+                e.preventDefault();
+                simState.saved = true;
+                if (!simState.files.includes(simState.fileName)) simState.files.push(simState.fileName);
+                advance();
+            }
+            return;
+        }
+
+        // File management steps (4-9) — only after save
+        if (!simState.saved) return;
+
+        let matched = false;
+        if (mStep === 4 && (e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'n') {
+            e.preventDefault(); simState.folderOk = true; simState.files.push('New_Folder'); matched = true;
+        } else if (mStep === 5 && e.key === 'F2' && !e.ctrlKey && !e.metaKey) {
+            e.preventDefault(); simState.renamed = true;
+            const idx = simState.files.indexOf(simState.fileName);
+            if (idx >= 0) simState.files[idx] = 'ICT_Final.txt';
+            matched = true;
+        } else if (mStep === 6 && (e.ctrlKey || e.metaKey) && !e.shiftKey && e.key.toLowerCase() === 'c') {
+            e.preventDefault(); simState.copied = true; matched = true;
+        } else if (mStep === 7 && (e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'x') {
+            e.preventDefault(); simState.moved = true; matched = true;
+        } else if (mStep === 8 && e.key === 'Delete') {
+            e.preventDefault(); simState.deleted = true; simState.trash = simState.files.pop(); matched = true;
+        } else if (mStep === 9 && (e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') {
+            e.preventDefault(); if (simState.trash) { simState.files.push(simState.trash); simState.restored = true; } matched = true;
+        } else if (mStep === 10 && e.altKey && e.key === 'F4') {
+            e.preventDefault(); simState.closed = true; matched = true;
+        }
+
+        if (matched) { advance(); draw(); }
+    };
+
+    document.addEventListener('keydown', activeKeyHandler, true);
     draw();
 }
 

@@ -124,7 +124,28 @@
         .sim-sidebar { background: #f3f3f3; padding: 10px; border-right: 1px solid #ddd; }
         .sim-file { padding: 8px 12px; cursor: pointer; border-radius: 4px; }
         .sim-file.selected { background: #cce8ff; }
-        .sim-notepad { width: 100%; min-height: 150px; border: none; font-family: 'Courier New', monospace; padding: 12px; resize: vertical; font-size: 1em; }
+        .sim-notepad { width: 100%; min-height: 180px; border: none; font-family: 'Consolas', 'Courier New', monospace; padding: 8px 12px; resize: vertical; font-size: 1em; outline: none; background: #fff; }
+        .win-desktop { background: #1e4e8c; border-radius: 8px; padding: 20px; min-height: 320px; position: relative; margin: 16px 0; }
+        .win-run-dialog { background: #f0f0f0; border: 1px solid #888; max-width: 420px; margin: 0 auto; box-shadow: 0 8px 32px rgba(0,0,0,.4); }
+        .win-run-title { background: linear-gradient(180deg, #fff 0%, #e5e5e5 100%); padding: 8px 12px; font-size: .85em; border-bottom: 1px solid #aaa; font-weight: 600; }
+        .win-run-body { padding: 16px; }
+        .win-run-label { font-size: .85em; margin-bottom: 6px; display: block; }
+        .win-run-input { width: 100%; padding: 6px 8px; border: 1px solid #7a7a7a; font-size: 1em; font-family: 'Segoe UI', sans-serif; }
+        .win-run-btns { display: flex; justify-content: flex-end; gap: 8px; margin-top: 14px; }
+        .win-btn { padding: 6px 20px; border: 1px solid #555; background: #e1e1e1; cursor: pointer; font-size: .85em; min-width: 75px; }
+        .win-btn:hover { background: #d0d0d0; }
+        .win-btn.primary { border-color: #0078d4; }
+        .win-notepad { background: #fff; border: 1px solid #888; max-width: 100%; box-shadow: 0 8px 32px rgba(0,0,0,.35); }
+        .win-notepad-title { background: linear-gradient(180deg, #fff 0%, #e8e8e8 100%); padding: 6px 10px; font-size: .8em; border-bottom: 1px solid #bbb; display: flex; justify-content: space-between; align-items: center; }
+        .win-notepad-menu { background: #f0f0f0; padding: 4px 8px; border-bottom: 1px solid #ddd; font-size: .8em; display: flex; gap: 16px; }
+        .win-notepad-menu span { padding: 2px 6px; cursor: default; }
+        .win-notepad-menu span:hover { background: #e0e0e0; }
+        .win-notepad-status { background: #f0f0f0; padding: 4px 10px; font-size: .75em; border-top: 1px solid #ddd; display: flex; justify-content: space-between; color: #555; }
+        .win-fallback { text-align: center; margin-top: 10px; font-size: .85em; color: #856404; }
+        .win-action-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 12px; }
+        .win-file-panel { background: #fff; border: 1px solid #ccc; margin-top: 12px; padding: 12px; border-radius: 4px; }
+        .win-file-item { padding: 6px 10px; border-radius: 3px; font-size: .9em; }
+        .win-file-item.selected { background: #cce8ff; }
         .key-hint { background: #fff3cd; color: #856404; padding: 12px 16px; border-radius: 10px; margin: 12px 0; font-size: .95em; border-left: 4px solid #ffc107; }
         .modal-overlay {
             display: none; position: fixed; inset: 0; background: rgba(0,0,0,.7);
