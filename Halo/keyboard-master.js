@@ -47,8 +47,9 @@ const T = {
         badgeEarned: 'Badge earned', pressShortcut: 'Press the correct shortcut keys',
         action: 'Action', keysPressed: 'Keys pressed', fileExplorer: 'File Explorer',
         wrongKey: 'Wrong key — try the shortcut shown above',
-        stepComplete: 'Step complete! Do the next action.',
-        explorerClosed: 'File Explorer is closed',
+        stepComplete: 'Task complete! Click Next to continue.',
+        nextTaskBtn: 'Next Task →',
+        clickNextToContinue: '✅ Task done — click Next to continue',
         notepad: 'Notepad', runDialog: 'Run', typeNotepad: 'Type notepad and press Enter',
         objectives: [
             'Learn keyboard key locations', 'Improve typing accuracy', 'Increase typing speed',
@@ -83,8 +84,9 @@ const T = {
         pressShortcut: 'சரியான குறுக்குவழி விசைகளை அழுத்தவும்', action: 'செயல்',
         keysPressed: 'அழுத்தப்பட்ட விசைகள்', fileExplorer: 'கோப்பு நிர்வாகி',
         wrongKey: 'தவறான விசை — மேலே காட்டப்பட்ட குறுக்குவழியைப் பயன்படுத்தவும்',
-        stepComplete: 'படி முடிந்தது! அடுத்த செயலைச் செய்யவும்.',
-        explorerClosed: 'கோப்பு நிர்வாகி மூடப்பட்டுள்ளது',
+        stepComplete: 'பணி முடிந்தது! தொடர அடுத்து என்பதை அழுத்தவும்.',
+        nextTaskBtn: 'அடுத்த பணி →',
+        clickNextToContinue: '✅ பணி முடிந்தது — தொடர அடுத்து என்பதை அழுத்தவும்',
         notepad: 'குறிப்பேடு', runDialog: 'இயக்கு', typeNotepad: 'notepad என தட்டச்சு செய்து Enter அழுத்தவும்',
         objectives: [
             'விசைப்பலகை விசை இருப்பிடங்களைக் கற்றுக்கொள்', 'தட்டச்சு துல்லியத்தை மேம்படுத்து',
@@ -780,6 +782,20 @@ function renderFileSim(area, lv) {
     let step = 0;
     let levelFinished = false;
     let feedback = '';
+    let awaitingNext = false;
+
+    function goNextStep() {
+        if (!awaitingNext || levelFinished) return;
+        awaitingNext = false;
+        feedback = '';
+        step++;
+        if (step >= steps.length) {
+            draw();
+            finishLevel();
+        } else {
+            draw();
+        }
+    }
 
     function finishLevel() {
         if (levelFinished) return;
@@ -809,23 +825,43 @@ function renderFileSim(area, lv) {
             <ul class="task-list" id="fileTasks"></ul>
             <p style="text-align:center;font-weight:600;margin-top:12px;color:#5e35b1" id="filePrompt"></p>
             <p style="text-align:center;color:#f44336;font-weight:600;min-height:24px" id="fileFeedback"></p>
-            <div class="stats-row"><div class="stat-box"><div class="stat-val">${step}/${steps.length}</div><div>${t('progress')}</div></div></div>`;
+            <div id="fileNextWrap" style="text-align:center;margin-top:16px;display:none">
+                <button class="btn btn-success" id="fileNextBtn">${t('nextTaskBtn')}</button>
+            </div>
+            <div class="stats-row"><div class="stat-box"><div class="stat-val">${Math.min(step + (awaitingNext ? 1 : 0), steps.length)}/${steps.length}</div><div>${t('progress')}</div></div></div>`;
 
         const list = document.getElementById('fileTasks');
         steps.forEach((s, i) => {
-            const cls = i < step ? 'done' : (i === step ? 'pending' : 'pending');
-            const active = i === step ? ' 👈' : '';
-            list.innerHTML += `<li class="${cls}" style="${i === step ? 'background:#e8eaf6;border:2px solid #5e35b1;font-weight:700' : ''}">${L(s.label)}${active}</li>`;
+            const isDone = i < step || (i === step && awaitingNext);
+            const isCurrent = i === step && !awaitingNext;
+            const cls = isDone ? 'done' : 'pending';
+            const active = isCurrent ? ' 👈' : '';
+            const style = isCurrent ? 'background:#e8eaf6;border:2px solid #5e35b1;font-weight:700' : (isDone ? 'background:#e8f5e9' : '');
+            list.innerHTML += `<li class="${cls}" style="${style}">${L(s.label)}${active}</li>`;
         });
 
-        if (step < steps.length) {
-            document.getElementById('filePrompt').textContent = `${t('press')}: ${L(current.label)}`;
+        const promptEl = document.getElementById('filePrompt');
+        const nextWrap = document.getElementById('fileNextWrap');
+        const nextBtn = document.getElementById('fileNextBtn');
+
+        if (awaitingNext) {
+            promptEl.textContent = t('clickNextToContinue');
+            promptEl.style.color = '#4caf50';
+            nextWrap.style.display = 'block';
+            nextBtn.textContent = t('nextTaskBtn');
+            nextBtn.onclick = goNextStep;
+        } else if (step < steps.length) {
+            promptEl.style.color = '#5e35b1';
+            promptEl.textContent = `${t('press')}: ${L(current.label)}`;
+            nextWrap.style.display = 'none';
+        } else {
+            nextWrap.style.display = 'none';
         }
         document.getElementById('fileFeedback').textContent = feedback;
     }
 
     activeKeyHandler = (e) => {
-        if (levelFinished || step >= steps.length) return;
+        if (levelFinished || step >= steps.length || awaitingNext) return;
 
         const current = steps[step];
         if (!current.match(e)) {
@@ -851,14 +887,8 @@ function renderFileSim(area, lv) {
         current.action();
         playSound('correct');
         feedback = t('stepComplete');
-        step++;
-
-        if (step >= steps.length) {
-            draw();
-            setTimeout(finishLevel, 600);
-        } else {
-            draw();
-        }
+        awaitingNext = true;
+        draw();
     };
 
     document.addEventListener('keydown', activeKeyHandler, true);
