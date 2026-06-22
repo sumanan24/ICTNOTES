@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard Master Adventure | விசைப்பலகை மாஸ்டர் சாகசம்</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;600;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', 'Noto Sans Tamil', sans-serif;
+            background: linear-gradient(135deg, #1a237e 0%, #5e35b1 40%, #7b1fa2 100%);
+            min-height: 100vh; color: #fff; overflow-x: hidden;
+        }
+        body::before {
+            content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+            background: radial-gradient(circle at 15% 40%, rgba(255,255,255,.08) 0%, transparent 50%),
+                        radial-gradient(circle at 85% 75%, rgba(255,255,255,.06) 0%, transparent 50%);
+        }
+        .tamil-text { font-family: 'Noto Sans Tamil', sans-serif; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; }
+        .top-bar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+        .lang-btn, .ctrl-btn {
+            padding: 8px 18px; border-radius: 25px; border: 2px solid rgba(255,255,255,.4);
+            background: rgba(255,255,255,.15); color: #fff; cursor: pointer; font-weight: 600;
+            font-family: inherit; transition: .3s;
+        }
+        .lang-btn.active, .ctrl-btn:hover { background: rgba(255,255,255,.3); transform: scale(1.05); }
+        .hud {
+            display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 20px;
+            background: rgba(255,255,255,.12); border-radius: 16px; padding: 14px 20px;
+            backdrop-filter: blur(8px);
+        }
+        .hud-item { text-align: center; min-width: 80px; }
+        .hud-value { font-size: 1.4em; font-weight: 700; }
+        .hud-label { font-size: .75em; opacity: .85; }
+        .progress-wrap { width: 100%; margin-top: 8px; }
+        .progress-bar { height: 12px; background: rgba(0,0,0,.25); border-radius: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #4caf50, #8bc34a); transition: width .4s; border-radius: 10px; }
+        .screen { display: none; animation: fadeUp .5s ease; }
+        .screen.active { display: block; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+        .card {
+            background: rgba(255,255,255,.95); color: #333; border-radius: 20px;
+            padding: 30px; box-shadow: 0 12px 40px rgba(0,0,0,.25); margin-bottom: 20px;
+        }
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); text-shadow: 2px 2px 8px rgba(0,0,0,.3); margin-bottom: 8px; }
+        .header p { font-size: 1.1em; opacity: .9; }
+        .level-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+        .level-card {
+            background: #fff; border-radius: 16px; padding: 20px; text-align: center; cursor: pointer;
+            transition: .3s; border-top: 5px solid #4caf50; position: relative; color: #333;
+        }
+        .level-card:hover:not(.locked) { transform: translateY(-6px); box-shadow: 0 10px 25px rgba(0,0,0,.2); }
+        .level-card.locked { opacity: .55; cursor: not-allowed; filter: grayscale(.4); }
+        .level-card.completed { border-top-color: #ffd700; }
+        .level-card.medium { border-top-color: #ff9800; }
+        .level-card.hard { border-top-color: #f44336; }
+        .level-card.very-hard { border-top-color: #9c27b0; }
+        .level-num { font-size: 2em; font-weight: 700; color: #5e35b1; }
+        .level-title { font-weight: 600; margin: 8px 0; font-size: .95em; }
+        .level-diff { font-size: .75em; padding: 3px 10px; border-radius: 20px; display: inline-block; margin-top: 6px; }
+        .diff-easy { background: #e8f5e9; color: #2e7d32; }
+        .diff-medium { background: #fff3e0; color: #e65100; }
+        .diff-hard { background: #ffebee; color: #c62828; }
+        .diff-very-hard { background: #f3e5f5; color: #6a1b9a; }
+        .stars { color: #ffd700; font-size: 1.1em; margin-top: 6px; }
+        .badge-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 16px; }
+        .badge { background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; padding: 6px 14px; border-radius: 20px; font-size: .8em; }
+        .mission-box { background: #f0f4ff; border-left: 5px solid #5e35b1; padding: 16px 20px; border-radius: 10px; margin-bottom: 20px; }
+        .mission-box h3 { color: #5e35b1; margin-bottom: 8px; }
+        .task-list { list-style: none; margin: 12px 0; }
+        .task-list li { padding: 8px 12px; margin: 6px 0; background: #f8f9fa; border-radius: 8px; display: flex; align-items: center; gap: 10px; }
+        .task-list li.done { background: #e8f5e9; color: #2e7d32; }
+        .task-list li.done::before { content: '✅'; }
+        .task-list li.pending::before { content: '⬜'; }
+        .text-display {
+            font-family: 'Courier New', monospace; font-size: 1.25em; line-height: 1.9;
+            background: #f8f9fa; padding: 20px; border-radius: 12px; margin: 16px 0;
+            border: 2px solid #e0e0e0; text-align: left; word-wrap: break-word; min-height: 80px;
+        }
+        .text-display span.correct { background: #c8e6c9; color: #2e7d32; }
+        .text-display span.incorrect { background: #ffcdd2; color: #c62828; text-decoration: underline; }
+        .text-display span.current { background: #5e35b1; color: #fff; border-radius: 3px; }
+        .type-input {
+            width: 100%; padding: 16px; font-size: 1.2em; font-family: 'Courier New', monospace;
+            border: 3px solid #ddd; border-radius: 12px; margin-bottom: 16px;
+        }
+        .type-input:focus { outline: none; border-color: #5e35b1; box-shadow: 0 0 15px rgba(94,53,177,.3); }
+        .btn {
+            padding: 12px 28px; border: none; border-radius: 50px; font-weight: 700; cursor: pointer;
+            font-family: inherit; font-size: 1em; transition: .3s; margin: 4px;
+        }
+        .btn-primary { background: linear-gradient(135deg, #5e35b1, #7b1fa2); color: #fff; }
+        .btn-success { background: linear-gradient(135deg, #4caf50, #388e3c); color: #fff; }
+        .btn-secondary { background: #757575; color: #fff; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.2); }
+        .timer { font-size: 1.5em; font-weight: 700; text-align: center; color: #f44336; margin: 12px 0; }
+        .timer.ok { color: #4caf50; }
+        .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin: 16px 0; }
+        .stat-box { background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; padding: 16px; border-radius: 12px; text-align: center; }
+        .stat-val { font-size: 1.8em; font-weight: 700; }
+        .quiz-options { display: grid; gap: 10px; margin: 16px 0; }
+        .quiz-opt {
+            padding: 14px 20px; background: #f0f4ff; border: 2px solid #ddd; border-radius: 12px;
+            cursor: pointer; text-align: left; transition: .2s; color: #333;
+        }
+        .quiz-opt:hover { border-color: #5e35b1; background: #e8eaf6; }
+        .quiz-opt.correct { background: #e8f5e9; border-color: #4caf50; }
+        .quiz-opt.wrong { background: #ffebee; border-color: #f44336; }
+        .shortcut-prompt {
+            text-align: center; padding: 30px; background: #1a237e; color: #fff;
+            border-radius: 16px; font-size: 1.4em; margin: 16px 0;
+        }
+        .shortcut-keys { font-size: 2em; font-weight: 700; margin-top: 12px; min-height: 50px; color: #ffd700; }
+        .sim-window {
+            background: #fff; border: 2px solid #ccc; border-radius: 8px; overflow: hidden;
+            color: #333; margin: 16px 0; box-shadow: 0 4px 20px rgba(0,0,0,.15);
+        }
+        .sim-titlebar { background: #0078d4; color: #fff; padding: 8px 14px; font-size: .9em; display: flex; justify-content: space-between; }
+        .sim-body { padding: 16px; min-height: 120px; }
+        .sim-sidebar { background: #f3f3f3; padding: 10px; border-right: 1px solid #ddd; }
+        .sim-file { padding: 8px 12px; cursor: pointer; border-radius: 4px; }
+        .sim-file.selected { background: #cce8ff; }
+        .sim-notepad { width: 100%; min-height: 150px; border: none; font-family: 'Courier New', monospace; padding: 12px; resize: vertical; font-size: 1em; }
+        .key-hint { background: #fff3cd; color: #856404; padding: 12px 16px; border-radius: 10px; margin: 12px 0; font-size: .95em; border-left: 4px solid #ffc107; }
+        .modal-overlay {
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,.7);
+            z-index: 1000; justify-content: center; align-items: center; padding: 20px;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal { background: #fff; color: #333; border-radius: 20px; padding: 40px; max-width: 500px; width: 100%; text-align: center; animation: popIn .4s ease; }
+        @keyframes popIn { from { transform: scale(.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .modal h2 { color: #5e35b1; margin-bottom: 16px; font-size: 1.8em; }
+        .modal .reward { font-size: 3em; margin: 16px 0; }
+        .confetti { position: fixed; width: 10px; height: 10px; top: -10px; z-index: 2000; animation: fall 3s linear forwards; }
+        @keyframes fall { to { transform: translateY(100vh) rotate(720deg); opacity: 0; } }
+        .cert-section { text-align: center; }
+        .cert-box {
+            border: 4px solid #c9a227; outline: 2px solid #1a237e; outline-offset: -6px;
+            padding: 40px; max-width: 800px; margin: 20px auto; background: #fff; color: #1a237e;
+        }
+        .cert-title { font-size: 1.8em; font-weight: 700; color: #5e35b1; margin-bottom: 20px; }
+        .cert-name-input { width: 100%; max-width: 300px; padding: 12px; border: 2px solid #5e35b1; border-radius: 10px; font-size: 1.1em; text-align: center; margin: 16px auto; display: block; font-family: inherit; }
+        .repeat-counter { text-align: center; font-size: 1.3em; font-weight: 700; color: #5e35b1; margin: 12px 0; }
+        .special-key-box { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin: 16px 0; }
+        .special-key {
+            padding: 16px 24px; background: #e8eaf6; border: 3px solid #5e35b1; border-radius: 12px;
+            font-weight: 700; min-width: 120px; text-align: center; transition: .3s;
+        }
+        .special-key.done { background: #e8f5e9; border-color: #4caf50; }
+        @media (max-width: 600px) { .level-grid { grid-template-columns: 1fr 1fr; } .card { padding: 20px; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="top-bar">
+            <div>
+                <button class="lang-btn active" id="langEn" onclick="setLang('en')">English</button>
+                <button class="lang-btn" id="langTa" onclick="setLang('ta')">தமிழ்</button>
+            </div>
+            <div>
+                <button class="ctrl-btn" id="soundBtn" onclick="toggleSound()">🔊</button>
+                <button class="ctrl-btn" onclick="showScreen('map')">🗺️ <span id="mapBtn">Map</span></button>
+            </div>
+        </div>
+
+        <div class="hud" id="hud">
+            <div class="hud-item"><div class="hud-value" id="hudPoints">0</div><div class="hud-label" id="lblPoints">Points</div></div>
+            <div class="hud-item"><div class="hud-value" id="hudXP">0</div><div class="hud-label" id="lblXP">XP</div></div>
+            <div class="hud-item"><div class="hud-value" id="hudLevel">1</div><div class="hud-label" id="lblLevel">Level</div></div>
+            <div class="hud-item"><div class="hud-value" id="hudStars">0</div><div class="hud-label" id="lblStars">Stars</div></div>
+            <div class="progress-wrap">
+                <div class="hud-label" id="lblProgress">Overall Progress</div>
+                <div class="progress-bar"><div class="progress-fill" id="overallProgress" style="width:0%"></div></div>
+            </div>
+        </div>
+
+        <!-- Welcome -->
+        <div id="screenWelcome" class="screen active">
+            <div class="header">
+                <h1 id="welcomeTitle">⌨️ Keyboard Master Adventure</h1>
+                <p id="welcomeSub">Learn typing, shortcuts & ICT skills through gamification</p>
+            </div>
+            <div class="card">
+                <h2 style="text-align:center;color:#5e35b1;margin-bottom:16px" id="objectivesTitle">🎯 Game Objectives</h2>
+                <ul class="task-list" id="objectivesList"></ul>
+                <div style="text-align:center;margin-top:24px">
+                    <button class="btn btn-primary" id="startGameBtn" onclick="showScreen('map')">🚀 Start Adventure</button>
+                </div>
+                <div style="margin-top:24px;padding:16px;background:#f8f9fa;border-radius:12px;text-align:left;color:#444">
+                    <h3 style="color:#5e35b1;margin-bottom:10px;text-align:center" id="scoringTitle">📊 Scoring System</h3>
+                    <ul class="task-list" id="scoringList" style="font-size:.9em"></ul>
+                </div>
+                <div class="badge-row" id="earnedBadges"></div>
+            </div>
+        </div>
+
+        <!-- Level Map -->
+        <div id="screenMap" class="screen">
+            <div class="header">
+                <h1 id="mapTitle">🗺️ Level Map</h1>
+                <p id="mapSub">Complete levels to unlock the next adventure</p>
+            </div>
+            <div class="level-grid" id="levelGrid"></div>
+            <div style="text-align:center;margin-top:20px">
+                <button class="btn btn-success" id="certBtn" onclick="showCertificate()" style="display:none">🏆 View Certificate</button>
+            </div>
+        </div>
+
+        <!-- Gameplay -->
+        <div id="screenGame" class="screen">
+            <div class="card">
+                <button class="btn btn-secondary" onclick="showScreen('map')" id="backMapBtn">← Back to Map</button>
+                <div class="mission-box">
+                    <h3 id="gameLevelTitle">Level 1</h3>
+                    <p id="gameMission"></p>
+                </div>
+                <div id="gameArea"></div>
+            </div>
+        </div>
+
+        <!-- Certificate -->
+        <div id="screenCert" class="screen">
+            <div class="card cert-section">
+                <button class="btn btn-secondary" onclick="showScreen('map')" id="certBackBtn">← Back</button>
+                <input type="text" class="cert-name-input" id="studentName" placeholder="Enter your name" maxlength="50">
+                <div class="cert-box" id="certBox">
+                    <div class="cert-title">🏆 KEYBOARD MASTER CERTIFICATE</div>
+                    <p id="certAwarded">This certificate is proudly awarded to</p>
+                    <h2 id="certStudentName" style="color:#5e35b1;margin:16px 0;font-size:1.6em">Student Name</h2>
+                    <div class="stats-row" style="margin:20px 0">
+                        <div class="stat-box"><div class="stat-val" id="certWPM">0</div><div id="certWPMLabel">WPM</div></div>
+                        <div class="stat-box"><div class="stat-val" id="certAcc">0%</div><div id="certAccLabel">Accuracy</div></div>
+                        <div class="stat-box"><div class="stat-val">10/10</div><div id="certLevelsLabel">Levels</div></div>
+                    </div>
+                    <p style="font-weight:700;color:#4caf50;font-size:1.2em" id="certStatus">Status: PASSED ✅</p>
+                    <p id="certMsg" style="margin-top:16px;line-height:1.7;color:#555"></p>
+                </div>
+                <button class="btn btn-primary" id="generateCertBtn" onclick="generateCert()">📜 Generate Certificate</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="resultModal">
+        <div class="modal">
+            <div class="reward" id="modalIcon">🎉</div>
+            <h2 id="modalTitle">Level Complete!</h2>
+            <p id="modalMsg"></p>
+            <p id="modalScore" style="font-size:1.3em;font-weight:700;color:#5e35b1;margin:12px 0"></p>
+            <button class="btn btn-success" onclick="closeModal()" id="modalContinue">Continue</button>
+        </div>
+    </div>
+
+    <script src="keyboard-master.js"></script>
+</body>
+</html>
