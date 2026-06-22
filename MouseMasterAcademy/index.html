@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mouse Master Academy - Interactive mouse skills training for school and ICT students">
+    <title>Mouse Master Academy</title>
+    <link rel="stylesheet" href="css/mma.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Welcome Screen -->
+        <section id="screen-welcome" class="screen active">
+            <div class="hero-card">
+                <div class="logo-ring">🖱️</div>
+                <h1>Mouse Master Academy</h1>
+                <p class="tagline">Learn mouse skills through fun interactive challenges</p>
+                <p class="sub">School · TVET · ICT · Computer Literacy</p>
+                <div class="name-form">
+                    <label for="playerName">Enter Your Name</label>
+                    <input type="text" id="playerName" maxlength="40" placeholder="Student name" autocomplete="name">
+                    <button type="button" class="btn btn-primary btn-lg" id="btnStart">Start Learning</button>
+                </div>
+                <div class="welcome-actions">
+                    <button type="button" class="btn btn-ghost" id="btnLeaderboard">🏆 Leaderboard</button>
+                    <button type="button" class="btn btn-ghost" id="btnFullscreen">⛶ Full Screen</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Level Select -->
+        <section id="screen-levels" class="screen">
+            <header class="top-bar">
+                <button type="button" class="btn btn-ghost btn-sm" id="btnBackHome">← Home</button>
+                <div class="player-chip" id="playerChip"></div>
+                <div class="total-progress-wrap">
+                    <span id="overallProgressLabel">0 / 15</span>
+                    <div class="progress-bar"><div class="progress-fill" id="overallProgressBar"></div></div>
+                </div>
+            </header>
+            <h2 class="section-title">Choose Your Level</h2>
+            <div class="difficulty-legend">
+                <span class="diff easy">Easy 1–5</span>
+                <span class="diff medium">Medium 6–10</span>
+                <span class="diff hard">Hard 11–14</span>
+                <span class="diff expert">Expert 15</span>
+            </div>
+            <div class="level-actions no-print" id="levelActions" hidden>
+                <button type="button" class="btn btn-primary" id="btnViewCert">🎓 View Certificate</button>
+            </div>
+            <div class="level-grid" id="levelGrid"></div>
+        </section>
+
+        <!-- Game Screen -->
+        <section id="screen-game" class="screen">
+            <header class="game-hud">
+                <button type="button" class="btn btn-ghost btn-sm" id="btnQuitLevel">✕ Quit</button>
+                <div class="hud-center">
+                    <span class="level-badge" id="hudLevelBadge">Level 1</span>
+                    <h2 id="hudLevelTitle">Balloon Pop</h2>
+                </div>
+                <div class="hud-stats">
+                    <div class="stat"><span class="stat-label">Time</span><span class="stat-value" id="hudTimer">60</span></div>
+                    <div class="stat"><span class="stat-label">Score</span><span class="stat-value" id="hudScore">0</span></div>
+                </div>
+            </header>
+            <div class="game-progress-row">
+                <div class="progress-bar lg"><div class="progress-fill" id="levelProgressBar"></div></div>
+                <span id="levelProgressText">0%</span>
+            </div>
+            <p class="instruction" id="levelInstruction"></p>
+            <div class="canvas-wrap" id="canvasWrap">
+                <canvas id="gameCanvas"></canvas>
+                <div class="canvas-overlay" id="canvasOverlay"></div>
+            </div>
+            <div class="star-row" id="liveStars">☆ ☆ ☆</div>
+        </section>
+
+        <!-- Level Complete -->
+        <section id="screen-result" class="screen">
+            <div class="result-card" id="resultCard">
+                <div class="celebration" id="celebrationEmoji">🎉</div>
+                <h2>Level Complete!</h2>
+                <div class="stars-big" id="resultStars">★★★</div>
+                <div class="result-stats" id="resultStats"></div>
+                <div class="badge-row" id="badgeRow"></div>
+                <div class="result-actions">
+                    <button type="button" class="btn btn-primary" id="btnNextLevel">Next Level →</button>
+                    <button type="button" class="btn btn-secondary" id="btnLevelSelect">Level Select</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certificate -->
+        <section id="screen-certificate" class="screen">
+            <div class="cert-actions no-print">
+                <button type="button" class="btn btn-ghost btn-sm" id="btnCertBack">← Back</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnPrintCert">🖨 Print</button>
+                <button type="button" class="btn btn-primary btn-sm" id="btnDownloadCert">⬇ Download</button>
+            </div>
+            <div class="certificate" id="certificate">
+                <div class="cert-border">
+                    <div class="cert-inner">
+                        <p class="cert-ribbon">Certificate of Achievement</p>
+                        <h1>Mouse Master Academy</h1>
+                        <p class="cert-presented">This certifies that</p>
+                        <p class="cert-name" id="certName">Student</p>
+                        <p class="cert-body">has successfully completed all 15 mouse mastery challenges demonstrating excellence in computer literacy skills.</p>
+                        <div class="cert-details">
+                            <div><span>Final Score</span><strong id="certScore">0</strong></div>
+                            <div><span>Grade</span><strong id="certGrade">A+</strong></div>
+                            <div><span>Date</span><strong id="certDate">—</strong></div>
+                            <div><span>Certificate ID</span><strong id="certId">MMA-0000</strong></div>
+                        </div>
+                        <div class="cert-stars" id="certStars">★★★★★</div>
+                        <p class="cert-footer">Mouse Master Academy · ICT Skills Training Program</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Leaderboard -->
+        <section id="screen-leaderboard" class="screen">
+            <header class="top-bar">
+                <button type="button" class="btn btn-ghost btn-sm" id="btnLbBack">← Back</button>
+                <h2>🏆 Leaderboard</h2>
+            </header>
+            <div class="leaderboard-table-wrap">
+                <table class="leaderboard" id="leaderboardTable">
+                    <thead>
+                        <tr><th>#</th><th>Name</th><th>Score</th><th>Grade</th><th>Levels</th><th>Date</th></tr>
+                    </thead>
+                    <tbody id="leaderboardBody"></tbody>
+                </table>
+                <p class="empty-msg" id="lbEmpty">No scores yet. Be the first champion!</p>
+            </div>
+        </section>
+    </div>
+
+    <canvas id="confettiCanvas" class="confetti-canvas"></canvas>
+
+    <script src="js/audio.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/score.js"></script>
+    <script src="js/certificate.js"></script>
+    <script src="js/engine.js"></script>
+    <script src="js/levels.js"></script>
+    <script src="js/level-play.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
