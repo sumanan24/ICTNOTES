@@ -12,6 +12,14 @@ let quizIndex = 0;
 let shortcutIndex = 0;
 let pressedKeys = new Set();
 let simState = {};
+let activeKeyHandler = null;
+
+function cleanupLevelHandlers() {
+    if (activeKeyHandler) {
+        document.removeEventListener('keydown', activeKeyHandler, true);
+        activeKeyHandler = null;
+    }
+}
 
 const SAVE_KEY = 'keyboardMasterSave';
 let save = JSON.parse(localStorage.getItem(SAVE_KEY)) || {
@@ -38,6 +46,9 @@ const T = {
         wrong: 'Try again!', levelComplete: 'Level Complete!', pointsEarned: 'Points earned',
         badgeEarned: 'Badge earned', pressShortcut: 'Press the correct shortcut keys',
         action: 'Action', keysPressed: 'Keys pressed', fileExplorer: 'File Explorer',
+        wrongKey: 'Wrong key — try the shortcut shown above',
+        stepComplete: 'Step complete! Do the next action.',
+        explorerClosed: 'File Explorer is closed',
         notepad: 'Notepad', runDialog: 'Run', typeNotepad: 'Type notepad and press Enter',
         objectives: [
             'Learn keyboard key locations', 'Improve typing accuracy', 'Increase typing speed',
@@ -71,6 +82,9 @@ const T = {
         pointsEarned: 'பெற்ற புள்ளிகள்', badgeEarned: 'பேட்ஜ் பெறப்பட்டது',
         pressShortcut: 'சரியான குறுக்குவழி விசைகளை அழுத்தவும்', action: 'செயல்',
         keysPressed: 'அழுத்தப்பட்ட விசைகள்', fileExplorer: 'கோப்பு நிர்வாகி',
+        wrongKey: 'தவறான விசை — மேலே காட்டப்பட்ட குறுக்குவழியைப் பயன்படுத்தவும்',
+        stepComplete: 'படி முடிந்தது! அடுத்த செயலைச் செய்யவும்.',
+        explorerClosed: 'கோப்பு நிர்வாகி மூடப்பட்டுள்ளது',
         notepad: 'குறிப்பேடு', runDialog: 'இயக்கு', typeNotepad: 'notepad என தட்டச்சு செய்து Enter அழுத்தவும்',
         objectives: [
             'விசைப்பலகை விசை இருப்பிடங்களைக் கற்றுக்கொள்', 'தட்டச்சு துல்லியத்தை மேம்படுத்து',
@@ -279,6 +293,7 @@ function renderMap() {
 }
 
 function showScreen(name) {
+    if (name !== 'game') cleanupLevelHandlers();
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     const map = { welcome: 'screenWelcome', map: 'screenMap', game: 'screenGame', cert: 'screenCert' };
     document.getElementById(map[name]).classList.add('active');
@@ -344,6 +359,7 @@ function confetti() {
 }
 
 function startLevel(id) {
+    cleanupLevelHandlers();
     currentLevel = LEVELS.find(l => l.id === id);
     if (!currentLevel || !isUnlocked(id)) return;
     levelStartTime = Date.now();
@@ -353,7 +369,10 @@ function startLevel(id) {
     quizIndex = 0;
     shortcutIndex = 0;
     pressedKeys = new Set();
-    simState = { step: 0, files: ['Documents'], folderCreated: false, renamed: false, copied: false, deleted: false, restored: false };
+    simState = {
+        explorerOpen: false, files: [], folderCreated: false, renamed: false,
+        copied: false, deleted: false, restored: false, trash: null
+    };
     clearInterval(timerInterval);
     document.getElementById('gameLevelTitle').textContent = `Level ${id}: ${L(currentLevel.title)}`;
     document.getElementById('gameMission').textContent = L(currentLevel.mission);
@@ -717,57 +736,132 @@ function renderShortcuts(area, lv) {
 
 /* ── Level 8: File Explorer Quest ── */
 function renderFileSim(area, lv) {
+    cleanupLevelHandlers();
+
     const steps = [
-        { key: 'e', meta: true, label: { en: 'Open File Explorer (Win + E)', ta: 'கோப்பு நிர்வாகியைத் திற (Win + E)' }, action: () => { simState.explorerOpen = true; } },
-        { key: 'n', ctrl: true, shift: true, label: { en: 'Create New Folder (Ctrl+Shift+N)', ta: 'புதிய கோப்புறை உருவாக்கு (Ctrl+Shift+N)' }, action: () => { simState.files.push('New Folder'); simState.folderCreated = true; } },
-        { key: 'F2', label: { en: 'Rename Folder (F2)', ta: 'கோப்புறையை மறுபெயரிடு (F2)' }, action: () => { simState.files[simState.files.length-1] = 'ICT_Project'; simState.renamed = true; } },
-        { key: 'c', ctrl: true, label: { en: 'Copy Folder (Ctrl+C)', ta: 'கோப்புறையை நகலெடு (Ctrl+C)' }, action: () => { simState.copied = true; } },
-        { key: 'Delete', label: { en: 'Delete Folder (Delete)', ta: 'கோப்புறையை நீக்கு (Delete)' }, action: () => { simState.deleted = true; simState.trash = simState.files.pop(); } },
-        { key: 'z', ctrl: true, label: { en: 'Restore Folder (Ctrl+Z)', ta: 'கோப்புறையை மீட்டெடு (Ctrl+Z)' }, action: () => { if (simState.trash) { simState.files.push(simState.trash); simState.restored = true; } } }
+        {
+            label: { en: 'Open File Explorer (Win + E)', ta: 'கோப்பு நிர்வாகியைத் திற (Win + E)' },
+            match: e => (e.metaKey || e.getModifierState?.('Meta')) && e.key.toLowerCase() === 'e' && !e.ctrlKey && !e.altKey && !e.shiftKey,
+            canDo: () => !simState.explorerOpen,
+            action: () => { simState.explorerOpen = true; }
+        },
+        {
+            label: { en: 'Create New Folder (Ctrl+Shift+N)', ta: 'புதிய கோப்புறை உருவாக்கு (Ctrl+Shift+N)' },
+            match: e => (e.ctrlKey || e.metaKey) && e.shiftKey && !e.altKey && e.key.toLowerCase() === 'n',
+            canDo: () => simState.explorerOpen && !simState.folderCreated,
+            action: () => { simState.files.push('New Folder'); simState.folderCreated = true; }
+        },
+        {
+            label: { en: 'Rename Folder (F2)', ta: 'கோப்புறையை மறுபெயரிடு (F2)' },
+            match: e => e.key === 'F2' && !e.ctrlKey && !e.metaKey && !e.altKey && !e.shiftKey,
+            canDo: () => simState.folderCreated && !simState.renamed,
+            action: () => { simState.files[simState.files.length - 1] = 'ICT_Project'; simState.renamed = true; }
+        },
+        {
+            label: { en: 'Copy Folder (Ctrl+C)', ta: 'கோப்புறையை நகலெடு (Ctrl+C)' },
+            match: e => (e.ctrlKey || e.metaKey) && !e.shiftKey && !e.altKey && e.key.toLowerCase() === 'c',
+            canDo: () => simState.renamed && !simState.copied,
+            action: () => { simState.copied = true; }
+        },
+        {
+            label: { en: 'Delete Folder (Delete)', ta: 'கோப்புறையை நீக்கு (Delete)' },
+            match: e => e.key === 'Delete' && !e.ctrlKey && !e.metaKey,
+            canDo: () => simState.copied && !simState.deleted,
+            action: () => { simState.trash = simState.files.pop(); simState.deleted = true; }
+        },
+        {
+            label: { en: 'Restore Folder (Ctrl+Z)', ta: 'கோப்புறையை மீட்டெடு (Ctrl+Z)' },
+            match: e => (e.ctrlKey || e.metaKey) && !e.shiftKey && !e.altKey && e.key.toLowerCase() === 'z',
+            canDo: () => simState.deleted && simState.trash && !simState.restored,
+            action: () => { simState.files.push(simState.trash); simState.restored = true; }
+        }
     ];
+
     let step = 0;
+    let levelFinished = false;
+    let feedback = '';
+
+    function finishLevel() {
+        if (levelFinished) return;
+        levelFinished = true;
+        cleanupLevelHandlers();
+        save.points += 150 * steps.length;
+        updateHUD();
+        completeLevel(lv, 100, 0, 3, 0);
+    }
 
     function draw() {
+        const current = steps[step];
+        const emptyMsg = lang === 'ta' ? '<em>கோப்புறை எதுவும் இல்லை — Ctrl+Shift+N அழுத்தவும்</em>' : '<em>No folders yet — press Ctrl+Shift+N</em>';
+        const closedMsg = lang === 'ta' ? '<em>கோப்பு நிர்வாகி மூடப்பட்டுள்ளது — Win+E அழுத்தவும்</em>' : '<em>File Explorer closed — press Win+E</em>';
+
         area.innerHTML = `
-            <div class="key-hint">${lang === 'ta' ? 'சுட்டி இல்லாமல் விசைப்பலகை மட்டும் பயன்படுத்தவும்!' : 'Use keyboard only — no mouse!'}</div>
-            <div class="sim-window">
-                <div class="sim-titlebar"><span>📁 ${t('fileExplorer')}</span><span>— □ ✕</span></div>
+            <div class="key-hint">${lang === 'ta' ? 'சுட்டி இல்லாமல் விசைப்பலகை மட்டும் பயன்படுத்தவும்! ஒவ்வொரு பணியும் முறையாக முடிக்கவும்.' : 'Use keyboard only — no mouse! Complete each task in order.'}</div>
+            <div class="sim-window" style="${simState.explorerOpen ? '' : 'opacity:.6'}">
+                <div class="sim-titlebar"><span>📁 ${t('fileExplorer')} ${simState.explorerOpen ? '' : '🔒'}</span><span>— □ ✕</span></div>
                 <div class="sim-body">
-                    <div id="simFiles">${simState.files.map(f => `<div class="sim-file">📁 ${f}</div>`).join('') || (lang === 'ta' ? '<em>கோப்புறை எதுவும் இல்லை</em>' : '<em>No folders yet</em>')}</div>
+                    <div id="simFiles">${
+                        !simState.explorerOpen ? closedMsg :
+                        simState.files.length ? simState.files.map(f => `<div class="sim-file">📁 ${f}</div>`).join('') : emptyMsg
+                    }</div>
                 </div>
             </div>
             <ul class="task-list" id="fileTasks"></ul>
-            <p style="text-align:center;font-weight:600;margin-top:12px" id="filePrompt"></p>`;
+            <p style="text-align:center;font-weight:600;margin-top:12px;color:#5e35b1" id="filePrompt"></p>
+            <p style="text-align:center;color:#f44336;font-weight:600;min-height:24px" id="fileFeedback"></p>
+            <div class="stats-row"><div class="stat-box"><div class="stat-val">${step}/${steps.length}</div><div>${t('progress')}</div></div></div>`;
+
         const list = document.getElementById('fileTasks');
         steps.forEach((s, i) => {
-            list.innerHTML += `<li class="${i < step ? 'done' : 'pending'}">${L(s.label)}</li>`;
+            const cls = i < step ? 'done' : (i === step ? 'pending' : 'pending');
+            const active = i === step ? ' 👈' : '';
+            list.innerHTML += `<li class="${cls}" style="${i === step ? 'background:#e8eaf6;border:2px solid #5e35b1;font-weight:700' : ''}">${L(s.label)}${active}</li>`;
         });
-        if (step < steps.length) document.getElementById('filePrompt').textContent = `${t('press')}: ${L(steps[step].label)}`;
-        else {
-            save.points += 150 * steps.length;
-            updateHUD();
-            completeLevel(lv, 100, 0, 3, 0);
+
+        if (step < steps.length) {
+            document.getElementById('filePrompt').textContent = `${t('press')}: ${L(current.label)}`;
         }
+        document.getElementById('fileFeedback').textContent = feedback;
     }
 
-    const handler = (e) => {
-        if (step >= steps.length) return;
-        const s = steps[step];
-        let match = false;
-        if (s.key === 'F2' && e.key === 'F2') match = true;
-        else if (s.key === 'Delete' && e.key === 'Delete') match = true;
-        else if (s.meta && e.metaKey && e.key.toLowerCase() === s.key) match = true;
-        else if (s.ctrl && s.shift && (e.ctrlKey||e.metaKey) && e.shiftKey && e.key.toLowerCase() === s.key) match = true;
-        else if (s.ctrl && !s.shift && (e.ctrlKey||e.metaKey) && e.key.toLowerCase() === s.key) match = true;
-        if (match) {
-            playSound('correct');
-            s.action();
-            step++;
+    activeKeyHandler = (e) => {
+        if (levelFinished || step >= steps.length) return;
+
+        const current = steps[step];
+        if (!current.match(e)) {
+            if (['F2', 'Delete', 'e', 'n', 'c', 'z', 'E', 'N', 'C', 'Z'].includes(e.key) ||
+                e.ctrlKey || e.metaKey || e.shiftKey) {
+                feedback = t('wrongKey');
+                playSound('wrong');
+                draw();
+            }
+            return;
+        }
+
+        if (!current.canDo()) {
+            feedback = t('wrongKey');
+            playSound('wrong');
             draw();
-            if (step >= steps.length) document.removeEventListener('keydown', handler);
+            return;
+        }
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        current.action();
+        playSound('correct');
+        feedback = t('stepComplete');
+        step++;
+
+        if (step >= steps.length) {
+            draw();
+            setTimeout(finishLevel, 600);
+        } else {
+            draw();
         }
     };
-    document.addEventListener('keydown', handler);
+
+    document.addEventListener('keydown', activeKeyHandler, true);
     draw();
 }
 
