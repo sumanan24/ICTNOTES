@@ -21,6 +21,76 @@ function cleanupLevelHandlers() {
     }
 }
 
+/* ── Windows PC keyboard support ── */
+const IS_WINDOWS = /Win/i.test(navigator.platform) || /Windows/i.test(navigator.userAgent);
+
+function hasCtrlKey(e) {
+    return IS_WINDOWS ? e.ctrlKey : (e.ctrlKey || e.metaKey);
+}
+
+function hasWinKey(e) {
+    if (!IS_WINDOWS) return e.metaKey;
+    return e.metaKey || e.getModifierState?.('Meta') || e.getModifierState?.('OS');
+}
+
+function normKey(e) {
+    return e.key.length === 1 ? e.key.toLowerCase() : e.key;
+}
+
+function matchLetter(e, letter) {
+    const want = letter.toLowerCase();
+    if (e.code && /^Key[A-Z]$/i.test(e.code)) {
+        return e.code.slice(3).toLowerCase() === want;
+    }
+    return normKey(e) === want;
+}
+
+function isCtrlShortcut(e, letter, needShift = false) {
+    if (needShift) return hasCtrlKey(e) && e.shiftKey && !e.altKey && matchLetter(e, letter);
+    return hasCtrlKey(e) && !e.shiftKey && !e.altKey && matchLetter(e, letter);
+}
+
+/** Ctrl+Shift+N — Chrome/Edge on Windows steal this for Incognito; Ctrl+Alt+N is fallback */
+function isCreateFolderShortcut(e) {
+    if (isCtrlShortcut(e, 'n', true)) return true;
+    if (IS_WINDOWS && hasCtrlKey(e) && e.altKey && !e.shiftKey && matchLetter(e, 'n')) return true;
+    return false;
+}
+
+function isWinShortcut(e, letter) {
+    const key = normKey(e);
+    return hasWinKey(e) && !hasCtrlKey(e) && !e.altKey && !e.shiftKey && key === letter.toLowerCase();
+}
+
+function isWinRunShortcut(e) {
+    if (isWinShortcut(e, 'r')) return true;
+    if (IS_WINDOWS && e.ctrlKey && e.altKey && normKey(e) === 'r') return true;
+    return false;
+}
+
+function ctrlLabel() { return IS_WINDOWS ? 'Ctrl' : (navigator.platform?.includes('Mac') ? '⌘' : 'Ctrl'); }
+
+function initWindowsSupport() {
+    if (IS_WINDOWS) {
+        document.body.classList.add('windows-pc');
+        const badge = document.getElementById('platformBadge');
+        if (badge) badge.style.display = 'inline-flex';
+    }
+    updateWindowsHints();
+}
+
+function updateWindowsHints() {
+    const hint = document.getElementById('windowsWelcomeHint');
+    if (hint && IS_WINDOWS) {
+        hint.style.display = 'block';
+        hint.textContent = lang === 'ta'
+            ? '🪟 Windows PC கண்டறியப்பட்டது — Ctrl குறுக்குவழிகள் மற்றும் Win விசை பயிற்சி ஆதரிக்கப்படுகிறது'
+            : '🪟 Windows PC detected — Ctrl shortcuts and Win key practice supported';
+    } else if (hint) {
+        hint.style.display = 'none';
+    }
+}
+
 const SAVE_KEY = 'keyboardMasterSave';
 let save = JSON.parse(localStorage.getItem(SAVE_KEY)) || {
     points: 0, xp: 0, stars: 0, completed: [], badges: [],
@@ -51,7 +121,7 @@ const T = {
         nextTaskBtn: 'Next Task →',
         clickNextToContinue: '✅ Task done — click Next to continue',
         notepad: 'Notepad', runDialog: 'Run', typeNotepad: 'Type notepad and press Enter',
-        winRunHint: '🪟 Windows: Press Win+R or Ctrl+Alt+R — or click the button below (browsers may block Win key)',
+        winRunHint: '🪟 Windows PC: Press Win+R to open Run. If Win key is blocked by browser, use Ctrl+Alt+R or click the button.',
         openRunBtn: '🪟 Open Run Dialog',
         openNotepadBtn: '📝 Open Notepad',
         runOpenLabel: 'Open:',
@@ -62,6 +132,8 @@ const T = {
         fileSaved: '✅ File saved!',
         filePanel: 'File Explorer',
         winShortcutHelp: 'Use keyboard shortcuts shown in each task',
+        folderShortcutHint: '📁 Windows: Ctrl+Shift+N = new folder. If browser blocks it (Chrome Incognito), use Ctrl+Alt+N or click the button.',
+        createFolderBtn: '📁 Create Folder',
         objectives: [
             'Learn keyboard key locations', 'Improve typing accuracy', 'Increase typing speed',
             'Master common keyboard shortcuts', 'Type without looking at the keyboard',
@@ -99,7 +171,7 @@ const T = {
         nextTaskBtn: 'அடுத்த பணி →',
         clickNextToContinue: '✅ பணி முடிந்தது — தொடர அடுத்து என்பதை அழுத்தவும்',
         notepad: 'குறிப்பேடு', runDialog: 'இயக்கு', typeNotepad: 'notepad என தட்டச்சு செய்து Enter அழுத்தவும்',
-        winRunHint: '🪟 Windows: Win+R அல்லது Ctrl+Alt+R அழுத்தவும் — அல்லது கீழே உள்ள பொத்தானை அழுத்தவும் (உலாவி Win விசையைத் தடுக்கலாம்)',
+        winRunHint: '🪟 Windows PC: Run திறக்க Win+R அழுத்தவும். உலாவி Win விசையைத் தடுத்தால் Ctrl+Alt+R அல்லது பொத்தானை அழுத்தவும்.',
         openRunBtn: '🪟 இயக்கு உரையாடலைத் திற',
         openNotepadBtn: '📝 குறிப்பேட்டைத் திற',
         runOpenLabel: 'திற:',
@@ -110,6 +182,8 @@ const T = {
         fileSaved: '✅ கோப்பு சேமிக்கப்பட்டது!',
         filePanel: 'கோப்பு நிர்வாகி',
         winShortcutHelp: 'ஒவ்வொரு பணியிலும் காட்டப்பட்ட விசைப்பலகை குறுக்குவழிகளைப் பயன்படுத்தவும்',
+        folderShortcutHint: '📁 Windows: Ctrl+Shift+N = புதிய கோப்புறை. உலாவி தடுத்தால் Ctrl+Alt+N அல்லது பொத்தானை அழுத்தவும்.',
+        createFolderBtn: '📁 கோப்புறை உருவாக்கு',
         objectives: [
             'விசைப்பலகை விசை இருப்பிடங்களைக் கற்றுக்கொள்', 'தட்டச்சு துல்லியத்தை மேம்படுத்து',
             'தட்டச்சு வேகத்தை அதிகரி', 'பொதுவான விசைப்பலகை குறுக்குவழிகளை மாஸ்டர் செய்',
@@ -226,6 +300,7 @@ function setLang(l) {
     document.getElementById('langEn').classList.toggle('active', l === 'en');
     document.getElementById('langTa').classList.toggle('active', l === 'ta');
     document.body.classList.toggle('tamil-text', l === 'ta');
+    updateWindowsHints();
     updateUI();
 }
 
@@ -726,54 +801,52 @@ function renderSymbols(area, lv) {
     showSeq();
 }
 
-/* ── Level 7: Shortcut Hunter ── */
+/* ── Level 7: Shortcut Hunter (Windows Ctrl support) ── */
 function renderShortcuts(area, lv) {
+    cleanupLevelHandlers();
     let idx = 0;
-    let currentKeys = [];
 
     function showShortcut() {
         if (idx >= lv.shortcuts.length) {
+            cleanupLevelHandlers();
             save.points += 100 * lv.shortcuts.length;
             updateHUD();
             completeLevel(lv, 100, 0, 3, 0);
             return;
         }
         const sc = lv.shortcuts[idx];
-        currentKeys = [];
+        const ctrl = ctrlLabel();
         area.innerHTML = `
-            <div class="key-hint">${t('pressShortcut')}</div>
+            <div class="key-hint">${IS_WINDOWS ? (lang === 'ta' ? '🪟 Windows PC: Ctrl விசையை அழுத்தி பயிற்சி செய்யவும்' : '🪟 Windows PC: Hold Ctrl key for shortcuts') : t('pressShortcut')}</div>
             <div class="shortcut-prompt">
                 <div>${t('action')}: <strong>${L(sc.action)}</strong></div>
-                <div class="shortcut-keys" id="keyDisplay">?</div>
-                <div style="font-size:.8em;margin-top:8px;opacity:.8">${idx+1} / ${lv.shortcuts.length}</div>
+                <div class="shortcut-keys" id="keyDisplay">${ctrl} + ?</div>
+                <div style="font-size:.8em;margin-top:8px;opacity:.8">${idx + 1} / ${lv.shortcuts.length}</div>
             </div>
             <ul class="task-list" id="scList"></ul>`;
         const list = document.getElementById('scList');
         lv.shortcuts.forEach((s, i) => {
-            list.innerHTML += `<li class="${i < idx ? 'done' : 'pending'}">${L(s.action)} = Ctrl + ${s.keys[1].toUpperCase()}</li>`;
+            list.innerHTML += `<li class="${i < idx ? 'done' : 'pending'}">${L(s.action)} = ${ctrl} + ${s.keys[1].toUpperCase()}</li>`;
         });
 
-        const handler = (e) => {
-            e.preventDefault();
-            const key = e.key.toLowerCase();
-            if (e.ctrlKey || e.metaKey) currentKeys = ['Control', key];
-            else if (key === 'control' || key === 'meta') currentKeys = ['Control'];
-            else currentKeys.push(key);
-
-            document.getElementById('keyDisplay').textContent = currentKeys.map(k => k === 'Control' ? 'Ctrl' : k.toUpperCase()).join(' + ');
-
-            const needed = sc.keys.map(k => k.toLowerCase());
-            const hasCtrl = e.ctrlKey || e.metaKey;
-            if (hasCtrl && key === needed[1]) {
+        activeKeyHandler = (e) => {
+            if (idx >= lv.shortcuts.length) return;
+            const key = normKey(e);
+            const display = document.getElementById('keyDisplay');
+            if (hasCtrlKey(e)) {
+                display.textContent = `${ctrl} + ${key.length === 1 ? key.toUpperCase() : e.key}`;
+            }
+            if (isCtrlShortcut(e, sc.keys[1])) {
+                e.preventDefault();
+                e.stopPropagation();
                 playSound('correct');
                 save.points += 100;
                 updateHUD();
                 idx++;
-                document.removeEventListener('keydown', handler);
                 setTimeout(showShortcut, 400);
             }
         };
-        document.addEventListener('keydown', handler);
+        document.addEventListener('keydown', activeKeyHandler, true);
     }
     showShortcut();
 }
@@ -801,11 +874,7 @@ function renderParagraph(area, lv) {
     });
 }
 
-/* ── Level 9: ICT Master Challenge (Windows + In-page Notepad) ── */
-function isWinShortcut(e) {
-    return e.metaKey || e.getModifierState?.('Meta') || e.getModifierState?.('OS');
-}
-
+/* ── Level 9: ICT Master Challenge (Windows PC + In-page Notepad) ── */
 function renderMaster(area, lv) {
     cleanupLevelHandlers();
 
@@ -814,7 +883,7 @@ function renderMaster(area, lv) {
         { key: 'notepad_cmd', label: { en: 'Type "notepad" and press Enter', ta: '"notepad" தட்டச்சு செய்து Enter அழுத்தவும்' } },
         { key: 'type_text', label: { en: 'Type a paragraph (50+ characters)', ta: 'ஒரு பத்தியை தட்டச்சு செய் (50+ எழுத்துகள்)' } },
         { key: 'save', label: { en: 'Save file (Ctrl + S)', ta: 'கோப்பை சேமி (Ctrl + S)' } },
-        { key: 'folder', label: { en: 'Create folder (Ctrl+Shift+N)', ta: 'கோப்புறை உருவாக்கு (Ctrl+Shift+N)' } },
+        { key: 'folder', label: { en: 'Create folder (Ctrl+Shift+N or Ctrl+Alt+N)', ta: 'கோப்புறை உருவாக்கு (Ctrl+Shift+N அல்லது Ctrl+Alt+N)' } },
         { key: 'rename', label: { en: 'Rename file (F2)', ta: 'கோப்பை மறுபெயரிடு (F2)' } },
         { key: 'copy', label: { en: 'Copy file (Ctrl + C)', ta: 'கோப்பை நகலெடு (Ctrl + C)' } },
         { key: 'move', label: { en: 'Move file (Ctrl + X)', ta: 'கோப்பை நகர்த்து (Ctrl + X)' } },
@@ -877,6 +946,43 @@ function renderMaster(area, lv) {
         draw();
     }
 
+    function createFolder() {
+        if (mStep !== 4 || simState.folderOk) return;
+        simState.folderOk = true;
+        simState.files.push('New_Folder');
+        playSound('correct');
+        advance();
+    }
+
+    function handleFileShortcut(e) {
+        if (!simState.saved || mStep < 4) return false;
+        let matched = false;
+        if (mStep === 4 && isCreateFolderShortcut(e)) {
+            e.preventDefault();
+            e.stopPropagation();
+            createFolder();
+            return true;
+        }
+        if (mStep === 5 && e.key === 'F2' && !hasCtrlKey(e) && !e.altKey) {
+            e.preventDefault(); simState.renamed = true;
+            const idx = simState.files.indexOf(simState.fileName);
+            if (idx >= 0) simState.files[idx] = 'ICT_Final.txt';
+            matched = true;
+        } else if (mStep === 6 && isCtrlShortcut(e, 'c')) {
+            e.preventDefault(); simState.copied = true; matched = true;
+        } else if (mStep === 7 && isCtrlShortcut(e, 'x')) {
+            e.preventDefault(); simState.moved = true; matched = true;
+        } else if (mStep === 8 && e.key === 'Delete' && !hasCtrlKey(e)) {
+            e.preventDefault(); simState.deleted = true; simState.trash = simState.files.pop(); matched = true;
+        } else if (mStep === 9 && isCtrlShortcut(e, 'z')) {
+            e.preventDefault(); if (simState.trash) { simState.files.push(simState.trash); simState.restored = true; } matched = true;
+        } else if (mStep === 10 && e.altKey && e.key === 'F4') {
+            e.preventDefault(); simState.closed = true; matched = true;
+        }
+        if (matched) { advance(); draw(); return true; }
+        return false;
+    }
+
     function draw() {
         const step = currentStep();
         const showRun = simState.runOpen && !simState.notepadOpen;
@@ -889,7 +995,7 @@ function renderMaster(area, lv) {
                 ${!simState.runOpen && !simState.notepadOpen ? `
                     <div style="text-align:center;padding:50px 20px;color:rgba(255,255,255,.7)">
                         <div style="font-size:3em;margin-bottom:12px">🪟</div>
-                        <p>${lang === 'ta' ? 'Windows பணிமேசை — Win+R அழுத்தவும்' : 'Windows Desktop — Press Win+R'}</p>
+                        <p>${lang === 'ta' ? 'Windows பணிமேசை — Win+R அல்லது Ctrl+Alt+R' : 'Windows Desktop — Win+R or Ctrl+Alt+R'}</p>
                         <div class="win-action-row" style="margin-top:20px">
                             <button class="btn btn-primary" id="btnOpenRun">${t('openRunBtn')}</button>
                         </div>
@@ -933,6 +1039,12 @@ function renderMaster(area, lv) {
                         <div id="fileList" style="margin-top:8px">
                             ${simState.files.length ? simState.files.map(f => `<div class="win-file-item">📄 ${f}</div>`).join('') : `<em>${lang === 'ta' ? 'கோப்புகள் இல்லை' : 'No files'}</em>`}
                         </div>
+                        ${mStep === 4 ? `
+                            <div class="win-fallback" style="margin-top:12px">
+                                <p style="margin-bottom:8px;font-size:.9em">${t('folderShortcutHint')}</p>
+                                <button class="btn btn-success" id="btnCreateFolder" style="font-size:.9em">${t('createFolderBtn')}</button>
+                            </div>
+                        ` : ''}
                     </div>
                 ` : ''}
             </div>
@@ -954,6 +1066,7 @@ function renderMaster(area, lv) {
         document.getElementById('btnOpenRun')?.addEventListener('click', openRun);
         document.getElementById('runOkBtn')?.addEventListener('click', openNotepad);
         document.getElementById('btnOpenNotepad')?.addEventListener('click', openNotepad);
+        document.getElementById('btnCreateFolder')?.addEventListener('click', createFolder);
         document.getElementById('runCancelBtn')?.addEventListener('click', () => {
             simState.runOpen = false; mStep = 0; runInput = ''; draw();
         });
@@ -970,7 +1083,8 @@ function renderMaster(area, lv) {
 
         const noteArea = document.getElementById('noteArea');
         if (noteArea) {
-            noteArea.focus();
+            if (mStep >= 4) noteArea.blur();
+            else noteArea.focus();
             noteArea.oninput = () => {
                 noteText = noteArea.value;
                 const cc = document.getElementById('noteCharCount');
@@ -978,12 +1092,14 @@ function renderMaster(area, lv) {
                 if (mStep === 2 && noteText.length >= 50) advance();
             };
             noteArea.onkeydown = (e) => {
-                if (mStep === 3 && (e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
+                if (mStep === 3 && isCtrlShortcut(e, 's')) {
                     e.preventDefault();
                     simState.saved = true;
                     simState.files.push(simState.fileName);
                     advance();
+                    return;
                 }
+                if (handleFileShortcut(e)) return;
                 if (e.altKey && e.key === 'F4' && mStep === 10) {
                     e.preventDefault();
                     simState.closed = true;
@@ -996,11 +1112,9 @@ function renderMaster(area, lv) {
     activeKeyHandler = (e) => {
         if (levelFinished || mStep >= steps.length) return;
 
-        // Step 0: Open Run — Win+R or Ctrl+Alt+R (Windows browser fallback)
+        // Step 0: Open Run — Win+R (Windows) or Ctrl+Alt+R fallback
         if (mStep === 0) {
-            const winR = isWinShortcut(e) && e.key.toLowerCase() === 'r' && !e.ctrlKey && !e.altKey && !e.shiftKey;
-            const altR = e.ctrlKey && e.altKey && e.key.toLowerCase() === 'r';
-            if (winR || altR) { e.preventDefault(); openRun(); }
+            if (isWinRunShortcut(e)) { e.preventDefault(); openRun(); }
             return;
         }
 
@@ -1010,10 +1124,11 @@ function renderMaster(area, lv) {
         // Step 2: typing in notepad
         if (mStep === 2) return;
 
-        // Step 3: Ctrl+S — also handled in noteArea
+        // Step 3: Ctrl+S save
         if (mStep === 3) {
-            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's' && simState.notepadOpen) {
+            if (isCtrlShortcut(e, 's') && simState.notepadOpen) {
                 e.preventDefault();
+                e.stopPropagation();
                 simState.saved = true;
                 if (!simState.files.includes(simState.fileName)) simState.files.push(simState.fileName);
                 advance();
@@ -1021,30 +1136,13 @@ function renderMaster(area, lv) {
             return;
         }
 
-        // File management steps (4-9) — only after save
-        if (!simState.saved) return;
-
-        let matched = false;
-        if (mStep === 4 && (e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'n') {
-            e.preventDefault(); simState.folderOk = true; simState.files.push('New_Folder'); matched = true;
-        } else if (mStep === 5 && e.key === 'F2' && !e.ctrlKey && !e.metaKey) {
-            e.preventDefault(); simState.renamed = true;
-            const idx = simState.files.indexOf(simState.fileName);
-            if (idx >= 0) simState.files[idx] = 'ICT_Final.txt';
-            matched = true;
-        } else if (mStep === 6 && (e.ctrlKey || e.metaKey) && !e.shiftKey && e.key.toLowerCase() === 'c') {
-            e.preventDefault(); simState.copied = true; matched = true;
-        } else if (mStep === 7 && (e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'x') {
-            e.preventDefault(); simState.moved = true; matched = true;
-        } else if (mStep === 8 && e.key === 'Delete') {
-            e.preventDefault(); simState.deleted = true; simState.trash = simState.files.pop(); matched = true;
-        } else if (mStep === 9 && (e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') {
-            e.preventDefault(); if (simState.trash) { simState.files.push(simState.trash); simState.restored = true; } matched = true;
-        } else if (mStep === 10 && e.altKey && e.key === 'F4') {
-            e.preventDefault(); simState.closed = true; matched = true;
+        // File management steps — try early preventDefault for Ctrl+Shift+N (browser conflict)
+        if (mStep === 4 && hasCtrlKey(e) && e.shiftKey && matchLetter(e, 'n')) {
+            e.preventDefault();
+            e.stopPropagation();
         }
 
-        if (matched) { advance(); draw(); }
+        handleFileShortcut(e);
     };
 
     document.addEventListener('keydown', activeKeyHandler, true);
@@ -1072,6 +1170,7 @@ function generateCert() {
 
 document.addEventListener('DOMContentLoaded', () => {
     migrateSave();
+    initWindowsSupport();
     setLang(lang);
     document.getElementById('soundBtn').textContent = soundOn ? '🔊' : '🔇';
 });

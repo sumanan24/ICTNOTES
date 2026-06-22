@@ -13,6 +13,26 @@
             background: linear-gradient(135deg, #1a237e 0%, #5e35b1 40%, #7b1fa2 100%);
             min-height: 100vh; color: #fff; overflow-x: hidden;
         }
+        body.windows-pc {
+            font-family: 'Segoe UI', 'Poppins', 'Noto Sans Tamil', sans-serif;
+        }
+        body.windows-pc .win-run-dialog,
+        body.windows-pc .win-notepad,
+        body.windows-pc .win-btn,
+        body.windows-pc .win-run-input {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
+        .platform-badge {
+            display: none; align-items: center; gap: 6px;
+            padding: 8px 14px; border-radius: 25px;
+            background: rgba(0, 120, 212, 0.35); border: 1px solid rgba(255,255,255,.4);
+            font-size: .85em; font-weight: 600;
+        }
+        .windows-welcome-hint {
+            display: none; text-align: center; padding: 12px 16px; margin-bottom: 16px;
+            background: rgba(0, 120, 212, 0.15); border: 1px solid rgba(0, 120, 212, 0.4);
+            border-radius: 12px; font-size: .95em;
+        }
         body::before {
             content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
             background: radial-gradient(circle at 15% 40%, rgba(255,255,255,.08) 0%, transparent 50%),
@@ -183,6 +203,7 @@
                 <button class="lang-btn" id="langTa" onclick="setLang('ta')">தமிழ்</button>
             </div>
             <div>
+                <span class="platform-badge ctrl-btn" id="platformBadge">🪟 Windows PC</span>
                 <button class="ctrl-btn" id="soundBtn" onclick="toggleSound()">🔊</button>
                 <button class="ctrl-btn" onclick="showScreen('map')">🗺️ <span id="mapBtn">Map</span></button>
             </div>
@@ -204,6 +225,7 @@
             <div class="header">
                 <h1 id="welcomeTitle">⌨️ Keyboard Master Adventure</h1>
                 <p id="welcomeSub">Learn typing, shortcuts & ICT skills through gamification</p>
+                <p class="windows-welcome-hint" id="windowsWelcomeHint"></p>
             </div>
             <div class="card">
                 <h2 style="text-align:center;color:#5e35b1;margin-bottom:16px" id="objectivesTitle">🎯 Game Objectives</h2>
