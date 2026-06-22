@@ -169,14 +169,7 @@ const LEVELS = [
         ]
     },
     {
-        id: 8, icon: '📁', diff: 'hard', diffKey: 'diffHard', reward: 0, rewardType: 'badge',
-        badge: { en: 'File Manager Badge', ta: 'கோப்பு மேலாளர் பேட்ஜ்' },
-        title: { en: 'File Explorer Quest', ta: 'கோப்பு நிர்வாகி பயணம்' },
-        mission: { en: 'Use keyboard commands for file management — no mouse allowed!', ta: 'கோப்பு மேலாண்மைக்கு விசைப்பலகை கட்டளைகளைப் பயன்படுத்துங்கள் — சுட்டி அனுமதிக்கப்படாது!' },
-        type: 'fileSim'
-    },
-    {
-        id: 9, icon: '👁️', diff: 'hard', diffKey: 'diffHard', reward: 0, rewardType: 'badge',
+        id: 8, icon: '👁️', diff: 'hard', diffKey: 'diffHard', reward: 0, rewardType: 'badge',
         badge: { en: 'Blind Typing Badge', ta: 'கண்ணற்ற தட்டச்சு பேட்ஜ்' },
         title: { en: 'Blind Typing Challenge', ta: 'கண்ணற்ற தட்டச்சு சவால்' },
         mission: { en: 'Type without looking at the keyboard. Goal: 90% accuracy.', ta: 'விசைப்பலகையைப் பார்க்காமல் தட்டச்சு செய்யுங்கள். இலக்கு: 90% துல்லியம்.' },
@@ -185,7 +178,7 @@ const LEVELS = [
         goalAcc: 90
     },
     {
-        id: 10, icon: '🏆', diff: 'very-hard', diffKey: 'diffVeryHard', reward: 0, rewardType: 'cert',
+        id: 9, icon: '🏆', diff: 'very-hard', diffKey: 'diffVeryHard', reward: 0, rewardType: 'cert',
         badge: { en: 'ICT Keyboard Master Certificate', ta: 'ICT விசைப்பலகை மாஸ்டர் சான்றிதழ்' },
         title: { en: 'ICT Master Challenge', ta: 'ICT மாஸ்டர் சவால்' },
         mission: { en: 'Complete a real-world ICT task using only the keyboard.', ta: 'விசைப்பலகை மட்டும் பயன்படுத்தி நிஜ உலக ICT பணியை முடிக்கவும்.' },
@@ -237,14 +230,41 @@ function playSound(type) {
 
 function persist() { localStorage.setItem(SAVE_KEY, JSON.stringify(save)); }
 
+function migrateSave() {
+    if (save._migratedV2) return;
+    const completed = new Set();
+    (save.completed || []).forEach(id => {
+        if (id === 8) return;
+        if (id === 9) completed.add(8);
+        else if (id === 10) completed.add(9);
+        else completed.add(id);
+    });
+    save.completed = [...completed].sort((a, b) => a - b);
+    const newStars = {};
+    if (save.levelStars) {
+        Object.entries(save.levelStars).forEach(([k, v]) => {
+            const id = parseInt(k, 10);
+            if (id === 8) return;
+            if (id === 9) newStars[8] = Math.max(newStars[8] || 0, v);
+            else if (id === 10) newStars[9] = Math.max(newStars[9] || 0, v);
+            else newStars[id] = v;
+        });
+    }
+    save.levelStars = newStars;
+    save.badges = (save.badges || []).filter(b => !/File Manager|கோப்பு மேலாளர்/.test(b));
+    save._migratedV2 = true;
+    persist();
+}
+
 function updateHUD() {
+    const total = LEVELS.length;
     document.getElementById('hudPoints').textContent = save.points;
     document.getElementById('hudXP').textContent = save.xp;
-    document.getElementById('hudLevel').textContent = save.completed.length + 1 > 10 ? 10 : Math.max(1, save.completed.length);
+    document.getElementById('hudLevel').textContent = Math.min(save.completed.length + 1, total);
     document.getElementById('hudStars').textContent = save.stars;
-    const pct = (save.completed.length / 10) * 100;
+    const pct = (save.completed.length / total) * 100;
     document.getElementById('overallProgress').style.width = pct + '%';
-    document.getElementById('certBtn').style.display = save.completed.length >= 10 ? 'inline-block' : 'none';
+    document.getElementById('certBtn').style.display = save.completed.length >= total ? 'inline-block' : 'none';
 }
 
 function updateUI() {
@@ -388,7 +408,7 @@ function renderLevel() {
     const renderers = {
         homeRow: renderHomeRow, alphabet: renderAlphabet, words: renderWords,
         sentences: renderSentences, numbers: renderNumbers, symbols: renderSymbols,
-        shortcuts: renderShortcuts, fileSim: renderFileSim, paragraph: renderParagraph, master: renderMaster
+        shortcuts: renderShortcuts, paragraph: renderParagraph, master: renderMaster
     };
     area.innerHTML = '';
     (renderers[lv.type] || (() => {}))(area, lv);
@@ -736,166 +756,7 @@ function renderShortcuts(area, lv) {
     showShortcut();
 }
 
-/* ── Level 8: File Explorer Quest ── */
-function renderFileSim(area, lv) {
-    cleanupLevelHandlers();
-
-    const steps = [
-        {
-            label: { en: 'Open File Explorer (Win + E)', ta: 'கோப்பு நிர்வாகியைத் திற (Win + E)' },
-            match: e => (e.metaKey || e.getModifierState?.('Meta')) && e.key.toLowerCase() === 'e' && !e.ctrlKey && !e.altKey && !e.shiftKey,
-            canDo: () => !simState.explorerOpen,
-            action: () => { simState.explorerOpen = true; }
-        },
-        {
-            label: { en: 'Create New Folder (Ctrl+Shift+N)', ta: 'புதிய கோப்புறை உருவாக்கு (Ctrl+Shift+N)' },
-            match: e => (e.ctrlKey || e.metaKey) && e.shiftKey && !e.altKey && e.key.toLowerCase() === 'n',
-            canDo: () => simState.explorerOpen && !simState.folderCreated,
-            action: () => { simState.files.push('New Folder'); simState.folderCreated = true; }
-        },
-        {
-            label: { en: 'Rename Folder (F2)', ta: 'கோப்புறையை மறுபெயரிடு (F2)' },
-            match: e => e.key === 'F2' && !e.ctrlKey && !e.metaKey && !e.altKey && !e.shiftKey,
-            canDo: () => simState.folderCreated && !simState.renamed,
-            action: () => { simState.files[simState.files.length - 1] = 'ICT_Project'; simState.renamed = true; }
-        },
-        {
-            label: { en: 'Copy Folder (Ctrl+C)', ta: 'கோப்புறையை நகலெடு (Ctrl+C)' },
-            match: e => (e.ctrlKey || e.metaKey) && !e.shiftKey && !e.altKey && e.key.toLowerCase() === 'c',
-            canDo: () => simState.renamed && !simState.copied,
-            action: () => { simState.copied = true; }
-        },
-        {
-            label: { en: 'Delete Folder (Delete)', ta: 'கோப்புறையை நீக்கு (Delete)' },
-            match: e => e.key === 'Delete' && !e.ctrlKey && !e.metaKey,
-            canDo: () => simState.copied && !simState.deleted,
-            action: () => { simState.trash = simState.files.pop(); simState.deleted = true; }
-        },
-        {
-            label: { en: 'Restore Folder (Ctrl+Z)', ta: 'கோப்புறையை மீட்டெடு (Ctrl+Z)' },
-            match: e => (e.ctrlKey || e.metaKey) && !e.shiftKey && !e.altKey && e.key.toLowerCase() === 'z',
-            canDo: () => simState.deleted && simState.trash && !simState.restored,
-            action: () => { simState.files.push(simState.trash); simState.restored = true; }
-        }
-    ];
-
-    let step = 0;
-    let levelFinished = false;
-    let feedback = '';
-    let awaitingNext = false;
-
-    function goNextStep() {
-        if (!awaitingNext || levelFinished) return;
-        awaitingNext = false;
-        feedback = '';
-        step++;
-        if (step >= steps.length) {
-            draw();
-            finishLevel();
-        } else {
-            draw();
-        }
-    }
-
-    function finishLevel() {
-        if (levelFinished) return;
-        levelFinished = true;
-        cleanupLevelHandlers();
-        save.points += 150 * steps.length;
-        updateHUD();
-        completeLevel(lv, 100, 0, 3, 0);
-    }
-
-    function draw() {
-        const current = steps[step];
-        const emptyMsg = lang === 'ta' ? '<em>கோப்புறை எதுவும் இல்லை — Ctrl+Shift+N அழுத்தவும்</em>' : '<em>No folders yet — press Ctrl+Shift+N</em>';
-        const closedMsg = lang === 'ta' ? '<em>கோப்பு நிர்வாகி மூடப்பட்டுள்ளது — Win+E அழுத்தவும்</em>' : '<em>File Explorer closed — press Win+E</em>';
-
-        area.innerHTML = `
-            <div class="key-hint">${lang === 'ta' ? 'சுட்டி இல்லாமல் விசைப்பலகை மட்டும் பயன்படுத்தவும்! ஒவ்வொரு பணியும் முறையாக முடிக்கவும்.' : 'Use keyboard only — no mouse! Complete each task in order.'}</div>
-            <div class="sim-window" style="${simState.explorerOpen ? '' : 'opacity:.6'}">
-                <div class="sim-titlebar"><span>📁 ${t('fileExplorer')} ${simState.explorerOpen ? '' : '🔒'}</span><span>— □ ✕</span></div>
-                <div class="sim-body">
-                    <div id="simFiles">${
-                        !simState.explorerOpen ? closedMsg :
-                        simState.files.length ? simState.files.map(f => `<div class="sim-file">📁 ${f}</div>`).join('') : emptyMsg
-                    }</div>
-                </div>
-            </div>
-            <ul class="task-list" id="fileTasks"></ul>
-            <p style="text-align:center;font-weight:600;margin-top:12px;color:#5e35b1" id="filePrompt"></p>
-            <p style="text-align:center;color:#f44336;font-weight:600;min-height:24px" id="fileFeedback"></p>
-            <div id="fileNextWrap" style="text-align:center;margin-top:16px;display:none">
-                <button class="btn btn-success" id="fileNextBtn">${t('nextTaskBtn')}</button>
-            </div>
-            <div class="stats-row"><div class="stat-box"><div class="stat-val">${Math.min(step + (awaitingNext ? 1 : 0), steps.length)}/${steps.length}</div><div>${t('progress')}</div></div></div>`;
-
-        const list = document.getElementById('fileTasks');
-        steps.forEach((s, i) => {
-            const isDone = i < step || (i === step && awaitingNext);
-            const isCurrent = i === step && !awaitingNext;
-            const cls = isDone ? 'done' : 'pending';
-            const active = isCurrent ? ' 👈' : '';
-            const style = isCurrent ? 'background:#e8eaf6;border:2px solid #5e35b1;font-weight:700' : (isDone ? 'background:#e8f5e9' : '');
-            list.innerHTML += `<li class="${cls}" style="${style}">${L(s.label)}${active}</li>`;
-        });
-
-        const promptEl = document.getElementById('filePrompt');
-        const nextWrap = document.getElementById('fileNextWrap');
-        const nextBtn = document.getElementById('fileNextBtn');
-
-        if (awaitingNext) {
-            promptEl.textContent = t('clickNextToContinue');
-            promptEl.style.color = '#4caf50';
-            nextWrap.style.display = 'block';
-            nextBtn.textContent = t('nextTaskBtn');
-            nextBtn.onclick = goNextStep;
-        } else if (step < steps.length) {
-            promptEl.style.color = '#5e35b1';
-            promptEl.textContent = `${t('press')}: ${L(current.label)}`;
-            nextWrap.style.display = 'none';
-        } else {
-            nextWrap.style.display = 'none';
-        }
-        document.getElementById('fileFeedback').textContent = feedback;
-    }
-
-    activeKeyHandler = (e) => {
-        if (levelFinished || step >= steps.length || awaitingNext) return;
-
-        const current = steps[step];
-        if (!current.match(e)) {
-            if (['F2', 'Delete', 'e', 'n', 'c', 'z', 'E', 'N', 'C', 'Z'].includes(e.key) ||
-                e.ctrlKey || e.metaKey || e.shiftKey) {
-                feedback = t('wrongKey');
-                playSound('wrong');
-                draw();
-            }
-            return;
-        }
-
-        if (!current.canDo()) {
-            feedback = t('wrongKey');
-            playSound('wrong');
-            draw();
-            return;
-        }
-
-        e.preventDefault();
-        e.stopPropagation();
-
-        current.action();
-        playSound('correct');
-        feedback = t('stepComplete');
-        awaitingNext = true;
-        draw();
-    };
-
-    document.addEventListener('keydown', activeKeyHandler, true);
-    draw();
-}
-
-/* ── Level 9: Blind Typing ── */
+/* ── Level 8: Blind Typing ── */
 function renderParagraph(area, lv) {
     area.innerHTML = `
         <div class="key-hint">${lang === 'ta' ? '⚠️ விசைப்பலகையைப் பார்க்காமல் தட்டச்சு செய்யுங்கள்! இலக்கு: 90% துல்லியம்' : '⚠️ Type without looking at the keyboard! Goal: 90% accuracy'}</div>
@@ -918,7 +779,7 @@ function renderParagraph(area, lv) {
     });
 }
 
-/* ── Level 10: ICT Master Challenge ── */
+/* ── Level 9: ICT Master Challenge ── */
 function renderMaster(area, lv) {
     const masterSteps = [
         { label: { en: 'Open Run dialog (Win + R)', ta: 'இயக்கு உரையாடலைத் திற (Win + R)' },
@@ -1023,6 +884,8 @@ function showCertificate() {
     showScreen('cert');
     document.getElementById('certWPM').textContent = save.bestWPM || 0;
     document.getElementById('certAcc').textContent = (save.bestAcc || 0) + '%';
+    const certCount = document.getElementById('certLevelCount');
+    if (certCount) certCount.textContent = `${LEVELS.length}/${LEVELS.length}`;
     const name = localStorage.getItem('kmaStudentName') || '';
     if (name) document.getElementById('studentName').value = name;
 }
@@ -1037,6 +900,7 @@ function generateCert() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    migrateSave();
     setLang(lang);
     document.getElementById('soundBtn').textContent = soundOn ? '🔊' : '🔇';
 });
